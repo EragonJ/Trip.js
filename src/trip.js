@@ -1,10 +1,14 @@
 (function(window, $) {
 
     var Trip = function( tripData, userOptions ) {
+
         // save the trip data
         this.tripData = tripData;
+
+        // used SELs
         this.$tripBlock = null;
         this.$overlay = null;
+        this.$bar = null;
         this.$root = $('body, html');
 
         // save the current trip index
@@ -88,8 +92,16 @@
                 break;
             case 39 : // right arrow
             case 40 : // down arrow
-                this.increaseIndex();
-                this.run();
+
+                // If we hit last here, then it means the user forces to exit the trip
+                if ( this.isLast() ){
+                    this.doLastOperation();
+                }
+                else {
+                    this.increaseIndex();
+                    this.run();
+                }
+
                 break;
             }
         },
@@ -152,24 +164,26 @@
         },
 
         showProgressBar : function( delay ) {
-            var $bar = $('.trip-progress-bar');
 
-            $bar.animate({
+            var that = this;
+            
+            // doing the progress effect
+            this.progressing = true;
+
+            this.$bar.animate({
                 width : '100%'  
             }, delay, "linear", function() {
-                $bar.width(0);
+                that.$bar.width(0);
             });
-
-            this.progressing = true;
         },
 
         hideProgressBar : function() {
 
-            var $bar = $('.trip-progress-bar');
-
+            // not doing the progress effect
             this.progressing = false;
-            $bar.width(0);
-            $bar.stop(true);
+
+            this.$bar.width(0);
+            this.$bar.stop(true);
         },
 
         run : function() {
@@ -319,12 +333,14 @@
             $overlay.height( $(document).height() );
 
             $('body').append( $overlay );
-
-            this.$overlay = $overlay;
         },
 
         init : function() {
             this.bindKeyEvent();
+
+            // set refs
+            this.$bar = $('.trip-progress-bar');
+            this.$overlay = $('.trip-overlay');
         },
 
         start : function() {
@@ -334,7 +350,7 @@
             // create some necessary DOM elements at the first time like jQuery UI
             this.create();
 
-            // init some necessary stuffs like events
+            // init some necessary stuffs like events, late DOM refs after creating DOMs
             this.init();
 
             // main entry
