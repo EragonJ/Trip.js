@@ -1,0 +1,19 @@
+<!DOCTYPE html><!--[if lt IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"></html><![endif]--><!--[if IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8"></html><![endif]--><!--[if IE 8]><html lang="en" class="no-js lt-ie9"></html><![endif]--><!--[if gt IE 8]><!--><html lang="en" class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Test</title><meta name="description" content=""><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="public/css/normalize.css"><link rel="stylesheet" href="public/css/main.css"><link rel="stylesheet" href="./src/trip.css"><style type="text/css">.wrapper div:nth-child(odd) {
+    background : #AAA;
+}
+.wrapper div:nth-child(even) {
+    background : #DDD;
+}</style><script src="public/js/vendor/modernizr-2.6.2.min.js"></script><script src="public/js/vendor/jquery-1.8.3.min.js"></script><script src="./src/trip.js"></script><script>$(window).load(function() {
+    var trip = new Trip([
+        { sel : $('#abc'), position : 'n', content : 'This is a highlight', delay : 3000 },
+        { sel : $('#def'), position : 'n', content : 'This is another test', delay : 2000, expose : true } 
+    ], {
+        onTripStart : $.noop,
+        onTripEnd : function() {
+            //console.log(this); 
+        },
+        backToTopWhenEnded : true,
+    });
+    
+    trip.start();
+});</script></head><body><div class="wrapper"><div>This is a test</div><div>This is a test</div><div>This is a test</div><div id="abc">This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div id="def">This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div><div>This is a test</div></div></body></html>
