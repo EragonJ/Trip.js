@@ -28,16 +28,19 @@ html.no-js(lang='en')
         script(src='public/js/vendor/jquery-1.8.3.min.js')
         script(src='./src/trip.js')
         script
-            $(window).load(function() {
+            $(document).ready(function() {
                 var trip = new Trip([
                     { sel : $('#abc'), position : 'n', content : 'This is a highlight', delay : 3000 },
-                    { sel : $('#def'), position : 'n', content : 'This is another test', delay : 2000, expose : true } 
+                    { sel : $('#def'), position : 'n', content : 'This is another test', delay : 2000, expose : true } ,
+                    { sel : $('#ghi'), content : 'This is a tettttttest' }
+                    // position is not implemented yet;
                 ], {
                     onTripStart : $.noop,
                     onTripEnd : function() {
                         //console.log(this); 
                     },
                     backToTopWhenEnded : true,
+                    tripIndex : 1
                 });
 
                 trip.start();
@@ -66,7 +69,7 @@ html.no-js(lang='en')
             div This is a test
             div This is a test
             div This is a test
-            div This is a test
+            div#ghi This is a test
             div This is a test
             div This is a test
             div This is a test

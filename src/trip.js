@@ -2,6 +2,17 @@
 
     var Trip = function( tripData, userOptions ) {
 
+        // save the settings
+        this.settings = $.extend({
+
+            tripIndex : 0,
+            onTripStart : $.noop,
+            onTripEnd : $.noop,
+            backToTopWhenEnded : false,
+            overlayZindex : 99999
+
+        }, userOptions);
+
         // save the trip data
         this.tripData = tripData;
 
@@ -12,20 +23,13 @@
         this.$root = $('body, html');
 
         // save the current trip index
-        this.tripIndex = 0;
+        this.tripIndex = this.settings.tripIndex;
         this.timer = null;
         this.progressing = false;
 
         // about expose
         this.hasExpose = false;
 
-        // save the options
-        this.options = $.extend({
-            onTripStart : $.noop,
-            onTripEnd : $.noop,
-            backToTopWhenEnded : false,
-            overlayZindex : 99999
-        }, userOptions);
     };
 
     Trip.prototype = {
@@ -44,7 +48,7 @@
 
             newCSS = {
                 position : 'relative',
-                zIndex : this.options.overlayZindex + 1 // we have to make it higher than the overlay
+                zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             };
 
             $sel.data('tour-old-css', oldCSS)
@@ -88,13 +92,20 @@
                 break;
             case 37 : // left arrow
             case 38 : // up arrow
-                //this.prev();
+
+                // if ( this.isFirst() ) {
+                //     // If we hit first here, then it means do nothing
+                // }
+                // else {
+                //     this.decreaseIndex();
+                //     this.prev();
+                // }
                 break;
             case 39 : // right arrow
             case 40 : // down arrow
 
-                // If we hit last here, then it means the user forces to exit the trip
                 if ( this.isLast() ){
+                    // If we hit last here, then it means the user forces to exit the trip
                     this.doLastOperation();
                 }
                 else {
@@ -106,6 +117,7 @@
             }
         },
 
+        // If the user forces to stop the timer, we won't do any further actions instead
         stop : function() {
 
             // clear timer
@@ -154,9 +166,9 @@
             this.unbindKeyEvent();
             this.hideTripBlock();
             this.hideExpose();
-            this.options.onTripEnd();
+            this.settings.onTripEnd();
             
-            if ( this.options.backToTopWhenEnded ) {
+            if ( this.settings.backToTopWhenEnded ) {
                 this.$root.animate({ scrollTop : 0 }, 'slow');
             }
 
@@ -255,8 +267,9 @@
             //    { sel : $('#def'), position : 'e', content : 'xxxx' },
             //
             if ( typeof o.sel === 'undefined' ||
-                    typeof o.position === 'undefined' ||
-                        typeof o.content === 'undefined' ) {
+                    typeof o.content === 'undefined' ) {
+                        //typeof o.position === 'undefined' ||
+
                 console.warn("Your tripData is not valid in obj :" + o +".");
                 return false;
             }
@@ -274,6 +287,7 @@
                 blockHeight = this.$tripBlock.outerHeight(),
                 arrowHeight = 10;
 
+            // TODO: 
             // THis is for gravity n only, change this later
             this.$tripBlock.css({
                 left : $sel.offset().left + ((selWidth - blockWidth) / 2),
@@ -285,7 +299,7 @@
 
             this.$tripBlock.css({
                 display : 'inline-block',
-                zIndex : this.options.overlayZindex + 1 // we have to make it higher than the overlay
+                zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             });
 
             var top = this.$tripBlock.offset().top,
@@ -345,7 +359,7 @@
 
         start : function() {
             // onTripStart callback
-            this.options.onTripStart();
+            this.settings.onTripStart();
 
             // create some necessary DOM elements at the first time like jQuery UI
             this.create();
