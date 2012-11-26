@@ -5,7 +5,7 @@
     padding : 8px;
     position : absolute;
     text-align : center;
-    min-width : 261px;
+    min-width : 100px;
     border-radius : 3px;
     box-shadow : 0 2px 4px 0 rgba(0; 0; 0; 0.2);
 }
@@ -14,13 +14,45 @@
     position : absolute;
     background : none;
     background : url("./arrow.png");
+    z-index : 1;
+}
+
+.trip-arrow.n {
     height : 8px;
     bottom : -8px;
     left : 15px;
     right : 15px;
     background-repeat : no-repeat;
     background-position : 50% 100%;
-    z-index : 1;
+}
+
+.trip-arrow.s {
+    height : 8px;
+    top : -8px;
+    left : 15px;
+    right : 15px;
+    background-repeat : no-repeat;
+    background-position : 50% 0%;
+}
+
+.trip-arrow.e {
+    width: 8px;
+    height: 16px;
+    left: -8px;
+    top: 11px;
+    bottom: 15px;
+    background-repeat : no-repeat;
+    background-position : 0% 50%;
+}
+
+.trip-arrow.w {
+    width: 8px;
+    height: 16px;
+    right: -8px;
+    top: 11px;
+    bottom: 15px;
+    background-repeat : no-repeat;
+    background-position : 100% 50%;
 }
 
 .trip-progress-wrapper {
@@ -29,7 +61,7 @@
 
 .trip-progress-bar {
     height: 1px;
-    background-color: white;
+    background-color: #444;
     width : 0;
 }
 

@@ -18,6 +18,7 @@
 
         // used SELs
         this.$tripBlock = null;
+        this.$tripArrow = null;
         this.$overlay = null;
         this.$bar = null;
         this.$root = $('body, html');
@@ -29,7 +30,6 @@
 
         // about expose
         this.hasExpose = false;
-
     };
 
     Trip.prototype = {
@@ -37,9 +37,9 @@
         // TODO: implement expose
         showExpose : function( $sel ) {
 
-            var oldCSS, newCSS;
-
             this.hasExpose = true;
+
+            var oldCSS, newCSS;
 
             oldCSS = {
                 position : $sel.css('position'),
@@ -143,7 +143,7 @@
             // show block
             this.checkTripData(o);
             this.setTripBlock(o);
-            this.showTripBlock();
+            this.showTripBlock(o);
 
             if ( o.expose ) {
                 this.showExpose( o.sel );
@@ -165,7 +165,11 @@
 
             this.unbindKeyEvent();
             this.hideTripBlock();
-            this.hideExpose();
+
+            if ( this.hasExpose ) {
+                this.hideExpose();
+            }
+
             this.settings.onTripEnd();
             
             if ( this.settings.backToTopWhenEnded ) {
@@ -285,17 +289,48 @@
                 selHeight = $sel.outerHeight(),
                 blockWidth = this.$tripBlock.outerWidth(),
                 blockHeight = this.$tripBlock.outerHeight(),
-                arrowHeight = 10;
+                arrowHeight = 10,
+                arrowWidth = 10;
 
-            // TODO: 
-            // THis is for gravity n only, change this later
-            this.$tripBlock.css({
-                left : $sel.offset().left + ((selWidth - blockWidth) / 2),
-                top : $sel.offset().top - arrowHeight - blockHeight
-            });
+            // Take off e/s/w/n classes
+            this.$tripArrow.removeClass('e s w n');
+
+            switch( o.position ) {
+            case 'e':
+                this.$tripArrow.addClass('e');
+                this.$tripBlock.css({
+                    left : $sel.offset().left + selWidth + arrowWidth,
+                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2),
+                });
+                break;
+            case 's':
+                this.$tripArrow.addClass('s');
+                this.$tripBlock.css({
+                    left : $sel.offset().left + ((selWidth - blockWidth) / 2),
+                    top : $sel.offset().top + arrowHeight + blockHeight
+                });
+                break;
+            case 'w':
+                this.$tripArrow.addClass('w');
+                this.$tripBlock.css({
+                    left : $sel.offset().left - (arrowWidth + blockWidth),
+                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
+                });
+                break;
+            case 'n':
+            default: 
+
+                this.$tripArrow.addClass('n');
+                this.$tripBlock.css({
+                    left : $sel.offset().left + ((selWidth - blockWidth) / 2),
+                    top : $sel.offset().top - arrowHeight - blockHeight
+                });
+
+                break;
+            }
         },
 
-        showTripBlock : function() {
+        showTripBlock : function( o ) {
 
             this.$tripBlock.css({
                 display : 'inline-block',
@@ -355,6 +390,7 @@
             // set refs
             this.$bar = $('.trip-progress-bar');
             this.$overlay = $('.trip-overlay');
+            this.$tripArrow = $('.trip-arrow');
         },
 
         start : function() {
