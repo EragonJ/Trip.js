@@ -9,7 +9,8 @@
             onTripStart : $.noop,
             onTripEnd : $.noop,
             backToTopWhenEnded : false,
-            overlayZindex : 99999
+            overlayZindex : 99999,
+            delayPeriod : 1000
 
         }, userOptions);
 
@@ -30,6 +31,16 @@
 
         // about expose
         this.hasExpose = false;
+
+        // contants
+        this.CONSTANTS = {
+            LEFT_ARROW : 37,
+            UP_ARROW : 38,
+            RIGHT_ARROW : 39,
+            DOWN_ARROW : 40,
+            ESC : 27,
+            SPACE : 32
+        };
     };
 
     Trip.prototype = {
@@ -71,7 +82,7 @@
             this.$overlay.hide();
         },
 
-        bindKeyEvent : function() {
+        bindKeyEvents : function() {
             var that = this;
             $(document).on({
                 'keydown.Trip' : function(e) {
@@ -81,38 +92,45 @@
             });
         },
 
-        unbindKeyEvent : function() {
+        unbindKeyEvents : function() {
             $(document).off('.Trip');
         },
 
         keyEvent : function(e) {
+
             switch(e.which) {
-            case 27 : // esc
+            case this.CONSTANTS['ESC'] :
+
                 this.stop();
                 break;
-            case 37 : // left arrow
-            case 38 : // up arrow
 
-                // if ( this.isFirst() ) {
-                //     // If we hit first here, then it means do nothing
-                // }
-                // else {
-                //     this.decreaseIndex();
-                //     this.prev();
-                // }
+            case this.CONSTANTS['SPACE'] : 
+
+                // this.pause();
                 break;
-            case 39 : // right arrow
-            case 40 : // down arrow
+
+            case this.CONSTANTS['LEFT_ARROW'] :
+            case this.CONSTANTS['UP_ARROW'] :
+
+                if ( this.isFirst() ) {
+                    // do nothing
+                }
+                else {
+                    this.decreaseIndex();
+                    this.run();
+                }
+                break;
+
+            case this.CONSTANTS['RIGHT_ARROW'] : 
+            case this.CONSTANTS['DOWN_ARROW'] : 
 
                 if ( this.isLast() ){
-                    // If we hit last here, then it means the user forces to exit the trip
                     this.doLastOperation();
                 }
                 else {
                     this.increaseIndex();
                     this.run();
                 }
-
                 break;
             }
         },
@@ -127,7 +145,16 @@
             this.hideTripBlock();
         },
 
-        next : function(o) {
+        // TODO: try to pause when the user hits space
+        pause : function() {
+
+        },
+
+        // XXX:
+        // Because the trip index is controlled by increaseIndex / decreaseIndex methods only, 
+        // `showCurrentTrip` doesn't have to take care about which is the current trip object, 
+        // it just does the necessary operations according to the passed tripData `o`
+        showCurrentTrip : function(o) {
 
             // preprocess when we have to show trip block
             clearTimeout( this.timer );
@@ -163,7 +190,7 @@
 
             clearTimeout( this.timer );
 
-            this.unbindKeyEvent();
+            this.unbindKeyEvents();
             this.hideTripBlock();
 
             if ( this.hasExpose ) {
@@ -206,10 +233,10 @@
 
             var that = this,
                 o = this.getCurrentTripObject(),
-                delay = o.delay || 1000;
+                delay = o.delay || this.settings.delayPeriod;
 
             // next to o
-            this.next(o);
+            this.showCurrentTrip(o);
 
             // show the progress bar
             this.showProgressBar( delay );
@@ -226,7 +253,6 @@
                     that.run();
                 }
 
-            // delay when the object has delay attribute or delay 1000 ms 
             }, delay);
         },
 
@@ -239,9 +265,10 @@
         },
 
         increaseIndex : function() {
-            // TODO : how about hitting the last item ?
+            // TODO :
+            // how about hitting the last item ?
             if ( this.tripIndex >= this.tripData.length - 1 ) {
-
+                // do nothing
             }
             else {
                 this.tripIndex += 1;
@@ -249,9 +276,10 @@
         },
 
         decreaseIndex : function() {
-            // TODO : how about hitting the first item ?
+            // TODO : 
+            // how about hitting the first item ?
             if ( this.tripIndex <= 0 ) {
-
+                // do nothing
             }
             else {
                 this.tripIndex -= 1;
@@ -267,12 +295,16 @@
         },
 
         checkTripData : function( o ) {
-            //    { sel : $('#abc'), position : 'n', content : 'This is a highlight', },
-            //    { sel : $('#def'), position : 'e', content : 'xxxx' },
-            //
+            /*
+             *  Possible TripData properties
+             *  {
+             *      sel : $('#id'),
+             *      content : 'This is a hint',
+             *      position : 'n', // optional
+             *  }
+             */
             if ( typeof o.sel === 'undefined' ||
                     typeof o.content === 'undefined' ) {
-                        //typeof o.position === 'undefined' ||
 
                 console.warn("Your tripData is not valid in obj :" + o +".");
                 return false;
@@ -347,9 +379,11 @@
             this.$tripBlock.fadeOut('slow');
         },
 
+        // TODO:
+        // Make sure this method is only called ONCE in this page,
+        // so that we will not create same DOMs more than once!
         create : function() {
 
-            // use Trip.js at the first time
             if ( !this.$tripBlock ) {
                 this.createTripBlock();
                 this.createOverlay();
@@ -358,39 +392,51 @@
 
         createTripBlock : function() {
 
-            var html = [
-                '<div class="trip-block">',
-                    '<div class="trip-content"></div>',
-                    '<div class="trip-progress-wrapper">',
-                        '<div class="trip-progress-bar"></div>',
-                    '</div>',
-                    '<div class="trip-arrow"></div>',
-                '</div>'
-            ].join('');
+            // make sure the element doesn't exist in the DOM tree
+            if ( typeof $('.trip-block').get(0) === 'undefined' ) {
 
-            var $tripBlock = $(html);  
+                var html = [
+                    '<div class="trip-block">',
+                        '<div class="trip-content"></div>',
+                        '<div class="trip-progress-wrapper">',
+                            '<div class="trip-progress-bar"></div>',
+                        '</div>',
+                        '<div class="trip-arrow"></div>',
+                    '</div>'
+                ].join('');
 
-            $('body').append( $tripBlock );
+                var $tripBlock = $(html);  
 
-            this.$tripBlock = $tripBlock;
+                $('body').append( $tripBlock );
+            }
         },
 
         createOverlay : function() {
 
-            var $overlay = $('<div class="trip-overlay"></div>');
+            // make sure the element doesn't exist in the DOM tree
+            if ( typeof $('.trip-overlay').get(0) === 'undefined' ) {
 
-            $overlay.height( $(document).height() );
+                var html = [
+                    '<div class="trip-overlay">',
+                    '</div>'
+                ].join('');
 
-            $('body').append( $overlay );
+                var $overlay = $(html);
+
+                $overlay.height( $(document).height() );
+
+                $('body').append( $overlay );
+            }
         },
 
         init : function() {
-            this.bindKeyEvent();
+            this.bindKeyEvents();
 
             // set refs
             this.$bar = $('.trip-progress-bar');
             this.$overlay = $('.trip-overlay');
             this.$tripArrow = $('.trip-arrow');
+            this.$tripBlock = $('.trip-block');
         },
 
         start : function() {
@@ -416,6 +462,7 @@
     // ], {
     //     onTripStart : $.noop,
     //     onTripEnd : $.noop,
+    //     backToTopWhenEnded : true
     // });
     //
 
