@@ -62,7 +62,7 @@
                 zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             };
 
-            $sel.data('tour-old-css', oldCSS)
+            $sel.data('trip-old-css', oldCSS)
                 .css(newCSS)
                 .addClass('trip-exposed');
 
@@ -74,7 +74,7 @@
             this.hasExpose = false;
 
             var $exposedSel = $('.trip-exposed'),
-                oldCSS = $exposedSel.data('tour-old-css');
+                oldCSS = $exposedSel.data('trip-old-css');
 
             $exposedSel.css( oldCSS )
                        .removeClass('trip-exposed');

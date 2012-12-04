@@ -7,6 +7,7 @@ Setup (minimal)
 ===============
 
 * include jQuery
+* include Trip.css
 * include Trip.js
 * setup trip codes shown below
 
@@ -19,7 +20,7 @@ Setup (minimal)
                 sel : $('#element2'),
                 content : 'This is element 2'
             }
-        ], options); // details about options is listed below
+        ], options); // details about options are listed below
 
 
 Options
