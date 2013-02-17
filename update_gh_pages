@@ -1,8 +1,8 @@
 #!/bin/bash
 git checkout gh-pages
-git checkout -- master index.html
-git checkout -- master public
-git checkout -- master src
+git checkout master -- index.html
+git checkout master -- public
+git checkout master -- src
 git add .
 git commit -a -m "merge from master"
-# git checkout master
+git checkout master
