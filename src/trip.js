@@ -10,7 +10,7 @@
             onTripEnd : $.noop,
             backToTopWhenEnded : false,
             overlayZindex : 99999,
-            delayPeriod : 1000
+            delay : 1000
 
         }, userOptions);
 
@@ -106,7 +106,8 @@
 
             case this.CONSTANTS['SPACE'] : 
 
-                // this.pause();
+                e.preventDefault();
+                this.pause();
                 break;
 
             case this.CONSTANTS['LEFT_ARROW'] :
@@ -138,9 +139,7 @@
         // If the user forces to stop the timer, we won't do any further actions instead
         stop : function() {
 
-            // clear timer
-            clearTimeout( this.timer );
-
+            this.timer.stop();
             this.tripIndex = 0;
             this.hideTripBlock();
         },
@@ -148,6 +147,16 @@
         // TODO: try to pause when the user hits space
         pause : function() {
 
+            if ( this.progressing ) {
+                this.timer.pause();
+                this.pauseProgressBar();
+            }
+            else{
+                var remainingTime = this.timer.resume();
+                this.resumeProgressBar( remainingTime );
+            }
+            
+            this.progressing = !this.progressing;
         },
 
         // XXX:
@@ -157,14 +166,20 @@
         showCurrentTrip : function(o) {
 
             // preprocess when we have to show trip block
-            clearTimeout( this.timer );
+            if ( this.timer ) {
+                this.timer.stop();
+            }
             
             if ( this.hasExpose ) {
                 this.hideExpose();
             }
 
             if ( this.progressing ) {
+
                 this.hideProgressBar();
+
+                // not doing the progress effect
+                this.progressing = false;
             }
 
             // show block
@@ -188,8 +203,7 @@
 
         doLastOperation : function() {
 
-            clearTimeout( this.timer );
-
+            this.timer.stop();
             this.unbindKeyEvents();
             this.hideTripBlock();
 
@@ -207,11 +221,7 @@
         },
 
         showProgressBar : function( delay ) {
-
             var that = this;
-            
-            // doing the progress effect
-            this.progressing = true;
 
             this.$bar.animate({
                 width : '100%'  
@@ -221,28 +231,33 @@
         },
 
         hideProgressBar : function() {
-
-            // not doing the progress effect
-            this.progressing = false;
-
             this.$bar.width(0);
             this.$bar.stop(true);
+        },
+
+        pauseProgressBar : function() {
+            this.$bar.stop(true);
+        },
+
+        resumeProgressBar : function( remainingTime ) {
+            this.showProgressBar( remainingTime );
         },
 
         run : function() {
 
             var that = this,
                 o = this.getCurrentTripObject(),
-                delay = o.delay || this.settings.delayPeriod;
+                delay = o.delay || this.settings.delay;
 
             // next to o
             this.showCurrentTrip(o);
 
             // show the progress bar
             this.showProgressBar( delay );
+            this.progressing = true;
 
             // set timer to show next
-            this.timer = setTimeout(function() {
+            this.timer = new Timer(function() {
 
                 if ( that.isLast() ) {
                     that.doLastOperation();
@@ -286,12 +301,8 @@
             }
         },
 
-        getCurrentTripIndex : function() {
-            return this.tripIndex;
-        },
-
         getCurrentTripObject : function() {
-            return this.tripData[ this.getCurrentTripIndex() ];
+            return this.tripData[ this.tripIndex ];
         },
 
         checkTripData : function( o ) {
@@ -454,17 +465,31 @@
         }
     };
 
-    // Example : 
-    //
-    // Trip([
-    //    { sel : $('#abc'), position : 'n', content : 'This is a highlight', expose : true },
-    //    { sel : $('#def'), position : 'e', content : 'xxxx' },
-    // ], {
-    //     onTripStart : $.noop,
-    //     onTripEnd : $.noop,
-    //     backToTopWhenEnded : true
-    // });
-    //
+    // helper from 
+    // http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
+    function Timer(callback, delay) {
+
+        var timerId,
+            start, 
+            remaining = delay;
+
+        this.pause = function() {
+            window.clearTimeout(timerId);
+            remaining -= new Date() - start;
+        };
+
+        this.resume = function() {
+            start = new Date();
+            timerId = window.setTimeout(callback, remaining);
+            return remaining;
+        };
+        
+        this.stop = function() {
+            window.clearTimeout(timerId);
+        };
+
+        this.resume(); 
+    }
 
     // Expose to window
     window.Trip = Trip;

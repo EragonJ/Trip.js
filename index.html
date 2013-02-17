@@ -5,17 +5,31 @@
     background : #DDD;
 }</style><script src="public/js/vendor/modernizr-2.6.2.min.js"></script><script src="public/js/vendor/jquery-1.8.3.min.js"></script><script src="./src/trip.js"></script><script>$(document).ready(function() {
     var trip = new Trip([
-        { sel : $('#abc'), position : 'n', content : 'This is a highlight', delay : 3000 },
-        { sel : $('#def'), position : 's', content : 'This is another test', delay : 2000},
-        { sel : $('#ghi'), content : 'This is a tettttttest' }
+        { 
+            sel : $('#abc'), 
+            position : 'n', 
+            content : 'This is a highlight', 
+            delay : 3000 
+        },
+        { 
+            sel : $('#def'),
+            position : 's',
+            content : 'This is another test',
+            delay : 2000
+        },
+        { 
+            sel : $('#ghi'),
+            content : 'This is a tettttttest'
+        }
         // position is not implemented yet;
     ], {
         onTripStart : $.noop,
         onTripEnd : function() {
-            //console.log(this); 
+            console.log('x'); 
         },
         backToTopWhenEnded : true,
-        tripIndex : 0
+        tripIndex : 0,
+        delay : 1000
     });
     
     trip.start();
