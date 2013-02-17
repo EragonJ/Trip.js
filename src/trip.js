@@ -139,7 +139,7 @@
         stop : function() {
 
             this.timer.stop();
-            this.tripIndex = 0;
+            this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
         },
 
