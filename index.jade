@@ -14,8 +14,10 @@ html.no-js(lang='en')
         title Test
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width')
-        link(rel='stylesheet', href='public/css/normalize.css')
-        link(rel='stylesheet', href='public/css/main.css')
+        link(rel='stylesheet', href='public/vendor/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet', href='public/css/index.css')
+
+        // include trip CSS
         link(rel='stylesheet', href='./src/trip.css')
         style(type='text/css')
             .wrapper div:nth-child(odd) {
@@ -24,84 +26,172 @@ html.no-js(lang='en')
             .wrapper div:nth-child(even) {
                 background : #DDD;
             }
-        script(src='public/js/vendor/modernizr-2.6.2.min.js')
-        script(src='public/js/vendor/jquery-1.8.3.min.js')
+        script(src='public/vendor/modernizr-2.6.2.min.js')
+        script(src='public/vendor/jquery-1.8.3.min.js')
+        script(src='public/vendor/bootstrap/js/bootstrap.min.js')
         script(src='./src/trip.js')
         script
             $(document).ready(function() {
                 var trip = new Trip([
                     { 
-                        sel : $('#abc'), 
+                        sel : $('.step1'), 
                         position : 'n', 
-                        content : 'This is a highlight', 
-                        delay : 3000 
+                        content : 'Hi, I am Trip.js', 
+                        delay : 2000 
                     },
-                    { 
-                        sel : $('#def'),
-                        position : 's',
-                        content : 'This is another test',
+                    {
+                        sel : $('.step2'),
+                        position : 'e',
+                        content : 'This is a plugin that can help you make hint flow easily !',
+                        delay : 3000
+                    },
+                    {
+                        sel : $('.step3'),
+                        position : 'n',
+                        content : 'Can be placed in many directinos - North',
                         delay : 2000
                     },
-                    { 
-                        sel : $('#ghi'),
-                        content : 'This is a tettttttest'
+                    {
+                        sel : $('.step4'),
+                        position : 'e',
+                        content : 'East',
+                        delay : 2000
+                    },
+                    {
+                        sel : $('.step5'),
+                        position : 's',
+                        content : 'South',
+                        delay : 2000
+                    },
+                    {
+                        sel : $('.step6'),
+                        position : 'w',
+                        content : 'west',
+                        delay : 2000
+                    },
+                    {
+                        sel : $('.step7'),
+                        position : 'n',
+                        content : 'One more thing, plz read this !',
+                        expose : true,
+                        delay : 7000
                     }
-                    // position is not implemented yet;
                 ], {
-                    onTripStart : $.noop,
+                    onTripStart : function() {
+                        console.log("onTripStart");
+                    },
                     onTripEnd : function() {
-                        console.log('x'); 
+                        console.log("onTripEnd");
                     },
                     backToTopWhenEnded : true,
-                    tripIndex : 0,
-                    delay : 1000
+                    delay : 2000
                 });
 
-                trip.start();
+                $(".start-tour").click(function() {
+                    trip.start(); 
+                });
             });
     body
-        div.wrapper
-            div This is a test
-            div This is a test
-            div This is a test
-            div#abc This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div#ghi This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div#def This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
-            div This is a test
+        .container
+            .navbar
+                .navbar-inner
+                    a.brand(href="#") Trip.js
+                    ul.nav
+                        li.active 
+                            a(href="#") Home
+                        li 
+                            a.start-tour(href="#") Start a Demo Tour
+                        li 
+                            a(href="https://github.com/EragonJ/Trip.js") Github
+
+                    ul.nav.pull-right
+                        li
+                            a(href="http://eragonj.me") By EragonJ
+
+            .jumbotron
+                h1.step1 Trip.js
+
+            .steps
+                .step
+                    h2
+                        span.step2 What is Trip.js ?
+                    p Trip.js is a light-weight jQuery plugin that can customize a `tutorial trip` easily
+                .step
+                    h2 Setup (minimal)
+                    ol 
+                        li Include jQuery ( has to check version later )
+                        li Include src/trip.css
+                        li Include src/trip.js
+                        li 
+                            div Setup Trip.js 
+                            pre.step3.step4.step5.step6
+                                | var trip = new Trip([
+                                |    { 
+                                |        sel : $('#element1'),
+                                |        content : 'This is element 1'
+                                |    },
+                                |    {
+                                |        sel : $('#element2'),
+                                |        content : 'This is element 2'
+                                |    }
+                                | ], options); // details about options are listed below
+                .step
+                    h2 Options
+                    ul 
+                        li 
+                            h4 tripIndex
+                            p You You can set tripIndex ( start from 0 ) to specific trip block at start.
+                            p 
+                                | Default : 
+                                code 
+                                    $.noop
+                        li 
+                            h4 onTripStart 
+                            p You can set a callback function triggered when the trip starts.
+                            p 
+                                | Default : 
+                                code 
+                                    $.noop
+                        li 
+                            h4 onTripEnd
+                            p You can set a callback function triggered when the trip ends.
+                            p 
+                                | Default : 
+                                code 
+                                    $.noop
+                        li 
+                            h4 backToTopWhenEnded
+                            p You can ask Trip.js go back to top when ended.
+                            p 
+                                | Default : 
+                                code 
+                                    false
+                        li 
+                            h4 overlayZindex
+                            p You can set the basic zIndex for overlay if you want to expose elements.
+                            p 
+                                | Default : 
+                                code 
+                                    false
+                        li 
+                            h4 backToTopWhenEnded
+                            p You can ask Trip.js go back to top when ended.
+                            p 
+                                | Default : 
+                                code 
+                                    99999
+                        li 
+                            h4 delayPeriod
+                            p every trip will be lived for 1 second (1000 ms) by default
+                            p 
+                                | Default : 
+                                code 
+                                    1000
+                .step.step7
+                    h2 Important !!
+                    p 
+                        | This plugin is still under development ! 
+                        | If you find any bugs or want me to implement anything, 
+                        | please feel free to open an issue to me !
+                    p
+                        a(href="https://github.com/EragonJ/Trip.js/issues") Open an issue
