@@ -348,7 +348,7 @@
                 this.$tripArrow.addClass('s');
                 this.$tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
-                    top : $sel.offset().top + arrowHeight + blockHeight
+                    top : $sel.offset().top + selHeight + arrowHeight
                 });
                 break;
             case 'w':
