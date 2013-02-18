@@ -1,0 +1,23 @@
+.jumbotron {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 100px;
+    line-height: 1;
+}
+
+.navbar {
+    margin-top: 20px;
+}
+
+.step {
+    margin: 40px 0;
+}
+
+ol li,
+ol li pre {
+    margin: 5px 0;
+}
+

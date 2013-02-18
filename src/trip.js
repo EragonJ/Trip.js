@@ -93,7 +93,7 @@
         },
 
         unbindKeyEvents : function() {
-            $(document).off('.Trip');
+            $(document).off('keydown.Trip');
         },
 
         keyEvent : function(e) {
@@ -136,22 +136,20 @@
             }
         },
 
-        // If the user forces to stop the timer, we won't do any further actions instead
         stop : function() {
 
             this.timer.stop();
-            this.tripIndex = 0;
+            this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
         },
 
-        // TODO: try to pause when the user hits space
         pause : function() {
 
             if ( this.progressing ) {
                 this.timer.pause();
                 this.pauseProgressBar();
             }
-            else{
+            else {
                 var remainingTime = this.timer.resume();
                 this.resumeProgressBar( remainingTime );
             }
@@ -350,7 +348,7 @@
                 this.$tripArrow.addClass('s');
                 this.$tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
-                    top : $sel.offset().top + arrowHeight + blockHeight
+                    top : $sel.offset().top + selHeight + arrowHeight
                 });
                 break;
             case 'w':
@@ -465,33 +463,15 @@
         }
     };
 
-    // helper from 
-    // http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
-    function Timer(callback, delay) {
-
-        var timerId,
-            start, 
-            remaining = delay;
-
-        this.pause = function() {
-            window.clearTimeout(timerId);
-            remaining -= new Date() - start;
-        };
-
-        this.resume = function() {
-            start = new Date();
-            timerId = window.setTimeout(callback, remaining);
-            return remaining;
-        };
-        
-        this.stop = function() {
-            window.clearTimeout(timerId);
-        };
-
-        this.resume(); 
-    }
-
     // Expose to window
     window.Trip = Trip;
+
+
+    /*
+     *  3rd party libraries / toolkits
+     *
+     *  1) http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
+     */
+    function Timer(e,t){var n,r,i=t;this.pause=function(){window.clearTimeout(n);i-=new Date-r};this.resume=function(){r=new Date;n=window.setTimeout(e,i);return i};this.stop=function(){window.clearTimeout(n)};this.resume()}
 
 }(window, jQuery));
