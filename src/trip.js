@@ -93,7 +93,7 @@
         },
 
         unbindKeyEvents : function() {
-            $(document).off('.Trip');
+            $(document).off('keydown.Trip');
         },
 
         keyEvent : function(e) {
