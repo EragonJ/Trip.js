@@ -5,13 +5,16 @@
         // save the settings
         this.settings = $.extend({
 
+            // basic config
             tripIndex : 0,
+            backToTopWhenEnded : false,
+            overlayZindex : 99999,
+            delay : 1000,
+
+            // callbacks
             onTripStart : $.noop,
             onTripEnd : $.noop,
             onTripStop : $.noop,
-            backToTopWhenEnded : false,
-            overlayZindex : 99999,
-            delay : 1000
 
         }, userOptions);
 

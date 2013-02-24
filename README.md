@@ -62,6 +62,13 @@ every trip will be lived for 1 second (1000 ms) by default
 * Type: *number*
 * Default: `1000`
 
+TODO
+====
+
+* Add Compress source code
+* Add different Trip themes
+* Make new direction images according new themes
+
 Author
 ======
 EragonJ ( eragonj@eragonj.me )
