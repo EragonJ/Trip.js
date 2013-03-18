@@ -5,12 +5,16 @@
         // save the settings
         this.settings = $.extend({
 
+            // basic config
             tripIndex : 0,
-            onTripStart : $.noop,
-            onTripEnd : $.noop,
             backToTopWhenEnded : false,
             overlayZindex : 99999,
-            delay : 1000
+            delay : 1000,
+
+            // callbacks
+            onTripStart : $.noop,
+            onTripEnd : $.noop,
+            onTripStop : $.noop,
 
         }, userOptions);
 
@@ -139,8 +143,16 @@
         stop : function() {
 
             this.timer.stop();
+
+            if ( this.hasExpose ) {
+                this.hideExpose();
+            }
+
             this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
+
+            // exec cb
+            this.settings.onTripStop();
         },
 
         pause : function() {
@@ -200,7 +212,7 @@
         },
 
         doLastOperation : function() {
-
+            
             this.timer.stop();
             this.unbindKeyEvents();
             this.hideTripBlock();
@@ -208,12 +220,13 @@
             if ( this.hasExpose ) {
                 this.hideExpose();
             }
-
-            this.settings.onTripEnd();
             
             if ( this.settings.backToTopWhenEnded ) {
                 this.$root.animate({ scrollTop : 0 }, 'slow');
             }
+
+            this.tripIndex = this.settings.tripIndex;
+            this.settings.onTripEnd();
 
             return false;
         },
