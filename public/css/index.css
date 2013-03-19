@@ -1,4 +1,5 @@
 .jumbotron {
+    position: relative;
     margin: 40px 0;
     text-align: center;
 }
@@ -14,6 +15,10 @@
 
 .step {
     margin: 40px 0;
+}
+
+.social-buttons {
+    margin-left: 47%;
 }
 
 ol li,
