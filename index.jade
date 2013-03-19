@@ -110,6 +110,9 @@ html.no-js(lang='en')
 
     body
         div#fb-root 
+        a(href="https://github.com/EragonJ/Trip.js") 
+            img(style="position: absolute; top: 0; right: 0; border: 0;", src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
+
         .container
             .navbar
                 .navbar-inner
@@ -133,7 +136,8 @@ html.no-js(lang='en')
                 div.fb-like(data-href="http://eragonj.github.com/Trip.js/", data-send="true", data-layout="button_count", data-width="450", data-show-faces="false", data-send="false")
                 div.twitter
                     a.twitter-share-button(href="https://twitter.com/share", data-hashtags="trip.js") Tweet
-
+                div.github
+                    iframe(src="http://ghbtns.com/github-btn.html?user=EragonJ&repo=Trip.js&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="152", height="20")
 
             .steps
                 .step
@@ -285,6 +289,25 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | 1000
+                .step 
+                    h2 Key Binding
+                    ul
+                        li 
+                            h4 Right and Down arrows
+                            p Go to next trip
+
+                        li 
+                            h4 Left and Up arrows
+                            p Go back to previous trip
+
+                        li 
+                            h4 Space
+                            p pause / continue
+
+                        li 
+                            h4 Esc
+                            p Stop
+
                 .step
                     h2 API
                     ul 
