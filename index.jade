@@ -119,11 +119,19 @@ html.no-js(lang='en')
                 .step
                     h2 Setup (minimal)
                     ol 
+                        - var jQueryCode = '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>'
                         li Include jQuery ( has to check version later )
+                            pre #{jQueryCode}
+
+                        - var cssCode = '<link type="text/css" rel="stylesheet" href="src/trip.css">'
                         li Include src/trip.css
+                            pre #{cssCode}
+
+                        - var jsCode = '<script type="text/javascript" src="src/trip.js"></script>'
                         li Include src/trip.js
-                        li 
-                            div Setup Trip.js 
+                            pre #{jsCode}
+
+                        li Setup Trip.js
                             pre.step3.step4.step5.step6
                                 | var trip = new Trip([
                                 |    { 
@@ -135,6 +143,12 @@ html.no-js(lang='en')
                                 |        content : 'This is element 2'
                                 |    }
                                 | ], options); // details about options are listed below
+
+                        li Take a Trip Now !
+                            pre
+                                | $(document).ready(function({
+                                |     trip.start();
+                                | });
                 .step
                     h2 Options
                     ul 
