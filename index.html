@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Test</title>
+    <title>Trip.js </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css">
@@ -80,6 +80,9 @@
               onTripEnd : function() {
                   console.log("onTripEnd");
               },
+              onTripStop : function() {
+                  console.log("onTripStop");
+              },
               backToTopWhenEnded : true,
               delay : 2000
           });
@@ -87,7 +90,10 @@
           $(".start-tour").click(function() {
               trip.start(); 
           });
+          
+          window.trip = trip;
       });
+      
     </script>
   </head>
   <body>
@@ -110,10 +116,10 @@
       <div class="steps">
         <div class="step">
           <h2><span class="step2">What is Trip.js ?</span></h2>
-          <p>Trip.js is a light-weight jQuery plugin that can customize a `tutorial trip` easily</p>
+          <p>Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )</p>
         </div>
         <div class="step">
-          <h2>Setup (minimal)</h2>
+          <h2>Setup ( Minimal )</h2>
           <ol> 
             <li>Include jQuery ( has to check version later )
               <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</pre>
@@ -143,12 +149,78 @@
             </li>
           </ol>
         </div>
+        <div class="step"> 
+          <h2>Setup for Demo Tour</h2>
+          <pre>$(document).ready(function() {
+    var trip = new Trip([
+        { 
+            sel : $('.step1'), 
+            position : 'n', 
+            content : 'Hi, I am Trip.js', 
+            delay : 2000 
+        },
+        {
+            sel : $('.step2'),
+            position : 'e',
+            content : 'This is a plugin that can help you make hint flow easily !',
+            delay : 3000
+        },
+        {
+            sel : $('.step3'),
+            position : 'n',
+            content : 'Can be placed in many directinos - North',
+            delay : 2000
+        },
+        {
+            sel : $('.step4'),
+            position : 'e',
+            content : 'East',
+            delay : 2000
+        },
+        {
+            sel : $('.step5'),
+            position : 's',
+            content : 'South',
+            delay : 2000
+        },
+        {
+            sel : $('.step6'),
+            position : 'w',
+            content : 'west',
+            delay : 2000
+        },
+        {
+            sel : $('.step7'),
+            position : 'n',
+            content : 'One more thing, plz read this !',
+            expose : true,
+            delay : 7000
+        }
+    ], {
+        onTripStart : function() {
+            console.log(&quot;onTripStart&quot;);
+        },
+        onTripEnd : function() {
+            console.log(&quot;onTripEnd&quot;);
+        },
+        onTripStop : function() {
+            console.log(&quot;onTripStop&quot;);
+        },
+        backToTopWhenEnded : true,
+        delay : 2000
+    });
+ 
+    $(&quot;.start-tour&quot;).click(function() {
+        trip.start(); 
+    });
+});</pre>
+        </div>
         <div class="step">
           <h2>Options</h2>
           <ul> 
             <li> 
               <h4>tripIndex</h4>
-              <p>You You can set tripIndex ( start from 0 ) to specific trip block at start.</p>
+              <p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p>
               <p>
                  
                 Default : <code>
@@ -208,13 +280,30 @@
             </li>
           </ul>
         </div>
+        <div class="step">
+          <h2>API</h2>
+          <ul> 
+            <li> 
+              <h4>trip.start()</h4>
+              <p>Call this method to start your trip</p>
+            </li>
+            <li>
+              <h4>trip.stop()</h4>
+              <p>Call this method to stop your trip</p>
+            </li>
+            <li>
+              <h4>trip.pause()</h4>
+              <p>Call this method to pause/continue your trip</p>
+            </li>
+          </ul>
+        </div>
         <div class="step step7">
-          <h2>Important !!</h2>
+          <h2>Notice</h2>
           <p>
              
             This plugin is still under development ! 
             If you find any bugs or want me to implement anything, 
-            please feel free to open an issue to me !
+            please feel free to open an issue ;)
           </p>
           <p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p>
         </div>
