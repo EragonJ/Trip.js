@@ -62,12 +62,29 @@ every trip will be lived for 1 second (1000 ms) by default
 * Type: *number*
 * Default: `1000`
 
+Key Binding
+===========
+
+Trip.js would detect following keys to do relative actions after loading it.
+
+* Right and Down arrows  - Go to next trip
+* Left and Up arrows     - Go back to previous trip
+* Space                  - pause / resume trip
+* Esc                    - Stop trip
+
+API
+===
+
+* trip.start()   - start your trip
+* trip.stop()    - stop your trip
+* trip.pause()   - pause / resume your trip
+
 TODO
 ====
 
-* Add Compress source code
-* Add different Trip themes
-* Make new direction images according new themes
+* [ ] Add different Trip themes
+* [ ] Make new direction images with new themes
+* [x] Add Compress source code
 
 Author
 ======
