@@ -3,6 +3,17 @@ Trip.js
 
 Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )
 
+Install
+=====
+
+Clone the latest version from Github directly
+
+* `git clone git://github.com/EragonJ/Trip.js.git`
+
+Or Install from Bower
+
+* `bower install trip.js`
+
 Setup (minimal)
 ===============
 
