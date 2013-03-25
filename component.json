@@ -1,0 +1,22 @@
+{
+  "name": "trip.js",
+  "description" : "a light-weight jQuery plugin that can customize a tutorial trip easily",
+  "homepage" : "https://github.com/EragonJ/Trip.js",
+  "keywords" : [
+    "trip",
+    "client",
+  ],
+  "author" : {
+    "name" : "EragonJ",
+    "email" : "eragonj@eragonj.me"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/EragonJ/Trip.js.git"
+  },
+  "version": "1.0.0",
+  "main": "./src/trip.min.js",
+  "dependencies": {
+    "jquery": "~1.8.3"
+  }
+}}
