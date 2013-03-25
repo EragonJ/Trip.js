@@ -1,3 +1,10 @@
+/*
+ *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
+ *  Version : 1.0.0
+ *
+ *  Author : EragonJ <eragonj@eragonj.me> 
+ *  Blog : http://eragonj.me
+ */
 (function(window, $) {
 
     var Trip = function( tripData, userOptions ) {
@@ -45,9 +52,25 @@
             ESC : 27,
             SPACE : 32
         };
+
+        this.console = window.console || {};
     };
 
     Trip.prototype = {
+
+        preInit : function() {
+
+            // override console object for IE
+            if ( typeof this.console === "undefined" ) {
+
+                var self = this,
+                    methods = ['log', 'warn', 'debug', 'info', 'error'];
+
+                $.each(methods, function(i, methodName) {
+                    self.console[methodName] = $.noop;
+                });
+            }
+        },
 
         // TODO: implement expose
         showExpose : function( $sel ) {
@@ -328,7 +351,7 @@
             if ( typeof o.sel === 'undefined' ||
                     typeof o.content === 'undefined' ) {
 
-                console.warn("Your tripData is not valid in obj :" + o +".");
+                this.console.warn("Your tripData is not valid in obj :" + o +".");
                 return false;
             }
         },
@@ -452,6 +475,7 @@
         },
 
         init : function() {
+            this.preInit();
             this.bindKeyEvents();
 
             // set refs
