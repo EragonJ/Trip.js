@@ -16,13 +16,19 @@
             sel : $('.step1'), 
             position : 'n', 
             content : 'Hi, I am Trip.js', 
-            delay : 2000 
+            delay : 2000,
+            callback : function(i) {
+                console.log("step "+ i +" is finished");
+            }
         },
         {
             sel : $('.step2'),
             position : 'e',
             content : 'This is a plugin that can help you make hint flow easily !',
-            delay : 3000
+            delay : 3000,
+            callback : function(i) {
+                console.log("step "+ i +" is finished");
+            }
         },
         {
             sel : $('.step3'),
@@ -92,13 +98,19 @@
             sel : $('.step1'), 
             position : 'n', 
             content : 'Hi, I am Trip.js', 
-            delay : 2000 
+            delay : 2000,
+            callback : function(i) {
+                console.log(&quot;step &quot;+ i +&quot; is finished&quot;);
+            }
         },
         {
             sel : $('.step2'),
             position : 'e',
             content : 'This is a plugin that can help you make hint flow easily !',
-            delay : 3000
+            delay : 3000,
+            callback : function(i) {
+                console.log(&quot;step &quot;+ i +&quot; is finished&quot;);
+            }
         },
         {
             sel : $('.step3'),
@@ -148,7 +160,7 @@
     $(&quot;.start-tour&quot;).click(function() {
         trip.start(); 
     });
-});</pre></div><div class="step"><h2>Options</h2><ul> <li> <h4>tripIndex</h4><p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p><p> 
+});</pre></div><div class="step"><h2>Global Options</h2><ul> <li> <h4>tripIndex</h4><p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p><p> 
 Default : <code> 
 $.noop</code></p></li><li> <h4>onTripStart </h4><p>You can set a callback function triggered when the trip starts.</p><p> 
 Default : <code> 
@@ -158,9 +170,27 @@ $.noop</code></p></li><li> <h4>backToTopWhenEnded</h4><p>You can ask Trip.js go 
 Default : <code> 
 false</code></p></li><li> <h4>overlayZindex</h4><p>You can set the basic zIndex for overlay if you want to expose elements.</p><p> 
 Default : <code> 
-99999</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p> 
+99999</code></p></li><li> <h4>enableKeyBinding</h4><p>You can decide to bind key events for trip navigations or not.</p><p> 
 Default : <code> 
-1000</code></p></li></ul></div><div class="step"> <h2>Key Binding</h2><ul><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ul></div><div class="step"><h2>API</h2><ul> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li></ul></div><div class="step step7"><h2>Notice</h2><p> 
+true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p> 
+Default : <code> 
+1000</code></p></li></ul></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ul> <li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
+Default : <code> 
+no default</code></p></li><li> <h4>content *Required*</h4><p>What information that you want to show to users.</p><p> 
+Default : <code> 
+no default</code></p></li><li> <h4>position</h4><p>What position would you prefer for the tripBlock.</p><p> 
+Default : <code> 
+n</code>( You can use e, w, n, s four positions )</p></li><li> <h4>delay</h4><p> 
+You can delay longer / shoter for this step. You can assign 
+<code>delay</code> 
+in global options to change the default delay.</p><p> 
+Default : <code> 
+1000</code></p></li><li> <h4>callback</h4><p> 
+You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current 
+<code>tripIndex</code>
+(start from 0) as the first parameter back to your callback function for later use.</p><p> 
+Default : <code> 
+$.noop</code></p></li></ul></div><div class="step"> <h2>Key Binding</h2><ul><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ul></div><div class="step"><h2>API</h2><ul> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ul></div><div class="step step7"><h2>Notice</h2><p> 
 This plugin is still under development ! 
 If you find any bugs or want me to implement anything, 
 please feel free to open an issue ;)</p><p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p></div></div></div></body></html>

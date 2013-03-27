@@ -34,8 +34,10 @@ Setup (minimal)
         ], options); // details about options are listed below
 
 
-Options
-=======
+Global Options
+==============
+
+You can setup global options for the whole trip.
 
 ### tripIndex
 You can set tripIndex ( start from 0 ) to specific trip block at start.
@@ -67,11 +69,53 @@ You can set the basic zIndex for overlay if you want to expose elements
 * Type: *number*
 * Default: `99999`
 
+### enableKeyBinding 
+You can decide to bind key events for trip navigations or not.
+
+* Type: *boolean*
+* Default: `true`
+
 ### delayPeriod
-every trip will be lived for 1 second (1000 ms) by default
+Every trip will be delayed for 1 second (1000 ms) by default
 
 * Type: *number*
 * Default: `1000`
+
+Local Options
+=============
+
+You can setup specific options for each step.
+
+### sel *Required*
+Which selector is referenced in this step.
+
+* Type: *jQuery Object*
+* no default
+
+### content *Required*
+What information that you want to show to users.
+
+* Type: *String*
+* no default
+
+### position 
+What position would you prefer for the tripBlock.
+
+* Type: *String*
+* Default: `n` ( You can use e, w, n, s four positions )
+
+### delay
+You can delay longer / shoter for this step. You can assign `delay` in global options to change the default delay.
+
+* Type: *Number*
+* Default: `1000` (ms)
+
+### callback
+You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current `tripIndex` (start from 0) as the first parameter back to your callback function for later use.
+
+* Type: *Function*
+* Default: `$.noop`
+
 
 Key Binding
 ===========
@@ -86,9 +130,11 @@ Trip.js would detect following keys to do relative actions after loading it.
 API
 ===
 
-* trip.start()   - start your trip
-* trip.stop()    - stop your trip
-* trip.pause()   - pause / resume your trip
+* trip.start() - start your trip
+* trip.stop()  - stop your trip
+* trip.pause() - pause / resume your trip
+* trip.next()  - jump to next step
+* trip.prev()  - jump back to previous step
 
 TODO
 ====

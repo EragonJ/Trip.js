@@ -48,13 +48,19 @@ html.no-js(lang='en')
                         sel : $('.step1'), 
                         position : 'n', 
                         content : 'Hi, I am Trip.js', 
-                        delay : 2000 
+                        delay : 2000,
+                        callback : function(i) {
+                            console.log("step "+ i +" is finished");
+                        }
                     },
                     {
                         sel : $('.step2'),
                         position : 'e',
                         content : 'This is a plugin that can help you make hint flow easily !',
-                        delay : 3000
+                        delay : 3000,
+                        callback : function(i) {
+                            console.log("step "+ i +" is finished");
+                        }
                     },
                     {
                         sel : $('.step3'),
@@ -186,13 +192,19 @@ html.no-js(lang='en')
                         |             sel : $('.step1'), 
                         |             position : 'n', 
                         |             content : 'Hi, I am Trip.js', 
-                        |             delay : 2000 
+                        |             delay : 2000,
+                        |             callback : function(i) {
+                        |                 console.log("step "+ i +" is finished");
+                        |             }
                         |         },
                         |         {
                         |             sel : $('.step2'),
                         |             position : 'e',
                         |             content : 'This is a plugin that can help you make hint flow easily !',
-                        |             delay : 3000
+                        |             delay : 3000,
+                        |             callback : function(i) {
+                        |                 console.log("step "+ i +" is finished");
+                        |             }
                         |         },
                         |         {
                         |             sel : $('.step3'),
@@ -245,7 +257,7 @@ html.no-js(lang='en')
                         | });
 
                 .step
-                    h2 Options
+                    h2 Global Options
                     ul 
                         li 
                             h4 tripIndex
@@ -283,12 +295,66 @@ html.no-js(lang='en')
                                 code 
                                     | 99999
                         li 
+                            h4 enableKeyBinding
+                            p You can decide to bind key events for trip navigations or not.
+                            p 
+                                | Default : 
+                                code 
+                                    | true
+                        li 
                             h4 delayPeriod
                             p every trip will be lived for 1 second (1000 ms) by default
                             p 
                                 | Default : 
                                 code 
                                     | 1000
+                .step
+                    h2 Local Options 
+                    h4 You can setup specific options for each step.
+                    ul 
+                        li 
+                            h4 sel *Required*
+                            p Which selector is referenced in this step.
+                            p 
+                                | Default : 
+                                code 
+                                    | no default
+                        li 
+                            h4 content *Required*
+                            p What information that you want to show to users.
+                            p 
+                                | Default : 
+                                code 
+                                    | no default
+                        li 
+                            h4 position
+                            p What position would you prefer for the tripBlock.
+                            p 
+                                | Default : 
+                                code 
+                                    | n
+                                | ( You can use e, w, n, s four positions )
+                        li 
+                            h4 delay
+                            p 
+                                |You can delay longer / shoter for this step. You can assign 
+                                | <code>delay</code> 
+                                | in global options to change the default delay.
+                            p 
+                                | Default : 
+                                code 
+                                    | 1000
+                        li 
+                            h4 callback
+                            p 
+                                |You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current 
+                                | <code>tripIndex</code>
+                                | (start from 0) as the first parameter back to your callback function for later use.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
+
                 .step 
                     h2 Key Binding
                     ul
@@ -322,6 +388,14 @@ html.no-js(lang='en')
                         li
                             h4 trip.pause()
                             p Call this method to pause/continue your trip
+
+                        li 
+                            h4 trip.next()
+                            p jump to next step
+
+                        li 
+                            h4 trip.prev()
+                            p jump back to previous step
 
                 .step.step7
                     h2 Notice
