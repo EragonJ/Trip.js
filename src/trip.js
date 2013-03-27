@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.0.0
+ *  Version : 1.0.1
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me
@@ -17,6 +17,7 @@
             backToTopWhenEnded : false,
             overlayZindex : 99999,
             delay : 1000,
+            enableKeyBinding : true,
 
             // callbacks
             onTripStart : $.noop,
@@ -77,7 +78,8 @@
 
             this.hasExpose = true;
 
-            var oldCSS, newCSS;
+            var oldCSS, 
+                newCSS;
 
             oldCSS = {
                 position : $sel.css('position'),
@@ -133,6 +135,7 @@
 
             case this.CONSTANTS['SPACE'] : 
 
+                // space will make the page jump
                 e.preventDefault();
                 this.pause();
                 break;
@@ -140,25 +143,13 @@
             case this.CONSTANTS['LEFT_ARROW'] :
             case this.CONSTANTS['UP_ARROW'] :
 
-                if ( this.isFirst() ) {
-                    // do nothing
-                }
-                else {
-                    this.decreaseIndex();
-                    this.run();
-                }
+                this.prev();
                 break;
 
             case this.CONSTANTS['RIGHT_ARROW'] : 
             case this.CONSTANTS['DOWN_ARROW'] : 
 
-                if ( this.isLast() ){
-                    this.doLastOperation();
-                }
-                else {
-                    this.increaseIndex();
-                    this.run();
-                }
+                this.next();
                 break;
             }
         },
@@ -190,6 +181,26 @@
             }
             
             this.progressing = !this.progressing;
+        },
+
+        next : function() {
+            if ( this.isLast() ){
+                this.doLastOperation();
+            }
+            else {
+                this.increaseIndex();
+                this.run();
+            }
+        },
+
+        prev : function() {
+            if ( this.isFirst() ) {
+                // do nothing
+            }
+            else {
+                this.decreaseIndex();
+                this.run();
+            }
         },
 
         // XXX:
@@ -225,19 +236,14 @@
             }
         },
 
-        // TODO: add prev later
-        prev : function(o) {
-            // show block
-        
-            // set timer to show prev
-            //
-            // this.decreaseIndex();
-        },
-
         doLastOperation : function() {
             
             this.timer.stop();
-            this.unbindKeyEvents();
+
+            if ( this.settings.enableKeyBinding ) {
+                this.unbindKeyEvents();
+            }
+
             this.hideTripBlock();
 
             if ( this.hasExpose ) {
@@ -280,11 +286,11 @@
         run : function() {
 
             var that = this,
-                o = this.getCurrentTripObject(),
-                delay = o.delay || this.settings.delay;
+                tripObject = this.getCurrentTripObject(),
+                delay = tripObject.delay || this.settings.delay;
 
             // next to o
-            this.showCurrentTrip(o);
+            this.showCurrentTrip( tripObject );
 
             // show the progress bar
             this.showProgressBar( delay );
@@ -293,14 +299,14 @@
             // set timer to show next
             this.timer = new Timer(function() {
 
-                if ( that.isLast() ) {
-                    that.doLastOperation();
+                // XXX
+                // If we get here, it means that we have finished a step within a trip.
+
+                if ( that.hasCallback() ) {
+                    tripObject.callback( that.tripIndex );
                 }
-                else {
-                    // increase the index after delay to make sure we can pause on this block
-                    that.increaseIndex();
-                    that.run();
-                }
+
+                that.next();
 
             }, delay);
         },
@@ -311,6 +317,10 @@
 
         isLast : function() {
             return ( this.tripIndex === this.tripData.length - 1 ) ? true : false;
+        },
+
+        hasCallback : function() {
+            return (typeof this.tripData[ this.tripIndex ].callback !== "undefined");
         },
 
         increaseIndex : function() {
@@ -475,8 +485,12 @@
         },
 
         init : function() {
+
             this.preInit();
-            this.bindKeyEvents();
+
+            if ( this.settings.enableKeyBinding ) {
+                this.bindKeyEvents();
+            }
 
             // set refs
             this.$bar = $('.trip-progress-bar');
