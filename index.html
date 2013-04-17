@@ -100,7 +100,7 @@
             content : 'Hi, I am Trip.js', 
             delay : 2000,
             callback : function(i) {
-                console.log(&quot;step &quot;+ i +&quot; is finished&quot;);
+                console.log("step "+ i +" is finished");
             }
         },
         {
@@ -109,7 +109,7 @@
             content : 'This is a plugin that can help you make hint flow easily !',
             delay : 3000,
             callback : function(i) {
-                console.log(&quot;step &quot;+ i +&quot; is finished&quot;);
+                console.log("step "+ i +" is finished");
             }
         },
         {
@@ -145,19 +145,19 @@
         }
     ], {
         onTripStart : function() {
-            console.log(&quot;onTripStart&quot;);
+            console.log("onTripStart");
         },
         onTripEnd : function() {
-            console.log(&quot;onTripEnd&quot;);
+            console.log("onTripEnd");
         },
         onTripStop : function() {
-            console.log(&quot;onTripStop&quot;);
+            console.log("onTripStop");
         },
         backToTopWhenEnded : true,
         delay : 2000
     });
  
-    $(&quot;.start-tour&quot;).click(function() {
+    $(".start-tour").click(function() {
         trip.start(); 
     });
 });</pre></div><div class="step"><h2>Global Options</h2><ul> <li> <h4>tripIndex</h4><p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p><p> 
