@@ -209,6 +209,14 @@
         // it just does the necessary operations according to the passed tripData `o`
         showCurrentTrip : function(o) {
 
+            // Allow sel element to be a string selector
+            // in case you want to create a TripObject that
+            // handles an element that doesn't exist yet when you create
+            // this Trip.
+            if(typeof o.sel === 'string') {
+                o.sel = $(o.sel);
+            }
+
             // preprocess when we have to show trip block
             if ( this.timer ) {
                 this.timer.stop();
@@ -227,12 +235,14 @@
             }
 
             // show block
-            this.checkTripData(o);
-            this.setTripBlock(o);
-            this.showTripBlock(o);
+            var tripDataOk = this.checkTripData(o);
+            if(tripDataOk) {
+                this.setTripBlock(o);
+                this.showTripBlock(o);
 
-            if ( o.expose ) {
-                this.showExpose( o.sel );
+                if ( o.expose ) {
+                    this.showExpose( o.sel );
+                }
             }
         },
 
@@ -359,11 +369,14 @@
              *  }
              */
             if ( typeof o.sel === 'undefined' ||
+                    o.sel === null ||
+                    o.sel.length === 0 ||
                     typeof o.content === 'undefined' ) {
 
                 this.console.warn("Your tripData is not valid in obj :" + o +".");
                 return false;
             }
+            return true;        
         },
 
         setTripBlock : function( o ) {
