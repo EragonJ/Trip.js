@@ -235,12 +235,14 @@
             }
 
             // show block
-            this.checkTripData(o);
-            this.setTripBlock(o);
-            this.showTripBlock(o);
+            var tripDataOk = this.checkTripData(o);
+            if(tripDataOk) {
+                this.setTripBlock(o);
+                this.showTripBlock(o);
 
-            if ( o.expose ) {
-                this.showExpose( o.sel );
+                if ( o.expose ) {
+                    this.showExpose( o.sel );
+                }
             }
         },
 
@@ -367,11 +369,14 @@
              *  }
              */
             if ( typeof o.sel === 'undefined' ||
+                    o.sel.length === 0 ||
+                    o.sel === null ||
                     typeof o.content === 'undefined' ) {
 
                 this.console.warn("Your tripData is not valid in obj :" + o +".");
                 return false;
             }
+            return true;        
         },
 
         setTripBlock : function( o ) {
