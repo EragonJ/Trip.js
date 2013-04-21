@@ -369,8 +369,8 @@
              *  }
              */
             if ( typeof o.sel === 'undefined' ||
-                    o.sel.length === 0 ||
                     o.sel === null ||
+                    o.sel.length === 0 ||
                     typeof o.content === 'undefined' ) {
 
                 this.console.warn("Your tripData is not valid in obj :" + o +".");
