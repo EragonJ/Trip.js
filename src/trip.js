@@ -209,6 +209,14 @@
         // it just does the necessary operations according to the passed tripData `o`
         showCurrentTrip : function(o) {
 
+            // Allow sel element to be a string selector
+            // in case you want to create a TripObject that
+            // handles an element that doesn't exist yet when you create
+            // this Trip.
+            if(typeof o.sel === 'string') {
+                o.sel = $(o.sel);
+            }
+
             // preprocess when we have to show trip block
             if ( this.timer ) {
                 this.timer.stop();
