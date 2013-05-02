@@ -249,10 +249,12 @@
                 }
             } else {
                 if( this.$dir === 'next' ) {
-                    this.next();
-                } else if( this.$dir === 'prev' ) {
-                    this.prev();
-                }
+                    this.increaseIndex();
+                    this.showCurrentTrip(this.getCurrentTripObject());
+                }else if( this.$dir === 'prev' ) {
+                    this.decreaseIndex();
+                    this.showCurrentTrip(this.getCurrentTripObject());
+                }                
             }
         },
 
@@ -323,7 +325,7 @@
                 // If we get here, it means that we have finished a step within a trip.
 
                 if ( that.hasCallback() ) {
-                    tripObject.callback( that.tripIndex );
+                   that.getCurrentTripObject().callback( that.tripIndex );
                 }
 
                 that.next();
