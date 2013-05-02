@@ -139,9 +139,9 @@ API
 TODO
 ====
 
+* [ ] Bypass !tripDataOk step
 * [ ] Add different Trip themes
 * [ ] Make new direction images with new themes
-* [x] Add Compress source code
 
 Author
 ======
