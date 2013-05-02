@@ -35,6 +35,8 @@
         this.$overlay = null;
         this.$bar = null;
         this.$root = $('body, html');
+        // default dir is next (forwards)
+        this.$dir = 'next';
 
         // save the current trip index
         this.tripIndex = this.settings.tripIndex;
@@ -184,6 +186,7 @@
         },
 
         next : function() {
+            this.$dir = 'next';
             if ( this.isLast() ){
                 this.doLastOperation();
             }
@@ -194,6 +197,7 @@
         },
 
         prev : function() {
+            this.$dir = 'prev';
             if ( this.isFirst() ) {
                 // do nothing
             }
@@ -242,6 +246,12 @@
 
                 if ( o.expose ) {
                     this.showExpose( o.sel );
+                }
+            } else {
+                if( this.$dir === 'next' ) {
+                    this.next();
+                } else if( this.$dir === 'prev' ) {
+                    this.prev();
                 }
             }
         },
