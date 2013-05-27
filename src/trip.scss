@@ -15,7 +15,7 @@
         color: #DDD;
 
         .trip-arrow {
-            background-image: url("./arrow.png");
+            background-image: url("img/arrow.png");
         }
         @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 4px 0);
     }
@@ -25,7 +25,7 @@
         color: #333;
 
         .trip-arrow {
-            background-image: url("./arrow-white.png");
+            background-image: url("img/arrow-white.png");
         }
     }
 }
