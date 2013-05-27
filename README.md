@@ -3,6 +3,11 @@ Trip.js
 
 Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )
 
+Version
+=======
+
+1.0.2
+
 Install
 =====
 
