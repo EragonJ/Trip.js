@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--[if lt IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"></html><![endif]--><!--[if IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8"></html><![endif]--><!--[if IE 8]><html lang="en" class="no-js lt-ie9"></html><![endif]--><!--[if gt IE 8]><!--><html lang="en" class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Trip.js </title><meta name="description" content=""><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="public/css/index.css"><!-- include trip CSS--><link rel="stylesheet" href="./src/trip.css"><style type="text/css">.wrapper div:nth-child(odd) {
+<!DOCTYPE html><!--[if lt IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"></html><![endif]--><!--[if IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8"></html><![endif]--><!--[if IE 8]><html lang="en" class="no-js lt-ie9"></html><![endif]--><!--[if gt IE 8]><!--><html lang="en" class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Trip.js </title><meta name="description" content=""><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="public/css/index.css"><!-- include trip CSS--><link rel="stylesheet" href="./src/trip.min.css"><style type="text/css">.wrapper div:nth-child(odd) {
     background : #AAA;
 }
 .wrapper div:nth-child(even) {
@@ -67,6 +67,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
             delay : 7000
         }
     ], {
+        tripTheme : "black",
         onTripStart : function() {
             console.log("onTripStart");
         },
@@ -86,7 +87,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
     
     window.trip = trip;
 });
-</script></head><body><div id="fb-root"> </div><a href="https://github.com/EragonJ/Trip.js"> <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand">Trip.js</a><ul class="nav"><li class="active"> <a href="#">Home</a></li><li> <a href="#" class="start-tour">Start a Demo Tour</a></li><li> <a href="https://github.com/EragonJ/Trip.js">Github</a></li></ul><ul class="nav pull-right"><li><a href="http://github.com/EragonJ">By EragonJ</a></li></ul></div></div><div class="jumbotron"><h1 class="step1">Trip.js</h1></div><div class="social-buttons clearfix"><div data-href="http://eragonj.github.com/Trip.js/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" class="fb-like"></div><div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div><div class="github"><iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe></div></div><div class="steps"><div class="step"><h2><span class="step2">What is Trip.js ?</span></h2><p>Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )</p></div><div class="step"><h2>Setup ( Minimal )</h2><ol> <li>Include jQuery ( has to check version later )<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Include src/trip.css<pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;src/trip.css&quot;&gt;</pre></li><li>Include src/trip.js<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;src/trip.js&quot;&gt;&lt;/script&gt;</pre></li><li>Setup Trip.js<pre class="step3 step4 step5 step6">var trip = new Trip([
+</script></head><body><div id="fb-root"> </div><a href="https://github.com/EragonJ/Trip.js"> <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand">Trip.js</a><ul class="nav"><li class="active"> <a href="#">Home</a></li><li> <a href="#" class="start-tour">Start a Demo Tour</a></li><li> <a href="https://github.com/EragonJ/Trip.js">Github</a></li></ul><ul class="nav pull-right"><li><a href="http://github.com/EragonJ">By EragonJ</a></li></ul></div></div><div class="jumbotron"><h1 class="step1">Trip.js</h1></div><div class="social-buttons clearfix"><div data-href="http://eragonj.github.com/Trip.js/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" class="fb-like"></div><div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div><div class="github"><iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe></div></div><div class="steps"><div class="step"><h2><span class="step2">What is Trip.js ?</span></h2><p>Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )</p></div><div class="step"><h2>Version</h2><p>1.0.2</p></div><div class="step"><h2>Setup ( Minimal )</h2><ol> <li>Include your jQuery<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Include src/trip.css<pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;src/trip.min.css&quot;&gt;</pre></li><li>Include src/trip.js<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;src/trip.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Setup Trip.js<pre class="step3 step4 step5 step6">var trip = new Trip([
    { 
        sel : $('#element1'),
        content : 'This is element 1'
@@ -165,9 +166,11 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
     $(".start-tour").click(function() {
         trip.start(); 
     });
-});</pre></div><div class="step"><h2>Global Options</h2><ul> <li> <h4>tripIndex</h4><p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p><p> 
+});</pre></div><div class="step"><h2>Global Options</h2><ol> <li> <h4>tripIndex</h4><p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p><p> 
 Default : <code> 
-$.noop</code></p></li><li> <h4>onTripStart </h4><p>You can set a callback function triggered when the trip starts.</p><p> 
+$.noop</code></p></li><li> <h4>tripTheme </h4><p>You can set which theme to use, now have white and black two themes.</p><p> 
+Default : <code> 
+black</code></p></li><li> <h4>onTripStart </h4><p>You can set a callback function triggered when the trip starts.</p><p> 
 Default : <code> 
 $.noop</code></p></li><li> <h4>onTripEnd</h4><p>You can set a callback function triggered when the trip ends.</p><p> 
 Default : <code> 
@@ -179,7 +182,7 @@ Default : <code>
 Default : <code> 
 true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p> 
 Default : <code> 
-1000</code></p></li></ul></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ul> <li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
+1000</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
 Default : <code> 
 no default</code></p></li><li> <h4>content *Required*</h4><p>What information that you want to show to users.</p><p> 
 Default : <code> 
@@ -195,7 +198,7 @@ You can do whatever you want to do after this step passed. BTW, Trip.js will ass
 <code>tripIndex</code>
 (start from 0) as the first parameter back to your callback function for later use.</p><p> 
 Default : <code> 
-$.noop</code></p></li></ul></div><div class="step"> <h2>Key Binding</h2><ul><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ul></div><div class="step"><h2>API</h2><ul> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ul></div><div class="step step7"><h2>Notice</h2><p> 
+$.noop</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
 This plugin is still under development ! 
 If you find any bugs or want me to implement anything, 
 please feel free to open an issue ;)</p><p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p></div></div></div></body></html>
