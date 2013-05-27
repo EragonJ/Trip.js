@@ -18,7 +18,7 @@ html.no-js(lang='en')
         link(rel='stylesheet', href='public/css/index.css')
 
         // include trip CSS
-        link(rel='stylesheet', href='./src/trip.css')
+        link(rel='stylesheet', href='./src/trip.min.css')
         style(type='text/css')
             .wrapper div:nth-child(odd) {
                 background : #AAA;
@@ -159,17 +159,20 @@ html.no-js(lang='en')
                         span.step2 What is Trip.js ?
                     p Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )
                 .step
+                    h2 Version
+                    p 1.0.2
+                .step
                     h2 Setup ( Minimal )
                     ol 
                         - var jQueryCode = '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>'
                         li Include jQuery ( has to check version later )
                             pre #{jQueryCode}
 
-                        - var cssCode = '<link type="text/css" rel="stylesheet" href="src/trip.css">'
+                        - var cssCode = '<link type="text/css" rel="stylesheet" href="src/trip.min.css">'
                         li Include src/trip.css
                             pre #{cssCode}
 
-                        - var jsCode = '<script type="text/javascript" src="src/trip.js"></script>'
+                        - var jsCode = '<script type="text/javascript" src="src/trip.min.js"></script>'
                         li Include src/trip.js
                             pre #{jsCode}
 
@@ -266,7 +269,7 @@ html.no-js(lang='en')
 
                 .step
                     h2 Global Options
-                    ul 
+                    ol 
                         li 
                             h4 tripIndex
                             p You can set tripIndex ( start from 0 ) to specific trip block at start.
@@ -274,6 +277,13 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | $.noop
+                        li 
+                            h4 tripTheme 
+                            p You can set which theme to use, now have white and black two themes.
+                            p 
+                                | Default : 
+                                code 
+                                    | black
                         li 
                             h4 onTripStart 
                             p You can set a callback function triggered when the trip starts.
@@ -319,7 +329,7 @@ html.no-js(lang='en')
                 .step
                     h2 Local Options 
                     h4 You can setup specific options for each step.
-                    ul 
+                    ol
                         li 
                             h4 sel *Required*
                             p Which selector is referenced in this step.
@@ -365,7 +375,7 @@ html.no-js(lang='en')
 
                 .step 
                     h2 Key Binding
-                    ul
+                    ol
                         li 
                             h4 Right and Down arrows
                             p Go to next trip
@@ -384,7 +394,7 @@ html.no-js(lang='en')
 
                 .step
                     h2 API
-                    ul 
+                    ol 
                         li 
                             h4 trip.start()
                             p Call this method to start your trip

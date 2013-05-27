@@ -45,6 +45,12 @@ You can set tripIndex ( start from 0 ) to specific trip block at start.
 * Type: *number*
 * Default: `0`
 
+### tripTheme
+You can set which theme to use, now have white and black two themes.
+
+* Type: *String*
+* Default: `black`
+
 ### onTripStart
 You can set a callback function triggered when the trip starts
 
