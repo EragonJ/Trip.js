@@ -14,6 +14,7 @@
 
             // basic config
             tripIndex : 0,
+            tripTheme : "black",
             backToTopWhenEnded : false,
             overlayZindex : 99999,
             delay : 1000,
@@ -473,7 +474,7 @@
                     '</div>'
                 ].join('');
 
-                var $tripBlock = $(html);  
+                var $tripBlock = $(html).addClass( this.settings.tripTheme );  
 
                 $('body').append( $tripBlock );
             }
