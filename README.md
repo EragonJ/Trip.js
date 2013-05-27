@@ -23,8 +23,8 @@ Setup (minimal)
 ===============
 
 * include jQuery
-* include Trip.css
-* include Trip.js
+* include trip.min.css
+* include trip.min.js
 * setup trip codes shown below
 
         var trip = new Trip([
@@ -150,9 +150,10 @@ API
 TODO
 ====
 
-* [ ] Bypass !tripDataOk step
-* [ ] Add different Trip themes
-* [ ] Make new direction images with new themes
+* Bypass !tripDataOk step
+* Add data-x to define steps ( make the setup easier )
+* Add UI for pause/play/stop to make users know how to interact
+* Don't depend on jQuery
 
 Author
 ======
