@@ -36,7 +36,10 @@
         this.$overlay = null;
         this.$bar = null;
         this.$root = $('body, html');
-
+        // default dir is next (forwards)
+        this.$dir = 'next';
+        // we store here if the last tripData checked was correct or not
+        this.$tripDataOk = true;
         // save the current trip index
         this.tripIndex = this.settings.tripIndex;
         this.timer = null;
@@ -185,6 +188,7 @@
         },
 
         next : function() {
+            this.$dir = 'next';
             if ( this.isLast() ){
                 this.doLastOperation();
             }
@@ -195,6 +199,7 @@
         },
 
         prev : function() {
+            this.$dir = 'prev';
             if ( this.isFirst() ) {
                 // do nothing
             }
@@ -236,14 +241,26 @@
             }
 
             // show block
-            var tripDataOk = this.checkTripData(o);
-            if(tripDataOk) {
+            this.$tripDataOk = this.checkTripData(o);
+            if(this.$tripDataOk) {
                 this.setTripBlock(o);
                 this.showTripBlock(o);
 
                 if ( o.expose ) {
                     this.showExpose( o.sel );
                 }
+            } else {
+                if( this.$dir === 'next' ) {
+                    this.increaseIndex();
+                    if( !this.isLast() ) {
+                        this.showCurrentTrip(this.getCurrentTripObject());
+                    } else {
+                        this.doLastOperation();
+                    }
+                }else if( this.$dir === 'prev' ) {
+                    this.decreaseIndex();
+                    this.showCurrentTrip(this.getCurrentTripObject());
+                }                
             }
         },
 
@@ -303,23 +320,26 @@
             // next to o
             this.showCurrentTrip( tripObject );
 
-            // show the progress bar
-            this.showProgressBar( delay );
-            this.progressing = true;
+            // only set timer and run callback if the tripData was correct
+            if( this.$tripDataOk ) {
+                // show the progress bar
+                this.showProgressBar( delay );
+                this.progressing = true;
 
-            // set timer to show next
-            this.timer = new Timer(function() {
+                // set timer to show next
+                this.timer = new Timer(function() {
 
-                // XXX
-                // If we get here, it means that we have finished a step within a trip.
+                    // XXX
+                    // If we get here, it means that we have finished a step within a trip.
 
-                if ( that.hasCallback() ) {
-                    tripObject.callback( that.tripIndex );
-                }
+                    if ( that.hasCallback() ) {
+                       that.getCurrentTripObject().callback( that.tripIndex );
+                    }
 
-                that.next();
+                    that.next();
 
-            }, delay);
+                }, delay);
+            }            
         },
 
         isFirst : function() {
