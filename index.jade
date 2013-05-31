@@ -322,7 +322,7 @@ html.no-js(lang='en')
                         li 
                             h4 delayPeriod
                             p every trip will be lived for 1 second (1000 ms) by default
-                            p 
+                            p Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
                                 | Default : 
                                 code 
                                     | 1000
@@ -358,6 +358,11 @@ html.no-js(lang='en')
                                 |You can delay longer / shoter for this step. You can assign 
                                 | <code>delay</code> 
                                 | in global options to change the default delay.
+                                | Setting to a
+                                | <code>-1</code>
+                                | will prevent auto-advancing. You must manually call
+                                | <code>trip.next()</code>
+                                | .
                             p 
                                 | Default : 
                                 code 
