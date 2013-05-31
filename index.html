@@ -180,7 +180,7 @@ false</code></p></li><li> <h4>overlayZindex</h4><p>You can set the basic zIndex 
 Default : <code> 
 99999</code></p></li><li> <h4>enableKeyBinding</h4><p>You can decide to bind key events for trip navigations or not.</p><p> 
 Default : <code> 
-true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p> 
+true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default. Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.</p><p> 
 Default : <code> 
 1000</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
 Default : <code> 
@@ -191,7 +191,7 @@ Default : <code>
 n</code>( You can use e, w, n, s four positions )</p></li><li> <h4>delay</h4><p> 
 You can delay longer / shoter for this step. You can assign 
 <code>delay</code> 
-in global options to change the default delay.</p><p> 
+in global options to change the default delay. Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.</p><p> 
 Default : <code> 
 1000</code></p></li><li> <h4>callback</h4><p> 
 You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current 

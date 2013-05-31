@@ -156,8 +156,8 @@
         },
 
         stop : function() {
-
-            this.timer.stop();
+            if (this.timer)
+                this.timer.stop();
 
             if ( this.hasExpose ) {
                 this.hideExpose();
@@ -185,6 +185,10 @@
         },
 
         next : function() {
+            if ( this.hasCallback() ) {
+                this.callCallback();
+            }
+
             if ( this.isLast() ){
                 this.doLastOperation();
             }
@@ -307,19 +311,11 @@
             this.showProgressBar( delay );
             this.progressing = true;
 
-            // set timer to show next
-            this.timer = new Timer(function() {
+            // set timer to show next, if the timer is less than zero we expect
+            // it to be manually advanced
+            if (delay >= 0)
+                this.timer = new Timer(that.next, delay);
 
-                // XXX
-                // If we get here, it means that we have finished a step within a trip.
-
-                if ( that.hasCallback() ) {
-                    tripObject.callback( that.tripIndex );
-                }
-
-                that.next();
-
-            }, delay);
         },
 
         isFirst : function() {
@@ -332,6 +328,10 @@
 
         hasCallback : function() {
             return (typeof this.tripData[ this.tripIndex ].callback !== "undefined");
+        },
+
+        callCallback : function() {
+            this.tripData[ this.tripIndex ].callback(this.tripIndex);
         },
 
         increaseIndex : function() {

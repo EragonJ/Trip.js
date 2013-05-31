@@ -87,7 +87,8 @@ You can decide to bind key events for trip navigations or not.
 * Default: `true`
 
 ### delayPeriod
-Every trip will be delayed for 1 second (1000 ms) by default
+Every trip will be delayed for 1 second (1000 ms) by default.
+Setting to a `-1` will prevent auto-advancing. You must manually call `trip.next()`.
 
 * Type: *number*
 * Default: `1000`
@@ -117,6 +118,7 @@ What position would you prefer for the tripBlock.
 
 ### delay
 You can delay longer / shoter for this step. You can assign `delay` in global options to change the default delay.
+Setting to a `-1` will prevent auto-advancing. You must manually call `trip.next()`.
 
 * Type: *Number*
 * Default: `1000` (ms)
