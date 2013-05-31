@@ -252,8 +252,9 @@
         },
 
         doLastOperation : function() {
-            
-            this.timer.stop();
+            if ( this.timer ) {
+                this.timer.stop();
+            }
 
             if ( this.settings.enableKeyBinding ) {
                 this.unbindKeyEvents();
