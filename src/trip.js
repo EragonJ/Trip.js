@@ -24,6 +24,7 @@
             showNavigation: false,
             nextLabel : "Next",
             prevLabel : "Back",
+            finishLabel: "Dismiss",
             canGoNext: true,
             canGoPrev: true,
 
@@ -349,7 +350,7 @@
                 canGoPrev   = trip.canGoPrev || this.settings.canGoPrev;
 
             if ( typeof canGoPrev === "function" ) {
-                canGoPrev = canGoPrev.call(this);
+                canGoPrev = canGoPrev.call(trip);
             }
 
             return canGoPrev;
@@ -360,7 +361,7 @@
                 canGoNext   = trip.canGoNext || this.settings.canGoNext;
 
             if ( typeof canGoNext === "function" ) {
-                canGoNext = canGoNext.call(this);
+                canGoNext = canGoNext.call(trip);
             }
 
             return canGoNext;
@@ -417,7 +418,8 @@
                 $tripArrow = this.$tripArrow,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
                 prevLabel = o.prevLabel || this.settings.prevLabel,
-                nextLabel = o.nextLabel || this.settings.nextLabel;
+                nextLabel = o.nextLabel || this.settings.nextLabel,
+                finishLabel = o.finishLabel || this.settings.finishLabel;
 
             $tripBlock.find('.trip-content')
                       .html( o.content );
@@ -427,8 +429,8 @@
                       .toggle( showNavigation && !this.isFirst() );
 
             $tripBlock.find('.trip-next')
-                      .html( nextLabel )
-                      .toggle( showNavigation && !this.isLast() );
+                      .html( this.isLast() ? finishLabel : nextLabel )
+                      .toggle( showNavigation );
 
             var $sel = o.sel,
                 selWidth = $sel.outerWidth(),

@@ -111,6 +111,12 @@ Label for the next button.
 * Type: *String*
 * Default: `Next`
 
+### finishLabel
+Label for the finish button.
+
+* Type: *String*
+* Default: `Dismiss`
+
 Local Options
 =============
 
@@ -164,6 +170,12 @@ Label for the next button.
 
 * Type: *String*
 * Default: `Next`
+
+### finishLabel
+Label for the finish button.
+
+* Type: *String*
+* Default: `Dismiss`
 
 ### canGoPrev
 Determines if the user can go backwards. If set to a function it is called and the
