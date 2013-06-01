@@ -87,10 +87,35 @@ You can decide to bind key events for trip navigations or not.
 * Default: `true`
 
 ### delayPeriod
-Every trip will be delayed for 1 second (1000 ms) by default
+Every trip will be delayed for 1 second (1000 ms) by default.
+Setting to a `-1` will prevent auto-advancing. You must manually call `trip.next()`.
 
 * Type: *number*
 * Default: `1000`
+
+### showNavigation
+Toggle navigation buttons.
+
+* Type: *boolean*
+* Default: `false`
+
+### prevLabel
+Label for the previous button.
+
+* Type: *String*
+* Default: `Back`
+
+### nextLabel
+Label for the next button.
+
+* Type: *String*
+* Default: `Next`
+
+### finishLabel
+Label for the finish button.
+
+* Type: *String*
+* Default: `Dismiss`
 
 Local Options
 =============
@@ -117,6 +142,7 @@ What position would you prefer for the tripBlock.
 
 ### delay
 You can delay longer / shoter for this step. You can assign `delay` in global options to change the default delay.
+Setting to a `-1` will prevent auto-advancing. You must manually call `trip.next()`.
 
 * Type: *Number*
 * Default: `1000` (ms)
@@ -126,6 +152,45 @@ You can do whatever you want to do after this step passed. BTW, Trip.js will ass
 
 * Type: *Function*
 * Default: `$.noop`
+
+### showNavigation
+Toggle navigation buttons.
+
+* Type: *boolean*
+* Default: `false`
+
+### prevLabel
+Label for the previous button.
+
+* Type: *String*
+* Default: `Back`
+
+### nextLabel
+Label for the next button.
+
+* Type: *String*
+* Default: `Next`
+
+### finishLabel
+Label for the finish button.
+
+* Type: *String*
+* Default: `Dismiss`
+
+### canGoPrev
+Determines if the user can go backwards. If set to a function it is called and the
+response is evaluated.
+
+* Type: *Boolean|Function*
+* Default: `true`
+
+### canGoNext
+Determines if the user can go forward. If set to a function it is called and the response is evaluated.
+
+* Type: *Boolean|Function*
+* Default: `true`
+
+
 
 
 Key Binding

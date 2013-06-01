@@ -94,6 +94,20 @@ html.no-js(lang='en')
                         delay : 2000
                     },
                     {
+                        sel : $('.step6'),
+                        content : 'Can control if the user can proceed',
+                        delay : 2000,
+                        canGoNext: function() {
+                            return confirm("You can only continue if you agree!");
+                        }
+                    },
+                    {
+                        sel : $('.step6'),
+                        content : 'You can\'t proceed until you click next',
+                        delay : -1,
+                        showNavigation: true
+                    },
+                    {
                         sel : $('.step7'),
                         position : 'n',
                         content : 'One more thing, plz read this !',
@@ -242,6 +256,20 @@ html.no-js(lang='en')
                         |             delay : 2000
                         |         },
                         |         {
+                        |             sel : $('.step6'),
+                        |             content : 'Can control if the user can proceed',
+                        |             delay : 2000,
+                        |             canGoNext: function() {
+                        |                 return confirm("You can only continue if you agree!");
+                        |             }
+                        |         },
+                        |         {
+                        |             sel : $('.step6'),
+                        |             content : 'You can\'t proceed until you click next',
+                        |             delay : -1,
+                        |             showNavigation: true
+                        |         },
+                        |         {
                         |             sel : $('.step7'),
                         |             position : 'n',
                         |             content : 'One more thing, plz read this !',
@@ -322,10 +350,63 @@ html.no-js(lang='en')
                         li 
                             h4 delayPeriod
                             p every trip will be lived for 1 second (1000 ms) by default
-                            p 
+                            p Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
                                 | Default : 
                                 code 
                                     | 1000
+                        li 
+                            h4 showNavigation
+                            p Toggle navigation buttons
+                            p 
+                                | Default : 
+                                code 
+                                    | false
+                        li 
+                            h4 prevLabel
+                            p Label for the previous button.
+                            p 
+                                | Default : 
+                                code 
+                                    | Back
+                        li 
+                            h4 nextLabel
+                            p Label for the next button.
+                                | <code>nextLabel</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | Next
+
+                        li 
+                            h4 finishLabel
+                            p Label for the finish button.
+                                | <code>finishLabel</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | Dismiss
+
+                        li 
+                            h4 canGoPrev
+                            p 
+                                |Determines if the user can go backwards. If set to a function
+                                |it is called and the response is evaluated.
+                                | <code>canGoPrev</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | true
+
+                        li 
+                            h4 canGoNext
+                            p 
+                                |Determines if the user can go forward. If set to a function
+                                |it is called and the response is evaluated.
+                                | <code>canGoNext</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | true
                 .step
                     h2 Local Options 
                     h4 You can setup specific options for each step.
@@ -358,6 +439,11 @@ html.no-js(lang='en')
                                 |You can delay longer / shoter for this step. You can assign 
                                 | <code>delay</code> 
                                 | in global options to change the default delay.
+                                | Setting to a
+                                | <code>-1</code>
+                                | will prevent auto-advancing. You must manually call
+                                | <code>trip.next()</code>
+                                | .
                             p 
                                 | Default : 
                                 code 
@@ -372,6 +458,68 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | $.noop
+
+                        li 
+                            h4 showNavigation
+                            p 
+                                |Toggle navigation buttons
+                                | <code>showNavigation</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | false
+
+                        li 
+                            h4 prevLabel
+                            p 
+                                |Label for the previous button.
+                                | <code>prevLabel</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | Back
+
+                        li 
+                            h4 nextLabel
+                            p 
+                                |Label for the next button.
+                                | <code>nextLabel</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | Next
+
+                        li 
+                            h4 finishLabel
+                            p 
+                                |Label for the finish button.
+                                | <code>finishLabel</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | Dismiss
+
+                        li 
+                            h4 canGoPrev
+                            p 
+                                |Determines if the user can go forward. If set to a function
+                                |it is called and the response is evaluated.
+                                | <code>canGoPrev</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | true
+
+                        li 
+                            h4 canGoNext
+                            p 
+                                |Determines if the user can go forward. If set to a function
+                                |it is called and the response is evaluated.
+                                | <code>canGoNext</code>
+                            p 
+                                | Default : 
+                                code 
+                                    | true
 
                 .step 
                     h2 Key Binding
