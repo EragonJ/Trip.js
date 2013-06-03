@@ -60,6 +60,20 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
             delay : 2000
         },
         {
+            sel : $('.step6'),
+            content : 'Can control if the user can proceed',
+            delay : 2000,
+            canGoNext: function() {
+                return confirm("You can only continue if you agree!");
+            }
+        },
+        {
+            sel : $('.step6'),
+            content : 'You can\'t proceed until you click next',
+            delay : -1,
+            showNavigation: true
+        },
+        {
             sel : $('.step7'),
             position : 'n',
             content : 'One more thing, plz read this !',
@@ -87,7 +101,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
     
     window.trip = trip;
 });
-</script></head><body><div id="fb-root"> </div><a href="https://github.com/EragonJ/Trip.js"> <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand">Trip.js</a><ul class="nav"><li class="active"> <a href="#">Home</a></li><li> <a href="#" class="start-tour">Start a Demo Tour</a></li><li> <a href="https://github.com/EragonJ/Trip.js">Github</a></li></ul><ul class="nav pull-right"><li><a href="http://github.com/EragonJ">By EragonJ</a></li></ul></div></div><div class="jumbotron"><h1 class="step1">Trip.js</h1></div><div class="social-buttons clearfix"><div data-href="http://eragonj.github.com/Trip.js/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" class="fb-like"></div><div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div><div class="github"><iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe></div></div><div class="steps"><div class="step"><h2><span class="step2">What is Trip.js ?</span></h2><p>Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )</p></div><div class="step"><h2>Version</h2><p>1.0.2</p></div><div class="step"><h2>Setup ( Minimal )</h2><ol> <li>Include your jQuery<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Include src/trip.css<pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;src/trip.min.css&quot;&gt;</pre></li><li>Include src/trip.js<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;src/trip.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Setup Trip.js<pre class="step3 step4 step5 step6">var trip = new Trip([
+</script></head><body><div id="fb-root"> </div><a href="https://github.com/EragonJ/Trip.js"> <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand">Trip.js</a><ul class="nav"><li class="active"> <a href="#">Home</a></li><li> <a href="#" class="start-tour">Start a Demo Tour</a></li><li> <a href="https://github.com/EragonJ/Trip.js">Github</a></li></ul><ul class="nav pull-right"><li><a href="http://github.com/EragonJ">By EragonJ</a></li></ul></div></div><div class="jumbotron"><h1 class="step1">Trip.js</h1></div><div class="social-buttons clearfix"><div data-href="http://eragonj.github.com/Trip.js/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" class="fb-like"></div><div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div><div class="github"><iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe></div></div><div class="steps"><div class="step"><h2><span class="step2">What is Trip.js ?</span></h2><p>Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )</p></div><div class="step"><h2>Version</h2><p>1.1.0</p></div><div class="step"><h2>Setup ( Minimal )</h2><ol> <li>Include your jQuery<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Include src/trip.css<pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;src/trip.min.css&quot;&gt;</pre></li><li>Include src/trip.js<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;src/trip.min.js&quot;&gt;&lt;/script&gt;</pre></li><li>Setup Trip.js<pre class="step3 step4 step5 step6">var trip = new Trip([
    { 
        sel : $('#element1'),
        content : 'This is element 1'
@@ -143,6 +157,20 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
             delay : 2000
         },
         {
+            sel : $('.step6'),
+            content : 'Can control if the user can proceed',
+            delay : 2000,
+            canGoNext: function() {
+                return confirm("You can only continue if you agree!");
+            }
+        },
+        {
+            sel : $('.step6'),
+            content : 'You can\'t proceed until you click next',
+            delay : -1,
+            showNavigation: true
+        },
+        {
             sel : $('.step7'),
             position : 'n',
             content : 'One more thing, plz read this !',
@@ -180,9 +208,29 @@ false</code></p></li><li> <h4>overlayZindex</h4><p>You can set the basic zIndex 
 Default : <code> 
 99999</code></p></li><li> <h4>enableKeyBinding</h4><p>You can decide to bind key events for trip navigations or not.</p><p> 
 Default : <code> 
-true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p> 
+true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p>Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
 Default : <code> 
-1000</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
+1000</code></p></li><li> <h4>showNavigation</h4><p>Toggle navigation buttons</p><p> 
+Default : <code> 
+false</code></p></li><li> <h4>prevLabel</h4><p>Label for the previous button.</p><p> 
+Default : <code> 
+Back</code></p></li><li> <h4>nextLabel</h4><p>Label for the next button.
+<code>nextLabel</code></p><p> 
+Default : <code> 
+Next</code></p></li><li> <h4>finishLabel</h4><p>Label for the finish button.
+<code>finishLabel</code></p><p> 
+Default : <code> 
+Dismiss</code></p></li><li> <h4>canGoPrev</h4><p> 
+Determines if the user can go backwards. If set to a function
+it is called and the response is evaluated.
+<code>canGoPrev</code></p><p> 
+Default : <code> 
+true</code></p></li><li> <h4>canGoNext</h4><p> 
+Determines if the user can go forward. If set to a function
+it is called and the response is evaluated.
+<code>canGoNext</code></p><p> 
+Default : <code> 
+true</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
 Default : <code> 
 no default</code></p></li><li> <h4>content *Required*</h4><p>What information that you want to show to users.</p><p> 
 Default : <code> 
@@ -191,14 +239,45 @@ Default : <code>
 n</code>( You can use e, w, n, s four positions )</p></li><li> <h4>delay</h4><p> 
 You can delay longer / shoter for this step. You can assign 
 <code>delay</code> 
-in global options to change the default delay.</p><p> 
+in global options to change the default delay.
+Setting to a
+<code>-1</code>
+will prevent auto-advancing. You must manually call
+<code>trip.next()</code>
+.</p><p> 
 Default : <code> 
 1000</code></p></li><li> <h4>callback</h4><p> 
 You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current 
 <code>tripIndex</code>
 (start from 0) as the first parameter back to your callback function for later use.</p><p> 
 Default : <code> 
-$.noop</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
+$.noop</code></p></li><li> <h4>showNavigation</h4><p> 
+Toggle navigation buttons
+<code>showNavigation</code></p><p> 
+Default : <code> 
+false</code></p></li><li> <h4>prevLabel</h4><p> 
+Label for the previous button.
+<code>prevLabel</code></p><p> 
+Default : <code> 
+Back</code></p></li><li> <h4>nextLabel</h4><p> 
+Label for the next button.
+<code>nextLabel</code></p><p> 
+Default : <code> 
+Next</code></p></li><li> <h4>finishLabel</h4><p> 
+Label for the finish button.
+<code>finishLabel</code></p><p> 
+Default : <code> 
+Dismiss</code></p></li><li> <h4>canGoPrev</h4><p> 
+Determines if the user can go forward. If set to a function
+it is called and the response is evaluated.
+<code>canGoPrev</code></p><p> 
+Default : <code> 
+true</code></p></li><li> <h4>canGoNext</h4><p> 
+Determines if the user can go forward. If set to a function
+it is called and the response is evaluated.
+<code>canGoNext</code></p><p> 
+Default : <code> 
+true</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
 This plugin is still under development ! 
 If you find any bugs or want me to implement anything, 
 please feel free to open an issue ;)</p><p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p></div></div></div></body></html>
