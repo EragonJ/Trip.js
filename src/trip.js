@@ -20,6 +20,15 @@
             delay : 1000,
             enableKeyBinding : true,
 
+            // navigation
+            showNavigation: false,
+            nextLabel : "Next",
+            prevLabel : "Back",
+            finishLabel: "Dismiss",
+            canGoNext: true,
+            canGoPrev: true,
+
+
             // callbacks
             onTripStart : $.noop,
             onTripEnd : $.noop,
@@ -156,8 +165,8 @@
         },
 
         stop : function() {
-
-            this.timer.stop();
+            if (this.timer)
+                this.timer.stop();
 
             if ( this.hasExpose ) {
                 this.hideExpose();
@@ -185,6 +194,14 @@
         },
 
         next : function() {
+            if ( !this.canGoNext() ) {
+                return this.run();
+            }
+
+            if ( this.hasCallback() ) {
+                this.callCallback();
+            }
+
             if ( this.isLast() ){
                 this.doLastOperation();
             }
@@ -195,13 +212,10 @@
         },
 
         prev : function() {
-            if ( this.isFirst() ) {
-                // do nothing
-            }
-            else {
+            if ( !this.isFirst() && this.canGoPrev() ) {
                 this.decreaseIndex();
-                this.run();
             }
+            this.run();
         },
 
         // XXX:
@@ -248,8 +262,9 @@
         },
 
         doLastOperation : function() {
-            
-            this.timer.stop();
+            if ( this.timer ) {
+                this.timer.stop();
+            }
 
             if ( this.settings.enableKeyBinding ) {
                 this.unbindKeyEvents();
@@ -307,19 +322,11 @@
             this.showProgressBar( delay );
             this.progressing = true;
 
-            // set timer to show next
-            this.timer = new Timer(function() {
+            // set timer to show next, if the timer is less than zero we expect
+            // it to be manually advanced
+            if (delay >= 0)
+                this.timer = new Timer(that.next.bind(that), delay);
 
-                // XXX
-                // If we get here, it means that we have finished a step within a trip.
-
-                if ( that.hasCallback() ) {
-                    tripObject.callback( that.tripIndex );
-                }
-
-                that.next();
-
-            }, delay);
         },
 
         isFirst : function() {
@@ -332,6 +339,32 @@
 
         hasCallback : function() {
             return (typeof this.tripData[ this.tripIndex ].callback !== "undefined");
+        },
+
+        callCallback : function() {
+            this.tripData[ this.tripIndex ].callback(this.tripIndex);
+        },
+
+        canGoPrev: function() {
+            var trip        = this.tripData[ this.tripIndex ],
+                canGoPrev   = trip.canGoPrev || this.settings.canGoPrev;
+
+            if ( typeof canGoPrev === "function" ) {
+                canGoPrev = canGoPrev.call(trip);
+            }
+
+            return canGoPrev;
+        },
+
+        canGoNext: function() {
+            var trip        = this.tripData[ this.tripIndex ],
+                canGoNext   = trip.canGoNext || this.settings.canGoNext;
+
+            if ( typeof canGoNext === "function" ) {
+                canGoNext = canGoNext.call(trip);
+            }
+
+            return canGoNext;
         },
 
         increaseIndex : function() {
@@ -381,48 +414,61 @@
         },
 
         setTripBlock : function( o ) {
+            var $tripBlock = this.$tripBlock,
+                $tripArrow = this.$tripArrow,
+                showNavigation = o.showNavigation || this.settings.showNavigation,
+                prevLabel = o.prevLabel || this.settings.prevLabel,
+                nextLabel = o.nextLabel || this.settings.nextLabel,
+                finishLabel = o.finishLabel || this.settings.finishLabel;
 
-            this.$tripBlock.find('.trip-content')
-                               .html( o.content );
+            $tripBlock.find('.trip-content')
+                      .html( o.content );
+
+            $tripBlock.find('.trip-prev')
+                      .html( prevLabel )
+                      .toggle( showNavigation && !this.isFirst() );
+
+            $tripBlock.find('.trip-next')
+                      .html( this.isLast() ? finishLabel : nextLabel )
+                      .toggle( showNavigation );
 
             var $sel = o.sel,
                 selWidth = $sel.outerWidth(),
                 selHeight = $sel.outerHeight(),
-                blockWidth = this.$tripBlock.outerWidth(),
-                blockHeight = this.$tripBlock.outerHeight(),
+                blockWidth = $tripBlock.outerWidth(),
+                blockHeight = $tripBlock.outerHeight(),
                 arrowHeight = 10,
                 arrowWidth = 10;
 
             // Take off e/s/w/n classes
-            this.$tripArrow.removeClass('e s w n');
+            $tripArrow.removeClass('e s w n');
 
             switch( o.position ) {
             case 'e':
-                this.$tripArrow.addClass('e');
-                this.$tripBlock.css({
+                $tripArrow.addClass('e');
+                $tripBlock.css({
                     left : $sel.offset().left + selWidth + arrowWidth,
                     top : $sel.offset().top - (( blockHeight - selHeight ) / 2),
                 });
                 break;
             case 's':
-                this.$tripArrow.addClass('s');
-                this.$tripBlock.css({
+                $tripArrow.addClass('s');
+                $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top + selHeight + arrowHeight
                 });
                 break;
             case 'w':
-                this.$tripArrow.addClass('w');
-                this.$tripBlock.css({
+                $tripArrow.addClass('w');
+                $tripBlock.css({
                     left : $sel.offset().left - (arrowWidth + blockWidth),
                     top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
                 });
                 break;
             case 'n':
             default: 
-
-                this.$tripArrow.addClass('n');
-                this.$tripBlock.css({
+                $tripArrow.addClass('n');
+                $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top - arrowHeight - blockHeight
                 });
@@ -469,6 +515,8 @@
                         '<div class="trip-content"></div>',
                         '<div class="trip-progress-wrapper">',
                             '<div class="trip-progress-bar"></div>',
+                            '<a href="#" class="trip-prev"></a>',
+                            '<a href="#" class="trip-next"></a>',
                         '</div>',
                         '<div class="trip-arrow"></div>',
                     '</div>'
@@ -477,6 +525,18 @@
                 var $tripBlock = $(html).addClass( this.settings.tripTheme );  
 
                 $('body').append( $tripBlock );
+
+                var that = this;
+
+                $tripBlock.find('.trip-prev').click(function(evt) {
+                    evt.preventDefault();
+                    that.prev();
+                });
+
+                $tripBlock.find('.trip-next').click(function(evt) {
+                    evt.preventDefault();
+                    that.next();
+                });
             }
         },
 
