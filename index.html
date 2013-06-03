@@ -208,27 +208,22 @@ false</code></p></li><li> <h4>overlayZindex</h4><p>You can set the basic zIndex 
 Default : <code> 
 99999</code></p></li><li> <h4>enableKeyBinding</h4><p>You can decide to bind key events for trip navigations or not.</p><p> 
 Default : <code> 
-true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p>Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
-Default : <code> 
+true</code></p></li><li> <h4>delayPeriod</h4><p>every trip will be lived for 1 second (1000 ms) by default</p><p>Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.</p><p>Default : <code> 
 1000</code></p></li><li> <h4>showNavigation</h4><p>Toggle navigation buttons</p><p> 
 Default : <code> 
 false</code></p></li><li> <h4>prevLabel</h4><p>Label for the previous button.</p><p> 
 Default : <code> 
-Back</code></p></li><li> <h4>nextLabel</h4><p>Label for the next button.
-<code>nextLabel</code></p><p> 
+Back</code></p></li><li> <h4>nextLabel</h4><p>Label for the next button.</p><p> 
 Default : <code> 
-Next</code></p></li><li> <h4>finishLabel</h4><p>Label for the finish button.
-<code>finishLabel</code></p><p> 
+Next</code></p></li><li> <h4>finishLabel</h4><p>Label for the finish button.</p><p> 
 Default : <code> 
 Dismiss</code></p></li><li> <h4>canGoPrev</h4><p> 
 Determines if the user can go backwards. If set to a function
-it is called and the response is evaluated.
-<code>canGoPrev</code></p><p> 
+it is called and the response is evaluated.</p><p> 
 Default : <code> 
 true</code></p></li><li> <h4>canGoNext</h4><p> 
 Determines if the user can go forward. If set to a function
-it is called and the response is evaluated.
-<code>canGoNext</code></p><p> 
+it is called and the response is evaluated.</p><p> 
 Default : <code> 
 true</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
 Default : <code> 
@@ -277,7 +272,7 @@ Determines if the user can go forward. If set to a function
 it is called and the response is evaluated.
 <code>canGoNext</code></p><p> 
 Default : <code> 
-true</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / continue</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause/continue your trip</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
+true</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / resume</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause your trip (same as trip.resume)</p></li><li><h4>trip.resume()</h4><p>Call this method to continue your trip (same as trip.pause)</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
 This plugin is still under development ! 
 If you find any bugs or want me to implement anything, 
 please feel free to open an issue ;)</p><p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p></div></div></div></body></html>

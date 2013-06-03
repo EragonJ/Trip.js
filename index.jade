@@ -351,6 +351,7 @@ html.no-js(lang='en')
                             h4 delayPeriod
                             p every trip will be lived for 1 second (1000 ms) by default
                             p Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
+                            p
                                 | Default : 
                                 code 
                                     | 1000
@@ -371,7 +372,6 @@ html.no-js(lang='en')
                         li 
                             h4 nextLabel
                             p Label for the next button.
-                                | <code>nextLabel</code>
                             p 
                                 | Default : 
                                 code 
@@ -380,7 +380,6 @@ html.no-js(lang='en')
                         li 
                             h4 finishLabel
                             p Label for the finish button.
-                                | <code>finishLabel</code>
                             p 
                                 | Default : 
                                 code 
@@ -391,7 +390,6 @@ html.no-js(lang='en')
                             p 
                                 |Determines if the user can go backwards. If set to a function
                                 |it is called and the response is evaluated.
-                                | <code>canGoPrev</code>
                             p 
                                 | Default : 
                                 code 
@@ -402,7 +400,6 @@ html.no-js(lang='en')
                             p 
                                 |Determines if the user can go forward. If set to a function
                                 |it is called and the response is evaluated.
-                                | <code>canGoNext</code>
                             p 
                                 | Default : 
                                 code 
@@ -534,7 +531,7 @@ html.no-js(lang='en')
 
                         li 
                             h4 Space
-                            p pause / continue
+                            p pause / resume
 
                         li 
                             h4 Esc
@@ -553,7 +550,11 @@ html.no-js(lang='en')
 
                         li
                             h4 trip.pause()
-                            p Call this method to pause/continue your trip
+                            p Call this method to pause your trip (same as trip.resume)
+
+                        li
+                            h4 trip.resume()
+                            p Call this method to continue your trip (same as trip.pause)
 
                         li 
                             h4 trip.next()

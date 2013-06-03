@@ -179,8 +179,7 @@
             this.settings.onTripStop();
         },
 
-        pause : function() {
-
+        pauseAndResume : function() {
             if ( this.progressing ) {
                 this.timer.pause();
                 this.pauseProgressBar();
@@ -191,6 +190,14 @@
             }
             
             this.progressing = !this.progressing;
+        },
+
+        pause : function() {
+            this.pauseAndResume();
+        },
+
+        resume : function() {
+            this.pauseAndResume();
         },
 
         next : function() {
