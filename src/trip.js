@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.1.0
+ *  Version : 1.1.1
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me

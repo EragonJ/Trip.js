@@ -10,7 +10,7 @@
     "type" : "git",
     "url" : "git://github.com/EragonJ/Trip.js.git"
   },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "./src/trip.min.js",
   "dependencies": {
     "jquery": "~1.8.0"
