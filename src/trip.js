@@ -491,10 +491,18 @@
                 zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             });
 
-            var top = this.$tripBlock.offset().top,
+            var windowHeight = $(window).height(),
+                windowTop = $(window).scrollTop(),
+                tripBlockTop = this.$tripBlock.offset().top,
                 OFFSET = 100; // make it look nice
 
-            this.$root.animate({ scrollTop : top - OFFSET }, 'slow');
+            if ( tripBlockTop < windowTop + windowHeight &&
+                    tripBlockTop >= windowTop ) {
+                // tripBlock is located inside the current screen, so we don't have to scroll
+            }
+            else {
+                this.$root.animate({ scrollTop : tripBlockTop - OFFSET }, 'slow');
+            }
         },
 
         hideTripBlock : function() {
