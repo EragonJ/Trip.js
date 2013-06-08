@@ -119,6 +119,9 @@ html.no-js(lang='en')
                     onTripStart : function() {
                         console.log("onTripStart");
                     },
+                    onTripChange : function(t) {
+                        console.log("onTripChange", t);
+                    },
                     onTripEnd : function() {
                         console.log("onTripEnd");
                     },
@@ -280,6 +283,9 @@ html.no-js(lang='en')
                         |         onTripStart : function() {
                         |             console.log("onTripStart");
                         |         },
+                        |         onTripChange : function(t) {
+                        |             console.log("onTripChange", t);
+                        |         },
                         |         onTripEnd : function() {
                         |             console.log("onTripEnd");
                         |         },
@@ -319,6 +325,15 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | $.noop
+                        li 
+                            h4 onTripChange
+                            p You can set a callback function triggered when the trip changes.
+                            p Provided the current trip as an argument.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
+
                         li 
                             h4 onTripEnd
                             p You can set a callback function triggered when the trip ends.

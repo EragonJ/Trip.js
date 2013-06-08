@@ -85,6 +85,9 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         onTripStart : function() {
             console.log("onTripStart");
         },
+        onTripChange : function(t) {
+            console.log("onTripChange", t);
+        },
         onTripEnd : function() {
             console.log("onTripEnd");
         },
@@ -181,6 +184,9 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         onTripStart : function() {
             console.log("onTripStart");
         },
+        onTripChange : function(t) {
+            console.log("onTripChange", t);
+        },
         onTripEnd : function() {
             console.log("onTripEnd");
         },
@@ -199,6 +205,8 @@ Default : <code>
 $.noop</code></p></li><li> <h4>tripTheme </h4><p>You can set which theme to use, now have white and black two themes.</p><p> 
 Default : <code> 
 black</code></p></li><li> <h4>onTripStart </h4><p>You can set a callback function triggered when the trip starts.</p><p> 
+Default : <code> 
+$.noop</code></p></li><li> <h4>onTripChange</h4><p>You can set a callback function triggered when the trip changes.</p><p>Provided the current trip as an argument.</p><p> 
 Default : <code> 
 $.noop</code></p></li><li> <h4>onTripEnd</h4><p>You can set a callback function triggered when the trip ends.</p><p> 
 Default : <code> 

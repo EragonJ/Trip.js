@@ -62,6 +62,13 @@ You can set a callback function triggered when the trip starts
 * Type: *function*
 * Default: `$.noop`
 
+### onTripChange
+You can set a callback function triggered when the trip changes.
+Provided the current trip as an argument.
+
+* Type: *function*
+* Default: `$.noop`
+
 ### onTripEnd
 You can set a callback function triggered when the trip ends
 

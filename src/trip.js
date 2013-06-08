@@ -33,6 +33,7 @@
             onTripStart : $.noop,
             onTripEnd : $.noop,
             onTripStop : $.noop,
+            onTripChange : $.noop,
 
         }, userOptions);
 
@@ -327,6 +328,7 @@
             if (delay >= 0)
                 this.timer = new Timer(that.next.bind(that), delay);
 
+            this.settings.onTripChange(tripObject);
         },
 
         isFirst : function() {
