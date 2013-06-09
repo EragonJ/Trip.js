@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.1.1
+ *  Version : 1.1.2
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me
@@ -27,7 +27,6 @@
             finishLabel: "Dismiss",
             canGoNext: true,
             canGoPrev: true,
-
 
             // callbacks
             onTripStart : $.noop,
@@ -256,15 +255,11 @@
                 this.progressing = false;
             }
 
-            // show block
-            var tripDataOk = this.checkTripData(o);
-            if(tripDataOk) {
-                this.setTripBlock(o);
-                this.showTripBlock(o);
+            this.setTripBlock(o);
+            this.showTripBlock(o);
 
-                if ( o.expose ) {
-                    this.showExpose( o.sel );
-                }
+            if ( o.expose ) {
+                this.showExpose( o.sel );
             }
         },
 
@@ -322,7 +317,12 @@
                 tripObject = this.getCurrentTripObject(),
                 delay = tripObject.delay || this.settings.delay;
 
-            // next to o
+            // stop Trip.js if the data is not valid
+            // to force developers check the data twice
+            if( !this.isTripDataValid( tripObject ) ) {
+                return false; 
+            }
+
             this.showCurrentTrip( tripObject );
 
             // show the progress bar
@@ -342,6 +342,21 @@
 
         isLast : function() {
             return ( this.tripIndex === this.tripData.length - 1 ) ? true : false;
+        },
+
+        isTripDataValid : function( o ) {
+
+            // have to check `sel` & `content` two required fields
+
+            if ( typeof o.content === "undefined" ||
+                    typeof o.sel === "undefined" ||
+                         o.sel === null || o.sel.length === 0 || $(o.sel).length === 0 ) {
+
+                this.console.error("Your tripData is not valid in obj : ");
+                this.console.error(o)
+                return false;
+            }
+            return true;        
         },
 
         hasCallback : function() {
@@ -398,26 +413,6 @@
 
         getCurrentTripObject : function() {
             return this.tripData[ this.tripIndex ];
-        },
-
-        checkTripData : function( o ) {
-            /*
-             *  Possible TripData properties
-             *  {
-             *      sel : $('#id'),
-             *      content : 'This is a hint',
-             *      position : 'n', // optional
-             *  }
-             */
-            if ( typeof o.sel === 'undefined' ||
-                    o.sel === null ||
-                    o.sel.length === 0 ||
-                    typeof o.content === 'undefined' ) {
-
-                this.console.warn("Your tripData is not valid in obj :" + o +".");
-                return false;
-            }
-            return true;        
         },
 
         setTripBlock : function( o ) {
