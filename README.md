@@ -206,16 +206,16 @@ Trip.js would detect following keys to do relative actions after loading it.
 API
 ===
 
-* trip.start() - start your trip
-* trip.stop()  - stop your trip
-* trip.pause() - pause / resume your trip
-* trip.next()  - jump to next step
-* trip.prev()  - jump back to previous step
+* trip.start()  - start your trip
+* trip.stop()   - stop your trip
+* trip.pause()  - pause / resume your trip ( same as trip.resume() )
+* trip.resume() - pause / resume your trip ( same as trip.pasue()  )
+* trip.next()   - jump to next step
+* trip.prev()   - jump back to previous step
 
 TODO
 ====
 
-* Bypass !tripDataOk step
 * Add data-x to define steps ( make the setup easier )
 * Add UI for pause/play/stop to make users know how to interact
 * Don't depend on jQuery
