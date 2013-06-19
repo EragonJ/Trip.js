@@ -14,6 +14,12 @@
         background: #333;
         color: #DDD;
 
+        .trip-close {
+            color: #ddd;
+            &:hover {
+                color: #fff;
+            }
+        }
         .trip-arrow {
             background-image: url("img/arrow.png");
         }
@@ -24,6 +30,12 @@
         background: #fff;
         color: #333;
 
+        .trip-close {
+            color: #333;
+            &:hover {
+                color: #000;
+            }
+        }
         .trip-arrow {
             background-image: url("img/arrow-white.png");
         }
@@ -31,6 +43,20 @@
 }
 
 // define its basic rules
+.trip-close {
+    font-size: 80%;
+    float: right;
+    margin-top: -5px;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.trip-content {
+    clear: right;
+}
+
 .trip-arrow {
     position: absolute;
     background: none;

@@ -38,7 +38,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         {
             sel : $('.step3'),
             position : 'n',
-            content : 'Can be placed in many directinos - North',
+            content : 'Can be placed in many directions - North',
             delay : 2000
         },
         {
@@ -75,6 +75,13 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         },
         {
             sel : $('.step7'),
+            content : 'The user can stop the tour by hitting Esc or clicking the Close box',
+            delay : -1,
+            showNavigation: true,
+            showCloseBox: true
+        },
+        {
+            sel : $('.step8'),
             position : 'n',
             content : 'One more thing, plz read this !',
             expose : true,
@@ -110,7 +117,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
        sel : $('#element2'),
        content : 'This is element 2'
    }
-], options); // details about options are listed below</pre></li><li>Take a Trip Now !<pre>$(document).ready(function({
+], options); // details about options are listed below</pre></li><li class="step7">Take a Trip Now !<pre>$(document).ready(function({
     trip.start();
 });</pre></li></ol></div><div class="step"> <h2>Setup for Demo Tour</h2><pre>$(document).ready(function() {
     var trip = new Trip([
@@ -135,7 +142,7 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         {
             sel : $('.step3'),
             position : 'n',
-            content : 'Can be placed in many directinos - North',
+            content : 'Can be placed in many directions - North',
             delay : 2000
         },
         {
@@ -172,6 +179,13 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         },
         {
             sel : $('.step7'),
+            content : 'The user can stop the tour by hitting Esc or clicking the Close box',
+            delay : -1,
+            showNavigation: true,
+            showCloseBox: true
+        },
+        {
+            sel : $('.step8'),
             position : 'n',
             content : 'One more thing, plz read this !',
             expose : true,
@@ -272,7 +286,7 @@ Determines if the user can go forward. If set to a function
 it is called and the response is evaluated.
 <code>canGoNext</code></p><p> 
 Default : <code> 
-true</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / resume</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause your trip (same as trip.resume)</p></li><li><h4>trip.resume()</h4><p>Call this method to continue your trip (same as trip.pause)</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step7"><h2>Notice</h2><p> 
+true</code></p></li></ol></div><div class="step"> <h2>Key Binding</h2><ol><li> <h4>Right and Down arrows</h4><p>Go to next trip</p></li><li> <h4>Left and Up arrows</h4><p>Go back to previous trip</p></li><li> <h4>Space</h4><p>pause / resume</p></li><li> <h4>Esc</h4><p>Stop</p></li></ol></div><div class="step"><h2>API</h2><ol> <li> <h4>trip.start()</h4><p>Call this method to start your trip</p></li><li><h4>trip.stop()</h4><p>Call this method to stop your trip</p></li><li><h4>trip.pause()</h4><p>Call this method to pause your trip (same as trip.resume)</p></li><li><h4>trip.resume()</h4><p>Call this method to continue your trip (same as trip.pause)</p></li><li> <h4>trip.next()</h4><p>jump to next step</p></li><li> <h4>trip.prev()</h4><p>jump back to previous step</p></li></ol></div><div class="step step8"><h2>Notice</h2><p> 
 This plugin is still under development ! 
 If you find any bugs or want me to implement anything, 
 please feel free to open an issue ;)</p><p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p></div></div></div></body></html>

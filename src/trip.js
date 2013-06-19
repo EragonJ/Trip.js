@@ -19,6 +19,8 @@
             overlayZindex : 99999,
             delay : 1000,
             enableKeyBinding : true,
+            showCloseBox : false,
+            closeBoxLabel : '&#215;',
 
             // navigation
             showNavigation: false,
@@ -418,6 +420,8 @@
         setTripBlock : function( o ) {
             var $tripBlock = this.$tripBlock,
                 $tripArrow = this.$tripArrow,
+                showCloseBox = o.showCloseBox || this.settings.showCloseBox,
+                closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
                 prevLabel = o.prevLabel || this.settings.prevLabel,
                 nextLabel = o.nextLabel || this.settings.nextLabel,
@@ -433,6 +437,10 @@
             $tripBlock.find('.trip-next')
                       .html( this.isLast() ? finishLabel : nextLabel )
                       .toggle( showNavigation );
+
+            $tripBlock.find('.trip-close')
+                      .html( closeBoxLabel )
+                      .toggle( showCloseBox );
 
             var $sel = o.sel,
                 selWidth = $sel.outerWidth(),
@@ -450,7 +458,7 @@
                 $tripArrow.addClass('e');
                 $tripBlock.css({
                     left : $sel.offset().left + selWidth + arrowWidth,
-                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2),
+                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
                 });
                 break;
             case 's':
@@ -522,6 +530,7 @@
 
                 var html = [
                     '<div class="trip-block">',
+                        '<a href="#" class="trip-close"></a>',
                         '<div class="trip-content"></div>',
                         '<div class="trip-progress-wrapper">',
                             '<div class="trip-progress-bar"></div>',
@@ -537,6 +546,11 @@
                 $('body').append( $tripBlock );
 
                 var that = this;
+
+                $tripBlock.find('.trip-close').click(function(evt) {
+                    evt.preventDefault();
+                    that.stop();
+                });
 
                 $tripBlock.find('.trip-prev').click(function(evt) {
                     evt.preventDefault();

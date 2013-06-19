@@ -72,7 +72,7 @@ html.no-js(lang='en')
                     {
                         sel : $('.step3'),
                         position : 'n',
-                        content : 'Can be placed in many directinos - North',
+                        content : 'Can be placed in many directions - North',
                         delay : 2000
                     },
                     {
@@ -109,6 +109,13 @@ html.no-js(lang='en')
                     },
                     {
                         sel : $('.step7'),
+                        content : 'The user can stop the tour by hitting Esc or clicking the Close box',
+                        delay : -1,
+                        showNavigation: true,
+                        showCloseBox: true
+                    },
+                    {
+                        sel : $('.step8'),
                         position : 'n',
                         content : 'One more thing, plz read this !',
                         expose : true,
@@ -207,7 +214,7 @@ html.no-js(lang='en')
                                 |    }
                                 | ], options); // details about options are listed below
 
-                        li Take a Trip Now !
+                        li.step7 Take a Trip Now !
                             pre
                                 | $(document).ready(function({
                                 |     trip.start();
@@ -238,7 +245,7 @@ html.no-js(lang='en')
                         |         {
                         |             sel : $('.step3'),
                         |             position : 'n',
-                        |             content : 'Can be placed in many directinos - North',
+                        |             content : 'Can be placed in many directions - North',
                         |             delay : 2000
                         |         },
                         |         {
@@ -275,6 +282,13 @@ html.no-js(lang='en')
                         |         },
                         |         {
                         |             sel : $('.step7'),
+                        |             content : 'The user can stop the tour by hitting Esc or clicking the Close box',
+                        |             delay : -1,
+                        |             showNavigation: true,
+                        |             showCloseBox: true
+                        |         },
+                        |         {
+                        |             sel : $('.step8'),
                         |             position : 'n',
                         |             content : 'One more thing, plz read this !',
                         |             expose : true,
@@ -568,7 +582,7 @@ html.no-js(lang='en')
                             h4 trip.prev()
                             p jump back to previous step
 
-                .step.step7
+                .step.step8
                     h2 Notice
                     p 
                         | This plugin is still under development ! 

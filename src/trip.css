@@ -11,13 +11,31 @@
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px 0;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px 0;
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px 0; }
+    .trip-block.black .trip-close {
+      color: #ddd; }
+      .trip-block.black .trip-close:hover {
+        color: #fff; }
     .trip-block.black .trip-arrow {
       background-image: url("img/arrow.png"); }
   .trip-block.white {
     background: #fff;
     color: #333; }
+    .trip-block.white .trip-close {
+      color: #333; }
+      .trip-block.white .trip-close:hover {
+        color: #000; }
     .trip-block.white .trip-arrow {
       background-image: url("img/arrow-white.png"); }
+
+.trip-close {
+  font-size: 80%;
+  float: right;
+  margin-top: -5px; }
+  .trip-close:hover {
+    text-decoration: none; }
+
+.trip-content {
+  clear: right; }
 
 .trip-arrow {
   position: absolute;
