@@ -15,8 +15,14 @@
       color: #ddd; }
       .trip-block.black .trip-close:hover {
         color: #fff; }
-    .trip-block.black .trip-arrow {
-      background-image: url("img/arrow.png"); }
+    .trip-block.black.n:before {
+      border-top-color: #333333; }
+    .trip-block.black.s:before {
+      border-bottom-color: #333333; }
+    .trip-block.black.e:before {
+      border-right-color: #333333; }
+    .trip-block.black.w:before {
+      border-left-color: #333333; }
   .trip-block.white {
     background: #fff;
     color: #333; }
@@ -24,8 +30,36 @@
       color: #333; }
       .trip-block.white .trip-close:hover {
         color: #000; }
-    .trip-block.white .trip-arrow {
-      background-image: url("img/arrow-white.png"); }
+    .trip-block.white.n:before {
+      border-top-color: white; }
+    .trip-block.white.s:before {
+      border-bottom-color: white; }
+    .trip-block.white.e:before {
+      border-right-color: white; }
+    .trip-block.white.w:before {
+      border-left-color: white; }
+  .trip-block:before {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute; }
+  .trip-block.n:before, .trip-block.s:before {
+    border-width: 8px;
+    left: 50%;
+    margin-left: -8px; }
+  .trip-block.e:before, .trip-block.w:before {
+    border-width: 8px;
+    top: 50%;
+    margin-top: -8px; }
+  .trip-block.n:before {
+    top: 100%; }
+  .trip-block.s:before {
+    bottom: 100%; }
+  .trip-block.e:before {
+    right: 100%; }
+  .trip-block.w:before {
+    left: 100%; }
 
 .trip-close {
   font-size: 80%;
@@ -36,41 +70,6 @@
 
 .trip-content {
   clear: right; }
-
-.trip-arrow {
-  position: absolute;
-  background: none;
-  z-index: 1; }
-  .trip-arrow.n {
-    height: 8px;
-    bottom: -8px;
-    left: 15px;
-    right: 15px;
-    background-repeat: no-repeat;
-    background-position: 50% 100%; }
-  .trip-arrow.s {
-    height: 8px;
-    top: -8px;
-    left: 15px;
-    right: 15px;
-    background-repeat: no-repeat;
-    background-position: 50% 0%; }
-  .trip-arrow.e {
-    width: 8px;
-    height: 16px;
-    left: -8px;
-    top: 11px;
-    bottom: 15px;
-    background-repeat: no-repeat;
-    background-position: 0% 50%; }
-  .trip-arrow.w {
-    width: 8px;
-    height: 16px;
-    right: -8px;
-    top: 11px;
-    bottom: 15px;
-    background-repeat: no-repeat;
-    background-position: 100% 50%; }
 
 .trip-progress-bar {
   height: 1px;

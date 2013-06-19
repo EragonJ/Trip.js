@@ -42,7 +42,6 @@
 
         // used SELs
         this.$tripBlock = null;
-        this.$tripArrow = null;
         this.$overlay = null;
         this.$bar = null;
         this.$root = $('body, html');
@@ -421,7 +420,6 @@
             this.recreateTripBlock();
 
             var $tripBlock = this.$tripBlock,
-                $tripArrow = this.$tripArrow,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
                 closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
@@ -453,25 +451,25 @@
                 arrowWidth = 10;
 
             // Take off e/s/w/n classes
-            $tripArrow.removeClass('e s w n');
+            $tripBlock.removeClass('e s w n');
 
             switch( o.position ) {
             case 'e':
-                $tripArrow.addClass('e');
+                $tripBlock.addClass('e');
                 $tripBlock.css({
                     left : $sel.offset().left + selWidth + arrowWidth,
                     top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
                 });
                 break;
             case 's':
-                $tripArrow.addClass('s');
+                $tripBlock.addClass('s');
                 $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top + selHeight + arrowHeight
                 });
                 break;
             case 'w':
-                $tripArrow.addClass('w');
+                $tripBlock.addClass('w');
                 $tripBlock.css({
                     left : $sel.offset().left - (arrowWidth + blockWidth),
                     top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
@@ -479,7 +477,7 @@
                 break;
             case 'n':
             default: 
-                $tripArrow.addClass('n');
+                $tripBlock.addClass('n');
                 $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top - arrowHeight - blockHeight
@@ -539,7 +537,6 @@
                             '<a href="#" class="trip-prev"></a>',
                             '<a href="#" class="trip-next"></a>',
                         '</div>',
-                        '<div class="trip-arrow"></div>',
                     '</div>'
                 ].join('');
 
@@ -564,7 +561,6 @@
                     that.next();
                 });
 
-                this.$tripArrow = $('.trip-arrow');
                 this.$tripBlock = $('.trip-block');
                 this.$bar = $('.trip-progress-bar');
             }
