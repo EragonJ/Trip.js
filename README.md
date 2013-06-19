@@ -19,6 +19,17 @@ Or Install from Bower
 
 * `bower install trip.js`
 
+How to Contribute
+=====
+
+If you want to build your own trip.js, you can check `Makefile` for details.
+
+Trip.js uses `uglifyjs(to minify)`, `scss(+compass)` and `jade(for introduction page)` to build final related scripts.
+
+If you are willing to contribute any commit for Trip.js, please use mentioned tools above to finish the whole build process to make the codebase consistent. 
+
+Thanks ! 
+
 Setup (minimal)
 ===============
 
