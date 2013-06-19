@@ -418,6 +418,8 @@
         },
 
         setTripBlock : function( o ) {
+            this.recreateTripBlock();
+
             var $tripBlock = this.$tripBlock,
                 $tripArrow = this.$tripArrow,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
@@ -561,7 +563,16 @@
                     evt.preventDefault();
                     that.next();
                 });
+
+                this.$tripArrow = $('.trip-arrow');
+                this.$tripBlock = $('.trip-block');
+                this.$bar = $('.trip-progress-bar');
             }
+        },
+
+        recreateTripBlock: function() {
+            $('.trip-block').remove();
+            this.createTripBlock();
         },
 
         createOverlay : function() {
@@ -591,10 +602,7 @@
             }
 
             // set refs
-            this.$bar = $('.trip-progress-bar');
             this.$overlay = $('.trip-overlay');
-            this.$tripArrow = $('.trip-arrow');
-            this.$tripBlock = $('.trip-block');
         },
 
         start : function() {
