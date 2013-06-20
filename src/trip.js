@@ -19,6 +19,8 @@
             overlayZindex : 99999,
             delay : 1000,
             enableKeyBinding : true,
+            showCloseBox : false,
+            closeBoxLabel : '&#215;',
 
             // navigation
             showNavigation: false,
@@ -40,7 +42,6 @@
 
         // used SELs
         this.$tripBlock = null;
-        this.$tripArrow = null;
         this.$overlay = null;
         this.$bar = null;
         this.$root = $('body, html');
@@ -416,8 +417,11 @@
         },
 
         setTripBlock : function( o ) {
+            this.recreateTripBlock();
+
             var $tripBlock = this.$tripBlock,
-                $tripArrow = this.$tripArrow,
+                showCloseBox = o.showCloseBox || this.settings.showCloseBox,
+                closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
                 prevLabel = o.prevLabel || this.settings.prevLabel,
                 nextLabel = o.nextLabel || this.settings.nextLabel,
@@ -434,6 +438,10 @@
                       .html( this.isLast() ? finishLabel : nextLabel )
                       .toggle( showNavigation );
 
+            $tripBlock.find('.trip-close')
+                      .html( closeBoxLabel )
+                      .toggle( showCloseBox );
+
             var $sel = o.sel,
                 selWidth = $sel.outerWidth(),
                 selHeight = $sel.outerHeight(),
@@ -443,25 +451,25 @@
                 arrowWidth = 10;
 
             // Take off e/s/w/n classes
-            $tripArrow.removeClass('e s w n');
+            $tripBlock.removeClass('e s w n');
 
             switch( o.position ) {
             case 'e':
-                $tripArrow.addClass('e');
+                $tripBlock.addClass('e');
                 $tripBlock.css({
                     left : $sel.offset().left + selWidth + arrowWidth,
-                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2),
+                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
                 });
                 break;
             case 's':
-                $tripArrow.addClass('s');
+                $tripBlock.addClass('s');
                 $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top + selHeight + arrowHeight
                 });
                 break;
             case 'w':
-                $tripArrow.addClass('w');
+                $tripBlock.addClass('w');
                 $tripBlock.css({
                     left : $sel.offset().left - (arrowWidth + blockWidth),
                     top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
@@ -469,7 +477,7 @@
                 break;
             case 'n':
             default: 
-                $tripArrow.addClass('n');
+                $tripBlock.addClass('n');
                 $tripBlock.css({
                     left : $sel.offset().left + ((selWidth - blockWidth) / 2),
                     top : $sel.offset().top - arrowHeight - blockHeight
@@ -522,13 +530,13 @@
 
                 var html = [
                     '<div class="trip-block">',
+                        '<a href="#" class="trip-close"></a>',
                         '<div class="trip-content"></div>',
                         '<div class="trip-progress-wrapper">',
                             '<div class="trip-progress-bar"></div>',
                             '<a href="#" class="trip-prev"></a>',
                             '<a href="#" class="trip-next"></a>',
                         '</div>',
-                        '<div class="trip-arrow"></div>',
                     '</div>'
                 ].join('');
 
@@ -537,6 +545,11 @@
                 $('body').append( $tripBlock );
 
                 var that = this;
+
+                $tripBlock.find('.trip-close').click(function(evt) {
+                    evt.preventDefault();
+                    that.stop();
+                });
 
                 $tripBlock.find('.trip-prev').click(function(evt) {
                     evt.preventDefault();
@@ -547,7 +560,15 @@
                     evt.preventDefault();
                     that.next();
                 });
+
+                this.$tripBlock = $('.trip-block');
+                this.$bar = $('.trip-progress-bar');
             }
+        },
+
+        recreateTripBlock: function() {
+            $('.trip-block').remove();
+            this.createTripBlock();
         },
 
         createOverlay : function() {
@@ -577,10 +598,7 @@
             }
 
             // set refs
-            this.$bar = $('.trip-progress-bar');
             this.$overlay = $('.trip-overlay');
-            this.$tripArrow = $('.trip-arrow');
-            this.$tripBlock = $('.trip-block');
         },
 
         start : function() {
