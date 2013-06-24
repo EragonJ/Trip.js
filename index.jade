@@ -132,6 +132,9 @@ html.no-js(lang='en')
                     onTripStop : function() {
                         console.log("onTripStop");
                     },
+                    onTripChange : function(index, tripBlock) {
+                        console.log("onTripChange");
+                    },
                     backToTopWhenEnded : true,
                     delay : 2000
                 });
