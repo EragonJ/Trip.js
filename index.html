@@ -98,6 +98,9 @@ ga('send', 'pageview');</script><script>(function(d, s, id) {
         onTripStop : function() {
             console.log("onTripStop");
         },
+        onTripChange : function(index, tripBlock) {
+            console.log("onTripChange");
+        },
         backToTopWhenEnded : true,
         delay : 2000
     });

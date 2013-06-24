@@ -20,20 +20,23 @@
             delay : 1000,
             enableKeyBinding : true,
             showCloseBox : false,
-            closeBoxLabel : '&#215;',
 
             // navigation
             showNavigation: false,
+            canGoNext: true,
+            canGoPrev: true,
+        
+            // labels
             nextLabel : "Next",
             prevLabel : "Back",
             finishLabel: "Dismiss",
-            canGoNext: true,
-            canGoPrev: true,
+            closeBoxLabel : '&#215;',
 
             // callbacks
             onTripStart : $.noop,
             onTripEnd : $.noop,
             onTripStop : $.noop,
+            onTripChange : $.noop
 
         }, userOptions);
 
@@ -332,9 +335,11 @@
 
             // set timer to show next, if the timer is less than zero we expect
             // it to be manually advanced
-            if (delay >= 0)
+            if (delay >= 0) {
                 this.timer = new Timer(that.next.bind(that), delay);
+            }
 
+            this.settings.onTripChange(this.tripIndex, tripObject);
         },
 
         isFirst : function() {
@@ -391,9 +396,8 @@
         },
 
         increaseIndex : function() {
-            // TODO :
-            // how about hitting the last item ?
             if ( this.tripIndex >= this.tripData.length - 1 ) {
+                // how about hitting the last item ?
                 // do nothing
             }
             else {
@@ -402,9 +406,8 @@
         },
 
         decreaseIndex : function() {
-            // TODO : 
-            // how about hitting the first item ?
             if ( this.tripIndex <= 0 ) {
+                // how about hitting the first item ?
                 // do nothing
             }
             else {
@@ -421,8 +424,8 @@
 
             var $tripBlock = this.$tripBlock,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
-                closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
+                closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 prevLabel = o.prevLabel || this.settings.prevLabel,
                 nextLabel = o.nextLabel || this.settings.nextLabel,
                 finishLabel = o.finishLabel || this.settings.finishLabel;
