@@ -1,5 +1,23 @@
 @import "compass/css3";
 
+@mixin trip-arrow-color($color) {
+    &.n:before {
+        border-top-color: $color;
+    }
+
+    &.s:before {
+        border-bottom-color: $color;
+    }
+
+    &.e:before {
+        border-right-color: $color;
+    }
+
+    &.w:before {
+        border-left-color: $color;
+    }
+}
+
 .trip-block {
 
     display: none;
@@ -14,65 +32,82 @@
         background: #333;
         color: #DDD;
 
-        .trip-arrow {
-            background-image: url("img/arrow.png");
+        .trip-close {
+            color: #ddd;
+            &:hover {
+                color: #fff;
+            }
         }
         @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 4px 0);
+
+        @include trip-arrow-color(#333);
     }
 
     &.white {
         background: #fff;
         color: #333;
 
-        .trip-arrow {
-            background-image: url("img/arrow-white.png");
+        .trip-close {
+            color: #333;
+            &:hover {
+                color: #000;
+            }
         }
+
+        @include trip-arrow-color(#fff);
+    }
+
+    &:before {
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+    }
+
+    $arrow-size: 8px;
+    &.n:before, &.s:before {
+        border-width: $arrow-size;
+        left: 50%;
+        margin-left: -$arrow-size;
+    }
+
+    &.e:before, &.w:before {
+        border-width: $arrow-size;
+        top: 50%;
+        margin-top: -$arrow-size;
+    }
+
+    &.n:before {
+        top: 100%;
+    }
+
+    &.s:before {
+        bottom: 100%;
+    }
+
+    &.e:before {
+        right: 100%;
+    }
+
+    &.w:before {
+        left: 100%;
     }
 }
 
 // define its basic rules
-.trip-arrow {
-    position: absolute;
-    background: none;
-    z-index: 1;
+.trip-close {
+    font-size: 80%;
+    float: right;
+    margin-top: -5px;
 
-    &.n {
-        height: 8px;
-        bottom: -8px;
-        left: 15px;
-        right: 15px;
-        background-repeat: no-repeat;
-        background-position: 50% 100%;
+    &:hover {
+        text-decoration: none;
     }
+}
 
-    &.s {
-        height: 8px;
-        top: -8px;
-        left: 15px;
-        right: 15px;
-        background-repeat: no-repeat;
-        background-position: 50% 0%;
-    }
-
-    &.e {
-        width: 8px;
-        height: 16px;
-        left: -8px;
-        top: 11px;
-        bottom: 15px;
-        background-repeat: no-repeat;
-        background-position: 0% 50%;
-    }
-
-    &.w {
-        width: 8px;
-        height: 16px;
-        right: -8px;
-        top: 11px;
-        bottom: 15px;
-        background-repeat: no-repeat;
-        background-position: 100% 50%;
-    }
+.trip-content {
+    clear: right;
 }
 
 .trip-progress-wrapper {
