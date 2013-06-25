@@ -185,136 +185,30 @@ html.no-js(lang='en')
                 .step
                     h2
                         span.step2 What is Trip.js ?
-                    p Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )
+                    p Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery ) 
                 .step
                     h2 Version
                     p 1.2.0
                 .step
                     h2 Setup ( Minimal )
                     ol 
-                        - var jQueryCode = '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>'
                         li Include your jQuery
-                            pre #{jQueryCode}
+                            script(src="https://gist.github.com/EragonJ/5855718.js")
 
-                        - var cssCode = '<link type="text/css" rel="stylesheet" href="src/trip.min.css">'
                         li Include src/trip.css
-                            pre #{cssCode}
+                            script(src="https://gist.github.com/EragonJ/5855723.js")
 
-                        - var jsCode = '<script type="text/javascript" src="src/trip.min.js"></script>'
                         li Include src/trip.js
-                            pre #{jsCode}
+                            script(src="https://gist.github.com/EragonJ/5855736.js")
 
-                        li Setup Trip.js
-                            pre.step3.step4.step5.step6
-                                | var trip = new Trip([
-                                |    { 
-                                |        sel : $('#element1'),
-                                |        content : 'This is element 1'
-                                |    },
-                                |    {
-                                |        sel : $('#element2'),
-                                |        content : 'This is element 2'
-                                |    }
-                                | ], options); // details about options are listed below
+                        li.step3.step4.step5.step6 Setup Trip.js
+                            script(src="https://gist.github.com/EragonJ/5855739.js")
 
-                        li Take a Trip Now !
-                            pre.step7
-                                | $(document).ready(function({
-                                |     trip.start();
-                                | });
+                        li.step7 Take a Trip Now !
+                            script.step7(src="https://gist.github.com/EragonJ/5855742.js")
                 .step 
                     h2 Setup for Demo Tour
-                    pre
-                        | $(document).ready(function() {
-                        |     var trip = new Trip([
-                        |         { 
-                        |             sel : $('.step1'), 
-                        |             position : 'n', 
-                        |             content : 'Hi, I am Trip.js', 
-                        |             delay : 2000,
-                        |             callback : function(i) {
-                        |                 console.log("step "+ i +" is finished");
-                        |             }
-                        |         },
-                        |         {
-                        |             sel : $('.step2'),
-                        |             position : 'e',
-                        |             content : 'This is a plugin that can help you make hint flow easily !',
-                        |             delay : 3000,
-                        |             callback : function(i) {
-                        |                 console.log("step "+ i +" is finished");
-                        |             }
-                        |         },
-                        |         {
-                        |             sel : $('.step3'),
-                        |             position : 'n',
-                        |             content : 'Can be placed in many directions - North',
-                        |             delay : 2000
-                        |         },
-                        |         {
-                        |             sel : $('.step4'),
-                        |             position : 'e',
-                        |             content : 'East',
-                        |             delay : 2000
-                        |         },
-                        |         {
-                        |             sel : $('.step5'),
-                        |             position : 'w',
-                        |             content : 'West',
-                        |             delay : 2000
-                        |         },
-                        |         {
-                        |             sel : $('.step6'),
-                        |             position : 's',
-                        |             content : 'South',
-                        |             delay : 2000
-                        |         },
-                        |         {
-                        |             sel : $('.step6'),
-                        |             content : 'Can control if the user can proceed',
-                        |             delay : 2000,
-                        |             canGoNext: function() {
-                        |                 return confirm("You can only continue if you agree!");
-                        |             }
-                        |         },
-                        |         {
-                        |             sel : $('.step6'),
-                        |             content : 'You can\'t proceed until you click next',
-                        |             delay : -1,
-                        |             showNavigation: true
-                        |         },
-                        |         {
-                        |             sel : $('.step7'),
-                        |             content : 'The user can stop the tour by hitting Esc or clicking the Close box',
-                        |             delay : -1,
-                        |             showNavigation: true,
-                        |             showCloseBox: true
-                        |         },
-                        |         {
-                        |             sel : $('.step8'),
-                        |             position : 'n',
-                        |             content : 'One more thing, plz read this !',
-                        |             expose : true,
-                        |             delay : 7000
-                        |         }
-                        |     ], {
-                        |         onTripStart : function() {
-                        |             console.log("onTripStart");
-                        |         },
-                        |         onTripEnd : function() {
-                        |             console.log("onTripEnd");
-                        |         },
-                        |         onTripStop : function() {
-                        |             console.log("onTripStop");
-                        |         },
-                        |         backToTopWhenEnded : true,
-                        |         delay : 2000
-                        |     });
-                        | 
-                        |     $(".start-tour").click(function() {
-                        |         trip.start(); 
-                        |     });
-                        | });
+                    script(src="https://gist.github.com/EragonJ/5855699.js")
 
                 .step
                     h2 Global Options
@@ -325,7 +219,7 @@ html.no-js(lang='en')
                             p 
                                 | Default : 
                                 code 
-                                    | $.noop
+                                    | 0
                         li 
                             h4 tripTheme 
                             p You can set which theme to use, now have white and black two themes.
@@ -333,20 +227,6 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | black
-                        li 
-                            h4 onTripStart 
-                            p You can set a callback function triggered when the trip starts.
-                            p 
-                                | Default : 
-                                code 
-                                    | $.noop
-                        li 
-                            h4 onTripEnd
-                            p You can set a callback function triggered when the trip ends.
-                            p 
-                                | Default : 
-                                code 
-                                    | $.noop
                         li 
                             h4 backToTopWhenEnded
                             p You can ask Trip.js go back to top when ended.
@@ -425,6 +305,34 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | true
+                        li 
+                            h4 onTripStart()
+                            p You can set a callback function triggered when Trip.js starts.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
+                        li 
+                            h4 onTripEnd()
+                            p You can set a callback function triggered when Trip.js ends.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
+                        li 
+                            h4 onTripStop()
+                            p You can set a callback function triggered when Trip.js stops.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
+                        li 
+                            h4 onTripChange(tripIndex, tripObject)
+                            p You can set a callback function triggered when Trip.js changes to another step. tripObject is your passed JSON for this current trip, so you can add your customized functions in your object and call the function when Trip.js changes to this step.
+                            p 
+                                | Default : 
+                                code 
+                                    | $.noop
                 .step
                     h2 Local Options 
                     h4 You can setup specific options for each step.
@@ -476,12 +384,17 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | $.noop
-
+                        li 
+                            h4 expose
+                            p 
+                                |You can enable this option to expose your selected element in this trip.
+                            p 
+                                | Default : 
+                                code 
+                                    | false
                         li 
                             h4 showNavigation
-                            p 
-                                |Toggle navigation buttons
-                                | <code>showNavigation</code>
+                            p Toggle navigation buttons
                             p 
                                 | Default : 
                                 code 
@@ -489,9 +402,7 @@ html.no-js(lang='en')
 
                         li 
                             h4 prevLabel
-                            p 
-                                |Label for the previous button.
-                                | <code>prevLabel</code>
+                            p Label for the previous button.
                             p 
                                 | Default : 
                                 code 
@@ -499,9 +410,7 @@ html.no-js(lang='en')
 
                         li 
                             h4 nextLabel
-                            p 
-                                |Label for the next button.
-                                | <code>nextLabel</code>
+                            p Label for the next button.
                             p 
                                 | Default : 
                                 code 
@@ -509,9 +418,7 @@ html.no-js(lang='en')
 
                         li 
                             h4 finishLabel
-                            p 
-                                |Label for the finish button.
-                                | <code>finishLabel</code>
+                            p Label for the finish button.
                             p 
                                 | Default : 
                                 code 
@@ -520,9 +427,8 @@ html.no-js(lang='en')
                         li 
                             h4 canGoPrev
                             p 
-                                |Determines if the user can go forward. If set to a function
-                                |it is called and the response is evaluated.
-                                | <code>canGoPrev</code>
+                                | Determines if the user can go forward. If set to a function
+                                | it is called and the response is evaluated.
                             p 
                                 | Default : 
                                 code 
@@ -531,9 +437,8 @@ html.no-js(lang='en')
                         li 
                             h4 canGoNext
                             p 
-                                |Determines if the user can go forward. If set to a function
-                                |it is called and the response is evaluated.
-                                | <code>canGoNext</code>
+                                | Determines if the user can go forward. If set to a function
+                                | it is called and the response is evaluated.
                             p 
                                 | Default : 
                                 code 
