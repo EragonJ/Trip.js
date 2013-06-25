@@ -67,18 +67,6 @@ You can set which theme to use, now have white and black two themes.
 * Type: *String*
 * Default: `black`
 
-### onTripStart
-You can set a callback function triggered when the trip starts
-
-* Type: *function*
-* Default: `$.noop`
-
-### onTripEnd
-You can set a callback function triggered when the trip ends
-
-* Type: *function*
-* Default: `$.noop`
-
 ### backToTopWhenEnded
 You can ask Trip.js go back to top when ended 
 
@@ -128,6 +116,42 @@ Label for the finish button.
 * Type: *String*
 * Default: `Dismiss`
 
+### canGoPrev
+Determines if the user can go backwards. If set to a function it is called and the response is evaluated.
+
+* Type: *function* or *boolean*
+* Default: `true`
+
+### canGoNext
+Determines if the user can go forward. If set to a function it is called and the response is evaluated.
+
+* Type: *function* or *boolean*
+* Default: `true`
+
+### onTripStart
+You can set a callback function triggered when the trip starts
+
+* Type: *function*
+* Default: `$.noop`
+
+### onTripEnd
+You can set a callback function triggered when the trip ends
+
+* Type: *function*
+* Default: `$.noop`
+
+### onTripStop
+You can set a callback function triggered when Trip.js stops.
+
+* Type: *function*
+* Default: `$.noop`
+
+### onTripChange(tripIndex, tripObject)
+You can set a callback function triggered when Trip.js changes to another step. tripObject is your passed JSON for this current trip, so you can add your customized functions in your object and call the function when Trip.js changes to this step.
+
+* Type: *function*
+* Default: `$.noop`
+
 Local Options
 =============
 
@@ -163,6 +187,12 @@ You can do whatever you want to do after this step passed. BTW, Trip.js will ass
 
 * Type: *Function*
 * Default: `$.noop`
+
+### expose
+You can enable this option to expose your selected element in this trip.
+
+* Type: *boolean*
+* Default: `false`
 
 ### showNavigation
 Toggle navigation buttons.
@@ -200,8 +230,6 @@ Determines if the user can go forward. If set to a function it is called and the
 
 * Type: *Boolean|Function*
 * Default: `true`
-
-
 
 
 Key Binding
