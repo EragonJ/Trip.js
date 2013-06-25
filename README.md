@@ -1,7 +1,7 @@
 Trip.js
 =======
 
-Trip.js is a useful plugin that can help you customize a tutorial trip easily. ( Based on jQuery )
+Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery )
 
 Version
 =======
