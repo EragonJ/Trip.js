@@ -1,6 +1,8 @@
 Trip.js
 =======
 
+![Trip.js](https://raw.github.com/EragonJ/Trip.js/master/public/img/logo-small.png "Trip.js")
+
 Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery )
 
 Version
