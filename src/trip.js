@@ -429,7 +429,7 @@
         },
 
         setTripBlock : function( o ) {
-            this.recreateTripBlock();
+            this.recreateTripBlock(o);
 
             var $tripBlock = this.$tripBlock,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
@@ -535,7 +535,7 @@
             }
         },
 
-        createTripBlock : function() {
+        createTripBlock : function(o) {
 
             // make sure the element doesn't exist in the DOM tree
             if ( typeof $('.trip-block').get(0) === 'undefined' ) {
@@ -552,8 +552,14 @@
                     '</div>'
                 ].join('');
 
-                var $tripBlock = $(html).addClass( this.settings.tripTheme );  
-
+                var _tripTheme = this.settings.tripTheme;
+                if (undefined != o) {
+                    if (undefined != o.tripTheme) {
+                        _tripTheme = o.tripTheme;
+                    }
+                }
+                var $tripBlock = $(html).addClass(_tripTheme);
+                
                 $('body').append( $tripBlock );
 
                 var that = this;
@@ -578,9 +584,9 @@
             }
         },
 
-        recreateTripBlock: function() {
+        recreateTripBlock: function(o) {
             $('.trip-block').remove();
-            this.createTripBlock();
+            this.createTripBlock(o);
         },
 
         createOverlay : function() {

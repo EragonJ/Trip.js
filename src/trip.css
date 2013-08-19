@@ -38,6 +38,38 @@
       border-right-color: white; }
     .trip-block.white.w:before {
       border-left-color: white; }
+ .trip-block.green {
+    background-color: #65A32C !important;
+    color: #FFFFFF !important;
+ }
+ .trip-block.green .trip-close {
+      color: #fff; }
+      .trip-block.green .trip-close:hover {
+        color: #fff; }
+    .trip-block.green.n:before {
+      border-top-color: #65A32C; }
+    .trip-block.green.s:before {
+      border-bottom-color: #65A32C; }
+    .trip-block.green.e:before {
+      border-right-color: #65A32C; }
+    .trip-block.green.w:before {
+      border-left-color: #65A32C; }
+ .trip-block.red {
+    background-color: #961919 !important;
+    color: #FFFFFF !important;
+ }
+ .trip-block.red .trip-close {
+      color: #fff; }
+      .trip-block.red .trip-close:hover {
+        color: #fff; }
+    .trip-block.red.n:before {
+      border-top-color: #961919; }
+    .trip-block.red.s:before {
+      border-bottom-color: #961919; }
+    .trip-block.red.e:before {
+      border-right-color: #961919; }
+    .trip-block.red.w:before {
+      border-left-color: #961919; }
   .trip-block:before {
     border: solid transparent;
     content: " ";
