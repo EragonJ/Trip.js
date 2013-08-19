@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.2.0
+ *  Version : 1.2.1
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me
@@ -20,6 +20,7 @@
             delay : 1000,
             enableKeyBinding : true,
             showCloseBox : false,
+            skipUndefinedTrip : false,
 
             // navigation
             showNavigation: false,
@@ -51,6 +52,7 @@
 
         // save the current trip index
         this.tripIndex = this.settings.tripIndex;
+        this.tripDirection = 'next';
         this.timer = null;
         this.progressing = false;
 
@@ -204,6 +206,8 @@
         },
 
         next : function() {
+            this.tripDirection = 'next';
+
             if ( !this.canGoNext() ) {
                 return this.run();
             }
@@ -222,6 +226,8 @@
         },
 
         prev : function() {
+            this.tripDirection = 'prev';
+
             if ( !this.isFirst() && this.canGoPrev() ) {
                 this.decreaseIndex();
             }
@@ -321,10 +327,18 @@
                 tripObject = this.getCurrentTripObject(),
                 delay = tripObject.delay || this.settings.delay;
 
-            // stop Trip.js if the data is not valid
-            // to force developers check the data twice
-            if( !this.isTripDataValid( tripObject ) ) {
-                return false; 
+            if ( !this.isTripDataValid( tripObject ) ) {
+
+                // force developers to double check tripData again
+                if ( this.settings.skipUndefinedTrip === false ) {
+                    this.console.error("Your tripData is not valid at index : " + this.tripIndex);
+                    this.stop();
+                    return false; 
+                }
+                // let it go
+                else {
+                    return this[ this.tripDirection ]();
+                }
             }
 
             this.showCurrentTrip( tripObject );
@@ -351,15 +365,10 @@
         },
 
         isTripDataValid : function( o ) {
-
             // have to check `sel` & `content` two required fields
-
             if ( typeof o.content === "undefined" ||
                     typeof o.sel === "undefined" ||
                          o.sel === null || o.sel.length === 0 || $(o.sel).length === 0 ) {
-
-                this.console.error("Your tripData is not valid in obj : ");
-                this.console.error(o)
                 return false;
             }
             return true;        
