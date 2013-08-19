@@ -87,7 +87,19 @@ You can decide to bind key events for trip navigations or not.
 * Type: *boolean*
 * Default: `true`
 
-### delayPeriod
+### showCloseBox
+You can decide to add small close icon on each trip or not
+
+* Type: *boolean*
+* Default: `false`
+
+### skipUndefinedTrip 
+You can enable this option to tell Trip.js skip undefined trips ( Undefined trips mean the trips without content or without sel or can not be selected by jQuery ). 
+
+* Type: *boolean*
+* Default: `false`
+
+### delay
 Every trip will be delayed for 1 second (1000 ms) by default.
 Setting to a `-1` will prevent auto-advancing. You must manually call `trip.next()`.
 
@@ -198,6 +210,12 @@ You can enable this option to expose your selected element in this trip.
 
 ### showNavigation
 Toggle navigation buttons.
+
+* Type: *boolean*
+* Default: `false`
+
+### showCloseBox
+You can decide to add small close icon on each trip or not
 
 * Type: *boolean*
 * Default: `false`
