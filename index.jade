@@ -251,7 +251,21 @@ html.no-js(lang='en')
                                 code 
                                     | true
                         li 
-                            h4 delayPeriod
+                            h4 showCloseBox
+                            p You can decide to add small close icon on each trip or not
+                            p 
+                                | Default : 
+                                code 
+                                    | false
+                        li 
+                            h4 skipUndefinedTrip
+                            p You can enable this option to tell Trip.js skip undefined trips ( Undefined trips mean the trips without content or without sel or can not be selected by jQuery ). 
+                            p 
+                                | Default : 
+                                code 
+                                    | false
+                        li 
+                            h4 delay
                             p every trip will be lived for 1 second (1000 ms) by default
                             p Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
                             p
@@ -401,7 +415,13 @@ html.no-js(lang='en')
                                 | Default : 
                                 code 
                                     | false
-
+                        li 
+                            h4 showCloseBox
+                            p You can decide to add small close icon on each trip or not
+                            p 
+                                | Default : 
+                                code 
+                                    | false
                         li 
                             h4 prevLabel
                             p Label for the previous button.
