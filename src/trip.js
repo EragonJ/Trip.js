@@ -126,6 +126,15 @@
             this.$overlay.hide();
         },
 
+        bindResizeEvents : function() {
+            var that = this;
+            $(window).on("resize", function() {
+                // when users resize the window
+                // our current solution is to rerun the trip (will restart the timer)
+                that.run();
+            });
+        },
+
         bindKeyEvents : function() {
             var that = this;
             $(document).on({
@@ -529,7 +538,6 @@
         // Make sure this method is only called ONCE in this page,
         // so that we will not create same DOMs more than once!
         create : function() {
-
             if ( !this.$tripBlock ) {
                 this.createTripBlock();
                 this.createOverlay();
@@ -553,24 +561,23 @@
                     '</div>'
                 ].join('');
 
-                var $tripBlock = $(html).addClass( this.settings.tripTheme );  
+                var that = this,
+                    $tripBlock = $(html).addClass( this.settings.tripTheme );  
 
                 $('body').append( $tripBlock );
 
-                var that = this;
-
-                $tripBlock.find('.trip-close').click(function(evt) {
-                    evt.preventDefault();
+                $tripBlock.find('.trip-close').on("click", function(e) {
+                    e.preventDefault();
                     that.stop();
                 });
 
-                $tripBlock.find('.trip-prev').click(function(evt) {
-                    evt.preventDefault();
+                $tripBlock.find('.trip-prev').on("click", function(e) {
+                    e.preventDefault();
                     that.prev();
                 });
 
-                $tripBlock.find('.trip-next').click(function(evt) {
-                    evt.preventDefault();
+                $tripBlock.find('.trip-next').on("click", function(e) {
+                    e.preventDefault();
                     that.next();
                 });
 
@@ -580,7 +587,7 @@
         },
 
         recreateTripBlock: function() {
-            $('.trip-block').remove();
+            this.$tripBlock.remove();
             this.createTripBlock();
         },
 
@@ -612,6 +619,8 @@
             if ( this.settings.enableKeyBinding ) {
                 this.bindKeyEvents();
             }
+
+            this.bindResizeEvents();
 
             // set refs
             this.$overlay = $('.trip-overlay');
