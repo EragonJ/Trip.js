@@ -122,14 +122,13 @@
 
 .trip-overlay {
     display: none;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background: black;
     width: 100%;
     height: 100%;
-    opacity: 0.7;
-    filter: alpha(opacity = 70);
+    @include opacity(0.7);
 }
 
 .trip-prev, .trip-next {

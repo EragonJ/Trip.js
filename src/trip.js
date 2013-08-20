@@ -170,8 +170,9 @@
         },
 
         stop : function() {
-            if (this.timer)
+            if ( this.timer ) {
                 this.timer.stop();
+            }
 
             if ( this.hasExpose ) {
                 this.hideExpose();
@@ -216,7 +217,7 @@
                 this.callCallback();
             }
 
-            if ( this.isLast() ){
+            if ( this.isLast() ) {
                 this.doLastOperation();
             }
             else {
@@ -595,7 +596,7 @@
 
                 var $overlay = $(html);
 
-                $overlay.height( $(document).height() );
+                $overlay.height( $(window).height() );
 
                 $('body').append( $overlay );
             }
