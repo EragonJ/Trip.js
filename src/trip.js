@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.2.1
+ *  Version : 1.2.2
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me
@@ -170,8 +170,9 @@
         },
 
         stop : function() {
-            if (this.timer)
+            if ( this.timer ) {
                 this.timer.stop();
+            }
 
             if ( this.hasExpose ) {
                 this.hideExpose();
@@ -216,7 +217,7 @@
                 this.callCallback();
             }
 
-            if ( this.isLast() ){
+            if ( this.isLast() ) {
                 this.doLastOperation();
             }
             else {
@@ -595,7 +596,10 @@
 
                 var $overlay = $(html);
 
-                $overlay.height( $(document).height() );
+                $overlay.height( $(window).height() )
+                        .css({
+                            zIndex : this.settings.overlayZindex 
+                        });
 
                 $('body').append( $overlay );
             }
