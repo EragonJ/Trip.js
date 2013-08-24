@@ -439,7 +439,6 @@
         },
 
         setTripBlock : function( o ) {
-            this.recreateTripBlock();
 
             var $tripBlock = this.$tripBlock,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
@@ -538,10 +537,8 @@
         // Make sure this method is only called ONCE in this page,
         // so that we will not create same DOMs more than once!
         create : function() {
-            if ( !this.$tripBlock ) {
-                this.createTripBlock();
-                this.createOverlay();
-            }
+            this.createTripBlock();
+            this.createOverlay();
         },
 
         createTripBlock : function() {
@@ -580,15 +577,7 @@
                     e.preventDefault();
                     that.next();
                 });
-
-                this.$tripBlock = $('.trip-block');
-                this.$bar = $('.trip-progress-bar');
             }
-        },
-
-        recreateTripBlock: function() {
-            this.$tripBlock.remove();
-            this.createTripBlock();
         },
 
         createOverlay : function() {
@@ -612,6 +601,10 @@
             }
         },
 
+        cleanup : function() {
+            $(".trip-overlay, .trip-block").remove();
+        },
+
         init : function() {
 
             this.preInit();
@@ -623,10 +616,16 @@
             this.bindResizeEvents();
 
             // set refs
+            this.$tripBlock = $('.trip-block');
+            this.$bar = $('.trip-progress-bar');
             this.$overlay = $('.trip-overlay');
         },
 
         start : function() {
+
+            // cleanup old DOM first
+            this.cleanup();
+
             // onTripStart callback
             this.settings.onTripStart();
 
@@ -635,6 +634,8 @@
 
             // init some necessary stuffs like events, late DOM refs after creating DOMs
             this.init();
+
+            console.log(this.$tripBlock);
 
             // main entry
             this.run();
