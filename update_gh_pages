@@ -1,6 +1,7 @@
 #!/bin/bash
 git checkout gh-pages
 git checkout master -- index.html
+git checkout master -- demo-basic.html
 git checkout master -- public
 git checkout master -- src
 git add .
