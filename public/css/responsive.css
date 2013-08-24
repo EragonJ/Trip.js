@@ -1,0 +1,14 @@
+@media (min-width: 1200px) {
+    .container, 
+    .navbar-static-top .container, 
+    .navbar-fixed-top .container, 
+    .navbar-fixed-bottom .container {
+        width: 940px;
+    }
+}
+
+@media (max-width: 480px) {
+    #fork-button {
+        display: none;
+    } 
+}
