@@ -12,7 +12,9 @@ scss:
 	sass --compass src/trip.scss:src/trip.min.css --style compressed
 
 jade:
-	jade index.jade
+	jade views/*.jade --out ./
+	# remove unnecessary layout
+	rm layout.html
 
 clean:
 	rm -f src/trip.min.js

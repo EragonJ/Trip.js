@@ -1,0 +1,86 @@
+extends ./layout
+
+block content
+
+    div.each-demo
+        h2 1. Configure positions ( n, e, s, w )
+        input.btn.btn-small.start-demo-basic-1(type="button", value="Run Demo 1")
+        pre
+            code.javascript
+                | var trip1 = new Trip([
+                |     { sel : $(".demo-basic-1.step1"), content : "North", position : "n" },
+                |     { sel : $(".demo-basic-1.step2"), content : "East",  position : "e" },
+                |     { sel : $(".demo-basic-1.step3"), content : "South", position : "s" },
+                |     { sel : $(".demo-basic-1.step4"), content : "West",  position : "w" }
+                | ], {
+                |     
+                | });
+                | 
+                | $(".start-demo-basic-1").on("click", function() {
+                |     trip1.start();
+                | });
+
+    div.each-demo
+        h2 2. Change Themes ( black or white )
+        input.btn.btn-small.start-demo-basic-2(type="button", value="Run Demo 2")
+        pre
+            code.javascript
+                | var trip2 = new Trip([
+                |     { sel : $(".demo-basic-2.step1"), content : "North", position : "n" },
+                |     { sel : $(".demo-basic-2.step2"), content : "East",  position : "e" },
+                |     { sel : $(".demo-basic-2.step3"), content : "South", position : "s" },
+                |     { sel : $(".demo-basic-2.step4"), content : "West",  position : "w" }
+                | ], {
+                |     tripTheme : "white",
+                |     onTripStart : function() {
+                |         $("body").css({ "background-color" : "#eee" });
+                |     },
+                |     onTripEnd : function() {
+                |         $("body").css({ "background-color" : "#fff" });
+                |     }
+                | });
+                | 
+                | $(".start-demo-basic-2").on("click", function() {
+                |     trip2.start();
+                | });
+
+    div.each-demo
+        h2.demo-basic-3.step1 3. You can tell Trip.js to go back to the top after finished
+        input.btn.btn-small.start-demo-basic-3(type="button", value="Run Demo 3")
+        pre
+            code.javascript
+                | var trip3 = new Trip([
+                |     { sel : $(".demo-basic-3.step1"), content : "Let's fly ...", position : "e" }
+                | ], {
+                |     backToTopWhenEnded : true,
+                |     delay : 3000
+                | });
+                | 
+                | $(".start-demo-basic-3").on("click", function() {
+                |     trip3.start();
+                | });
+
+    div.each-demo
+        h2.demo-basic-4.step1.step2 4. You can show close box and show navigation
+        p Note : If you wan to manipulate Trip.js manually, set delay to -1 
+        input.btn.btn-small.start-demo-basic-4(type="button", value="Run Demo 4")
+        pre
+            code.javascript
+                | var trip4 = new Trip([
+                |     { sel : $(".demo-basic-4.step1"), content : "Hola!", position : "n" },
+                |     { sel : $(".demo-basic-4.step2"), content : "Adios!", position : "s" }
+                | ], {
+                |     showNavigation : true,
+                |     showCloseBox : true,
+                |     delay : -1
+                | });
+                | 
+                | $(".start-demo-basic-4").on("click", function() {
+                |     trip4.start();
+                | });
+    div.each-demo
+        h3 δ With the flexibility of Trip.js, the only limitation is your imagination ! :P
+
+block extra_header
+    link(rel='stylesheet', href='public/css/demo.css')
+    script(src="public/js/demo-basic.js")

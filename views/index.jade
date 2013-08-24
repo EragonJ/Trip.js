@@ -1,0 +1,345 @@
+extends ./layout
+
+block content
+    .steps
+        .step
+            h2
+                span.demo-index.step2 What is Trip.js ?
+            p Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery ) 
+        .step
+            h2 Version
+            p 1.2.2
+        .step
+            h2 Setup ( Minimal )
+            ol 
+                li Include your jQuery
+                    script(src="https://gist.github.com/EragonJ/5855718.js")
+
+                li Include src/trip.css
+                    script(src="https://gist.github.com/EragonJ/5855723.js")
+
+                li Include src/trip.js
+                    script(src="https://gist.github.com/EragonJ/5855736.js")
+
+                li.demo-index.step3.step4.step5.step6 Setup Trip.js
+                    script(src="https://gist.github.com/EragonJ/5855739.js")
+
+                li.demo-index.step7 Take a Trip Now !
+                    script.step7(src="https://gist.github.com/EragonJ/5855742.js")
+        //
+            .step 
+                h2 Setup for Demo Tour
+                script(src="https://gist.github.com/EragonJ/5855699.js")
+
+        .step
+            h2 Global Options
+            ol 
+                li 
+                    h4 tripIndex
+                    p You can set tripIndex ( start from 0 ) to specific trip block at start.
+                    p 
+                        | Default : 
+                        code 
+                            | 0
+                li 
+                    h4 tripTheme 
+                    p You can set which theme to use, now have white and black two themes.
+                    p 
+                        | Default : 
+                        code 
+                            | black
+                li 
+                    h4 backToTopWhenEnded
+                    p You can ask Trip.js go back to top when ended.
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 overlayZindex
+                    p You can set the basic zIndex for overlay if you want to expose elements.
+                    p 
+                        | Default : 
+                        code 
+                            | 99999
+                li 
+                    h4 enableKeyBinding
+                    p You can decide to bind key events for trip navigations or not.
+                    p 
+                        | Default : 
+                        code 
+                            | true
+                li 
+                    h4 showCloseBox
+                    p You can decide to add small close icon on each trip or not
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 skipUndefinedTrip
+                    p You can enable this option to tell Trip.js skip undefined trips ( Undefined trips mean the trips without content or without sel or can not be selected by jQuery ). 
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 delay
+                    p every trip will be lived for 1 second (1000 ms) by default
+                    p Setting to a <code>-1</code> will prevent auto-advancing. You must manually call <code>trip.next()</code>.
+                    p
+                        | Default : 
+                        code 
+                            | 1000
+                li 
+                    h4 showNavigation
+                    p Toggle navigation buttons
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 prevLabel
+                    p Label for the previous button.
+                    p 
+                        | Default : 
+                        code 
+                            | Back
+                li 
+                    h4 nextLabel
+                    p Label for the next button.
+                    p 
+                        | Default : 
+                        code 
+                            | Next
+
+                li 
+                    h4 finishLabel
+                    p Label for the finish button.
+                    p 
+                        | Default : 
+                        code 
+                            | Dismiss
+
+                li 
+                    h4 canGoPrev
+                    p 
+                        |Determines if the user can go backwards. If set to a function
+                        |it is called and the response is evaluated.
+                    p 
+                        | Default : 
+                        code 
+                            | true
+
+                li 
+                    h4 canGoNext
+                    p 
+                        |Determines if the user can go forward. If set to a function
+                        |it is called and the response is evaluated.
+                    p 
+                        | Default : 
+                        code 
+                            | true
+                li 
+                    h4 onTripStart()
+                    p You can set a callback function triggered when Trip.js starts.
+                    p 
+                        | Default : 
+                        code 
+                            | $.noop
+                li 
+                    h4 onTripEnd()
+                    p You can set a callback function triggered when Trip.js ends.
+                    p 
+                        | Default : 
+                        code 
+                            | $.noop
+                li 
+                    h4 onTripStop()
+                    p You can set a callback function triggered when Trip.js stops.
+                    p 
+                        | Default : 
+                        code 
+                            | $.noop
+                li 
+                    h4 onTripChange(tripIndex, tripObject)
+                    p You can set a callback function triggered when Trip.js changes to another step. tripObject is your passed JSON for this current trip, so you can add your customized functions in your object and call the function when Trip.js changes to this step.
+                    p 
+                        | Default : 
+                        code 
+                            | $.noop
+        .step
+            h2 Local Options 
+            h4 You can setup specific options for each step.
+            ol
+                li 
+                    h4 sel *Required*
+                    p Which selector is referenced in this step.
+                    p 
+                        | Default : 
+                        code 
+                            | no default
+                li 
+                    h4 content *Required*
+                    p What information that you want to show to users.
+                    p 
+                        | Default : 
+                        code 
+                            | no default
+                li 
+                    h4 position
+                    p What position would you prefer for the tripBlock.
+                    p 
+                        | Default : 
+                        code 
+                            | n
+                        | ( You can use e, w, n, s four positions )
+                li 
+                    h4 delay
+                    p 
+                        |You can delay longer / shoter for this step. You can assign 
+                        | <code>delay</code> 
+                        | in global options to change the default delay.
+                        | Setting to a
+                        | <code>-1</code>
+                        | will prevent auto-advancing. You must manually call
+                        | <code>trip.next()</code>
+                        | .
+                    p 
+                        | Default : 
+                        code 
+                            | 1000
+                li 
+                    h4 callback
+                    p 
+                        |You can do whatever you want to do after this step passed. BTW, Trip.js will assign the current 
+                        | <code>tripIndex</code>
+                        | (start from 0) as the first parameter back to your callback function for later use.
+                    p 
+                        | Default : 
+                        code 
+                            | $.noop
+                li 
+                    h4 expose
+                    p 
+                        |You can enable this option to expose your selected element in this trip.
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 showNavigation
+                    p Toggle navigation buttons
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 showCloseBox
+                    p You can decide to add small close icon on each trip or not
+                    p 
+                        | Default : 
+                        code 
+                            | false
+                li 
+                    h4 prevLabel
+                    p Label for the previous button.
+                    p 
+                        | Default : 
+                        code 
+                            | Back
+
+                li 
+                    h4 nextLabel
+                    p Label for the next button.
+                    p 
+                        | Default : 
+                        code 
+                            | Next
+
+                li 
+                    h4 finishLabel
+                    p Label for the finish button.
+                    p 
+                        | Default : 
+                        code 
+                            | Dismiss
+
+                li 
+                    h4 canGoPrev
+                    p 
+                        | Determines if the user can go forward. If set to a function
+                        | it is called and the response is evaluated.
+                    p 
+                        | Default : 
+                        code 
+                            | true
+
+                li 
+                    h4 canGoNext
+                    p 
+                        | Determines if the user can go forward. If set to a function
+                        | it is called and the response is evaluated.
+                    p 
+                        | Default : 
+                        code 
+                            | true
+
+        .step 
+            h2 Key Binding
+            ol
+                li 
+                    h4 Right and Down arrows
+                    p Go to next trip
+
+                li 
+                    h4 Left and Up arrows
+                    p Go back to previous trip
+
+                li 
+                    h4 Space
+                    p pause / resume
+
+                li 
+                    h4 Esc
+                    p Stop
+
+        .step
+            h2 API
+            ol 
+                li 
+                    h4 trip.start()
+                    p Call this method to start your trip
+
+                li
+                    h4 trip.stop()
+                    p Call this method to stop your trip
+
+                li
+                    h4 trip.pause()
+                    p Call this method to pause your trip (same as trip.resume)
+
+                li
+                    h4 trip.resume()
+                    p Call this method to continue your trip (same as trip.pause)
+
+                li 
+                    h4 trip.next()
+                    p jump to next step
+
+                li 
+                    h4 trip.prev()
+                    p jump back to previous step
+
+        .step.demo-index.step8
+            h2 Notice
+            p 
+                | This plugin is still under development ! 
+                | If you find any bugs or want me to implement anything, 
+                | please feel free to open an issue ;)
+            p
+                a(href="https://github.com/EragonJ/Trip.js/issues") Open an issue
+
+block extra_header
+    link(rel='stylesheet', href='public/css/index.css')
+    script(src="public/js/demo-index.js")

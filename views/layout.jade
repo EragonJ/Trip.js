@@ -1,0 +1,52 @@
+!!! 5
+//if lt IE 7
+  html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='en')
+//if IE 7
+  html.no-js.lt-ie9.lt-ie8(lang='en')
+//if IE 8
+  html.no-js.lt-ie9(lang='en')
+//[if gt IE 8]><!
+html.no-js(lang='en')
+    //<![endif]
+    head
+        include ./partials/_header
+        block extra_header
+
+    body
+        div#fb-root 
+        a#fork-button(href="https://github.com/EragonJ/Trip.js") 
+            img(style="position: absolute; top: 0; right: 0; border: 0;", src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", alt="Fork me on GitHub")
+
+        .container
+            .navbar
+                .navbar-inner
+                    a.brand.demo-index.step1(href="#") Trip.js
+                    ul.nav
+                        li
+                            a(href="index.html") Home
+                        li 
+                            a.start-demo-index(href="#") Quick Demo
+                        li 
+                            a(href="demo-basic.html") More Demos
+                        li
+                            a(href="https://github.com/EragonJ/Trip.js/tags") Download
+                        li
+                            a(href="https://github.com/EragonJ/Trip.js/contributors") Contributors
+                        li 
+                            a(href="https://github.com/EragonJ/Trip.js") Github
+
+                    ul.nav.pull-right
+                        li
+                            a(href="http://github.com/EragonJ") By EragonJ
+
+            .jumbotron
+                img.demo-basic-1.demo-basic-2.step1.step2.step3.step4(src="public/img/logo-tiny.png")
+
+            .social-buttons.clearfix
+                div.fb-like(data-href="http://eragonj.github.com/Trip.js/", data-send="true", data-layout="button_count", data-width="450", data-show-faces="false", data-send="false")
+                div.twitter
+                    a.twitter-share-button(href="https://twitter.com/share", data-hashtags="trip.js") Tweet
+                div.github
+                    iframe(src="http://ghbtns.com/github-btn.html?user=EragonJ&repo=Trip.js&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="152", height="20")
+
+            block content
