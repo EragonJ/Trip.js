@@ -80,6 +80,46 @@ block content
                 | });
 
     div.each-demo
+        h2.demo-basic-5.step1.step2 5. Want events ? Here you go !!!!!
+        p Note : right now we support 
+            code onTripStart
+            | , 
+            code onTripEnd
+            | , 
+            code onTripStop
+            |  three events
+        input.btn.btn-primary.btn-small.start-demo-basic-5(type="button", value="Run Demo 5")
+        pre
+            code.javascript
+                | var trip5 = new Trip([
+                |     { sel : $(".demo-basic-5.step1"), content : "onTripStart get triggered before we start our trip", position : "n" },
+                |     { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } }
+                | ], {
+                |     onTripStart : function() {
+                |         alert("onTripStart");
+                |     },
+                |     onTripStop : function() {
+                |         alert("onTripStop");
+                |     },
+                |     onTripEnd : function() {
+                |         alert("onTripEnd");
+                |     },
+                |     onTripChange : function(i, tripData) {
+                |         if ( i === 1 ) {
+                |             alert("onTripChange, go check your console !");
+                |             console.log("You can put your own function or data in tripData, then access it onTripChange !");
+                |             console.log("current tripIndex : " + i);
+                |             console.log("current tripData : ", tripData);
+                |             console.log("User's function : " + tripData.myFunction());
+                |         }
+                |     }
+                | });
+                | 
+                | $(".start-demo-basic-5").on("click", function() {
+                |     trip5.start();
+                | });
+
+    div.each-demo
         h3 δ With the flexibility of Trip.js, the only limitation is your imagination ! :P
 
 block extra_header

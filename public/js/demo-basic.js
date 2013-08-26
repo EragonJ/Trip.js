@@ -67,4 +67,35 @@ $(document).ready(function() {
     $(".start-demo-basic-4").on("click", function() {
         trip4.start();
     });
+
+    /*
+     * basic-demo-5
+     */
+    var trip5 = new Trip([
+        { sel : $(".demo-basic-5.step1"), content : "onTripStart get triggered before we start our trip", position : "n" },
+        { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } }
+    ], {
+        onTripStart : function() {
+            alert("onTripStart");
+        },
+        onTripStop : function() {
+            alert("onTripStop");
+        },
+        onTripEnd : function() {
+            alert("onTripEnd");
+        },
+        onTripChange : function(i, tripData) {
+            if ( i === 1 ) {
+                alert("onTripChange, go check your console !");
+                console.log("You can put your own function or data in tripData, then access it onTripChange !");
+                console.log("current tripIndex : " + i);
+                console.log("current tripData : ", tripData);
+                console.log("User's function : " + tripData.myFunction());
+            }
+        }
+    });
+
+    $(".start-demo-basic-5").on("click", function() {
+        trip5.start();
+    });
 });
