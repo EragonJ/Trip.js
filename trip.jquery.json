@@ -20,7 +20,7 @@
   },
   "demo" : "http://eragonj.github.io/Trip.js/",
   "keywords" : [ "trip", "tutorial", "guide" ],
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "./src/trip.min.js",
   "dependencies": {
     "jquery": "~1.8.0"
