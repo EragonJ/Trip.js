@@ -98,4 +98,19 @@ $(document).ready(function() {
     $(".start-demo-basic-5").on("click", function() {
         trip5.start();
     });
+    
+    /*
+     * basic-demo-6
+     */
+    var trip6 = new Trip([
+        { sel : $(".demo-basic-6.step1"), content : "Highlight this", expose : true },
+        { sel : $(".demo-basic-6.step2"), content : "No highlight" },
+        { sel : $(".demo-basic-6.step3"), content : "Highlight that", expose : true }
+    ], {
+        delay : 3000
+    });
+    
+    $(".start-demo-basic-6").on("click", function() {
+        trip6.start();
+    });
 });

@@ -85,4 +85,14 @@ $(".start-demo-basic-4").on("click", function() {
  
 $(".start-demo-basic-5").on("click", function() {
     trip5.start();
+});</code></pre></div><div class="each-demo"><h2 class="demo-basic-6 step1 step2">6. You can also highlight something</h2><input type="button" value="Run Demo 6" class="btn btn-primary btn-small start-demo-basic-6"><pre class="demo-basic-6 step3"><code class="javascript">var trip6 = new Trip([
+    { sel : $(".demo-basic-6.step1"), content : "Highlight this", expose : true },
+    { sel : $(".demo-basic-6.step2"), content : "No highlight" },
+    { sel : $(".demo-basic-6.step3"), content : "Highlight that", expose : true }
+], {
+    delay : 3000
+});
+ 
+$(".start-demo-basic-6").on("click", function() {
+    trip6.start();
 });</code></pre></div><div class="each-demo"><h3>δ With the flexibility of Trip.js, the only limitation is your imagination ! :P</h3></div></div></body></html>
