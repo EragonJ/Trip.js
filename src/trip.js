@@ -635,8 +635,6 @@
             // init some necessary stuffs like events, late DOM refs after creating DOMs
             this.init();
 
-            console.log(this.$tripBlock);
-
             // main entry
             this.run();
         }
