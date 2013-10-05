@@ -4,6 +4,7 @@ git checkout master -- index.html
 git checkout master -- demo-basic.html
 git checkout master -- public
 git checkout master -- src
+git checkout master -- tests
 git add .
 git commit -a -m "merge from master"
 git push origin gh-pages
