@@ -1,6 +1,6 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.2.3
+ *  Version : 1.2.4
  *
  *  Author : EragonJ <eragonj@eragonj.me> 
  *  Blog : http://eragonj.me
@@ -463,7 +463,23 @@
                       .html( closeBoxLabel )
                       .toggle( showCloseBox );
 
-            var $sel = o.sel,
+            // remove old styles then add new one
+            $tripBlock.removeClass('e s w n');
+            $tripBlock.addClass(o.position);
+
+            // NOTE: issue #27
+            // we have to set position left first then position top
+            // because when tripBlock hits the page margin, it will become
+            // multi-lined and this will break cached attributes.
+            //
+            // In this way, we have to count these attributes at runtime.
+            this.setTripBlockPosition(o, 'left');
+            this.setTripBlockPosition(o, 'top');
+        },
+
+        setTripBlockPosition: function(o, leftOrTop) {
+            var $tripBlock = this.$tripBlock,
+                $sel = o.sel,
                 selWidth = $sel.outerWidth(),
                 selHeight = $sel.outerHeight(),
                 blockWidth = $tripBlock.outerWidth(),
@@ -471,40 +487,35 @@
                 arrowHeight = 10,
                 arrowWidth = 10;
 
-            // Take off e/s/w/n classes
-            $tripBlock.removeClass('e s w n');
-
-            switch( o.position ) {
+            switch (o.position) {
             case 'e':
-                $tripBlock.addClass('e');
-                $tripBlock.css({
-                    left : $sel.offset().left + selWidth + arrowWidth,
-                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
-                });
+                cssLeft = $sel.offset().left + selWidth + arrowWidth;
+                cssTop = $sel.offset().top - (( blockHeight - selHeight ) / 2);
                 break;
             case 's':
-                $tripBlock.addClass('s');
-                $tripBlock.css({
-                    left : $sel.offset().left + ((selWidth - blockWidth) / 2),
-                    top : $sel.offset().top + selHeight + arrowHeight
-                });
+                cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                cssTop = $sel.offset().top + selHeight + arrowHeight;
                 break;
             case 'w':
-                $tripBlock.addClass('w');
-                $tripBlock.css({
-                    left : $sel.offset().left - (arrowWidth + blockWidth),
-                    top : $sel.offset().top - (( blockHeight - selHeight ) / 2)
-                });
+                cssLeft = $sel.offset().left - (arrowWidth + blockWidth);
+                cssTop = $sel.offset().top - (( blockHeight - selHeight ) / 2);
                 break;
             case 'n':
-            default: 
-                $tripBlock.addClass('n');
-                $tripBlock.css({
-                    left : $sel.offset().left + ((selWidth - blockWidth) / 2),
-                    top : $sel.offset().top - arrowHeight - blockHeight
-                });
-
+            default:
+                cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                cssTop = $sel.offset().top - arrowHeight - blockHeight;
                 break;
+            }
+
+            if (leftOrTop === 'left') {
+                $tripBlock.css({
+                    left: cssLeft
+                });
+            }
+            else {
+                $tripBlock.css({
+                    top : cssTop
+                });
             }
         },
 
@@ -642,7 +653,6 @@
 
     // Expose to window
     window.Trip = Trip;
-
 
     /*
      *  3rd party libraries / toolkits
