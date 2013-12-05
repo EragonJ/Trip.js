@@ -128,11 +128,15 @@
 
         bindResizeEvents : function() {
             var that = this;
-            $(window).on("resize", function() {
+            $(window).on("resize.Trip", function() {
                 // when users resize the window
                 // our current solution is to rerun the trip (will restart the timer)
-                that.run();
+                that.run()
             });
+        },
+
+        unBindResizeEvents: function() {
+            $(window).off("resize.Trip")
         },
 
         bindKeyEvents : function() {
@@ -189,6 +193,8 @@
 
             this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
+            this.unBindKeyEvents();
+            this.unBindResizeEvents();
 
             // exec cb
             this.settings.onTripStop();
