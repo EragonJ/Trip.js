@@ -255,6 +255,7 @@
             // handles an element that doesn't exist yet when you create
             // this Trip.
             if(typeof o.sel === 'string') {
+                var sel = o.sel;
                 o.sel = $(o.sel);
             }
 
@@ -280,6 +281,10 @@
 
             if ( o.expose ) {
                 this.showExpose( o.sel );
+            }
+            
+            if (typeof sel == 'string') {
+                o.sel = sel;
             }
         },
 
