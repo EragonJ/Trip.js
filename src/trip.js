@@ -441,8 +441,8 @@
         setTripBlock : function( o ) {
 
             var $tripBlock = this.$tripBlock,
-                showCloseBox = o.showCloseBox || this.settings.showCloseBox,
-                showNavigation = o.showNavigation || this.settings.showNavigation,
+                showCloseBox = typeof o.showCloseBox != 'undefined' ? o.showCloseBox : this.settings.showCloseBox,
+                showNavigation = typeof o.showNavigation != 'undefined' ? o.showNavigation : this.settings.showNavigation,
                 closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
                 prevLabel = o.prevLabel || this.settings.prevLabel,
                 nextLabel = o.nextLabel || this.settings.nextLabel,
@@ -453,11 +453,13 @@
 
             $tripBlock.find('.trip-prev')
                       .html( prevLabel )
-                      .toggle( showNavigation && !this.isFirst() );
+                      .toggle( showNavigation )
+                      .toggleClass( 'disabled', this.isFirst() || !this.canGoPrev() );
 
             $tripBlock.find('.trip-next')
                       .html( this.isLast() ? finishLabel : nextLabel )
-                      .toggle( showNavigation );
+                      .toggle( showNavigation )
+                      .toggleClass( 'disabled', !this.canGoNext() );
 
             $tripBlock.find('.trip-close')
                       .html( closeBoxLabel )
