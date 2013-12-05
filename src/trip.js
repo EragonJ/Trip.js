@@ -486,6 +486,7 @@
                 blockHeight = $tripBlock.outerHeight(),
                 arrowHeight = 10,
                 arrowWidth = 10;
+                screenPadding = 10;
 
             switch (o.position) {
             case 'e':
@@ -497,6 +498,10 @@
                 cssTop = $sel.offset().top + selHeight + arrowHeight;
                 break;
             case 'w':
+                availableSpace = $sel.offset().left - arrowWidth - screenPadding;
+                maxWidth = availableSpace - ($tripBlock.outerWidth() - $tripBlock.width());
+                $tripBlock.css('max-width', maxWidth);
+                blockWidth = $tripBlock.outerWidth();
                 cssLeft = $sel.offset().left - (arrowWidth + blockWidth);
                 cssTop = $sel.offset().top - (( blockHeight - selHeight ) / 2);
                 break;
