@@ -400,7 +400,7 @@
 
         canGoPrev: function() {
             var trip        = this.tripData[ this.tripIndex ],
-                canGoPrev   = trip.canGoPrev || this.settings.canGoPrev;
+                canGoPrev   = typeof trip.canGoPrev != 'undefined' ? trip.canGoPrev : this.settings.canGoPrev;
 
             if ( typeof canGoPrev === "function" ) {
                 canGoPrev = canGoPrev.call(trip);
@@ -411,7 +411,7 @@
 
         canGoNext: function() {
             var trip        = this.tripData[ this.tripIndex ],
-                canGoNext   = trip.canGoNext || this.settings.canGoNext;
+                canGoNext   = typeof trip.canGoNext != 'undefined' ? trip.canGoNext : this.settings.canGoNext;
 
             if ( typeof canGoNext === "function" ) {
                 canGoNext = canGoNext.call(trip);
