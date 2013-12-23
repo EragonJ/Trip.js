@@ -2,7 +2,7 @@
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
  *  Version : 1.2.4
  *
- *  Author : EragonJ <eragonj@eragonj.me> 
+ *  Author : EragonJ <eragonj@eragonj.me>
  *  Blog : http://eragonj.me
  */
 (function(window, $) {
@@ -26,7 +26,7 @@
             showNavigation: false,
             canGoNext: true,
             canGoPrev: true,
-        
+
             // labels
             nextLabel : "Next",
             prevLabel : "Back",
@@ -93,7 +93,7 @@
 
             this.hasExpose = true;
 
-            var oldCSS, 
+            var oldCSS,
                 newCSS;
 
             oldCSS = {
@@ -128,11 +128,15 @@
 
         bindResizeEvents : function() {
             var that = this;
-            $(window).on("resize", function() {
+            $(window).on("resize.Trip", function() {
                 // when users resize the window
                 // our current solution is to rerun the trip (will restart the timer)
                 that.run();
             });
+        },
+
+        unBindResizeEvents: function() {
+            $(window).off("resize.Trip")
         },
 
         bindKeyEvents : function() {
@@ -140,7 +144,7 @@
             $(document).on({
                 'keydown.Trip' : function(e) {
                     // `this` will be bound to #document DOM element here
-                    that.keyEvent.call(that, e); 
+                    that.keyEvent.call(that, e);
                 }
             });
         },
@@ -157,7 +161,7 @@
                 this.stop();
                 break;
 
-            case this.CONSTANTS['SPACE'] : 
+            case this.CONSTANTS['SPACE'] :
 
                 // space will make the page jump
                 e.preventDefault();
@@ -170,8 +174,8 @@
                 this.prev();
                 break;
 
-            case this.CONSTANTS['RIGHT_ARROW'] : 
-            case this.CONSTANTS['DOWN_ARROW'] : 
+            case this.CONSTANTS['RIGHT_ARROW'] :
+            case this.CONSTANTS['DOWN_ARROW'] :
 
                 this.next();
                 break;
@@ -189,6 +193,8 @@
 
             this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
+            this.unBindKeyEvents();
+            this.unBindResizeEvents();
 
             // exec cb
             this.settings.onTripStop();
@@ -203,7 +209,7 @@
                 var remainingTime = this.timer.resume();
                 this.resumeProgressBar( remainingTime );
             }
-            
+
             this.progressing = !this.progressing;
         },
 
@@ -245,8 +251,8 @@
         },
 
         // XXX:
-        // Because the trip index is controlled by increaseIndex / decreaseIndex methods only, 
-        // `showCurrentTrip` doesn't have to take care about which is the current trip object, 
+        // Because the trip index is controlled by increaseIndex / decreaseIndex methods only,
+        // `showCurrentTrip` doesn't have to take care about which is the current trip object,
         // it just does the necessary operations according to the passed tripData `o`
         showCurrentTrip : function(o) {
 
@@ -262,7 +268,7 @@
             if ( this.timer ) {
                 this.timer.stop();
             }
-            
+
             if ( this.hasExpose ) {
                 this.hideExpose();
             }
@@ -297,7 +303,7 @@
             if ( this.hasExpose ) {
                 this.hideExpose();
             }
-            
+
             if ( this.settings.backToTopWhenEnded ) {
                 this.$root.animate({ scrollTop : 0 }, 'slow');
             }
@@ -312,7 +318,7 @@
             var that = this;
 
             this.$bar.animate({
-                width : '100%'  
+                width : '100%'
             }, delay, "linear", function() {
                 that.$bar.width(0);
             });
@@ -343,7 +349,7 @@
                 if ( this.settings.skipUndefinedTrip === false ) {
                     this.console.error("Your tripData is not valid at index : " + this.tripIndex);
                     this.stop();
-                    return false; 
+                    return false;
                 }
                 // let it go
                 else {
@@ -381,7 +387,7 @@
                          o.sel === null || o.sel.length === 0 || $(o.sel).length === 0 ) {
                 return false;
             }
-            return true;        
+            return true;
         },
 
         hasCallback : function() {
@@ -570,7 +576,7 @@
                 ].join('');
 
                 var that = this,
-                    $tripBlock = $(html).addClass( this.settings.tripTheme );  
+                    $tripBlock = $(html).addClass( this.settings.tripTheme );
 
                 $('body').append( $tripBlock );
 
@@ -605,7 +611,7 @@
 
                 $overlay.height( $(window).height() )
                         .css({
-                            zIndex : this.settings.overlayZindex 
+                            zIndex : this.settings.overlayZindex
                         });
 
                 $('body').append( $overlay );
