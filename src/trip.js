@@ -1,26 +1,26 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version : 1.2.4
+ *  Version: 1.2.4
  *
- *  Author : EragonJ <eragonj@eragonj.me>
- *  Blog : http://eragonj.me
+ *  Author: EragonJ <eragonj@eragonj.me>
+ *  Blog: http://eragonj.me
  */
 (function(window, $) {
 
-    var Trip = function( tripData, userOptions ) {
+    var Trip = function(tripData, userOptions) {
 
         // save the settings
         this.settings = $.extend({
 
             // basic config
-            tripIndex : 0,
-            tripTheme : "black",
-            backToTopWhenEnded : false,
-            overlayZindex : 99999,
-            delay : 1000,
-            enableKeyBinding : true,
-            showCloseBox : false,
-            skipUndefinedTrip : false,
+            tripIndex: 0,
+            tripTheme: "black",
+            backToTopWhenEnded: false,
+            overlayZindex: 99999,
+            delay: 1000,
+            enableKeyBinding: true,
+            showCloseBox: false,
+            skipUndefinedTrip: false,
 
             // navigation
             showNavigation: false,
@@ -28,16 +28,16 @@
             canGoPrev: true,
 
             // labels
-            nextLabel : "Next",
-            prevLabel : "Back",
+            nextLabel: "Next",
+            prevLabel: "Back",
             finishLabel: "Dismiss",
-            closeBoxLabel : '&#215;',
+            closeBoxLabel: '&#215;',
 
             // callbacks
-            onTripStart : $.noop,
-            onTripEnd : $.noop,
-            onTripStop : $.noop,
-            onTripChange : $.noop
+            onTripStart: $.noop,
+            onTripEnd: $.noop,
+            onTripStop: $.noop,
+            onTripChange: $.noop
 
         }, userOptions);
 
@@ -61,23 +61,22 @@
 
         // contants
         this.CONSTANTS = {
-            LEFT_ARROW : 37,
-            UP_ARROW : 38,
-            RIGHT_ARROW : 39,
-            DOWN_ARROW : 40,
-            ESC : 27,
-            SPACE : 32
+            LEFT_ARROW: 37,
+            UP_ARROW: 38,
+            RIGHT_ARROW: 39,
+            DOWN_ARROW: 40,
+            ESC: 27,
+            SPACE: 32
         };
 
         this.console = window.console || {};
     };
 
     Trip.prototype = {
-
-        preInit : function() {
+        preInit: function() {
 
             // override console object for IE
-            if ( typeof this.console === "undefined" ) {
+            if (typeof this.console === "undefined") {
 
                 var self = this,
                     methods = ['log', 'warn', 'debug', 'info', 'error'];
@@ -89,21 +88,20 @@
         },
 
         // TODO: implement expose
-        showExpose : function( $sel ) {
-
+        showExpose: function($sel) {
             this.hasExpose = true;
 
             var oldCSS,
                 newCSS;
 
             oldCSS = {
-                position : $sel.css('position'),
-                zIndex : $sel.css('z-Index')
+                position: $sel.css('position'),
+                zIndex: $sel.css('z-Index')
             };
 
             newCSS = {
-                position : 'relative',
-                zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
+                position: 'relative',
+                zIndex: this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             };
 
             $sel.data('trip-old-css', oldCSS)
@@ -114,19 +112,19 @@
         },
 
         // TODO: implement expose
-        hideExpose : function() {
+        hideExpose: function() {
             this.hasExpose = false;
 
             var $exposedSel = $('.trip-exposed'),
                 oldCSS = $exposedSel.data('trip-old-css');
 
-            $exposedSel.css( oldCSS )
+            $exposedSel.css(oldCSS)
                        .removeClass('trip-exposed');
 
             this.$overlay.hide();
         },
 
-        bindResizeEvents : function() {
+        bindResizeEvents: function() {
             var that = this;
             $(window).on("resize.Trip", function() {
                 // when users resize the window
@@ -136,58 +134,53 @@
         },
 
         unBindResizeEvents: function() {
-            $(window).off("resize.Trip")
+            $(window).off("resize.Trip");
         },
 
-        bindKeyEvents : function() {
+        bindKeyEvents: function() {
             var that = this;
             $(document).on({
-                'keydown.Trip' : function(e) {
+                'keydown.Trip': function(e) {
                     // `this` will be bound to #document DOM element here
                     that.keyEvent.call(that, e);
                 }
             });
         },
 
-        unbindKeyEvents : function() {
+        unbindKeyEvents: function() {
             $(document).off('keydown.Trip');
         },
 
-        keyEvent : function(e) {
-
+        keyEvent: function(e) {
             switch(e.which) {
-            case this.CONSTANTS['ESC'] :
+                case this.CONSTANTS['ESC']:
+                    this.stop();
+                    break;
 
-                this.stop();
-                break;
+                case this.CONSTANTS['SPACE']:
+                    // space will make the page jump
+                    e.preventDefault();
+                    this.pause();
+                    break;
 
-            case this.CONSTANTS['SPACE'] :
+                case this.CONSTANTS['LEFT_ARROW']:
+                case this.CONSTANTS['UP_ARROW']:
+                    this.prev();
+                    break;
 
-                // space will make the page jump
-                e.preventDefault();
-                this.pause();
-                break;
-
-            case this.CONSTANTS['LEFT_ARROW'] :
-            case this.CONSTANTS['UP_ARROW'] :
-
-                this.prev();
-                break;
-
-            case this.CONSTANTS['RIGHT_ARROW'] :
-            case this.CONSTANTS['DOWN_ARROW'] :
-
-                this.next();
-                break;
+                case this.CONSTANTS['RIGHT_ARROW']:
+                case this.CONSTANTS['DOWN_ARROW']:
+                    this.next();
+                    break;
             }
         },
 
-        stop : function() {
-            if ( this.timer ) {
+        stop: function() {
+            if (this.timer) {
                 this.timer.stop();
             }
 
-            if ( this.hasExpose ) {
+            if (this.hasExpose) {
                 this.hideExpose();
             }
 
@@ -200,39 +193,38 @@
             this.settings.onTripStop();
         },
 
-        pauseAndResume : function() {
-            if ( this.progressing ) {
+        pauseAndResume: function() {
+            if (this.progressing) {
                 this.timer.pause();
                 this.pauseProgressBar();
             }
             else {
                 var remainingTime = this.timer.resume();
-                this.resumeProgressBar( remainingTime );
+                this.resumeProgressBar(remainingTime);
             }
-
             this.progressing = !this.progressing;
         },
 
-        pause : function() {
+        pause: function() {
             this.pauseAndResume();
         },
 
-        resume : function() {
+        resume: function() {
             this.pauseAndResume();
         },
 
-        next : function() {
+        next: function() {
             this.tripDirection = 'next';
 
-            if ( !this.canGoNext() ) {
+            if (!this.canGoNext()) {
                 return this.run();
             }
 
-            if ( this.hasCallback() ) {
+            if (this.hasCallback()) {
                 this.callCallback();
             }
 
-            if ( this.isLast() ) {
+            if (this.isLast()) {
                 this.doLastOperation();
             }
             else {
@@ -241,10 +233,10 @@
             }
         },
 
-        prev : function() {
+        prev: function() {
             this.tripDirection = 'prev';
 
-            if ( !this.isFirst() && this.canGoPrev() ) {
+            if (!this.isFirst() && this.canGoPrev()) {
                 this.decreaseIndex();
             }
             this.run();
@@ -254,27 +246,25 @@
         // Because the trip index is controlled by increaseIndex / decreaseIndex methods only,
         // `showCurrentTrip` doesn't have to take care about which is the current trip object,
         // it just does the necessary operations according to the passed tripData `o`
-        showCurrentTrip : function(o) {
-
+        showCurrentTrip: function(o) {
             // Allow sel element to be a string selector
             // in case you want to create a TripObject that
             // handles an element that doesn't exist yet when you create
             // this Trip.
-            if(typeof o.sel === 'string') {
+            if (typeof o.sel === 'string') {
                 o.sel = $(o.sel);
             }
 
             // preprocess when we have to show trip block
-            if ( this.timer ) {
+            if (this.timer) {
                 this.timer.stop();
             }
 
-            if ( this.hasExpose ) {
+            if (this.hasExpose) {
                 this.hideExpose();
             }
 
-            if ( this.progressing ) {
-
+            if (this.progressing) {
                 this.hideProgressBar();
 
                 // not doing the progress effect
@@ -284,28 +274,28 @@
             this.setTripBlock(o);
             this.showTripBlock(o);
 
-            if ( o.expose ) {
-                this.showExpose( o.sel );
+            if (o.expose) {
+                this.showExpose(o.sel);
             }
         },
 
-        doLastOperation : function() {
-            if ( this.timer ) {
+        doLastOperation: function() {
+            if (this.timer) {
                 this.timer.stop();
             }
 
-            if ( this.settings.enableKeyBinding ) {
+            if (this.settings.enableKeyBinding) {
                 this.unbindKeyEvents();
             }
 
             this.hideTripBlock();
 
-            if ( this.hasExpose ) {
+            if (this.hasExpose) {
                 this.hideExpose();
             }
 
-            if ( this.settings.backToTopWhenEnded ) {
-                this.$root.animate({ scrollTop : 0 }, 'slow');
+            if (this.settings.backToTopWhenEnded) {
+                this.$root.animate({ scrollTop: 0 }, 'slow');
             }
 
             this.tripIndex = this.settings.tripIndex;
@@ -314,40 +304,39 @@
             return false;
         },
 
-        showProgressBar : function( delay ) {
+        showProgressBar: function(delay) {
             var that = this;
 
             this.$bar.animate({
-                width : '100%'
+                width: '100%'
             }, delay, "linear", function() {
                 that.$bar.width(0);
             });
         },
 
-        hideProgressBar : function() {
+        hideProgressBar: function() {
             this.$bar.width(0);
             this.$bar.stop(true);
         },
 
-        pauseProgressBar : function() {
+        pauseProgressBar: function() {
             this.$bar.stop(true);
         },
 
-        resumeProgressBar : function( remainingTime ) {
-            this.showProgressBar( remainingTime );
+        resumeProgressBar: function(remainingTime) {
+            this.showProgressBar(remainingTime);
         },
 
-        run : function() {
-
+        run: function() {
             var that = this,
                 tripObject = this.getCurrentTripObject(),
                 delay = tripObject.delay || this.settings.delay;
 
-            if ( !this.isTripDataValid( tripObject ) ) {
+            if (!this.isTripDataValid(tripObject)) {
 
                 // force developers to double check tripData again
-                if ( this.settings.skipUndefinedTrip === false ) {
-                    this.console.error("Your tripData is not valid at index : " + this.tripIndex);
+                if (this.settings.skipUndefinedTrip === false) {
+                    this.console.error("Your tripData is not valid at index: " + this.tripIndex);
                     this.stop();
                     return false;
                 }
@@ -357,10 +346,10 @@
                 }
             }
 
-            this.showCurrentTrip( tripObject );
+            this.showCurrentTrip(tripObject);
 
             // show the progress bar
-            this.showProgressBar( delay );
+            this.showProgressBar(delay);
             this.progressing = true;
 
             // set timer to show next, if the timer is less than zero we expect
@@ -372,37 +361,37 @@
             this.settings.onTripChange(this.tripIndex, tripObject);
         },
 
-        isFirst : function() {
-            return ( this.tripIndex === 0 ) ? true : false;
+        isFirst: function() {
+            return (this.tripIndex === 0) ? true: false;
         },
 
-        isLast : function() {
-            return ( this.tripIndex === this.tripData.length - 1 ) ? true : false;
+        isLast: function() {
+            return (this.tripIndex === this.tripData.length - 1) ? true: false;
         },
 
-        isTripDataValid : function( o ) {
+        isTripDataValid: function(o) {
             // have to check `sel` & `content` two required fields
-            if ( typeof o.content === "undefined" ||
+            if (typeof o.content === "undefined" ||
                     typeof o.sel === "undefined" ||
-                         o.sel === null || o.sel.length === 0 || $(o.sel).length === 0 ) {
+                         o.sel === null || o.sel.length === 0 || $(o.sel).length === 0) {
                 return false;
             }
             return true;
         },
 
-        hasCallback : function() {
+        hasCallback: function() {
             return (typeof this.tripData[ this.tripIndex ].callback !== "undefined");
         },
 
-        callCallback : function() {
+        callCallback: function() {
             this.tripData[ this.tripIndex ].callback(this.tripIndex);
         },
 
         canGoPrev: function() {
-            var trip        = this.tripData[ this.tripIndex ],
-                canGoPrev   = trip.canGoPrev || this.settings.canGoPrev;
+            var trip = this.tripData[ this.tripIndex ],
+                canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
 
-            if ( typeof canGoPrev === "function" ) {
+            if (typeof canGoPrev === "function") {
                 canGoPrev = canGoPrev.call(trip);
             }
 
@@ -410,18 +399,18 @@
         },
 
         canGoNext: function() {
-            var trip        = this.tripData[ this.tripIndex ],
-                canGoNext   = trip.canGoNext || this.settings.canGoNext;
+            var trip = this.tripData[ this.tripIndex ],
+                canGoNext = trip.canGoNext || this.settings.canGoNext;
 
-            if ( typeof canGoNext === "function" ) {
+            if (typeof canGoNext === "function") {
                 canGoNext = canGoNext.call(trip);
             }
 
             return canGoNext;
         },
 
-        increaseIndex : function() {
-            if ( this.tripIndex >= this.tripData.length - 1 ) {
+        increaseIndex: function() {
+            if (this.tripIndex >= this.tripData.length - 1) {
                 // how about hitting the last item ?
                 // do nothing
             }
@@ -430,8 +419,8 @@
             }
         },
 
-        decreaseIndex : function() {
-            if ( this.tripIndex <= 0 ) {
+        decreaseIndex: function() {
+            if (this.tripIndex <= 0) {
                 // how about hitting the first item ?
                 // do nothing
             }
@@ -440,11 +429,11 @@
             }
         },
 
-        getCurrentTripObject : function() {
+        getCurrentTripObject: function() {
             return this.tripData[ this.tripIndex ];
         },
 
-        setTripBlock : function( o ) {
+        setTripBlock: function(o) {
 
             var $tripBlock = this.$tripBlock,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
@@ -455,19 +444,19 @@
                 finishLabel = o.finishLabel || this.settings.finishLabel;
 
             $tripBlock.find('.trip-content')
-                      .html( o.content );
+                      .html(o.content);
 
             $tripBlock.find('.trip-prev')
-                      .html( prevLabel )
-                      .toggle( showNavigation && !this.isFirst() );
+                      .html(prevLabel)
+                      .toggle(showNavigation && !this.isFirst());
 
             $tripBlock.find('.trip-next')
-                      .html( this.isLast() ? finishLabel : nextLabel )
-                      .toggle( showNavigation );
+                      .html(this.isLast() ? finishLabel: nextLabel)
+                      .toggle(showNavigation);
 
             $tripBlock.find('.trip-close')
-                      .html( closeBoxLabel )
-                      .toggle( showCloseBox );
+                      .html(closeBoxLabel)
+                      .toggle(showCloseBox);
 
             // remove old styles then add new one
             $tripBlock.removeClass('e s w n');
@@ -494,23 +483,23 @@
                 arrowWidth = 10;
 
             switch (o.position) {
-            case 'e':
-                cssLeft = $sel.offset().left + selWidth + arrowWidth;
-                cssTop = $sel.offset().top - (( blockHeight - selHeight ) / 2);
-                break;
-            case 's':
-                cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
-                cssTop = $sel.offset().top + selHeight + arrowHeight;
-                break;
-            case 'w':
-                cssLeft = $sel.offset().left - (arrowWidth + blockWidth);
-                cssTop = $sel.offset().top - (( blockHeight - selHeight ) / 2);
-                break;
-            case 'n':
-            default:
-                cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
-                cssTop = $sel.offset().top - arrowHeight - blockHeight;
-                break;
+                case 'e':
+                    cssLeft = $sel.offset().left + selWidth + arrowWidth;
+                    cssTop = $sel.offset().top - ((blockHeight - selHeight) / 2);
+                    break;
+                case 's':
+                    cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                    cssTop = $sel.offset().top + selHeight + arrowHeight;
+                    break;
+                case 'w':
+                    cssLeft = $sel.offset().left - (arrowWidth + blockWidth);
+                    cssTop = $sel.offset().top - ((blockHeight - selHeight) / 2);
+                    break;
+                case 'n':
+                default:
+                    cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                    cssTop = $sel.offset().top - arrowHeight - blockHeight;
+                    break;
             }
 
             if (leftOrTop === 'left') {
@@ -520,16 +509,15 @@
             }
             else {
                 $tripBlock.css({
-                    top : cssTop
+                    top: cssTop
                 });
             }
         },
 
-        showTripBlock : function( o ) {
-
+        showTripBlock: function(o) {
             this.$tripBlock.css({
-                display : 'inline-block',
-                zIndex : this.settings.overlayZindex + 1 // we have to make it higher than the overlay
+                display: 'inline-block',
+                zIndex: this.settings.overlayZindex + 1 // we have to make it higher than the overlay
             });
 
             var windowHeight = $(window).height(),
@@ -537,31 +525,30 @@
                 tripBlockTop = this.$tripBlock.offset().top,
                 OFFSET = 100; // make it look nice
 
-            if ( tripBlockTop < windowTop + windowHeight &&
-                    tripBlockTop >= windowTop ) {
+            if (tripBlockTop < windowTop + windowHeight &&
+                    tripBlockTop >= windowTop) {
                 // tripBlock is located inside the current screen, so we don't have to scroll
             }
             else {
-                this.$root.animate({ scrollTop : tripBlockTop - OFFSET }, 'slow');
+                this.$root.animate({ scrollTop: tripBlockTop - OFFSET }, 'slow');
             }
         },
 
-        hideTripBlock : function() {
+        hideTripBlock: function() {
             this.$tripBlock.fadeOut('slow');
         },
 
         // TODO:
         // Make sure this method is only called ONCE in this page,
         // so that we will not create same DOMs more than once!
-        create : function() {
+        create: function() {
             this.createTripBlock();
             this.createOverlay();
         },
 
-        createTripBlock : function() {
-
+        createTripBlock: function() {
             // make sure the element doesn't exist in the DOM tree
-            if ( typeof $('.trip-block').get(0) === 'undefined' ) {
+            if (typeof $('.trip-block').get(0) === 'undefined') {
 
                 var html = [
                     '<div class="trip-block">',
@@ -576,9 +563,9 @@
                 ].join('');
 
                 var that = this,
-                    $tripBlock = $(html).addClass( this.settings.tripTheme );
+                    $tripBlock = $(html).addClass(this.settings.tripTheme);
 
-                $('body').append( $tripBlock );
+                $('body').append($tripBlock);
 
                 $tripBlock.find('.trip-close').on("click", function(e) {
                     e.preventDefault();
@@ -597,10 +584,9 @@
             }
         },
 
-        createOverlay : function() {
-
+        createOverlay: function() {
             // make sure the element doesn't exist in the DOM tree
-            if ( typeof $('.trip-overlay').get(0) === 'undefined' ) {
+            if (typeof $('.trip-overlay').get(0) === 'undefined') {
 
                 var html = [
                     '<div class="trip-overlay">',
@@ -609,24 +595,23 @@
 
                 var $overlay = $(html);
 
-                $overlay.height( $(window).height() )
+                $overlay.height($(window).height())
                         .css({
-                            zIndex : this.settings.overlayZindex
+                            zIndex: this.settings.overlayZindex
                         });
 
-                $('body').append( $overlay );
+                $('body').append($overlay);
             }
         },
 
-        cleanup : function() {
+        cleanup: function() {
             $(".trip-overlay, .trip-block").remove();
         },
 
-        init : function() {
-
+        init: function() {
             this.preInit();
 
-            if ( this.settings.enableKeyBinding ) {
+            if (this.settings.enableKeyBinding) {
                 this.bindKeyEvents();
             }
 
@@ -638,8 +623,7 @@
             this.$overlay = $('.trip-overlay');
         },
 
-        start : function() {
-
+        start: function() {
             // cleanup old DOM first
             this.cleanup();
 
