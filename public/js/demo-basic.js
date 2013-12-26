@@ -73,7 +73,8 @@ $(document).ready(function() {
      */
     var trip5 = new Trip([
         { sel : $(".demo-basic-5.step1"), content : "onTripStart get triggered before we start our trip", position : "n" },
-        { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } }
+        { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function"; } },
+        { sel : $(".demo-basic-5.step3"), content : "Click the close icon to see what's going on in your console log", delay: -1, showCloseBox: true }
     ], {
         onTripStart : function() {
             alert("onTripStart");
@@ -92,6 +93,9 @@ $(document).ready(function() {
                 console.log("current tripData : ", tripData);
                 console.log("User's function : " + tripData.myFunction());
             }
+        },
+        onTripClose: function(i) {
+            console.log("You close the trip at index : ", i);
         }
     });
 
