@@ -37,7 +37,8 @@
             onTripStart: $.noop,
             onTripEnd: $.noop,
             onTripStop: $.noop,
-            onTripChange: $.noop
+            onTripChange: $.noop,
+            onTripClose: $.noop
 
         }, userOptions);
 
@@ -133,7 +134,7 @@
             });
         },
 
-        unBindResizeEvents: function() {
+        unbindResizeEvents: function() {
             $(window).off("resize.Trip");
         },
 
@@ -186,8 +187,8 @@
 
             this.tripIndex = this.settings.tripIndex;
             this.hideTripBlock();
-            this.unBindKeyEvents();
-            this.unBindResizeEvents();
+            this.unbindKeyEvents();
+            this.unbindResizeEvents();
 
             // exec cb
             this.settings.onTripStop();
@@ -569,6 +570,7 @@
 
                 $tripBlock.find('.trip-close').on("click", function(e) {
                     e.preventDefault();
+                    that.settings.onTripClose(that.tripIndex);
                     that.stop();
                 });
 

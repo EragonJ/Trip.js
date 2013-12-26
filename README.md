@@ -166,6 +166,12 @@ You can set a callback function triggered when Trip.js changes to another step. 
 * Type: *function*
 * Default: `$.noop`
 
+### onTripClose(tripIndex)
+You can do whatever you want when users click on the close button on the top-right icon. In your callback, you will get current tripIndex as first parameter and you can use that index to do following things.
+
+* Type: *function*
+* Default: `$.noop`
+
 Local Options
 =============
 

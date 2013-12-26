@@ -80,7 +80,7 @@ block content
                 | });
 
     div.each-demo
-        h2.demo-basic-5.step1.step2 5. Want events ? Here you go !!!!!
+        h2.demo-basic-5.step1.step2.step3 5. Want events ? Here you go !!!!!
         p Note : right now we support 
             code onTripStart
             | , 
@@ -89,13 +89,16 @@ block content
             code onTripStop
             | , 
             code onTripChange
-            |  4 events
+            | , 
+            code onTripClose
+            |  5 events
         input.btn.btn-primary.btn-small.start-demo-basic-5(type="button", value="Run Demo 5")
         pre
             code.javascript
                 | var trip5 = new Trip([
                 |     { sel : $(".demo-basic-5.step1"), content : "onTripStart get triggered before we start our trip", position : "n" },
-                |     { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } }
+                |     { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } },
+                |     { sel : $(".demo-basic-5.step3"), content : "Click the close icon to see what's going on in your console log", delay: -1, showCloseBox: true }
                 | ], {
                 |     onTripStart : function() {
                 |         alert("onTripStart");
@@ -114,6 +117,9 @@ block content
                 |             console.log("current tripData : ", tripData);
                 |             console.log("User's function : " + tripData.myFunction());
                 |         }
+                |     },
+                |     onTripClose: function(i) {
+                |         console.log("You close the trip at index : ", i);
                 |     }
                 | });
                 | 
