@@ -290,6 +290,7 @@
             }
 
             this.hideTripBlock();
+            this.unbindResizeEvents();
 
             if (this.hasExpose) {
                 this.hideExpose();
