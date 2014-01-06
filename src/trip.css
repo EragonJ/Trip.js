@@ -60,6 +60,8 @@
     right: 100%; }
   .trip-block.w:before {
     left: 100%; }
+  .trip-block.screen-ne, .trip-block.screen-se, .trip-block.screen-sw, .trip-block.screen-nw, .trip-block.screen-center {
+    position: fixed; }
 
 .trip-close {
   font-size: 80%;

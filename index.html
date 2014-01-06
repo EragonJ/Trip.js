@@ -50,13 +50,13 @@ $.noop</code></p></li><li> <h4>onTripStop()</h4><p>You can set a callback functi
 Default : <code> 
 $.noop</code></p></li><li> <h4>onTripChange(tripIndex, tripObject)</h4><p>You can set a callback function triggered when Trip.js changes to another step. tripObject is your passed JSON for this current trip, so you can add your customized functions in your object and call the function when Trip.js changes to this step.</p><p> 
 Default : <code> 
-$.noop</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel *Required*</h4><p>Which selector is referenced in this step.</p><p> 
+$.noop</code></p></li></ol></div><div class="step"><h2>Local Options </h2><h4>You can setup specific options for each step.</h4><ol><li> <h4>sel</h4><p>Which selector is referenced in this step.</p><p> 
 Default : <code> 
 no default</code></p></li><li> <h4>content *Required*</h4><p>What information that you want to show to users.</p><p> 
 Default : <code> 
-no default</code></p></li><li> <h4>position</h4><p>What position would you prefer for the tripBlock.</p><p> 
+no default</code></p></li><li> <h4>position</h4><p>What position would you prefer for the tripBlock. We support 9 different positions : e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center.</p><p>To be clear, e, w, n, s are related to the sel, so for this use case, sel is required. For screen-ne, screen-se, screen-sw, screen-nw and screen-center are related to the screen (fixed in CSS), so in this case, you don't have to put sel.</p><p> 
 Default : <code> 
-n</code>( You can use e, w, n, s four positions )</p></li><li> <h4>delay</h4><p> 
+n</code>( You can use e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center 9 positions )</p></li><li> <h4>delay</h4><p> 
 You can delay longer / shoter for this step. You can assign 
 <code>delay</code> 
 in global options to change the default delay.
