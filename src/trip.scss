@@ -93,6 +93,15 @@
     &.w:before {
         left: 100%;
     }
+
+    // sepcial directions will be positioned fixed
+    &.screen-ne,
+    &.screen-se,
+    &.screen-sw,
+    &.screen-nw,
+    &.screen-center {
+        position: fixed;
+    }
 }
 
 // define its basic rules

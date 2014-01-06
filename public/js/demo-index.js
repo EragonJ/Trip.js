@@ -1,9 +1,9 @@
 $(document).ready(function() {
     var trip = new Trip([
-        { 
-            sel : $('.demo-index.step1'), 
-            position : 's', 
-            content : 'Hi, I am Trip.js', 
+        {
+            sel : $('.demo-index.step1'),
+            position : 's',
+            content : 'Hi, I am Trip.js',
             delay : 2000,
             callback : function(i) {
                 console.log("step "+ i +" is finished");
@@ -41,6 +41,31 @@ $(document).ready(function() {
             position : 's',
             content : 'South',
             delay : 2000
+        },
+        {
+            position : 'screen-ne',
+            content : 'North east on the screen',
+            delay : 1000
+        },
+        {
+            position : 'screen-nw',
+            content : 'North west on the screen',
+            delay : 1000
+        },
+        {
+            position : 'screen-sw',
+            content : 'South west on the screen',
+            delay : 1000
+        },
+        {
+            position : 'screen-se',
+            content : 'South east on the screen',
+            delay : 1000
+        },
+        {
+            position : 'screen-center',
+            content : 'Center on the screen',
+            delay : 1000
         },
         {
             sel : $('.demo-index.step6'),
@@ -89,7 +114,7 @@ $(document).ready(function() {
     });
 
     $(".start-demo-index").click(function() {
-        trip.start(); 
+        trip.start();
     });
 
     window.trip = trip;

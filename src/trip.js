@@ -67,7 +67,9 @@
             RIGHT_ARROW: 39,
             DOWN_ARROW: 40,
             ESC: 27,
-            SPACE: 32
+            SPACE: 32,
+            TRIP_BLOCK_OFFSET_VERTICAL: 10,
+            TRIP_BLOCK_OFFSET_HORIZONTAL: 10
         };
 
         this.console = window.console || {};
@@ -372,10 +374,26 @@
         },
 
         isTripDataValid: function(o) {
+            var specialDirections = [
+                'screen-ne',
+                'screen-se',
+                'screen-sw',
+                'screen-nw',
+                'screen-center'
+            ];
+
+            // if we have set special direction,
+            // we don't need to check sel
+            if ($.inArray(o.position, specialDirections) >= 0) {
+                return true;
+            }
+
             // have to check `sel` & `content` two required fields
             if (typeof o.content === "undefined" ||
                     typeof o.sel === "undefined" ||
-                         o.sel === null || o.sel.length === 0 || $(o.sel).length === 0) {
+                         o.sel === null ||
+                         o.sel.length === 0 ||
+                         $(o.sel).length === 0) {
                 return false;
             }
             return true;
@@ -436,7 +454,6 @@
         },
 
         setTripBlock: function(o) {
-
             var $tripBlock = this.$tripBlock,
                 showCloseBox = o.showCloseBox || this.settings.showCloseBox,
                 showNavigation = o.showNavigation || this.settings.showNavigation,
@@ -461,7 +478,7 @@
                       .toggle(showCloseBox);
 
             // remove old styles then add new one
-            $tripBlock.removeClass('e s w n');
+            $tripBlock.removeClass('e s w n screen-ne screen-se screen-sw screen-nw screen-center');
             $tripBlock.addClass(o.position);
 
             // NOTE: issue #27
@@ -470,49 +487,121 @@
             // multi-lined and this will break cached attributes.
             //
             // In this way, we have to count these attributes at runtime.
-            this.setTripBlockPosition(o, 'left');
-            this.setTripBlockPosition(o, 'top');
+            this.setTripBlockPosition(o, 'horizontal');
+            this.setTripBlockPosition(o, 'vertical');
         },
 
-        setTripBlockPosition: function(o, leftOrTop) {
+        setTripBlockPosition: function(o, horizontalOrVertical) {
             var $tripBlock = this.$tripBlock,
                 $sel = o.sel,
-                selWidth = $sel.outerWidth(),
-                selHeight = $sel.outerHeight(),
+                selWidth = $sel && $sel.outerWidth(),
+                selHeight = $sel && $sel.outerHeight(),
                 blockWidth = $tripBlock.outerWidth(),
                 blockHeight = $tripBlock.outerHeight(),
                 arrowHeight = 10,
-                arrowWidth = 10;
+                arrowWidth = 10,
+                cssHorizontal,
+                cssVertical;
 
             switch (o.position) {
+                case 'screen-center':
+                    cssHorizontal = '50%';
+                    cssVertical = '50%';
+                    break;
+                case 'screen-ne':
+                case 'screen-se':
+                case 'screen-nw':
+                case 'screen-sw':
+                    cssHorizontal = this.CONSTANTS.TRIP_BLOCK_OFFSET_HORIZONTAL;
+                    cssVertical = this.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL;
+                    break;
                 case 'e':
-                    cssLeft = $sel.offset().left + selWidth + arrowWidth;
-                    cssTop = $sel.offset().top - ((blockHeight - selHeight) / 2);
+                    cssHorizontal = $sel.offset().left + selWidth + arrowWidth;
+                    cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
                     break;
                 case 's':
-                    cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
-                    cssTop = $sel.offset().top + selHeight + arrowHeight;
+                    cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                    cssVertical = $sel.offset().top + selHeight + arrowHeight;
                     break;
                 case 'w':
-                    cssLeft = $sel.offset().left - (arrowWidth + blockWidth);
-                    cssTop = $sel.offset().top - ((blockHeight - selHeight) / 2);
+                    cssHorizontal = $sel.offset().left - (arrowWidth + blockWidth);
+                    cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
                     break;
                 case 'n':
                 default:
-                    cssLeft = $sel.offset().left + ((selWidth - blockWidth) / 2);
-                    cssTop = $sel.offset().top - arrowHeight - blockHeight;
+                    cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
+                    cssVertical = $sel.offset().top - arrowHeight - blockHeight;
                     break;
             }
 
-            if (leftOrTop === 'left') {
+            if (horizontalOrVertical === 'horizontal') {
+                // reset styles first
                 $tripBlock.css({
-                    left: cssLeft
+                    left: '',
+                    right: '',
+                    marginLeft: '',
                 });
+
+                switch (o.position) {
+                    case 'screen-center':
+                        $tripBlock.css({
+                            left: cssHorizontal,
+                            marginLeft: -0.5 * blockWidth
+                        });
+                        break;
+                    case 'screen-se':
+                    case 'screen-ne':
+                        $tripBlock.css({
+                            right: cssHorizontal
+                        });
+                        break;
+                    case 'screen-sw':
+                    case 'screen-nw':
+                    case 'e':
+                    case 's':
+                    case 'w':
+                    case 'n':
+                    default:
+                        $tripBlock.css({
+                            left: cssHorizontal
+                        });
+                        break;
+                }
             }
-            else {
+            else if (horizontalOrVertical === 'vertical') {
+                // reset styles first
                 $tripBlock.css({
-                    top: cssTop
+                    top: '',
+                    bottom: '',
+                    marginTop: '',
                 });
+
+                switch (o.position) {
+                    case 'screen-center':
+                        $tripBlock.css({
+                            top: cssVertical,
+                            marginTop: -0.5 * blockHeight
+                        });
+                        break;
+                    case 'screen-sw':
+                    case 'screen-se':
+                        $tripBlock.css({
+                            bottom: cssVertical
+                        });
+                        break;
+                    case 'screen-nw':
+                    case 'screen-ne':
+                    case 'e':
+                    case 's':
+                    case 'w':
+                    case 'n':
+                    default:
+                        $tripBlock.css({
+                            top: cssVertical
+                        });
+                        break;
+
+                }
             }
         },
 

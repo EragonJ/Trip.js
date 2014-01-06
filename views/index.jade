@@ -177,7 +177,7 @@ block content
             h4 You can setup specific options for each step.
             ol
                 li 
-                    h4 sel *Required*
+                    h4 sel
                     p Which selector is referenced in this step.
                     p 
                         | Default : 
@@ -192,12 +192,13 @@ block content
                             | no default
                 li 
                     h4 position
-                    p What position would you prefer for the tripBlock.
+                    p What position would you prefer for the tripBlock. We support 9 different positions : e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center.
+                    p To be clear, e, w, n, s are related to the sel, so for this use case, sel is required. For screen-ne, screen-se, screen-sw, screen-nw and screen-center are related to the screen (fixed in CSS), so in this case, you don't have to put sel.
                     p 
                         | Default : 
                         code 
                             | n
-                        | ( You can use e, w, n, s four positions )
+                        | ( You can use e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center 9 positions )
                 li 
                     h4 delay
                     p 

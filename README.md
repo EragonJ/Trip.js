@@ -177,7 +177,7 @@ Local Options
 
 You can setup specific options for each step.
 
-### sel *Required*
+### sel
 Which selector is referenced in this step.
 
 * Type: *jQuery Object*
@@ -190,10 +190,10 @@ What information that you want to show to users.
 * no default
 
 ### position 
-What position would you prefer for the tripBlock.
+What position would you prefer for the tripBlock. We support 9 different positions : e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center. To be clear, *e*, *w*, *n*, *s* are related to the sel, so for this use case, sel is *required*. For *screen-ne*, *screen-se*, *screen-sw*, *screen-nw* and *screen-center* are related to the screen (fixed in CSS), so in this case, you don't have to put sel.
 
 * Type: *String*
-* Default: `n` ( You can use e, w, n, s four positions )
+* Default: `n` ( You can use e, w, n, s, screen-ne, screen-se, screen-sw, screen-nw, screen-center 9 positions )
 
 ### delay
 You can delay longer / shoter for this step. You can assign `delay` in global options to change the default delay.
