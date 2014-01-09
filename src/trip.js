@@ -38,7 +38,20 @@
             onTripEnd: $.noop,
             onTripStop: $.noop,
             onTripChange: $.noop,
-            onTripClose: $.noop
+            onTripClose: $.noop,
+
+			// html
+			html: [
+				'<div class="trip-block">',
+					'<a href="#" class="trip-close"></a>',
+					'<div class="trip-content"></div>',
+					'<div class="trip-progress-wrapper">',
+						'<div class="trip-progress-bar"></div>',
+						'<a href="#" class="trip-prev"></a>',
+						'<a href="#" class="trip-next"></a>',
+					'</div>',
+				'</div>'
+			]
 
         }, userOptions);
 
@@ -641,17 +654,7 @@
             // make sure the element doesn't exist in the DOM tree
             if (typeof $('.trip-block').get(0) === 'undefined') {
 
-                var html = [
-                    '<div class="trip-block">',
-                        '<a href="#" class="trip-close"></a>',
-                        '<div class="trip-content"></div>',
-                        '<div class="trip-progress-wrapper">',
-                            '<div class="trip-progress-bar"></div>',
-                            '<a href="#" class="trip-prev"></a>',
-                            '<a href="#" class="trip-next"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
+                var html = this.settings.html.join('');
 
                 var that = this,
                     $tripBlock = $(html).addClass(this.settings.tripTheme);
