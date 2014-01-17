@@ -130,6 +130,12 @@ Label for the finish button.
 * Type: *String*
 * Default: `Dismiss`
 
+### tripBlockHTML
+Base HTML for tripBlock
+
+* Type: *Array*
+* Default: An array contains base HTML of tripBlock
+
 ### canGoPrev
 Determines if the user can go backwards. If set to a function it is called and the response is evaluated.
 
