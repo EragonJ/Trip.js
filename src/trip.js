@@ -40,8 +40,8 @@
             onTripChange: $.noop,
             onTripClose: $.noop,
 
-			// html
-			html: [
+            // customizable HTML
+			tripBlockHTML: [
 				'<div class="trip-block">',
 					'<a href="#" class="trip-close"></a>',
 					'<div class="trip-content"></div>',
@@ -653,11 +653,9 @@
         createTripBlock: function() {
             // make sure the element doesn't exist in the DOM tree
             if (typeof $('.trip-block').get(0) === 'undefined') {
-
-                var html = this.settings.html.join('');
-
                 var that = this,
-                    $tripBlock = $(html).addClass(this.settings.tripTheme);
+                    tripBlockHTML = this.settings.tripBlockHTML.join(''),
+                    $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
 
                 $('body').append($tripBlock);
 
