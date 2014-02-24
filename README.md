@@ -8,7 +8,7 @@ Trip.js is a plugin that can help you customize a tutorial trip easily with more
 Version
 =======
 
-1.2.5
+1.3.0
 
 Install
 =====
@@ -87,6 +87,12 @@ You can decide to bind key events for trip navigations or not.
 * Type: *boolean*
 * Default: `true`
 
+### enableAnimation 
+You can enable animations on tripBlock.
+
+* Type: *boolean*
+* Default: `true`
+
 ### showCloseBox
 You can decide to add small close icon on each trip or not
 
@@ -129,6 +135,12 @@ Label for the finish button.
 
 * Type: *String*
 * Default: `Dismiss`
+
+### animation
+Animation that would be applied on the tripBlock.
+
+* Type: *String*
+* Default: `tada`
 
 ### tripBlockHTML
 Base HTML for tripBlock
@@ -263,6 +275,11 @@ Determines if the user can go forward. If set to a function it is called and the
 * Type: *Boolean|Function*
 * Default: `true`
 
+### animation
+Animation that would be applied on the tripBlock. if ignored, global value would be used.
+
+* Type: *String*
+* Default: `tada`
 
 Key Binding
 ===========

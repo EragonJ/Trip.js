@@ -1,11 +1,21 @@
 /*
  *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
- *  Version: 1.2.5
+ *  Version: 1.3.0
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
  */
 (function(window, $) {
+
+    var CHECKED_ANIMATIONS = [
+        'flash', 'bounce', 'shake', 'tada',
+        'fadeIn', 'fadeInUp', 'fadeInDown',
+        'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
+        'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
+        'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
+        'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
+        'rotateInUpRight'
+    ];
 
     var Trip = function(tripData, userOptions) {
 
@@ -19,6 +29,7 @@
             overlayZindex: 99999,
             delay: 1000,
             enableKeyBinding: true,
+            enableAnimation: true,
             showCloseBox: false,
             skipUndefinedTrip: false,
 
@@ -39,6 +50,9 @@
             onTripStop: $.noop,
             onTripChange: $.noop,
             onTripClose: $.noop,
+
+            // animation
+            animation: 'tada',
 
             // customizable HTML
 			tripBlockHTML: [
@@ -271,6 +285,10 @@
                 o.sel = $(o.sel);
             }
 
+            if (this.settings.enableAnimation) {
+                this.removeAnimation();
+            }
+
             // preprocess when we have to show trip block
             if (this.timer) {
                 this.timer.stop();
@@ -289,6 +307,10 @@
 
             this.setTripBlock(o);
             this.showTripBlock(o);
+
+            if (this.settings.enableAnimation) {
+                this.addAnimation(o);
+            }
 
             if (o.expose) {
                 this.showExpose(o.sel);
@@ -616,6 +638,20 @@
 
                 }
             }
+        },
+
+        addAnimation: function(o) {
+            var animation = o.animation || this.settings.animation;
+
+            if ($.inArray(animation, CHECKED_ANIMATIONS) >= 0) {
+                this.$tripBlock.addClass('animated');
+                this.$tripBlock.addClass(animation);
+            }
+        },
+
+        removeAnimation: function() {
+            this.$tripBlock.removeClass(CHECKED_ANIMATIONS.join(' '));
+            this.$tripBlock.removeClass('animated');
         },
 
         showTripBlock: function(o) {
