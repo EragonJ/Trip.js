@@ -117,4 +117,25 @@ $(document).ready(function() {
     $(".start-demo-basic-6").on("click", function() {
         trip6.start();
     });
+
+    /*
+     * basic-demo-7
+     */
+    var trip7 = new Trip([
+        { sel : $(".demo-basic-7.step1"), content : "hi"},
+        { sel : $(".demo-basic-7.step2"), content : "hi", animation: 'bounce'},
+        { sel : $(".demo-basic-7.step3"), content : "hi", animation: 'shake'},
+        { sel : $(".demo-basic-7.step4"), content : "hi", animation: 'fadeIn'},
+        { sel : $(".demo-basic-7.step5"), content : "hi", animation: 'fadeInUp'},
+        { sel : $(".demo-basic-7.step6"), content : "hi", animation: 'fadeInDown'},
+        { sel : $(".demo-basic-7.step7"), content : "hi", animation: 'fadeInLeft'},
+        { sel : $(".demo-basic-7.step8"), content : "hi", animation: 'rotateInUpRight'}
+    ], {
+        delay : 1000,
+        animation: 'tada'
+    });
+    
+    $(".start-demo-basic-7").on("click", function() {
+        trip7.start();
+    });
 });
