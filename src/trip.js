@@ -394,7 +394,9 @@
             // set timer to show next, if the timer is less than zero we expect
             // it to be manually advanced
             if (delay >= 0) {
-                this.timer = new Timer(that.next.bind(that), delay);
+                this.timer = new Timer(function() {
+                    that.next();
+                }, delay);
             }
 
             this.settings.onTripChange(this.tripIndex, tripObject);
