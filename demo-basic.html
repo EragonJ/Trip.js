@@ -1,17 +1,71 @@
-<!DOCTYPE html><!--[if lt IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"></html><![endif]--><!--[if IE 7]><html lang="en" class="no-js lt-ie9 lt-ie8"></html><![endif]--><!--[if IE 8]><html lang="en" class="no-js lt-ie9"></html><![endif]--><!--[if gt IE 8]><!--><html lang="en" class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Trip.js </title><meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. (Based on jQuery)"><meta name="viewport" content="width=device-width, initial-scale=1"><meta property="og:image" content="http://eragonj.github.io/Trip.js/public/img/logo-tiny.png"><!-- styles--><link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap-responsive.min.css"><link rel="stylesheet" href="public/vendor/highlight/github.min.css"><link rel="stylesheet" href="public/css/base.css"><link rel="stylesheet" href="public/css/responsive.css"><link rel="stylesheet" href="src/trip.min.css"><!-- 3rd parties --><script src="public/vendor/highlight/highlight.min.js"></script><script src="public/vendor/modernizr-2.6.2.min.js"></script><script src="public/vendor/jquery-1.8.3.min.js"></script><script src="public/vendor/bootstrap/js/bootstrap.min.js"></script><script src="public/js/global.js"></script><!-- include trip--><script src="src/trip.js"></script><!-- google analysis--><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-41178936-1', 'eragonj.github.io');
-ga('send', 'pageview');
-</script><!-- facebook all.js--><script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=491695290890106";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script><!-- twitter share js--><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><link rel="stylesheet" href="public/css/demo.css"><script src="public/js/demo-basic.js"></script></head><body><div id="fb-root"> </div><a id="fork-button" href="https://github.com/EragonJ/Trip.js"> <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand demo-index step1">Trip.js</a><ul class="nav"><li><a href="index.html">Home</a></li><li> <a href="demo-basic.html">Demos</a></li><li><a href="https://github.com/EragonJ/Trip.js/tags">Download</a></li><li><a href="https://github.com/EragonJ/Trip.js/contributors">Contributors</a></li><li> <a href="https://github.com/EragonJ/Trip.js">Github</a></li></ul><ul class="nav pull-right"><li><a href="http://github.com/EragonJ">By EragonJ</a></li></ul></div></div><div class="jumbotron"><img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4"></div><div class="social-buttons clearfix"><div data-href="http://eragonj.github.com/Trip.js/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" class="fb-like"></div><div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div><div class="github"><iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe></div></div><div class="each-demo"><h2>1. Configure positions ( n, e, s, w )</h2><input type="button" value="Run Demo 1" class="btn btn-primary btn-small start-demo-basic-1"><pre><code class="javascript">var trip1 = new Trip([
+<!DOCTYPE html>
+<!--if lt IE 7html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='en')
+-->
+<!--if IE 7html.no-js.lt-ie9.lt-ie8(lang='en')
+-->
+<!--if IE 8html.no-js.lt-ie9(lang='en')
+-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trip.js </title>
+    <meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. (Based on jQuery)">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="http://eragonj.github.io/Trip.js/public/img/logo-tiny.png">
+    <!-- styles-->
+    <link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="public/vendor/highlight/github.min.css">
+    <link rel="stylesheet" href="public/css/base.css">
+    <link rel="stylesheet" href="public/css/responsive.css">
+    <link rel="stylesheet" href="src/trip.min.css">
+    <!-- 3rd parties -->
+    <script src="public/vendor/highlight/highlight.min.js"></script>
+    <script src="public/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="public/vendor/jquery-1.8.3.min.js"></script>
+    <script src="public/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="public/js/global.js"></script>
+    <!-- tracking stuffs-->
+    <script src="public/vendor/social/ga.js"></script>
+    <script src="public/vendor/social/fb.js"></script>
+    <script src="public/vendor/social/twitter.js"></script>
+    <!-- include trip-->
+    <script src="src/trip.js"></script>
+    <link rel="stylesheet" href="public/css/demo.css">
+    <script src="public/js/demo-basic.js"></script>
+  </head>
+  <body>
+    <div id="fb-root"></div><a id="fork-button" href="https://github.com/EragonJ/Trip.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner"><a href="#" class="brand demo-index step1">Trip.js</a>
+          <ul class="nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="demo-basic.html">Demos</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/tags">Download</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/contributors">Contributors</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js">Github</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="http://github.com/EragonJ">By EragonJ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="jumbotron"><img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4"></div>
+      <div class="social-buttons clearfix">
+        <div data-href="http://eragonj.github.com/Trip.js/" data-layout="button_count" data-width="450" data-show-faces="false" data-send="false" class="fb-like"></div>
+        <div class="twitter"><a href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div>
+        <div class="github">
+          <iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe>
+        </div>
+      </div>
+      <div class="each-demo">
+        <h2>1. Configure positions ( n, e, s, w )</h2>
+        <input type="button" value="Run Demo 1" class="btn btn-primary btn-small start-demo-basic-1">
+        <pre><code class="javascript">var trip1 = new Trip([
     { sel : $(".demo-basic-1.step1"), content : "North", position : "n" },
     { sel : $(".demo-basic-1.step2"), content : "East",  position : "e" },
     { sel : $(".demo-basic-1.step3"), content : "South", position : "s" },
@@ -22,7 +76,12 @@ ga('send', 'pageview');
  
 $(".start-demo-basic-1").on("click", function() {
     trip1.start();
-});</code></pre></div><div class="each-demo"><h2>2. Change Themes ( black or white )</h2><input type="button" value="Run Demo 2" class="btn btn-primary btn-small start-demo-basic-2"><pre><code class="javascript">var trip2 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2>2. Change Themes ( black or white )</h2>
+        <input type="button" value="Run Demo 2" class="btn btn-primary btn-small start-demo-basic-2">
+        <pre><code class="javascript">var trip2 = new Trip([
     { sel : $(".demo-basic-2.step1"), content : "North", position : "n" },
     { sel : $(".demo-basic-2.step2"), content : "East",  position : "e" },
     { sel : $(".demo-basic-2.step3"), content : "South", position : "s" },
@@ -39,7 +98,12 @@ $(".start-demo-basic-1").on("click", function() {
  
 $(".start-demo-basic-2").on("click", function() {
     trip2.start();
-});</code></pre></div><div class="each-demo"><h2 class="demo-basic-3 step1">3. You can tell Trip.js to go back to the top after finished</h2><input type="button" value="Run Demo 3" class="btn btn-primary btn-small start-demo-basic-3"><pre><code class="javascript">var trip3 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2 class="demo-basic-3 step1">3. You can tell Trip.js to go back to the top after finished</h2>
+        <input type="button" value="Run Demo 3" class="btn btn-primary btn-small start-demo-basic-3">
+        <pre><code class="javascript">var trip3 = new Trip([
     { sel : $(".demo-basic-3.step1"), content : "Let's fly ...", position : "e" }
 ], {
     backToTopWhenEnded : true,
@@ -48,7 +112,13 @@ $(".start-demo-basic-2").on("click", function() {
  
 $(".start-demo-basic-3").on("click", function() {
     trip3.start();
-});</code></pre></div><div class="each-demo"><h2 class="demo-basic-4 step1 step2">4. You can show close box and show navigation</h2><p>Note : If you wan to manipulate Trip.js manually, set delay to -1 </p><input type="button" value="Run Demo 4" class="btn btn-primary btn-small start-demo-basic-4"><pre><code class="javascript">var trip4 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2 class="demo-basic-4 step1 step2">4. You can show close box and show navigation</h2>
+        <p>Note : If you wan to manipulate Trip.js manually, set delay to -1 </p>
+        <input type="button" value="Run Demo 4" class="btn btn-primary btn-small start-demo-basic-4">
+        <pre><code class="javascript">var trip4 = new Trip([
     { sel : $(".demo-basic-4.step1"), content : "Hola!", position : "n" },
     { sel : $(".demo-basic-4.step2"), content : "Adios!", position : "s" }
 ], {
@@ -59,7 +129,13 @@ $(".start-demo-basic-3").on("click", function() {
  
 $(".start-demo-basic-4").on("click", function() {
     trip4.start();
-});</code></pre></div><div class="each-demo"><h2 class="demo-basic-5 step1 step2 step3">5. Want events ? Here you go !!!!!</h2><p>Note : right now we support <code>onTripStart</code>, <code>onTripEnd</code>, <code>onTripStop</code>, <code>onTripChange</code>, <code>onTripClose</code> 5 events</p><input type="button" value="Run Demo 5" class="btn btn-primary btn-small start-demo-basic-5"><pre><code class="javascript">var trip5 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2 class="demo-basic-5 step1 step2 step3">5. Want events ? Here you go !!!!!</h2>
+        <p>Note : right now we support <code>onTripStart</code>, <code>onTripEnd</code>, <code>onTripStop</code>, <code>onTripChange</code>, <code>onTripClose</code> 5 events</p>
+        <input type="button" value="Run Demo 5" class="btn btn-primary btn-small start-demo-basic-5">
+        <pre><code class="javascript">var trip5 = new Trip([
     { sel : $(".demo-basic-5.step1"), content : "onTripStart get triggered before we start our trip", position : "n" },
     { sel : $(".demo-basic-5.step2"), content : "Press ESC to stop this step !", position : "s", delay : 3000, myFunction : function() { return "this is user's function" } },
     { sel : $(".demo-basic-5.step3"), content : "Click the close icon to see what's going on in your console log", delay: -1, showCloseBox: true }
@@ -89,7 +165,12 @@ $(".start-demo-basic-4").on("click", function() {
  
 $(".start-demo-basic-5").on("click", function() {
     trip5.start();
-});</code></pre></div><div class="each-demo"><h2 class="demo-basic-6 step1 step2">6. You can also highlight something</h2><input type="button" value="Run Demo 6" class="btn btn-primary btn-small start-demo-basic-6"><pre class="demo-basic-6 step3"><code class="javascript">var trip6 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2 class="demo-basic-6 step1 step2">6. You can also highlight something</h2>
+        <input type="button" value="Run Demo 6" class="btn btn-primary btn-small start-demo-basic-6">
+        <pre class="demo-basic-6 step3"><code class="javascript">var trip6 = new Trip([
     { sel : $(".demo-basic-6.step1"), content : "Highlight this", expose : true },
     { sel : $(".demo-basic-6.step2"), content : "No highlight" },
     { sel : $(".demo-basic-6.step3"), content : "Highlight that", expose : true }
@@ -99,7 +180,14 @@ $(".start-demo-basic-5").on("click", function() {
  
 $(".start-demo-basic-6").on("click", function() {
     trip6.start();
-});</code></pre></div><div class="each-demo"><h2 class="demo-basic-7 step1 step2 step3 step4">7. Add animations for each trip !</h2><h3 class="demo-basic-7 step5 step6 step7 step8">Powered by animate.css, we now support lots of animations !</h3><p>Allowed values are <code>bounce</code>,<code>shake</code>,<code>tada</code>,<code>fadeIn</code>,<code>fadeInUp</code>,<code>fadeInDown</code>,<code>fadeInLeft</code>,<code>fadeInRight</code>,<code>fadeInUpBig</code>,<code>fadeInDownBig</code>,<code>fadeInLeftBig</code>,<code>fadeInRightBig</code>,<code>bounceIn</code>,<code>bounceInDown</code>,<code>bounceInUp</code>,<code>bounceInLeft</code>,<code>bounceInRight</code>,<code>rotateIn</code>,<code>rotateInDownLeft</code>,<code>rotateInDownRight</code>,<code>rotateInUpLeft</code>,<code>rotateInUpRight</code></p><input type="button" value="Run Demo 7" class="btn btn-primary btn-small start-demo-basic-7"><pre class="demo-basic-7"><code class="javascript">var trip7 = new Trip([
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h2 class="demo-basic-7 step1 step2 step3 step4">7. Add animations for each trip !</h2>
+        <h3 class="demo-basic-7 step5 step6 step7 step8">Powered by animate.css, we now support lots of animations !</h3>
+        <p>Allowed values are <code>bounce</code>,<code>shake</code>,<code>tada</code>,<code>fadeIn</code>,<code>fadeInUp</code>,<code>fadeInDown</code>,<code>fadeInLeft</code>,<code>fadeInRight</code>,<code>fadeInUpBig</code>,<code>fadeInDownBig</code>,<code>fadeInLeftBig</code>,<code>fadeInRightBig</code>,<code>bounceIn</code>,<code>bounceInDown</code>,<code>bounceInUp</code>,<code>bounceInLeft</code>,<code>bounceInRight</code>,<code>rotateIn</code>,<code>rotateInDownLeft</code>,<code>rotateInDownRight</code>,<code>rotateInUpLeft</code>,<code>rotateInUpRight</code></p>
+        <input type="button" value="Run Demo 7" class="btn btn-primary btn-small start-demo-basic-7">
+        <pre class="demo-basic-7"><code class="javascript">var trip7 = new Trip([
     { sel : $(".demo-basic-7.step1"), content : "hi"},
     { sel : $(".demo-basic-7.step2"), content : "hi", animation: 'bounce'},
     { sel : $(".demo-basic-7.step3"), content : "hi", animation: 'shake'},
@@ -115,4 +203,11 @@ $(".start-demo-basic-6").on("click", function() {
  
 $(".start-demo-basic-7").on("click", function() {
     trip6.start();
-});</code></pre></div><div class="each-demo"><h3>δ With the flexibility of Trip.js, the only limitation is your imagination ! :P</h3></div></div></body></html>
+});</code></pre>
+      </div>
+      <div class="each-demo">
+        <h3>δ With the flexibility of Trip.js, the only limitation is your imagination ! :P</h3>
+      </div>
+    </div>
+  </body>
+</html>
