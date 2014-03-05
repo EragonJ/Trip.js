@@ -5,6 +5,11 @@ Trip.js
 
 Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery )
 
+Build Status
+=======
+
+[![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js)
+
 Version
 =======
 
