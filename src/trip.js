@@ -4,6 +4,8 @@
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
+ *
+ *  @preserve
  */
 (function(window, $) {
 
