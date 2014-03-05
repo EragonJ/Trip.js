@@ -18,3 +18,6 @@ jade:
 
 clean:
 	rm -f src/trip.min.js
+
+test:
+	grunt test
