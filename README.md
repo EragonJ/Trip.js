@@ -1,22 +1,18 @@
-Trip.js
-=======
+# Trip.js
 
 ![Trip.js](https://raw.github.com/EragonJ/Trip.js/master/public/img/logo-tiny.png "Trip.js")
 
-Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery )
+Trip.js is a jQuery plugin that can help you customize a tutorial trip easily with more flexibilities. Right now Trip.js support lots of useful stuffs like **keyboard binding**, **animations**, **changing themes** ... etc. If you want to highly customize your own tutorial trip, then Trip.js is definitely worth to give it a try !
 
-Build Status
-=======
+# Build Status
 
 [![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js)
 
-Version
-=======
+# Version
 
 1.3.0
 
-Install
-=====
+# Install
 
 Clone the latest version from Github directly
 
@@ -26,19 +22,7 @@ Or Install from Bower
 
 * `bower install trip.js`
 
-How to Contribute
-=====
-
-If you want to build your own trip.js, you can check `Makefile` for details.
-
-Trip.js uses `uglifyjs(to minify)`, `scss(+compass)` and `jade(for introduction page)` to build final related scripts.
-
-If you are willing to contribute any commit for Trip.js, please use mentioned tools above to finish the whole build process to make the codebase consistent. 
-
-Thanks ! 
-
-Setup (minimal)
-===============
+# Setup (minimal)
 
 * include jQuery
 * include trip.min.css
@@ -56,9 +40,33 @@ Setup (minimal)
             }
         ], options); // details about options are listed below
 
+# How to Contribute
 
-Global Options
-==============
+If you want to build your own Trip.js, you can check `Gruntfile.js` for details.
+
+All you have to do is to clone the whole repository and do `npm install` to install all necessary modules !
+
+If you are willing to contribute any commit for Trip.js, please follow the rule below : 
+
+1. Create an issue talking about your change and let's discuss here.
+2. Assign yourself as assignee.
+3. fork Trip.js.
+4. send a pull request to Trip.js and make sure put `fix #xxx` in your commit title.
+5. make sure you pass all existing tests and ask preprocessor for you to create final files.
+
+Although the rule is not forced to follow, it would be helpful for me to review code and make sure there is nothing mssing !
+
+Thanks for all your participations !!!
+
+## How to run Tests
+
+`grunt test` (this will run all qunit tests)
+
+## How to build
+
+`grunt build` (this will do `uglify`, `sass`, `jade` at the same time)
+
+# Global Options
 
 You can setup global options for the whole trip.
 
@@ -195,8 +203,7 @@ You can do whatever you want when users click on the close button on the top-rig
 * Type: *function*
 * Default: `$.noop`
 
-Local Options
-=============
+# Local Options
 
 You can setup specific options for each step.
 
@@ -286,8 +293,7 @@ Animation that would be applied on the tripBlock. if ignored, global value would
 * Type: *String*
 * Default: `tada`
 
-Key Binding
-===========
+# Key Binding
 
 Trip.js would detect following keys to do relative actions after loading it.
 
@@ -296,8 +302,7 @@ Trip.js would detect following keys to do relative actions after loading it.
 * Space                  - pause / resume trip
 * Esc                    - Stop trip
 
-API
-===
+# API
 
 * trip.start()  - start your trip
 * trip.stop()   - stop your trip
@@ -306,17 +311,14 @@ API
 * trip.next()   - jump to next step
 * trip.prev()   - jump back to previous step
 
-TODO
-====
+# TODO
 
 * Add data-x to define steps ( make the setup easier )
 * Add UI for pause/play/stop to make users know how to interact
 * Don't depend on jQuery
 
-Author
-======
+# Author
 EragonJ ( eragonj@eragonj.me )
 
-License
-=======
+# License
 MIT
