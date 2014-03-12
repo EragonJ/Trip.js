@@ -1,14 +1,14 @@
 var baseTripData = [
-    { sel: $(".demo"), content: "North", position: "n" },
-    { sel: $(".demo"), content: "South", position: "s" }
+    { sel: $('.demo'), content: 'North', position: 'n' },
+    { sel: $('.demo'), content: 'South', position: 's' }
 ];
 
 module('onTripXYZ related callbacks tests');
 
-asyncTest("onTripStart", function() {
+asyncTest('onTripStart', function() {
     var trip = new Trip(baseTripData, {
         onTripStart: function() {
-            ok(true, "onTripStart ok");
+            ok(true, 'onTripStart ok');
         },
         onTripEnd: function() {
             start();
@@ -18,10 +18,10 @@ asyncTest("onTripStart", function() {
     trip.start();
 });
 
-asyncTest("onTripChange", function() {
+asyncTest('onTripChange', function() {
     var trip = new Trip(baseTripData, {
         onTripChange: function() {
-            ok(true, "onTripChange ok");
+            ok(true, 'onTripChange ok');
         },
         onTripEnd: function() {
             start();
@@ -31,10 +31,10 @@ asyncTest("onTripChange", function() {
     trip.start();
 });
 
-asyncTest("onTripEnd", function() {
+asyncTest('onTripEnd', function() {
     var trip = new Trip(baseTripData, {
         onTripEnd: function() {
-            ok(true, "onTripEnd ok");
+            ok(true, 'onTripEnd ok');
             start();
         }
     });
@@ -42,10 +42,10 @@ asyncTest("onTripEnd", function() {
     trip.start();
 });
 
-asyncTest("onTripStop", function() {
+asyncTest('onTripStop', function() {
     var trip = new Trip(baseTripData, {
         onTripStop: function() {
-            ok(true, "onTripStop ok");
+            ok(true, 'onTripStop ok');
             start();
         }
     });
@@ -59,16 +59,21 @@ asyncTest("onTripStop", function() {
 
 module('visual related tests');
 
-asyncTest("directions test", function() {
+asyncTest('directions test', function() {
     var trip = new Trip([
-        { sel: $(".demo"), content: "North", position: "n" },
-        { sel: $(".demo"), content: "East",  position: "e" },
-        { sel: $(".demo"), content: "South", position: "s" },
-        { sel: $(".demo"), content: "West",  position: "w" }
+        { sel: $('.demo'), content: 'North',         position: 'n' },
+        { sel: $('.demo'), content: 'East',          position: 'e' },
+        { sel: $('.demo'), content: 'South',         position: 's' },
+        { sel: $('.demo'), content: 'West',          position: 'w' },
+        { sel: $('.demo'), content: 'screen-center', position: 'screen-center' },
+        { sel: $('.demo'), content: 'screen-ne',     position: 'scren-ne' },
+        { sel: $('.demo'), content: 'screen-se',     position: 'scren-se' },
+        { sel: $('.demo'), content: 'screen-nw',     position: 'scren-nw' },
+        { sel: $('.demo'), content: 'screen-sw',     position: 'scren-sw' }
     ], {
         onTripChange: function(i, tripData) {
-            var $tripBlock = $(".trip-block");
-            ok($tripBlock.hasClass(tripData.position), "Detect postion : " + tripData.position);
+            var $tripBlock = $('.trip-block');
+            ok($tripBlock.hasClass(tripData.position), 'Detect postion : ' + tripData.position);
         },
         onTripEnd: function() {
             start();
@@ -78,12 +83,12 @@ asyncTest("directions test", function() {
     trip.start();
 });
 
-asyncTest("theme test", function() {
+asyncTest('theme test', function() {
     var trip = new Trip(baseTripData, {
-        tripTheme: "white",
+        tripTheme: 'white',
         onTripChange: function(i, tripData) {
-            var $tripBlock = $(".trip-block");
-            ok($tripBlock.hasClass("white"));
+            var $tripBlock = $('.trip-block');
+            ok($tripBlock.hasClass('white'));
         },
         onTripEnd: function() {
             start();
@@ -95,12 +100,12 @@ asyncTest("theme test", function() {
 
 module('keyboard related tests');
 
-asyncTest("arrow keys test", function() {
+asyncTest('arrow keys test', function() {
     var step = 0;
     var trip = new Trip([
-        { sel: $(".demo"), content: "North", position: "n" },
-        { sel: $(".demo"), content: "East",  position: "e" },
-        { sel: $(".demo"), content: "West",  position: "w" }
+        { sel: $('.demo'), content: 'North', position: 'n' },
+        { sel: $('.demo'), content: 'East',  position: 'e' },
+        { sel: $('.demo'), content: 'West',  position: 'w' }
     ], {
         onTripChange: function(index) {
             step++;
