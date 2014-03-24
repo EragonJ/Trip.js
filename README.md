@@ -191,8 +191,8 @@ You can set a callback function triggered when Trip.js stops.
 * Type: *function*
 * Default: `$.noop`
 
-### onTripPause
-You can set a callback function triggered when the Trip.js pauses.
+### onTripPause(tripIndex, tripObject)
+You can set a callback function triggered when the Trip.js pauses. tripObject is your passed JSON for this current trip, and tripIndex is the current step index when the trip was paused. You can add add your customized functions in your object and call them when Trip.js is paused.
 
 * Type: *function*
 * Default: `$.noop`
