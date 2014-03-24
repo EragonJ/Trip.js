@@ -51,12 +51,14 @@ If you are willing to contribute any commit for Trip.js, please follow the rule 
 1. Create an issue talking about your change and let's discuss here.
 2. Assign yourself as assignee.
 3. fork Trip.js.
-4. send a pull request to Trip.js and make sure put `fix #xxx` in your commit title.
-5. make sure you pass all existing tests and ask preprocessor for you to create final files.
+4. put your changes into a commit !
+5. press `grunt build` to build all necessary files. Notes: You need to install compass (I am sorry because it is ruby based), node and npm first, and don't forget to press `npm install` to install all needed building tools so that grunt can recognize it and help you minify js, compile jade and SCSS.
+6. send a pull request to Trip.js and make sure put `fix #xxx` in your commit title.
+7. make sure Travis is green and ping me :D
 
-Although the rule is not forced to follow, it would be helpful for me to review code and make sure there is nothing mssing !
+Although the rule is not forced to follow, it would be helpful for me to review code to make sure there is nothing missing and make the code base consistent. 
 
-Thanks for all your participations !!!
+Thanks for all your participations !!! 
 
 ## How to run Tests
 
