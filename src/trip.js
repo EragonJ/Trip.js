@@ -50,6 +50,7 @@
       onTripStart: $.noop,
       onTripEnd: $.noop,
       onTripStop: $.noop,
+      onTripPause: $.noop,
       onTripChange: $.noop,
       onTripClose: $.noop,
 
@@ -239,6 +240,9 @@
 
     pause: function() {
       this.pauseAndResume();
+      
+      // onTripPause callback
+      this.settings.onTripPause(this.tripIndex, this.getCurrentTripObject());
     },
 
     resume: function() {
