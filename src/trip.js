@@ -242,7 +242,7 @@
       this.pauseAndResume();
       
       // onTripPause callback
-      this.settings.onTripPause(this.tripIndex,this.getCurrentTripObject());
+      this.settings.onTripPause(this.tripIndex, this.getCurrentTripObject());
     },
 
     resume: function() {
