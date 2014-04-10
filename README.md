@@ -22,6 +22,11 @@ Or Install from Bower
 
 * `bower install trip.js`
 
+Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
+
+* `<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/1.3.0/trip.min.css" />`
+* `<script src="//oss.maxcdn.com/jquery.trip.js/1.3.0/trip.min.js"></script>`
+
 # Setup (minimal)
 
 * include jQuery
