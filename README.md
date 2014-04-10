@@ -24,7 +24,8 @@ Or Install from Bower
 
 Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
 
-* `<script src="//oss.maxcdn.com/jquery.trip.js/1.3.0/trip.min.css"></script>`
+* `<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/1.3.0/trip.min.css" />`
+* `<script src="//oss.maxcdn.com/jquery.trip.js/1.3.0/trip.min.js"></script>`
 
 # Setup (minimal)
 
