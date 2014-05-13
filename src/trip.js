@@ -711,11 +711,15 @@
 
         $tripBlock.find('.trip-prev').on("click", function(e) {
           e.preventDefault();
+          // Force IE/FF to lose focus
+          $(this).blur();
           that.prev();
         });
 
         $tripBlock.find('.trip-next').on("click", function(e) {
           e.preventDefault();
+          // Force IE/FF to lose focus
+          $(this).blur();
           that.next();
         });
       }
