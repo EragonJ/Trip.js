@@ -223,7 +223,7 @@ You can setup specific options for each step.
 ### sel
 Which selector is referenced in this step.
 
-* Type: *jQuery Object*
+* Type: *jQuery Object* or *String* (If the element is not existent at the moment)
 * no default
 
 ### content *Required*
