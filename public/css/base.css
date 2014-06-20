@@ -17,13 +17,14 @@
     margin-left: 47%;
 }
 
+.fb-like {
+    margin: 5px 0;
+}
+
 pre {
     margin: 10px 0;
 }
 
-/*
-ol li,
-ol li pre {
-    margin: 5px 0;
+code.type {
+    color: #4d9be9;
 }
-*/

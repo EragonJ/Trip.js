@@ -56,6 +56,7 @@ module.exports = function(grunt) {
         },
         files: {
           'demo-basic.html': 'views/demo-basic.jade',
+          'documentation.html': 'views/documentation.jade',
           'index.html': 'views/index.jade'
         }
       }
@@ -70,7 +71,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('test', ['connect', 'qunit']);
-  // grunt.registerTask('jade', ['jade']);
+  grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['uglify']);
   grunt.registerTask('build', ['uglify', 'sass', 'jade']);
