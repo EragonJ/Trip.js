@@ -28,7 +28,7 @@
     min-width: 100px;
     border-radius: 3px;
 
-    // default theme
+    // default black theme
     &.black {
         background: #333;
         color: #DDD;
@@ -44,6 +44,7 @@
         @include trip-arrow-color(#333);
     }
 
+    // white theme
     &.white {
         background: #fff;
         color: #333;
