@@ -182,23 +182,23 @@
 
     keyEvent: function(e) {
       switch(e.which) {
-        case this.CONSTANTS['ESC']:
+        case this.CONSTANTS.ESC:
           this.stop();
           break;
 
-        case this.CONSTANTS['SPACE']:
+        case this.CONSTANTS.SPACE:
           // space will make the page jump
           e.preventDefault();
           this.pause();
           break;
 
-        case this.CONSTANTS['LEFT_ARROW']:
-        case this.CONSTANTS['UP_ARROW']:
+        case this.CONSTANTS.LEFT_ARROW:
+        case this.CONSTANTS.UP_ARROW:
           this.prev();
           break;
 
-        case this.CONSTANTS['RIGHT_ARROW']:
-        case this.CONSTANTS['DOWN_ARROW']:
+        case this.CONSTANTS.RIGHT_ARROW:
+        case this.CONSTANTS.DOWN_ARROW:
           this.next();
           break;
       }
@@ -566,6 +566,7 @@
           cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
           break;
         case 'n':
+          /* falls through */
         default:
           cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
           cssVertical = $sel.offset().top - arrowHeight - blockHeight;
@@ -599,6 +600,7 @@
           case 's':
           case 'w':
           case 'n':
+            /* falls through */
           default:
             $tripBlock.css({
               left: cssHorizontal
@@ -633,6 +635,7 @@
           case 's':
           case 'w':
           case 'n':
+            /* falls through */
           default:
             $tripBlock.css({
               top: cssVertical
@@ -783,6 +786,27 @@
    *
    *  1) http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
    */
-  function Timer(e,t){var n,r,i=t;this.pause=function(){window.clearTimeout(n);i-=new Date-r};this.resume=function(){r=new Date;n=window.setTimeout(e,i);return i};this.stop=function(){window.clearTimeout(n)};this.resume()}
+  function Timer(callback, delay) {
+    var timerId;
+    var start;
+    var remaining = delay;
+
+    this.pause = function() {
+      window.clearTimeout(timerId);
+      remaining -= new Date() - start;
+    };
+
+    this.resume = function() {
+      start = new Date();
+      timerId = window.setTimeout(callback, remaining);
+      return remaining;
+    };
+
+    this.stop = function() {
+      window.clearTimeout(timerId);
+    };
+
+    this.resume();
+  }
 
 }(window, jQuery));

@@ -60,6 +60,17 @@ module.exports = function(grunt) {
           'index.html': 'views/index.jade'
         }
       }
+    },
+    jshint: {
+      options: {
+        globals: {
+          jQuery: true
+        }
+      },
+      all: [
+        'Gruntfile.js',
+        'src/trip.js'
+      ],
     }
   });
 
@@ -68,11 +79,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
   grunt.registerTask('test', ['connect', 'qunit']);
   grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
-  grunt.registerTask('minify', ['uglify']);
-  grunt.registerTask('build', ['uglify', 'sass', 'jade']);
+  grunt.registerTask('minify', ['jshint', 'uglify']);
+  grunt.registerTask('build', ['jshint', 'uglify', 'sass', 'jade']);
 };
