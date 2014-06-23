@@ -20,13 +20,12 @@
   ];
 
   var Trip = function(tripData, userOptions) {
-
     // save the settings
     this.settings = $.extend({
 
       // basic config
       tripIndex: 0,
-      tripTheme: "black",
+      tripTheme: 'black',
       backToTopWhenEnded: false,
       overlayZindex: 99999,
       delay: 1000,
@@ -41,9 +40,9 @@
       canGoPrev: true,
 
       // labels
-      nextLabel: "Next",
-      prevLabel: "Back",
-      finishLabel: "Dismiss",
+      nextLabel: 'Next',
+      prevLabel: 'Back',
+      finishLabel: 'Dismiss',
       closeBoxLabel: '&#215;',
 
       // callbacks
@@ -69,7 +68,6 @@
 					'</div>',
 				'</div>'
 			]
-
     }, userOptions);
 
     // save the trip data
@@ -107,10 +105,8 @@
 
   Trip.prototype = {
     preInit: function() {
-
       // override console object for IE
-      if (typeof this.console === "undefined") {
-
+      if (typeof this.console === 'undefined') {
         var self = this,
           methods = ['log', 'warn', 'debug', 'info', 'error'];
 
@@ -159,7 +155,7 @@
 
     bindResizeEvents: function() {
       var that = this;
-      $(window).on("resize.Trip", function() {
+      $(window).on('resize.Trip', function() {
         // when users resize the window
         // our current solution is to rerun the trip (will restart the timer)
         that.run();
@@ -167,7 +163,7 @@
     },
 
     unbindResizeEvents: function() {
-      $(window).off("resize.Trip");
+      $(window).off('resize.Trip');
     },
 
     bindKeyEvents: function() {
@@ -240,7 +236,6 @@
 
     pause: function() {
       this.pauseAndResume();
-      
       // onTripPause callback
       this.settings.onTripPause(this.tripIndex, this.getCurrentTripObject());
     },
@@ -354,7 +349,7 @@
 
       this.$bar.animate({
         width: '100%'
-      }, delay, "linear", function() {
+      }, delay, 'linear', function() {
         that.$bar.width(0);
       });
     },
@@ -381,7 +376,7 @@
 
         // force developers to double check tripData again
         if (this.settings.skipUndefinedTrip === false) {
-          this.console.error("Your tripData is not valid at index: " + this.tripIndex);
+          this.console.error('Your tripData is not valid at index: ' + this.tripIndex);
           this.stop();
           return false;
         }
@@ -432,8 +427,8 @@
       }
 
       // have to check `sel` & `content` two required fields
-      if (typeof o.content === "undefined" ||
-          typeof o.sel === "undefined" ||
+      if (typeof o.content === 'undefined' ||
+          typeof o.sel === 'undefined' ||
              o.sel === null ||
              o.sel.length === 0 ||
              $(o.sel).length === 0) {
@@ -443,7 +438,7 @@
     },
 
     hasCallback: function() {
-      return (typeof this.tripData[ this.tripIndex ].callback !== "undefined");
+      return (typeof this.tripData[ this.tripIndex ].callback !== 'undefined');
     },
 
     callCallback: function() {
@@ -454,7 +449,7 @@
       var trip = this.tripData[ this.tripIndex ],
         canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
 
-      if (typeof canGoPrev === "function") {
+      if (typeof canGoPrev === 'function') {
         canGoPrev = canGoPrev.call(trip);
       }
 
@@ -465,7 +460,7 @@
       var trip = this.tripData[ this.tripIndex ],
         canGoNext = trip.canGoNext || this.settings.canGoNext;
 
-      if (typeof canGoNext === "function") {
+      if (typeof canGoNext === 'function') {
         canGoNext = canGoNext.call(trip);
       }
 
@@ -703,20 +698,20 @@
 
         $('body').append($tripBlock);
 
-        $tripBlock.find('.trip-close').on("click", function(e) {
+        $tripBlock.find('.trip-close').on('click', function(e) {
           e.preventDefault();
           that.settings.onTripClose(that.tripIndex);
           that.stop();
         });
 
-        $tripBlock.find('.trip-prev').on("click", function(e) {
+        $tripBlock.find('.trip-prev').on('click', function(e) {
           e.preventDefault();
           // Force IE/FF to lose focus
           $(this).blur();
           that.prev();
         });
 
-        $tripBlock.find('.trip-next').on("click", function(e) {
+        $tripBlock.find('.trip-next').on('click', function(e) {
           e.preventDefault();
           // Force IE/FF to lose focus
           $(this).blur();
@@ -728,14 +723,12 @@
     createOverlay: function() {
       // make sure the element doesn't exist in the DOM tree
       if (typeof $('.trip-overlay').get(0) === 'undefined') {
-
         var html = [
           '<div class="trip-overlay">',
           '</div>'
         ].join('');
 
         var $overlay = $(html);
-
         $overlay.height($(window).height())
             .css({
               zIndex: this.settings.overlayZindex
@@ -746,7 +739,7 @@
     },
 
     cleanup: function() {
-      $(".trip-overlay, .trip-block").remove();
+      $('.trip-overlay, .trip-block').remove();
     },
 
     init: function() {
