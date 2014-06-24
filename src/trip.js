@@ -758,7 +758,8 @@
         ].join('');
 
         var $overlay = $(html);
-        $overlay.height($(window).height())
+        $overlay
+          .height($(window).height())
           .css({
             zIndex: this.settings.overlayZindex
           });

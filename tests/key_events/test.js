@@ -27,15 +27,31 @@ asyncTest('arrow keys test', function() {
       }
       else if (step === 5) {
         ok(Helpers.getTripBlock().hasClass('n'));
+        Helpers.sendKey('SPACE');
+      }
+      else if (step === 6) {
+        ok(Helpers.getTripBlock().hasClass('e'));
+        Helpers.sendKey('RIGHT');
+      }
+      else if (step === 7) {
+        ok(Helpers.getTripBlock().hasClass('w'));
         Helpers.sendKey('ESC');
       }
+    },
+    onTripPause: function() {
+      ok('Press space would trigger onTripPause');
+      Helpers.sendKey('SPACE');
+    },
+    onTripResume: function() {
+      ok('Press space again would trigger onTripResume');
     },
     onTripStop: function() {
       // we will get here when finished
       start();
     },
     onEnd: function() {
-      throw new Error('We can\' get into onTripEnd!');
+      throw new Error(
+        'We can\' get into onTripEnd! We should exit from onTripStop()');
     }
   });
 
