@@ -7,7 +7,10 @@ module.exports = function(grunt) {
         options: {
           timeout: 10000,
           urls: [
-            'http://localhost:8000/tests/test.html'
+            'http://localhost:8000/tests/trip_events/test.html',
+            'http://localhost:8000/tests/directions/test.html',
+            'http://localhost:8000/tests/themes/test.html',
+            'http://localhost:8000/tests/key_events/test.html',
           ]
         }
       }
