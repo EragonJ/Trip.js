@@ -1,5 +1,9 @@
 /*
- *  Trip.js - A jQuery plugin that can help you customize your tutorial trip easily
+ *  Trip.js
+ *
+ *  This is a jQuery plugin that can help you customize your tutorial trip
+ *  with full flexibilities.
+ *
  *  Version: 1.3.0
  *
  *  Author: EragonJ <eragonj@eragonj.me>
@@ -22,7 +26,6 @@
   var Trip = function(tripData, userOptions) {
     // save the settings
     this.settings = $.extend({
-
       // basic config
       tripIndex: 0,
       tripTheme: 'black',
@@ -45,11 +48,16 @@
       finishLabel: 'Dismiss',
       closeBoxLabel: '&#215;',
 
-      // callbacks
+      // callbacks for whole process
+      onStart: $.noop,
+      onEnd: $.noop,
+
+      // callbacks for each trip
       onTripStart: $.noop,
       onTripEnd: $.noop,
       onTripStop: $.noop,
       onTripPause: $.noop,
+      onTripResume: $.noop,
       onTripChange: $.noop,
       onTripClose: $.noop,
 
@@ -107,8 +115,8 @@
     preInit: function() {
       // override console object for IE
       if (typeof this.console === 'undefined') {
-        var self = this,
-          methods = ['log', 'warn', 'debug', 'info', 'error'];
+        var self = this;
+        var methods = ['log', 'warn', 'debug', 'info', 'error'];
 
         $.each(methods, function(i, methodName) {
           self.console[methodName] = $.noop;
@@ -118,22 +126,24 @@
 
     // TODO: implement expose
     showExpose: function($sel) {
-      this.hasExpose = true;
+      var oldCSS;
+      var newCSS;
 
-      var oldCSS,
-        newCSS;
+      this.hasExpose = true;
 
       oldCSS = {
         position: $sel.css('position'),
         zIndex: $sel.css('z-Index')
       };
 
+      // we have to make it higher than the overlay
       newCSS = {
         position: 'relative',
-        zIndex: this.settings.overlayZindex + 1 // we have to make it higher than the overlay
+        zIndex: this.settings.overlayZindex + 1
       };
 
-      $sel.data('trip-old-css', oldCSS)
+      $sel
+        .data('trip-old-css', oldCSS)
         .css(newCSS)
         .addClass('trip-exposed');
 
@@ -142,13 +152,14 @@
 
     // TODO: implement expose
     hideExpose: function() {
+      var $exposedSel = $('.trip-exposed');
+      var oldCSS = $exposedSel.data('trip-old-css');
+
       this.hasExpose = false;
 
-      var $exposedSel = $('.trip-exposed'),
-        oldCSS = $exposedSel.data('trip-old-css');
-
-      $exposedSel.css(oldCSS)
-             .removeClass('trip-exposed');
+      $exposedSel
+        .css(oldCSS)
+        .removeClass('trip-exposed');
 
       this.$overlay.hide();
     },
@@ -213,13 +224,13 @@
         this.hideExpose();
       }
 
-      this.tripIndex = this.settings.tripIndex;
       this.hideTripBlock();
       this.unbindKeyEvents();
       this.unbindResizeEvents();
 
-      // exec cb
-      this.settings.onTripStop();
+      var tripObject = this.getCurrentTripObject();
+      var tripStop = tripObject.onTripStop || this.settings.onTripStop;
+      tripStop(this.tripIndex, tripObject);
     },
 
     pauseAndResume: function() {
@@ -236,12 +247,16 @@
 
     pause: function() {
       this.pauseAndResume();
-      // onTripPause callback
-      this.settings.onTripPause(this.tripIndex, this.getCurrentTripObject());
+      var tripObject = this.getCurrentTripObject();
+      var tripPause = tripObject.onTripPause || this.settings.onTripPause;
+      tripPause(this.tripIndex, tripObject);
     },
 
     resume: function() {
       this.pauseAndResume();
+      var tripObject = this.getCurrentTripObject();
+      var tripResume = tripObject.onTripResume || this.settings.onTripResume;
+      tripResume(this.tripIndex, tripObject);
     },
 
     next: function() {
@@ -274,12 +289,13 @@
     },
 
     // XXX:
-    // Because the trip index is controlled by increaseIndex / decreaseIndex methods only,
-    // `showCurrentTrip` doesn't have to take care about which is the current trip object,
-    // it just does the necessary operations according to the passed tripData `o`
+    // Because the trip index is controlled by increaseIndex / decreaseIndex
+    // methods only, `showCurrentTrip` doesn't have to take care about which is
+    // the current trip object, it just does the necessary operations
+    // according to the passed tripData `o`
     showCurrentTrip: function(o) {
       // Allow sel element to be a string selector
-      // in case you want to create a TripObject that
+      // in case you want to create a tripObject that
       // handles an element that doesn't exist yet when you create
       // this Trip.
       if (typeof o.sel === 'string') {
@@ -339,7 +355,7 @@
       }
 
       this.tripIndex = this.settings.tripIndex;
-      this.settings.onTripEnd();
+      this.settings.onEnd();
 
       return false;
     },
@@ -368,39 +384,42 @@
     },
 
     run: function() {
-      var that = this,
-        tripObject = this.getCurrentTripObject(),
-        delay = tripObject.delay || this.settings.delay;
+      var that = this;
+      var tripObject = this.getCurrentTripObject();
+      var tripStart = tripObject.onTripStart || this.settings.onTripStart;
+      var tripChange = tripObject.onTripChange || this.settings.onTripChange;
+      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
+      var delay = tripObject.delay || this.settings.delay;
 
       if (!this.isTripDataValid(tripObject)) {
-
         // force developers to double check tripData again
         if (this.settings.skipUndefinedTrip === false) {
-          this.console.error('Your tripData is not valid at index: ' + this.tripIndex);
+          this.console.error(
+            'Your tripData is not valid at index: ' + this.tripIndex);
           this.stop();
           return false;
         }
         // let it go
         else {
-          return this[ this.tripDirection ]();
+          return this[this.tripDirection]();
         }
       }
 
       this.showCurrentTrip(tripObject);
-
-      // show the progress bar
       this.showProgressBar(delay);
       this.progressing = true;
+
+      tripChange(this.tripIndex, tripObject);
+      tripStart(this.tripIndex, tripObject);
 
       // set timer to show next, if the timer is less than zero we expect
       // it to be manually advanced
       if (delay >= 0) {
         this.timer = new Timer(function() {
+          tripEnd(that.tripIndex, tripObject);
           that.next();
         }, delay);
       }
-
-      this.settings.onTripChange(this.tripIndex, tripObject);
     },
 
     isFirst: function() {
@@ -428,26 +447,26 @@
 
       // have to check `sel` & `content` two required fields
       if (typeof o.content === 'undefined' ||
-          typeof o.sel === 'undefined' ||
-             o.sel === null ||
-             o.sel.length === 0 ||
-             $(o.sel).length === 0) {
-        return false;
+        typeof o.sel === 'undefined' ||
+        o.sel === null ||
+        o.sel.length === 0 ||
+        $(o.sel).length === 0) {
+          return false;
       }
       return true;
     },
 
     hasCallback: function() {
-      return (typeof this.tripData[ this.tripIndex ].callback !== 'undefined');
+      return (typeof this.tripData[this.tripIndex].callback !== 'undefined');
     },
 
     callCallback: function() {
-      this.tripData[ this.tripIndex ].callback(this.tripIndex);
+      this.tripData[this.tripIndex].callback(this.tripIndex);
     },
 
     canGoPrev: function() {
-      var trip = this.tripData[ this.tripIndex ],
-        canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
+      var trip = this.tripData[this.tripIndex];
+      var canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
 
       if (typeof canGoPrev === 'function') {
         canGoPrev = canGoPrev.call(trip);
@@ -457,8 +476,8 @@
     },
 
     canGoNext: function() {
-      var trip = this.tripData[ this.tripIndex ],
-        canGoNext = trip.canGoNext || this.settings.canGoNext;
+      var trip = this.tripData[this.tripIndex];
+      var canGoNext = trip.canGoNext || this.settings.canGoNext;
 
       if (typeof canGoNext === 'function') {
         canGoNext = canGoNext.call(trip);
@@ -488,35 +507,40 @@
     },
 
     getCurrentTripObject: function() {
-      return this.tripData[ this.tripIndex ];
+      return this.tripData[this.tripIndex];
     },
 
     setTripBlock: function(o) {
-      var $tripBlock = this.$tripBlock,
-        showCloseBox = o.showCloseBox || this.settings.showCloseBox,
-        showNavigation = o.showNavigation || this.settings.showNavigation,
-        closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel,
-        prevLabel = o.prevLabel || this.settings.prevLabel,
-        nextLabel = o.nextLabel || this.settings.nextLabel,
-        finishLabel = o.finishLabel || this.settings.finishLabel;
+      var $tripBlock = this.$tripBlock;
+      var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
+      var showNavigation = o.showNavigation || this.settings.showNavigation;
+      var closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel;
+      var prevLabel = o.prevLabel || this.settings.prevLabel;
+      var nextLabel = o.nextLabel || this.settings.nextLabel;
+      var finishLabel = o.finishLabel || this.settings.finishLabel;
 
-      $tripBlock.find('.trip-content')
-            .html(o.content);
+      $tripBlock
+        .find('.trip-content')
+        .html(o.content);
 
-      $tripBlock.find('.trip-prev')
-            .html(prevLabel)
-            .toggle(showNavigation && !this.isFirst());
+      $tripBlock
+        .find('.trip-prev')
+        .html(prevLabel)
+        .toggle(showNavigation && !this.isFirst());
 
-      $tripBlock.find('.trip-next')
-            .html(this.isLast() ? finishLabel: nextLabel)
-            .toggle(showNavigation);
+      $tripBlock
+        .find('.trip-next')
+        .html(this.isLast() ? finishLabel: nextLabel)
+        .toggle(showNavigation);
 
-      $tripBlock.find('.trip-close')
-            .html(closeBoxLabel)
-            .toggle(showCloseBox);
+      $tripBlock
+        .find('.trip-close')
+        .html(closeBoxLabel)
+        .toggle(showCloseBox);
 
       // remove old styles then add new one
-      $tripBlock.removeClass('e s w n screen-ne screen-se screen-sw screen-nw screen-center');
+      $tripBlock.removeClass(
+        'e s w n screen-ne screen-se screen-sw screen-nw screen-center');
       $tripBlock.addClass(o.position);
 
       // NOTE: issue #27
@@ -530,16 +554,16 @@
     },
 
     setTripBlockPosition: function(o, horizontalOrVertical) {
-      var $tripBlock = this.$tripBlock,
-        $sel = o.sel,
-        selWidth = $sel && $sel.outerWidth(),
-        selHeight = $sel && $sel.outerHeight(),
-        blockWidth = $tripBlock.outerWidth(),
-        blockHeight = $tripBlock.outerHeight(),
-        arrowHeight = 10,
-        arrowWidth = 10,
-        cssHorizontal,
-        cssVertical;
+      var $tripBlock = this.$tripBlock;
+      var $sel = o.sel;
+      var selWidth = $sel && $sel.outerWidth();
+      var selHeight = $sel && $sel.outerHeight();
+      var blockWidth = $tripBlock.outerWidth();
+      var blockHeight = $tripBlock.outerHeight();
+      var arrowHeight = 10;
+      var arrowWidth = 10;
+      var cssHorizontal;
+      var cssVertical;
 
       switch (o.position) {
         case 'screen-center':
@@ -641,14 +665,12 @@
               top: cssVertical
             });
             break;
-
         }
       }
     },
 
     addAnimation: function(o) {
       var animation = o.animation || this.settings.animation;
-
       if ($.inArray(animation, CHECKED_ANIMATIONS) >= 0) {
         this.$tripBlock.addClass('animated');
         this.$tripBlock.addClass(animation);
@@ -663,17 +685,19 @@
     showTripBlock: function(o) {
       this.$tripBlock.css({
         display: 'inline-block',
-        zIndex: this.settings.overlayZindex + 1 // we have to make it higher than the overlay
+        // we have to make it higher than the overlay
+        zIndex: this.settings.overlayZindex + 1
       });
 
-      var windowHeight = $(window).height(),
-        windowTop = $(window).scrollTop(),
-        tripBlockTop = this.$tripBlock.offset().top,
-        OFFSET = 100; // make it look nice
+      var windowHeight = $(window).height();
+      var windowTop = $(window).scrollTop();
+      var tripBlockTop = this.$tripBlock.offset().top;
+      var OFFSET = 100; // make it look nice
 
       if (tripBlockTop < windowTop + windowHeight &&
-          tripBlockTop >= windowTop) {
-        // tripBlock is located inside the current screen, so we don't have to scroll
+        tripBlockTop >= windowTop) {
+          // tripBlock is located inside the current screen,
+          // so we don't have to scroll
       }
       else {
         this.$root.animate({ scrollTop: tripBlockTop - OFFSET }, 'slow');
@@ -695,15 +719,17 @@
     createTripBlock: function() {
       // make sure the element doesn't exist in the DOM tree
       if (typeof $('.trip-block').get(0) === 'undefined') {
-        var that = this,
-          tripBlockHTML = this.settings.tripBlockHTML.join(''),
-          $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
+        var that = this;
+        var tripBlockHTML = this.settings.tripBlockHTML.join('');
+        var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
 
         $('body').append($tripBlock);
 
         $tripBlock.find('.trip-close').on('click', function(e) {
           e.preventDefault();
-          that.settings.onTripClose(that.tripIndex);
+          var tripObject = that.getCurrentTripObject();
+          var tripClose = tripObject.onTripClose || that.settings.onTripClose;
+          tripClose(that.tripIndex, tripObject);
           that.stop();
         });
 
@@ -733,9 +759,9 @@
 
         var $overlay = $(html);
         $overlay.height($(window).height())
-            .css({
-              zIndex: this.settings.overlayZindex
-            });
+          .css({
+            zIndex: this.settings.overlayZindex
+          });
 
         $('body').append($overlay);
       }
@@ -764,13 +790,14 @@
       // cleanup old DOM first
       this.cleanup();
 
-      // onTripStart callback
-      this.settings.onTripStart();
+      // we will call this before initializing all stuffs
+      this.settings.onStart();
 
       // create some necessary DOM elements at the first time like jQuery UI
       this.create();
 
-      // init some necessary stuffs like events, late DOM refs after creating DOMs
+      // init some necessary stuffs like events, late DOM refs
+      // after creating DOMs
       this.init();
 
       // main entry

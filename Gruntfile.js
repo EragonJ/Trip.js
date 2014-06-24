@@ -63,6 +63,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
+        maxlen: 80,
         globals: {
           jQuery: true
         }

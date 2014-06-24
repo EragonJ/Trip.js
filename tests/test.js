@@ -5,12 +5,12 @@ var baseTripData = [
 
 module('onTripXYZ related callbacks tests');
 
-asyncTest('onTripStart', function() {
+asyncTest('onStart', function() {
   var trip = new Trip(baseTripData, {
-    onTripStart: function() {
-      ok(true, 'onTripStart ok');
+    onStart: function() {
+      ok(true, 'onStart ok');
     },
-    onTripEnd: function() {
+    onEnd: function() {
       start();
     }
   });
@@ -23,7 +23,7 @@ asyncTest('onTripChange', function() {
     onTripChange: function() {
       ok(true, 'onTripChange ok');
     },
-    onTripEnd: function() {
+    onEnd: function() {
       start();
     }
   });
@@ -31,10 +31,10 @@ asyncTest('onTripChange', function() {
   trip.start();
 });
 
-asyncTest('onTripEnd', function() {
+asyncTest('onEnd', function() {
   var trip = new Trip(baseTripData, {
-    onTripEnd: function() {
-      ok(true, 'onTripEnd ok');
+    onEnd: function() {
+      ok(true, 'onEnd ok');
       start();
     }
   });
@@ -75,7 +75,7 @@ asyncTest('directions test', function() {
       var $tripBlock = $('.trip-block');
       ok($tripBlock.hasClass(tripData.position), 'Detect postion : ' + tripData.position);
     },
-    onTripEnd: function() {
+    onEnd: function() {
       start();
     }
   });
@@ -90,7 +90,7 @@ asyncTest('theme test', function() {
       var $tripBlock = $('.trip-block');
       ok($tripBlock.hasClass('white'));
     },
-    onTripEnd: function() {
+    onEnd: function() {
       start();
     }
   });
@@ -134,7 +134,7 @@ asyncTest('arrow keys test', function() {
       // we will get here when finished
       start();
     },
-    onTripEnd: function() {
+    onEnd: function() {
       throw new Error('We can\' get into onTripEnd!');
     }
   });
