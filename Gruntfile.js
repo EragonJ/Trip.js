@@ -75,6 +75,40 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         'src/trip.js'
       ],
+    },
+    replace: {
+      configfiles: {
+        src: [
+          'trip.jquery.json',
+          'package.json',
+          'component.json'
+        ],
+        overwrite: true,
+        replacements: [{
+          from: (function() {
+            return new RegExp('"version": "' + grunt.option('oldv') + '",');
+          })(),
+          to: function() {
+            return '"version": "' + grunt.option('newv') + '",';
+          }
+        }]
+      },
+      sourcefiles: {
+        src: [
+          'views/index.jade',
+          'src/trip.js',
+          'README.md'
+        ],
+        overwrite: true,
+        replacements: [{
+          from: (function() {
+            return new RegExp(grunt.option('oldv'));
+          })(),
+          to: function() {
+            return grunt.option('newv');
+          }
+        }]
+      }
     }
   });
 
@@ -84,6 +118,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-text-replace');
 
   // Default task(s).
   grunt.registerTask('test', ['connect', 'qunit']);
@@ -91,4 +126,18 @@ module.exports = function(grunt) {
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['jshint', 'uglify']);
   grunt.registerTask('build', ['jshint', 'uglify', 'sass', 'jade']);
+  grunt.registerTask('bumpversion',
+    ['replace:configfiles', 'replace:sourcefiles', 'build']);
+
+  // How to bump version ?
+  //
+  // grunt bumpversion --oldv=1.3.0 --newv=2.0.0
+  //
+  // NOTE: 
+  //
+  // 1. After bumping versions, we will also build again to make sure
+  // this change old get reflected into built files also.
+  //
+  // 2. Because the matching rule is very easy, we have to check version
+  // again after bumping to make sure we won't override the wrong words.
 };
