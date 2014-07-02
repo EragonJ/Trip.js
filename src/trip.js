@@ -23,8 +23,19 @@
     'rotateInUpRight'
   ];
 
+  /**
+   * Trip constructor
+   *
+   * @constructor
+   * @param {Array} tripData
+   * @param {Object} userOptions
+   */
   var Trip = function(tripData, userOptions) {
-    // save the settings
+
+    /**
+     * It is used to keep user and default settings.
+     * @type {Object}
+     */
     this.settings = $.extend({
       // basic config
       tripIndex: 0,
@@ -78,7 +89,10 @@
 			]
     }, userOptions);
 
-    // save the trip data
+    /**
+     * Save the trip data into our internal storage
+     * @type {Array} tripData
+     */
     this.tripData = tripData;
 
     // used SELs
@@ -112,8 +126,13 @@
   };
 
   Trip.prototype = {
+    /**
+     * This is used to preInit Trip.js. For current use, we will try to
+     * override this.console if there is no window.console like IE.
+     *
+     * @type {Function}
+     */
     preInit: function() {
-      // override console object for IE
       if (typeof this.console === 'undefined') {
         var self = this;
         var methods = ['log', 'warn', 'debug', 'info', 'error'];
@@ -124,7 +143,12 @@
       }
     },
 
-    // TODO: implement expose
+    /**
+     * Expose element which has hasExpose property.
+     *
+     * @type {Funtion}
+     * @param {jQuery} $sel
+     */
     showExpose: function($sel) {
       var oldCSS;
       var newCSS;
@@ -150,7 +174,11 @@
       this.$overlay.show();
     },
 
-    // TODO: implement expose
+    /**
+     * Make exposed element back to normal state and hide overlay.
+     *
+     * @type {Funtion}
+     */
     hideExpose: function() {
       var $exposedSel = $('.trip-exposed');
       var oldCSS = $exposedSel.data('trip-old-css');
@@ -164,19 +192,33 @@
       this.$overlay.hide();
     },
 
+    /**
+     * When users resize its browser, we will rerun Trip and restart the timer.
+     * TODO: We have to debounce this function later to make performance better.
+     *
+     * @type {Function}
+     */
     bindResizeEvents: function() {
       var that = this;
       $(window).on('resize.Trip', function() {
-        // when users resize the window
-        // our current solution is to rerun the trip (will restart the timer)
         that.run();
       });
     },
 
+    /**
+     * Remove resize event from window.
+     *
+     * @type {Function}
+     */
     unbindResizeEvents: function() {
       $(window).off('resize.Trip');
     },
 
+    /**
+     * Bind keydown events on document.
+     *
+     * @type {Function}
+     */
     bindKeyEvents: function() {
       var that = this;
       $(document).on({
@@ -187,10 +229,22 @@
       });
     },
 
+    /**
+     * Remove keydown events from document.
+     *
+     * @type {Function}
+     */
     unbindKeyEvents: function() {
       $(document).off('keydown.Trip');
     },
 
+    /**
+     * Bound keydown events. We will do specific actions when matched keys
+     * are pressed by user.
+     *
+     * @type {function}
+     * @param {Event} e
+     */
     keyEvent: function(e) {
       switch(e.which) {
         case this.CONSTANTS.ESC:
@@ -215,6 +269,11 @@
       }
     },
 
+    /**
+     * Stop API, which will stop the trip.
+     *
+     * @type {Function}
+     */
     stop: function() {
       if (this.timer) {
         this.timer.stop();
@@ -235,6 +294,11 @@
       this.settings.onEnd();
     },
 
+    /**
+     * This is an wrapper for pause and resume API.
+     *
+     * @type {Function}
+     */
     pauseAndResume: function() {
       if (this.progressing) {
         this.timer.pause();
@@ -247,6 +311,11 @@
       this.progressing = !this.progressing;
     },
 
+    /**
+     * pause API, which will pause the trip.
+     *
+     * @type {Function}
+     */
     pause: function() {
       this.pauseAndResume();
       var tripObject = this.getCurrentTripObject();
@@ -254,6 +323,11 @@
       tripPause(this.tripIndex, tripObject);
     },
 
+    /**
+     * pause API, which will pause the trip.
+     *
+     * @type {Function}
+     */
     resume: function() {
       this.pauseAndResume();
       var tripObject = this.getCurrentTripObject();
@@ -261,6 +335,11 @@
       tripResume(this.tripIndex, tripObject);
     },
 
+    /**
+     * next API, which will jump to next the trip.
+     *
+     * @type {Function}
+     */
     next: function() {
       this.tripDirection = 'next';
 
@@ -281,6 +360,11 @@
       }
     },
 
+    /**
+     * prev API, which will jump to previous trip.
+     *
+     * @type {Function}
+     */
     prev: function() {
       this.tripDirection = 'prev';
 
@@ -290,11 +374,13 @@
       this.run();
     },
 
-    // XXX:
-    // Because the trip index is controlled by increaseIndex / decreaseIndex
-    // methods only, `showCurrentTrip` doesn't have to take care about which is
-    // the current trip object, it just does the necessary operations
-    // according to the passed tripData `o`
+    /**
+     * Show current trip. In this method, we will control all stuffs about
+     * current trip including animation, timer, expose, progress bar.
+     *
+     * @type {Function}
+     * @param {Object} o
+     */
     showCurrentTrip: function(o) {
       // Allow sel element to be a string selector
       // in case you want to create a tripObject that
@@ -336,6 +422,12 @@
       }
     },
 
+    /**
+     * This is the last operation when we successfully finish all trips in
+     * the end.
+     *
+     * @type {Function}
+     */
     doLastOperation: function() {
       if (this.timer) {
         this.timer.stop();
@@ -362,6 +454,13 @@
       return false;
     },
 
+    /**
+     * This is used to show progress bar UI. We will use jQuery to manipulate
+     * the animation.
+     *
+     * @type {Function}
+     * @param {Number} delay
+     */
     showProgressBar: function(delay) {
       var that = this;
 
@@ -372,19 +471,43 @@
       });
     },
 
+    /**
+     * Hide the progress bar and stop animations.
+     *
+     * @type {Function}
+     */
     hideProgressBar: function() {
       this.$bar.width(0);
       this.$bar.stop(true);
     },
 
+    /**
+     * Pause the progress bar.
+     *
+     * @type {Function}
+     */
     pauseProgressBar: function() {
       this.$bar.stop(true);
     },
 
+    /**
+     * Resumse the progress bar.
+     *
+     * @type {Function}
+     * @param {Number} remainingTime
+     */
     resumeProgressBar: function(remainingTime) {
       this.showProgressBar(remainingTime);
     },
 
+    /**
+     * This is the main function to control each trip. In this method, we will
+     * make sure every tripData is valid and use that to do following works like
+     * showing trip, setup timer and trigger registered callbacks at the right
+     * timing.
+     *
+     * @type {Function}
+     */
     run: function() {
       var that = this;
       var tripObject = this.getCurrentTripObject();
@@ -424,14 +547,30 @@
       }
     },
 
+    /**
+     * Check whether current trip is the first one.
+     *
+     * @type {Function}
+     */
     isFirst: function() {
       return (this.tripIndex === 0) ? true: false;
     },
 
+    /**
+     * Check whether current trip is the last one.
+     *
+     * @type {Function}
+     */
     isLast: function() {
       return (this.tripIndex === this.tripData.length - 1) ? true: false;
     },
 
+    /**
+     * Check whether tripData is valid
+     *
+     * @type {Function}
+     * @param {Object} o
+     */
     isTripDataValid: function(o) {
       var specialDirections = [
         'screen-ne',
@@ -458,14 +597,29 @@
       return true;
     },
 
+    /**
+     * Check whether current trip has callback or not.
+     *
+     * @type {Function}
+     */
     hasCallback: function() {
       return (typeof this.tripData[this.tripIndex].callback !== 'undefined');
     },
 
+    /**
+     * If current trip has callback, we will call it directly.
+     *
+     * @type {Function}
+     */
     callCallback: function() {
       this.tripData[this.tripIndex].callback(this.tripIndex);
     },
 
+    /**
+     * Check whether we can go to previous trip or not.
+     *
+     * @type {Function}
+     */
     canGoPrev: function() {
       var trip = this.tripData[this.tripIndex];
       var canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
@@ -477,6 +631,11 @@
       return canGoPrev;
     },
 
+    /**
+     * Check whether we can go to next trip or not.
+     *
+     * @type {Function}
+     */
     canGoNext: function() {
       var trip = this.tripData[this.tripIndex];
       var canGoNext = trip.canGoNext || this.settings.canGoNext;
@@ -488,6 +647,12 @@
       return canGoNext;
     },
 
+    /**
+     * We can call this method to increase tripIndex because we are not allowed
+     * to manipualte the value directly.
+     *
+     * @type {Function}
+     */
     increaseIndex: function() {
       if (this.tripIndex >= this.tripData.length - 1) {
         // how about hitting the last item ?
@@ -498,6 +663,12 @@
       }
     },
 
+    /**
+     * We can call this method to decrease tripIndex because we are not allowed
+     * to manipualte the value directly.
+     *
+     * @type {Function}
+     */
     decreaseIndex: function() {
       if (this.tripIndex <= 0) {
         // how about hitting the first item ?
@@ -508,10 +679,22 @@
       }
     },
 
+    /**
+     * This method is used to get current trip data.
+     *
+     * @type {Function}
+     */
     getCurrentTripObject: function() {
       return this.tripData[this.tripIndex];
     },
 
+    /**
+     * Based on current trip data, we will use this method to set all stuffs
+     * we want like content, prev / next labels, close button, used animations.
+     *
+     * @type {Function}
+     * @param {Object} o
+     */
     setTripBlock: function(o) {
       var $tripBlock = this.$tripBlock;
       var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
@@ -555,6 +738,15 @@
       this.setTripBlockPosition(o, 'vertical');
     },
 
+    /**
+     * This method is mainly used to help us position the trip block. As you can
+     * see, we will find out the $sel and its positions first then put our trip
+     * block at the right location.
+     *
+     * @type {Function}
+     * @param {Object} o
+     * @param {String} horizontalOrVertical
+     */
     setTripBlockPosition: function(o, horizontalOrVertical) {
       var $tripBlock = this.$tripBlock;
       var $sel = o.sel;
@@ -671,6 +863,12 @@
       }
     },
 
+    /**
+     * Add animation on the trip block.
+     *
+     * @type {Function}
+     * @param {Object} o
+     */
     addAnimation: function(o) {
       var animation = o.animation || this.settings.animation;
       if ($.inArray(animation, CHECKED_ANIMATIONS) >= 0) {
@@ -679,11 +877,24 @@
       }
     },
 
+    /**
+     * Remove animation from the trip block.
+     *
+     * @type {Function}
+     */
     removeAnimation: function() {
       this.$tripBlock.removeClass(CHECKED_ANIMATIONS.join(' '));
       this.$tripBlock.removeClass('animated');
     },
 
+    /**
+     * After we positioned our trip block, we have to show it on the screen. If
+     * the trip block is not on the screen, we will scroll the $root element and
+     * then make sure it is definitely on the screen.
+     *
+     * @type {Function}
+     * @param {Object} o
+     */
     showTripBlock: function(o) {
       this.$tripBlock.css({
         display: 'inline-block',
@@ -706,18 +917,33 @@
       }
     },
 
+    /**
+     * Hide the trip block.
+     *
+     * @type {Function}
+     */
     hideTripBlock: function() {
       this.$tripBlock.fadeOut('slow');
     },
 
-    // TODO:
-    // Make sure this method is only called ONCE in this page,
-    // so that we will not create same DOMs more than once!
+    /**
+     * This is a method wrapper.
+     *
+     * @type {Function}
+     */
     create: function() {
       this.createTripBlock();
       this.createOverlay();
     },
 
+
+    /**
+     * This method is used to create a trip block at the first time when
+     * start. If the trip block already exists on the DOM tree, we will
+     * not create it again.
+     *
+     * @type {Function}
+     */
     createTripBlock: function() {
       // make sure the element doesn't exist in the DOM tree
       if (typeof $('.trip-block').get(0) === 'undefined') {
@@ -751,6 +977,12 @@
       }
     },
 
+    /**
+     * This method is used to create overlay. If the overlay is in the DOM tree,
+     * we will not create it again.
+     *
+     * @type {Function}
+     */
     createOverlay: function() {
       // make sure the element doesn't exist in the DOM tree
       if (typeof $('.trip-overlay').get(0) === 'undefined') {
@@ -770,10 +1002,21 @@
       }
     },
 
+    /**
+     * Clean up all stuffs when we are going to start / restart a trip, so we
+     * can make we won't mess up with old stuffs.
+     *
+     * @type {Function}
+     */
     cleanup: function() {
       $('.trip-overlay, .trip-block').remove();
     },
 
+    /**
+     * Initialize Trip.
+     *
+     * @type {Function}
+     */
     init: function() {
       this.preInit();
 
@@ -789,6 +1032,11 @@
       this.$overlay = $('.trip-overlay');
     },
 
+    /**
+     * Start Trip.
+     *
+     * @type {Function}
+     */
     start: function() {
       // cleanup old DOM first
       this.cleanup();
@@ -811,10 +1059,14 @@
   // Expose to window
   window.Trip = Trip;
 
-  /*
+  /**
    *  3rd party libraries / toolkits
    *
-   *  1) http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
+   *  We will keep our 3rd party libraries / toolkits here to make sure we can
+   *  track where did we get the code from and its usage.
+   *
+   *  See also:
+   *  http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
    */
   function Timer(callback, delay) {
     var timerId;
