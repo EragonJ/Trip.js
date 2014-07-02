@@ -231,6 +231,8 @@
       var tripObject = this.getCurrentTripObject();
       var tripStop = tripObject.onTripStop || this.settings.onTripStop;
       tripStop(this.tripIndex, tripObject);
+
+      this.settings.onEnd();
     },
 
     pauseAndResume: function() {
