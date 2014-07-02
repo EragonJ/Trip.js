@@ -109,6 +109,16 @@ module.exports = function(grunt) {
           }
         }]
       }
+    },
+    jsdoc: {
+      dist: {
+        src: ['src/trip.js'],
+        options: {
+          destination: 'doc',
+          template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
+          configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json"
+        }
+      }
     }
   });
 
@@ -118,6 +128,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-text-replace');
 
   // Default task(s).
@@ -126,6 +137,7 @@ module.exports = function(grunt) {
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['jshint', 'uglify']);
   grunt.registerTask('build', ['jshint', 'uglify', 'sass', 'jade']);
+  grunt.registerTask('doc', ['jsdoc']);
   grunt.registerTask('bumpversion',
     ['replace:configfiles', 'replace:sourcefiles', 'build']);
 
