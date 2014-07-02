@@ -112,7 +112,7 @@ module.exports = function(grunt) {
     },
     jsdoc: {
       dist: {
-        src: ['src/trip.js'],
+        src: ['src/trip.js', '.jsdoc_index.md'],
         options: {
           destination: 'doc',
           template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",

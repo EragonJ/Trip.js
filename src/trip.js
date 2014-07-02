@@ -1,4 +1,4 @@
-/*
+/**
  *  Trip.js
  *
  *  This is a jQuery plugin that can help you customize your tutorial trip
@@ -24,9 +24,9 @@
   ];
 
   /**
-   * Trip constructor
+   * Trip
    *
-   * @constructor
+   * @class Trip
    * @param {Array.<Object>} tripData
    * @param {Object} userOptions
    */
@@ -34,6 +34,8 @@
 
     /**
      * It is used to keep user and default settings.
+     *
+     * @memberOf Trip
      * @type {Object}
      */
     this.settings = $.extend({
@@ -126,6 +128,7 @@
      * This is used to preInit Trip.js. For current use, we will try to
      * override this.console if there is no window.console like IE.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     preInit: function() {
@@ -142,6 +145,7 @@
     /**
      * Expose element which has hasExpose property.
      *
+     * @memberOf Trip
      * @type {Funtion}
      * @param {jQuery} $sel
      */
@@ -173,6 +177,7 @@
     /**
      * Make exposed element back to normal state and hide overlay.
      *
+     * @memberOf Trip
      * @type {Funtion}
      */
     hideExpose: function() {
@@ -192,6 +197,7 @@
      * When users resize its browser, we will rerun Trip and restart the timer.
      * TODO: We have to debounce this function later to make performance better.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     bindResizeEvents: function() {
@@ -204,6 +210,7 @@
     /**
      * Remove resize event from window.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     unbindResizeEvents: function() {
@@ -213,6 +220,7 @@
     /**
      * Bind keydown events on document.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     bindKeyEvents: function() {
@@ -228,6 +236,7 @@
     /**
      * Remove keydown events from document.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     unbindKeyEvents: function() {
@@ -238,6 +247,7 @@
      * Bound keydown events. We will do specific actions when matched keys
      * are pressed by user.
      *
+     * @memberOf Trip
      * @type {function}
      * @param {Event} e
      */
@@ -268,6 +278,7 @@
     /**
      * Stop API, which will stop the trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     stop: function() {
@@ -293,6 +304,7 @@
     /**
      * This is an wrapper for pause and resume API.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     pauseAndResume: function() {
@@ -310,6 +322,7 @@
     /**
      * pause API, which will pause the trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     pause: function() {
@@ -322,6 +335,7 @@
     /**
      * pause API, which will pause the trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     resume: function() {
@@ -334,6 +348,7 @@
     /**
      * next API, which will jump to next the trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     next: function() {
@@ -359,6 +374,7 @@
     /**
      * prev API, which will jump to previous trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     prev: function() {
@@ -374,6 +390,7 @@
      * Show current trip. In this method, we will control all stuffs about
      * current trip including animation, timer, expose, progress bar.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      */
@@ -422,6 +439,7 @@
      * This is the last operation when we successfully finish all trips in
      * the end.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     doLastOperation: function() {
@@ -454,6 +472,7 @@
      * This is used to show progress bar UI. We will use jQuery to manipulate
      * the animation.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Number} delay
      */
@@ -470,6 +489,7 @@
     /**
      * Hide the progress bar and stop animations.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     hideProgressBar: function() {
@@ -480,6 +500,7 @@
     /**
      * Pause the progress bar.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     pauseProgressBar: function() {
@@ -489,6 +510,7 @@
     /**
      * Resumse the progress bar.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Number} remainingTime
      */
@@ -502,6 +524,7 @@
      * showing trip, setup timer and trigger registered callbacks at the right
      * timing.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     run: function() {
@@ -546,6 +569,7 @@
     /**
      * Check whether current trip is the first one.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     isFirst: function() {
@@ -555,6 +579,7 @@
     /**
      * Check whether current trip is the last one.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     isLast: function() {
@@ -564,6 +589,7 @@
     /**
      * Check whether tripData is valid
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      */
@@ -596,6 +622,7 @@
     /**
      * Check whether current trip has callback or not.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     hasCallback: function() {
@@ -605,6 +632,7 @@
     /**
      * If current trip has callback, we will call it directly.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     callCallback: function() {
@@ -614,6 +642,7 @@
     /**
      * Check whether we can go to previous trip or not.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     canGoPrev: function() {
@@ -630,6 +659,7 @@
     /**
      * Check whether we can go to next trip or not.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     canGoNext: function() {
@@ -647,6 +677,7 @@
      * We can call this method to increase tripIndex because we are not allowed
      * to manipualte the value directly.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     increaseIndex: function() {
@@ -663,6 +694,7 @@
      * We can call this method to decrease tripIndex because we are not allowed
      * to manipualte the value directly.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     decreaseIndex: function() {
@@ -678,6 +710,7 @@
     /**
      * This method is used to get current trip data.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     getCurrentTripObject: function() {
@@ -688,6 +721,7 @@
      * Based on current trip data, we will use this method to set all stuffs
      * we want like content, prev / next labels, close button, used animations.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      */
@@ -739,6 +773,7 @@
      * see, we will find out the $sel and its positions first then put our trip
      * block at the right location.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      * @param {String} horizontalOrVertical
@@ -862,6 +897,7 @@
     /**
      * Add animation on the trip block.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      */
@@ -876,6 +912,7 @@
     /**
      * Remove animation from the trip block.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     removeAnimation: function() {
@@ -888,6 +925,7 @@
      * the trip block is not on the screen, we will scroll the $root element and
      * then make sure it is definitely on the screen.
      *
+     * @memberOf Trip
      * @type {Function}
      * @param {Object} o
      */
@@ -916,6 +954,7 @@
     /**
      * Hide the trip block.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     hideTripBlock: function() {
@@ -925,6 +964,7 @@
     /**
      * This is a method wrapper.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     create: function() {
@@ -938,6 +978,7 @@
      * start. If the trip block already exists on the DOM tree, we will
      * not create it again.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     createTripBlock: function() {
@@ -977,6 +1018,7 @@
      * This method is used to create overlay. If the overlay is in the DOM tree,
      * we will not create it again.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     createOverlay: function() {
@@ -1002,6 +1044,7 @@
      * Clean up all stuffs when we are going to start / restart a trip, so we
      * can make we won't mess up with old stuffs.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     cleanup: function() {
@@ -1011,6 +1054,7 @@
     /**
      * Initialize Trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     init: function() {
@@ -1031,6 +1075,7 @@
     /**
      * Start Trip.
      *
+     * @memberOf Trip
      * @type {Function}
      */
     start: function() {
@@ -1056,13 +1101,13 @@
   window.Trip = Trip;
 
   /**
-   *  3rd party libraries / toolkits
+   * 3rd party libraries / toolkits
    *
-   *  We will keep our 3rd party libraries / toolkits here to make sure we can
-   *  track where did we get the code from and its usage.
+   * We will keep our 3rd party libraries / toolkits here to make sure we can
+   * track where did we get the code from and its usage.
    *
-   *  See also:
-   *  http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
+   * See also:
+   * http://stackoverflow.com/questions/3969475/javascript-pause-settimeout
    */
   function Timer(callback, delay) {
     var timerId;
