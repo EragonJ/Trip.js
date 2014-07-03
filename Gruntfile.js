@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  var pathToInk = 'node_modules/grunt-jsdoc/node_modules/ink-docstrap';
 
   // Project configuration.
   grunt.initConfig({
@@ -115,8 +116,8 @@ module.exports = function(grunt) {
         src: ['src/trip.js', '.jsdoc_index.md'],
         options: {
           destination: 'doc',
-          template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
-          configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json"
+          template : pathToInk + '/template',
+          configure : pathToInk + '/template/jsdoc.conf.json'
         }
       }
     }

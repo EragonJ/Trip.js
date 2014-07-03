@@ -280,6 +280,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @public
      */
     stop: function() {
       if (this.timer) {
@@ -324,6 +325,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @public
      */
     pause: function() {
       this.pauseAndResume();
@@ -337,6 +339,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @public
      */
     resume: function() {
       this.pauseAndResume();
@@ -350,6 +353,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @public
      */
     next: function() {
       this.tripDirection = 'next';
@@ -376,6 +380,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @public
      */
     prev: function() {
       this.tripDirection = 'prev';
@@ -395,14 +400,6 @@
      * @param {Object} o
      */
     showCurrentTrip: function(o) {
-      // Allow sel element to be a string selector
-      // in case you want to create a tripObject that
-      // handles an element that doesn't exist yet when you create
-      // this Trip.
-      if (typeof o.sel === 'string') {
-        o.sel = $(o.sel);
-      }
-
       if (this.settings.enableAnimation) {
         this.removeAnimation();
       }
@@ -431,7 +428,7 @@
       }
 
       if (o.expose) {
-        this.showExpose(o.sel);
+        this.showExpose($(o.sel));
       }
     },
 
@@ -571,6 +568,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Boolean} whether current trip is the first one
      */
     isFirst: function() {
       return (this.tripIndex === 0) ? true: false;
@@ -581,6 +579,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Boolean} whether current trip is the last one
      */
     isLast: function() {
       return (this.tripIndex === this.tripData.length - 1) ? true: false;
@@ -591,7 +590,8 @@
      *
      * @memberOf Trip
      * @type {Function}
-     * @param {Object} o
+     * @param {Object} o tripData
+     * @return {Boolean} whether tripData is valid
      */
     isTripDataValid: function(o) {
       var specialDirections = [
@@ -624,6 +624,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Boolean} whether current trip has callback
      */
     hasCallback: function() {
       return (typeof this.tripData[this.tripIndex].callback !== 'undefined');
@@ -644,6 +645,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Boolean} whether we can go to previous trip
      */
     canGoPrev: function() {
       var trip = this.tripData[this.tripIndex];
@@ -661,6 +663,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Boolean} whether we can go to next trip
      */
     canGoNext: function() {
       var trip = this.tripData[this.tripIndex];
@@ -712,6 +715,7 @@
      *
      * @memberOf Trip
      * @type {Function}
+     * @return {Object} current trip data
      */
     getCurrentTripObject: function() {
       return this.tripData[this.tripIndex];
@@ -780,7 +784,7 @@
      */
     setTripBlockPosition: function(o, horizontalOrVertical) {
       var $tripBlock = this.$tripBlock;
-      var $sel = o.sel;
+      var $sel = $(o.sel);
       var selWidth = $sel && $sel.outerWidth();
       var selHeight = $sel && $sel.outerHeight();
       var blockWidth = $tripBlock.outerWidth();
