@@ -60,7 +60,8 @@ module.exports = function(grunt) {
         },
         files: {
           'demo-basic.html': 'views/demo-basic.jade',
-          'documentation.html': 'views/documentation.jade',
+          'doc/documentation-1.3.html': 'views/documentation-1.3.jade',
+          'doc/documentation.html': 'views/documentation.jade',
           'index.html': 'views/index.jade'
         }
       }
@@ -137,8 +138,9 @@ module.exports = function(grunt) {
   grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['jshint', 'uglify']);
-  grunt.registerTask('build', ['jshint', 'uglify', 'sass', 'jade']);
-  grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('build', ['minify', 'sass']);
+  grunt.registerTask('doc', ['jsdoc', 'jade']);
+  grunt.registerTask('all', ['build', 'doc']);
   grunt.registerTask('bumpversion',
     ['replace:configfiles', 'replace:sourcefiles', 'build']);
 

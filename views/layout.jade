@@ -22,12 +22,22 @@ html.no-js(lang='en')
                 .navbar-inner
                     a.brand.demo-index.step1(href="#") Trip.js
                     ul.nav
+                        li.divider-vertical
                         li
-                            a(href="index.html") Home
+                            a(href="#{rootPath}index.html") Home
                         li
-                            a(href="demo-basic.html") Demos
-                        li
-                            a(href="documentation.html") Documentation
+                            a(href="#{rootPath}demo-basic.html") Demos
+                        li.dropdown
+                            a.dropdown-toggle(href="#", data-toggle="dropdown")
+                                | Documentations
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href="#{rootPath}doc/documentation.html") 2.0+ Docs
+                                li
+                                    a(href="#{rootPath}doc/documentation-1.3.html") 1.3 Docs
+                                li
+                                    a(href="#{rootPath}doc/index.html") JSdoc for source code
                         li
                             a(href="https://github.com/EragonJ/Trip.js/tags") Download
                         li
@@ -40,7 +50,7 @@ html.no-js(lang='en')
                             a(href="http://github.com/EragonJ") By EragonJ
 
             .jumbotron
-                img.demo-basic-1.demo-basic-2.step1.step2.step3.step4(src="public/img/logo-tiny.png")
+                img.demo-basic-1.demo-basic-2.step1.step2.step3.step4(src="#{rootPath}public/img/logo-tiny.png")
 
             .social-buttons.clearfix
                 div.fb-like(data-href="http://eragonj.github.com/Trip.js/", data-layout="button_count", data-width="450", data-show-faces="false", data-send="false")

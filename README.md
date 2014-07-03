@@ -47,7 +47,7 @@ Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
 
 # Documentation
 
-Please check the [documentation](http://eragonj.github.io/Trip.js/documentation.html) here !
+Please check the [documentation](http://eragonj.github.io/Trip.js/doc/documentation.html) here !
 
 # How to Contribute
 
@@ -75,7 +75,15 @@ Thanks for all your participations !!!
 
 ## How to build
 
-`grunt build` (this will do `uglify`, `sass`, `jade` at the same time)
+`grunt build` (this will do `uglify`, `sass` at the same time)
+
+## How to compile html
+
+`grunt html` (Because we use `jade`, so you may need to compile first)
+
+## How to create docs
+
+`grunt doc` (This includes `jsdoc` for source code and documentations)
 
 # Key Binding
 
