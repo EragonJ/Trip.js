@@ -97,11 +97,11 @@ $(document).ready(function() {
     }
   ], {
     tripTheme : "black",
-    onTripStart : function() {
-      console.log("onTripStart");
+    onStart : function() {
+      console.log("onStart");
     },
-    onTripEnd : function() {
-      console.log("onTripEnd");
+    onEnd : function() {
+      console.log("onEnd");
     },
     onTripStop : function() {
       console.log("onTripStop");
