@@ -39,7 +39,7 @@
   <body>
     <div id="fb-root"></div><a id="fork-button" href="https://github.com/EragonJ/Trip.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <div class="container">
-      <div class="navbar">
+      <div id="top-header" class="navbar">
         <div class="navbar-inner"><a href="#" class="brand demo-index step1">Trip.js</a>
           <ul class="nav">
             <li class="divider-vertical"></li>
@@ -80,7 +80,11 @@
           </li>
           <li>
             <h4>tripTheme</h4>
-            <p>You can set which theme to use, now have white and black two themes.</p>
+            <p>
+              You can set which theme to use, now Trip.js support
+              <code>white</code>, <code>black</code>, and <code>yeti</code>
+              three themes.
+            </p>
             <p>Type :<code class="type">String</code></p>
             <p>Default :<code>'black'</code></p>
           </li>
@@ -115,8 +119,24 @@
             <p>Default :<code>false</code></p>
           </li>
           <li>
+            <h4>showHeader</h4>
+            <p>
+              If you want to show no matter with default or customized header,
+              you have to set this value to true. You can check
+              <code>header</code> option for more details.
+            </p>
+            <p>Type :<code class="type">Boolean</code></p>
+            <p>Default :<code>false</code></p>
+          </li>
+          <li>
+            <h4>showNavigation</h4>
+            <p>Toggle navigation buttons</p>
+            <p>Type :<code class="type">Boolean</code></p>
+            <p>Default :<code>false</code></p>
+          </li>
+          <li>
             <h4>skipUndefinedTrip</h4>
-            <p>You can enable this option to tell Trip.js skip undefined trips ( Undefined trips mean the trips without content or without sel or can not be selected by jQuery ).</p>
+            <p>You can enable this option to tell Trip.js skip undefined trips (Undefined trips mean the trips without content or without sel or can not be selected by jQuery)</p>
             <p>Type :<code class="type">Boolean</code></p>
             <p>Default :<code>false</code></p>
           </li>
@@ -128,10 +148,15 @@
             <p>Default :<code>1000</code></p>
           </li>
           <li>
-            <h4>showNavigation</h4>
-            <p>Toggle navigation buttons</p>
-            <p>Type :<code class="type">Boolean</code></p>
-            <p>Default :<code>false</code></p>
+            <h4>header</h4>
+            <p>
+              This is the header for each trip. You can customize your own
+              if you don't want to use default one. By the way, you can put
+              <code>tripIndex</code> in your header and
+              it will be replaced with current tripIndex.
+            </p>
+            <p>Type :<code class="type">String</code></p>
+            <p>Default :<code>Step {{tripIndex}}</code></p>
           </li>
           <li>
             <h4>prevLabel</h4>
@@ -244,6 +269,10 @@
             <p>Default :<code>No default</code></p>
           </li>
           <li>
+            <h4>header</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
             <h4>content *Required*</h4>
             <p>What information that you want to show to users.</p>
             <p>Type :<code class="type">String</code></p>
@@ -288,36 +317,6 @@
             <p>Default :<code>false</code></p>
           </li>
           <li>
-            <h4>showNavigation</h4>
-            <p>Toggle navigation buttons</p>
-            <p>Type :<code class="type">Boolean</code></p>
-            <p>Default :<code>false</code></p>
-          </li>
-          <li>
-            <h4>showCloseBox</h4>
-            <p>You can decide to add small close icon on each trip or not</p>
-            <p>Type :<code class="type">Boolean</code></p>
-            <p>Default :<code>false</code></p>
-          </li>
-          <li>
-            <h4>prevLabel</h4>
-            <p>Label for the previous button.</p>
-            <p>Type :<code class="type">String</code></p>
-            <p>Default :<code>'Back'</code></p>
-          </li>
-          <li>
-            <h4>nextLabel</h4>
-            <p>Label for the next button.</p>
-            <p>Type :<code class="type">String</code></p>
-            <p>Default :<code>'Next'</code></p>
-          </li>
-          <li>
-            <h4>finishLabel</h4>
-            <p>Label for the finish button.</p>
-            <p>Type :<code class="type">String</code></p>
-            <p>Default :<code>'Dismiss'</code></p>
-          </li>
-          <li>
             <h4>tripBlockHTML</h4>
             <p>Base HTML for tripBlock</p>
             <p>Type :<code class="type">String</code></p>
@@ -349,6 +348,26 @@
             </p>
             <p>Type :<code class="type">String</code></p>
             <p>Default :<code>'tada'</code></p>
+          </li>
+          <li>
+            <h4>showNavigation</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
+            <h4>showCloseBox</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
+            <h4>prevLabel</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
+            <h4>nextLabel</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
+            <h4>finishLabel</h4>
+            <p>Please check the same part in global options.</p>
           </li>
           <li>
             <h4>onTripStart(tripIndex, tripObject)</h4>

@@ -1,0 +1,15 @@
+// Default Trip Theme - Black
+.trip-block.black {
+  background: #333;
+  color: #DDD;
+
+  .trip-close {
+    color: #ddd;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 4px 0);
+  @include trip-arrow-color(#333);
+}

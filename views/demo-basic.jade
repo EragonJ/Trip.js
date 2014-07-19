@@ -6,7 +6,7 @@ block content
     div.alert.alert-danger Reminder : please turn on your inspector first because we may put logs there if needed.
     div.each-demo
         h2 1. Configure positions ( n, e, s, w )
-        input.btn.btn-primary.btn-small.start-demo-basic-1(type="button", value="Run Demo 1")
+        input.btn.btn-primary.btn-small.start-demo-basic-1(type="button", value="Run Demo")
         pre
             code.javascript
                 | var trip1 = new Trip([
@@ -23,32 +23,60 @@ block content
                 | });
 
     div.each-demo
-        h2 2. Change Themes ( black or white )
-        input.btn.btn-primary.btn-small.start-demo-basic-2(type="button", value="Run Demo 2")
-        pre
-            code.javascript
-                | var trip2 = new Trip([
-                |   { sel : $(".demo-basic-2.step1"), content : "North", position : "n" },
-                |   { sel : $(".demo-basic-2.step2"), content : "East",  position : "e" },
-                |   { sel : $(".demo-basic-2.step3"), content : "South", position : "s" },
-                |   { sel : $(".demo-basic-2.step4"), content : "West",  position : "w" }
-                | ], {
-                |   tripTheme : "white",
-                |   onStart : function() {
-                |       $("body").css({ "background-color" : "#eee" });
-                |   },
-                |   onEnd : function() {
-                |       $("body").css({ "background-color" : "#fff" });
-                |   }
-                | });
-                | 
-                | $(".start-demo-basic-2").on("click", function() {
-                |   trip2.start();
-                | });
+        h2 2. Change Themes
+        ul#theme-demo.nav.nav-tabs
+            li.active
+                a(href="#demo2-1", data-toggle="tab") Black and white theme
+            li
+                a(href="#demo2-2", data-toggle="tab") Yeti theme
+        div.tab-content
+            div#demo2-1.tab-pane.active
+                input.btn.btn-primary.btn-small.start-demo-basic-2-1(type="button", value="Run Demo")
+                pre
+                    code.javascript
+                        | var trip2_1 = new Trip([
+                        |   { sel : $(".demo-basic-2.step1"), content : "North", position : "n" },
+                        |   { sel : $(".demo-basic-2.step2"), content : "East",  position : "e" },
+                        |   { sel : $(".demo-basic-2.step3"), content : "South", position : "s" },
+                        |   { sel : $(".demo-basic-2.step4"), content : "West",  position : "w" }
+                        | ], {
+                        |   tripTheme : "white",
+                        |   onStart : function() {
+                        |       $("body").css({ "background-color" : "#eee" });
+                        |   },
+                        |   onEnd : function() {
+                        |       $("body").css({ "background-color" : "#fff" });
+                        |   }
+                        | });
+                        | 
+                        | $(".start-demo-basic-2").on("click", function() {
+                        |   trip2_1.start();
+                        | });
+            div#demo2-2.tab-pane
+                p 
+                    | Note :
+                    | Yeti theme is a special theme that is composed with header, so if you want to use this theme,
+                    | please remember to put <code>showHeader</code> to <code>true</code>
+                input.btn.btn-primary.btn-small.start-demo-basic-2-2(type="button", value="Run Demo")
+                pre
+                    code.javascript
+                        | var trip2_2 = new Trip([
+                        |   { sel : $(".demo-basic-2.step1"), content : "This is Yeti!", position : "n" },
+                        |   { sel : $(".demo-basic-2.step2"), content : "This is Yeti!", position : "e" },
+                        |   { sel : $(".demo-basic-2.step3"), content : "This is Yeti!", position : "s" },
+                        |   { sel : $(".demo-basic-2.step4"), content : "This is Yeti!", position : "w" }
+                        | ], {
+                        |   showHeader : true,
+                        |   tripTheme : "yeti"
+                        | });
+                        | 
+                        | $(".start-demo-basic-2").on("click", function() {
+                        |   trip2_2.start();
+                        | });
 
     div.each-demo
         h2.demo-basic-3.step1 3. You can tell Trip.js to go back to the top after finished
-        input.btn.btn-primary.btn-small.start-demo-basic-3(type="button", value="Run Demo 3")
+        input.btn.btn-primary.btn-small.start-demo-basic-3(type="button", value="Run Demo")
         pre
             code.javascript
                 | var trip3 = new Trip([
@@ -65,7 +93,7 @@ block content
     div.each-demo
         h2.demo-basic-4.step1.step2 4. You can show close box and show navigation
         p Note : If you wan to manipulate Trip.js manually, set delay to -1 
-        input.btn.btn-primary.btn-small.start-demo-basic-4(type="button", value="Run Demo 4")
+        input.btn.btn-primary.btn-small.start-demo-basic-4(type="button", value="Run Demo")
         pre
             code.javascript
                 | var trip4 = new Trip([
@@ -83,7 +111,7 @@ block content
 
     div.each-demo
         h2.demo-basic-5.step1.step2.step3 5. Want global events ? Here you go !!
-        input.btn.btn-primary.btn-small.start-demo-basic-5(type="button", value="Run Demo 5")
+        input.btn.btn-primary.btn-small.start-demo-basic-5(type="button", value="Run Demo")
         pre
             code.javascript
                 | var trip5 = new Trip([
@@ -120,7 +148,7 @@ block content
     div.each-demo
         h2.demo-basic-6.step1.step2 6. Use local events if you want !
         p Note: we will use global one if not found.
-        input.btn.btn-primary.btn-small.start-demo-basic-6(type="button", value="Run Demo 6")
+        input.btn.btn-primary.btn-small.start-demo-basic-6(type="button", value="Run Demo")
         pre
             code.javascript
                 | var trip6 = new Trip([
@@ -153,7 +181,7 @@ block content
 
     div.each-demo
         h2.demo-basic-7.step1.step2 7. You can also highlight something
-        input.btn.btn-primary.btn-small.start-demo-basic-6(type="button", value="Run Demo 7")
+        input.btn.btn-primary.btn-small.start-demo-basic-6(type="button", value="Run Demo")
         pre.demo-basic-7.step3
             code.javascript
                 | var trip7 = new Trip([
@@ -215,7 +243,7 @@ block content
             code rotateInUpLeft
             | ,
             code rotateInUpRight
-        input.btn.btn-primary.btn-small.start-demo-basic-8(type="button", value="Run Demo 8")
+        input.btn.btn-primary.btn-small.start-demo-basic-8(type="button", value="Run Demo")
         pre.demo-basic-8
             code.javascript
                 | var trip8 = new Trip([

@@ -1,0 +1,14 @@
+// Default Trip Theme - White
+.trip-block.white {
+  background: #fff;
+  color: #333;
+
+  .trip-close {
+    color: #333;
+    &:hover {
+      color: #000;
+    }
+  }
+
+  @include trip-arrow-color(#fff);
+}

@@ -114,3 +114,8 @@ EragonJ ( eragonj@eragonj.me )
 
 # License
 MIT
+
+# Special Thanks
+
+* Everyone who is engaged in this project.
+* [Animate.css](http://daneden.github.io/animate.css/)

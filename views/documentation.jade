@@ -20,7 +20,10 @@ block content
                         | 0
             li
                 h4 tripTheme
-                p You can set which theme to use, now have white and black two themes.
+                p
+                    | You can set which theme to use, now Trip.js support
+                    | <code>white</code>, <code>black</code>, and <code>yeti</code>
+                    | three themes.
                 p
                     | Type :
                     code.type
@@ -85,8 +88,33 @@ block content
                     code
                         | false
             li
+                h4 showHeader
+                p
+                    | If you want to show no matter with default or customized header,
+                    | you have to set this value to true. You can check
+                    | <code>header</code> option for more details.
+                p
+                    | Type :
+                    code.type
+                        | Boolean
+                p
+                    | Default :
+                    code
+                        | false
+            li
+                h4 showNavigation
+                p Toggle navigation buttons
+                p
+                    | Type :
+                    code.type
+                        | Boolean
+                p
+                    | Default :
+                    code
+                        | false
+            li
                 h4 skipUndefinedTrip
-                p You can enable this option to tell Trip.js skip undefined trips ( Undefined trips mean the trips without content or without sel or can not be selected by jQuery ).
+                p You can enable this option to tell Trip.js skip undefined trips (Undefined trips mean the trips without content or without sel or can not be selected by jQuery)
                 p
                     | Type :
                     code.type
@@ -108,16 +136,20 @@ block content
                     code
                         | 1000
             li
-                h4 showNavigation
-                p Toggle navigation buttons
+                h4 header
+                p
+                    | This is the header for each trip. You can customize your own
+                    | if you don't want to use default one. By the way, you can put
+                    | <code>tripIndex</code> in your header and
+                    | it will be replaced with current tripIndex.
                 p
                     | Type :
                     code.type
-                        | Boolean
+                        | String
                 p
-                    | Default :
-                    code
-                        | false
+                  | Default :
+                  code
+                    | Step {{tripIndex}}
             li
                 h4 prevLabel
                 p Label for the previous button.
@@ -311,6 +343,9 @@ block content
                     code
                         | No default
             li
+                h4 header
+                p Please check the same part in global options.
+            li
                 h4 content *Required*
                 p What information that you want to show to users.
                 p
@@ -380,63 +415,6 @@ block content
                     code
                         | false
             li
-                h4 showNavigation
-                p Toggle navigation buttons
-                p
-                    | Type :
-                    code.type
-                        | Boolean
-                p
-                    | Default :
-                    code
-                        | false
-            li
-                h4 showCloseBox
-                p You can decide to add small close icon on each trip or not
-                p
-                    | Type :
-                    code.type
-                        | Boolean
-                p
-                    | Default :
-                    code
-                        | false
-            li
-                h4 prevLabel
-                p Label for the previous button.
-                p
-                    | Type :
-                    code.type
-                        | String
-                p
-                    | Default :
-                    code
-                        | 'Back'
-
-            li
-                h4 nextLabel
-                p Label for the next button.
-                p
-                    | Type :
-                    code.type
-                        | String
-                p
-                    | Default :
-                    code
-                        | 'Next'
-
-            li
-                h4 finishLabel
-                p Label for the finish button.
-                p
-                    | Type :
-                    code.type
-                        | String
-                p
-                    | Default :
-                    code
-                        | 'Dismiss'
-            li
                 h4 tripBlockHTML
                 p Base HTML for tripBlock
                 p
@@ -488,6 +466,21 @@ block content
                     | Default :
                     code
                         | 'tada'
+            li
+                h4 showNavigation
+                p Please check the same part in global options.
+            li
+                h4 showCloseBox
+                p Please check the same part in global options.
+            li
+                h4 prevLabel
+                p Please check the same part in global options.
+            li
+                h4 nextLabel
+                p Please check the same part in global options.
+            li
+                h4 finishLabel
+                p Please check the same part in global options.
             li
                 h4 onTripStart(tripIndex, tripObject)
                 p Please check the same part in global options.
