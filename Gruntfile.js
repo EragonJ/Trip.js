@@ -142,7 +142,7 @@ module.exports = function(grunt) {
   grunt.registerTask('doc', ['jsdoc', 'jade']);
   grunt.registerTask('all', ['build', 'doc']);
   grunt.registerTask('bumpversion',
-    ['replace:configfiles', 'replace:sourcefiles', 'build']);
+    ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc']);
 
   // How to bump version ?
   //
