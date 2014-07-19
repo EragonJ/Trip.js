@@ -1,0 +1,78 @@
+// Trip Theme - Yeti
+.trip-overlay.yeti {
+  @include opacity(0.2);
+}
+
+.trip-block.yeti {
+  padding: 0px;
+  background: #008cba;
+  color: #fff;
+  @include box-shadow(rgba(0, 0, 0, 0.39) 0 2px 2px 0);
+
+  &.n:before {
+    border-top-color: #008cba;
+  }
+
+  &.s:before {
+    border-bottom-color: #006687;
+  }
+
+  &.e:before {
+    border-right-color: #008cba;
+  }
+
+  &.w:before {
+    border-left-color: #008cba;
+  }
+
+  .trip-header {
+    position: relative;
+    font-size: 18px;
+    background: #006687;
+    margin: 0px;
+    border-radius: 3px 3px 0px 0px;
+    padding: 5px;
+  }
+
+  .trip-content {
+    font-size: 12px;
+    padding: 15px;
+    max-width: 450px;
+  }
+
+  .trip-close {
+    right: 0px;
+    top: 0px;
+    margin:3px 8px 0px 0px;
+    color: #fff;
+    font-size: 16px;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .trip-progress-wrapper {
+    .trip-prev,
+    .trip-next {
+      font-size: 12px;
+      color:#fff;
+    }
+
+    .trip-prev:hover,
+    .trip-next:hover {
+      background:#006687;
+    }
+
+    .trip-next {
+      float:right;
+      border-radius: 0px 0px 5px 0px;
+    }
+
+    .trip-prev {
+      display: none;
+      float:left;
+      border-radius: 0px 0px 0px 5px;
+    }
+  }
+}

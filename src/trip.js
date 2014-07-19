@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 2.0.0
+ *  Version: 2.0.1
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -48,6 +48,7 @@
       enableKeyBinding: true,
       enableAnimation: true,
       showCloseBox: false,
+      showHeader: false,
       skipUndefinedTrip: false,
 
       // navigation
@@ -60,6 +61,7 @@
       prevLabel: 'Back',
       finishLabel: 'Dismiss',
       closeBoxLabel: '&#215;',
+      header: 'Step {{tripIndex}}',
 
       // callbacks for whole process
       onStart: $.noop,
@@ -81,6 +83,7 @@
 			tripBlockHTML: [
 				'<div class="trip-block">',
 					'<a href="#" class="trip-close"></a>',
+          '<div class="trip-header"></div>',
 					'<div class="trip-content"></div>',
 					'<div class="trip-progress-wrapper">',
 						'<div class="trip-progress-bar"></div>',
@@ -722,6 +725,21 @@
     },
 
     /**
+     * This method is used to get current trip title. Because users may need
+     * to show the tripIndex in the title, we will process passed title and
+     * replace any string matching {{tripIndex}} with current tripIndex.
+     *
+     * @memberOf Trip
+     * @type {Function}
+     * @param {String} title
+     * @return {String} current title
+     */
+    getCurrentHeader: function(title) {
+      var reTripIndex = /\{\{(tripIndex)\}\}/g;
+      return title.replace(reTripIndex, this.tripIndex + 1);
+    },
+
+    /**
      * Based on current trip data, we will use this method to set all stuffs
      * we want like content, prev / next labels, close button, used animations.
      *
@@ -731,12 +749,25 @@
      */
     setTripBlock: function(o) {
       var $tripBlock = this.$tripBlock;
+
+      // toggle used settings
       var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
       var showNavigation = o.showNavigation || this.settings.showNavigation;
+      var showHeader = o.showHeader || this.settings.showHeader;
+
+      // labels
       var closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel;
       var prevLabel = o.prevLabel || this.settings.prevLabel;
       var nextLabel = o.nextLabel || this.settings.nextLabel;
       var finishLabel = o.finishLabel || this.settings.finishLabel;
+
+      // other user customized contents
+      var header = o.header || this.settings.header;
+
+      $tripBlock
+        .find('.trip-header')
+        .html(this.getCurrentHeader(header))
+        .toggle(showHeader);
 
       $tripBlock
         .find('.trip-content')

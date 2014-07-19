@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   /*
    * basic-demo-1
    */
@@ -16,9 +17,9 @@ $(document).ready(function() {
   });
 
   /*
-   * basic-demo-2
+   * basic-demo-2-1
    */
-  var trip2 = new Trip([
+  var trip2_1 = new Trip([
     { sel : $('.demo-basic-2.step1'), content : 'North', position : 'n' },
     { sel : $('.demo-basic-2.step2'), content : 'East',  position : 'e' },
     { sel : $('.demo-basic-2.step3'), content : 'South', position : 's' },
@@ -33,8 +34,25 @@ $(document).ready(function() {
     }
   });
 
-  $('.start-demo-basic-2').on('click', function() {
-    trip2.start();
+  $('.start-demo-basic-2-1').on('click', function() {
+    trip2_1.start();
+  });
+
+  /**
+   * basic-demo-2-2
+   */
+  var trip2_2 = new Trip([
+    { sel : $('.demo-basic-2.step1'), content : 'This is Yeti!', position : 'n' },
+    { sel : $('.demo-basic-2.step2'), content : 'This is Yeti!', position : 'e' },
+    { sel : $('.demo-basic-2.step3'), content : 'This is Yeti!', position : 's' },
+    { sel : $('.demo-basic-2.step4'), content : 'This is Yeti!', position : 'w' }
+  ], {
+    showHeader: true,
+    tripTheme : 'yeti'
+  });
+
+  $('.start-demo-basic-2-2').on('click', function() {
+    trip2_2.start();
   });
 
   /*
@@ -105,7 +123,7 @@ $(document).ready(function() {
    * basic-demo-6
    */
   var trip6 = new Trip([
-    { 
+    {
       sel: $('.demo-basic-6.step1'),
       content: 'onTripStart will be called when entering this trip',
       onTripStart: function(tripIndex) {

@@ -2,145 +2,113 @@
 @import "animate";
 
 @mixin trip-arrow-color($color) {
-    &.n:before {
-        border-top-color: $color;
-    }
+  &.n:before {
+    border-top-color: $color;
+  }
 
-    &.s:before {
-        border-bottom-color: $color;
-    }
+  &.s:before {
+    border-bottom-color: $color;
+  }
 
-    &.e:before {
-        border-right-color: $color;
-    }
+  &.e:before {
+    border-right-color: $color;
+  }
 
-    &.w:before {
-        border-left-color: $color;
-    }
+  &.w:before {
+    border-left-color: $color;
+  }
 }
 
 .trip-block {
+  display: none;
+  padding: 8px;
+  position: absolute;
+  text-align: center;
+  min-width: 100px;
+  border-radius: 3px;
 
-    display: none;
-    padding: 8px;
+  &:before {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
     position: absolute;
-    text-align: center;
-    min-width: 100px;
-    border-radius: 3px;
+  }
 
-    // default black theme
-    &.black {
-        background: #333;
-        color: #DDD;
+  $arrow-size: 8px;
+  &.n:before, &.s:before {
+    border-width: $arrow-size;
+    left: 50%;
+    margin-left: -$arrow-size;
+  }
 
-        .trip-close {
-            color: #ddd;
-            &:hover {
-                color: #fff;
-            }
-        }
-        @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 4px 0);
+  &.e:before, &.w:before {
+    border-width: $arrow-size;
+    top: 50%;
+    margin-top: -$arrow-size;
+  }
 
-        @include trip-arrow-color(#333);
-    }
+  &.n:before {
+    top: 100%;
+  }
 
-    // white theme
-    &.white {
-        background: #fff;
-        color: #333;
+  &.s:before {
+    bottom: 100%;
+  }
 
-        .trip-close {
-            color: #333;
-            &:hover {
-                color: #000;
-            }
-        }
+  &.e:before {
+    right: 100%;
+  }
 
-        @include trip-arrow-color(#fff);
-    }
+  &.w:before {
+    left: 100%;
+  }
 
-    &:before {
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-    }
-
-    $arrow-size: 8px;
-    &.n:before, &.s:before {
-        border-width: $arrow-size;
-        left: 50%;
-        margin-left: -$arrow-size;
-    }
-
-    &.e:before, &.w:before {
-        border-width: $arrow-size;
-        top: 50%;
-        margin-top: -$arrow-size;
-    }
-
-    &.n:before {
-        top: 100%;
-    }
-
-    &.s:before {
-        bottom: 100%;
-    }
-
-    &.e:before {
-        right: 100%;
-    }
-
-    &.w:before {
-        left: 100%;
-    }
-
-    // sepcial directions will be positioned fixed
-    &.screen-ne,
-    &.screen-se,
-    &.screen-sw,
-    &.screen-nw,
-    &.screen-center {
-        position: fixed;
-    }
+  // sepcial directions will be positioned fixed
+  &.screen-ne,
+  &.screen-se,
+  &.screen-sw,
+  &.screen-nw,
+  &.screen-center {
+    position: fixed;
+  }
 }
 
 .trip-block.animated {
-    // animations are from :
-    // http://thecssguru.freeiz.com/animate/
-    $duration: 0.5s;
-    $delay: 0s;
-    $supportAnimations: (
-        'flash', 'bounce', 'shake', 'tada',
-        'fadeIn', 'fadeInUp', 'fadeInDown',
-        'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
-        'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
-        'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
-        'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
-        'rotateInUpRight'
-    );
+  // animations are from :
+  // http://thecssguru.freeiz.com/animate/
+  $duration: 0.5s;
+  $delay: 0s;
+  $supportAnimations: (
+    'flash', 'bounce', 'shake', 'tada',
+    'fadeIn', 'fadeInUp', 'fadeInDown',
+    'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
+    'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
+    'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
+    'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
+    'rotateInUpRight'
+  );
 
-    @each $animation in $supportAnimations {
-        &.#{$animation} {
-            @include animate(#{$animation}, $duration, $delay);
-        }
+  @each $animation in $supportAnimations {
+    &.#{$animation} {
+      @include animate(#{$animation}, $duration, $delay);
     }
+  }
 }
 
 // define its basic rules
 .trip-close {
-    font-size: 80%;
-    float: right;
-    margin-top: -5px;
+  font-size: 80%;
+  float: right;
+  margin-top: -5px;
 
-    &:hover {
-        text-decoration: none;
-    }
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .trip-content {
-    clear: right;
+  clear: right;
 }
 
 .trip-progress-wrapper {
@@ -148,24 +116,23 @@
 }
 
 .trip-progress-bar {
-    height: 1px;
-    background-color: #444;
-    width: 0;
+  height: 1px;
+  background-color: #444;
+  width: 0;
 }
 
 .trip-overlay {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: black;
-    width: 100%;
-    height: 100%;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: black;
+  width: 100%;
+  height: 100%;
 
-    // NOTE
-    // z-index is an option defined in trip.js
-
-    @include opacity(0.7);
+  // NOTE
+  // z-index is an option defined in trip.js
+  @include opacity(0.7);
 }
 
 .trip-prev, .trip-next {
@@ -177,5 +144,12 @@
  *  implement with more details later
  */
 .trip-exposed {
-    background: white
+  background: white
 }
+
+// include default themes
+@import "themes/black";
+@import "themes/white";
+
+// Include other customized themes
+@import "themes/yeti";
