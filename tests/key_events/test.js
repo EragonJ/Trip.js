@@ -50,8 +50,7 @@ asyncTest('arrow keys test', function() {
       start();
     },
     onEnd: function() {
-      throw new Error(
-        'We can\' get into onTripEnd! We should exit from onTripStop()');
+      ok('When stop, we still go into onEnd')
     }
   });
 
