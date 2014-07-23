@@ -33,6 +33,17 @@ block content
                     code
                         | 'black'
             li
+                h4 tripBlockHTML
+                p Base HTML for tripBlock
+                p
+                    | Type :
+                    code.type
+                        | String
+                p
+                    | Default :
+                    code
+                        | An array contains base HTML of tripBlock
+            li
                 h4 backToTopWhenEnded
                 p You can ask Trip.js go back to top when ended.
                 p
@@ -139,9 +150,10 @@ block content
                 h4 header
                 p
                     | This is the header for each trip. You can customize your own
-                    | if you don't want to use default one. By the way, you can put
-                    | <code>tripIndex</code> in your header and
-                    | it will be replaced with current tripIndex.
+                    | if you don't want to use default one.
+                    | You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code>
+                    | in the title to notify users about the number of trips and current
+                    | index of trip. Later when rendering, Trip.js will replace them with right information.
                 p
                     | Type :
                     code.type
@@ -346,8 +358,11 @@ block content
                 h4 header
                 p Please check the same part in global options.
             li
+                h4 showHeader
+                p Please check the same part in global options.
+            li
                 h4 content *Required*
-                p What information that you want to show to users.
+                p What information that you want to show to users. You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code> in the content to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.
                 p
                     | Type :
                     code.type
@@ -415,57 +430,15 @@ block content
                     code
                         | false
             li
-                h4 tripBlockHTML
-                p Base HTML for tripBlock
-                p
-                    | Type :
-                    code.type
-                        | String
-                p
-                    | Default :
-                    code
-                        | An array contains base HTML of tripBlock
-            li
                 h4 canGoPrev
-                p
-                    | Determines if the user can go forward. If set to a function
-                    | it is called and the response is evaluated.
-                p
-                    | Type :
-                    code.type
-                        | Boolean
-                p
-                    | Default :
-                    code
-                        | true
+                p Please check the same part in global options.
 
             li
                 h4 canGoNext
-                p
-                    | Determines if the user can go forward. If set to a function
-                    | it is called and the response is evaluated.
-                p
-                    | Type :
-                    code.type
-                        | Boolean
-                p
-                    | Default :
-                    code
-                        | true
-
+                p Please check the same part in global options.
             li
                 h4 animation
-                p
-                    |Animation that would be applied on the tripBlock. if ignored,
-                    |global value would be used.
-                p
-                    | Type :
-                    code.type
-                        | String
-                p
-                    | Default :
-                    code
-                        | 'tada'
+                p Please check the same part in global options.
             li
                 h4 showNavigation
                 p Please check the same part in global options.

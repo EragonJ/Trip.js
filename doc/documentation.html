@@ -89,6 +89,12 @@
             <p>Default :<code>'black'</code></p>
           </li>
           <li>
+            <h4>tripBlockHTML</h4>
+            <p>Base HTML for tripBlock</p>
+            <p>Type :<code class="type">String</code></p>
+            <p>Default :<code>An array contains base HTML of tripBlock</code></p>
+          </li>
+          <li>
             <h4>backToTopWhenEnded</h4>
             <p>You can ask Trip.js go back to top when ended.</p>
             <p>Type :<code class="type">Boolean</code></p>
@@ -151,9 +157,10 @@
             <h4>header</h4>
             <p>
               This is the header for each trip. You can customize your own
-              if you don't want to use default one. By the way, you can put
-              <code>tripIndex</code> in your header and
-              it will be replaced with current tripIndex.
+              if you don't want to use default one.
+              You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code>
+              in the title to notify users about the number of trips and current
+              index of trip. Later when rendering, Trip.js will replace them with right information.
             </p>
             <p>Type :<code class="type">String</code></p>
             <p>Default :<code>Step {{tripIndex}}</code></p>
@@ -273,8 +280,12 @@
             <p>Please check the same part in global options.</p>
           </li>
           <li>
+            <h4>showHeader</h4>
+            <p>Please check the same part in global options.</p>
+          </li>
+          <li>
             <h4>content *Required*</h4>
-            <p>What information that you want to show to users.</p>
+            <p>What information that you want to show to users. You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code> in the content to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.</p>
             <p>Type :<code class="type">String</code></p>
             <p>Default :<code>No default</code></p>
           </li>
@@ -317,37 +328,16 @@
             <p>Default :<code>false</code></p>
           </li>
           <li>
-            <h4>tripBlockHTML</h4>
-            <p>Base HTML for tripBlock</p>
-            <p>Type :<code class="type">String</code></p>
-            <p>Default :<code>An array contains base HTML of tripBlock</code></p>
-          </li>
-          <li>
             <h4>canGoPrev</h4>
-            <p>
-              Determines if the user can go forward. If set to a function
-              it is called and the response is evaluated.
-            </p>
-            <p>Type :<code class="type">Boolean</code></p>
-            <p>Default :<code>true</code></p>
+            <p>Please check the same part in global options.</p>
           </li>
           <li>
             <h4>canGoNext</h4>
-            <p>
-              Determines if the user can go forward. If set to a function
-              it is called and the response is evaluated.
-            </p>
-            <p>Type :<code class="type">Boolean</code></p>
-            <p>Default :<code>true</code></p>
+            <p>Please check the same part in global options.</p>
           </li>
           <li>
             <h4>animation</h4>
-            <p>
-              Animation that would be applied on the tripBlock. if ignored,
-              global value would be used.
-            </p>
-            <p>Type :<code class="type">String</code></p>
-            <p>Default :<code>'tada'</code></p>
+            <p>Please check the same part in global options.</p>
           </li>
           <li>
             <h4>showNavigation</h4>
