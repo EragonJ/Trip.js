@@ -401,7 +401,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-939">line 939</a>
+				 <a href="trip.js.html#sunlight-1-line-943">line 943</a>
 			</li>
 		</ul>
 	</dd>
@@ -905,7 +905,7 @@ can make we won't mess up with old stuffs.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1085">line 1085</a>
+				 <a href="trip.js.html#sunlight-1-line-1089">line 1089</a>
 			</li>
 		</ul>
 	</dd>
@@ -981,7 +981,7 @@ can make we won't mess up with old stuffs.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1005">line 1005</a>
+				 <a href="trip.js.html#sunlight-1-line-1009">line 1009</a>
 			</li>
 		</ul>
 	</dd>
@@ -1058,7 +1058,7 @@ we will not create it again.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1059">line 1059</a>
+				 <a href="trip.js.html#sunlight-1-line-1063">line 1063</a>
 			</li>
 		</ul>
 	</dd>
@@ -1136,7 +1136,7 @@ not create it again.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1019">line 1019</a>
+				 <a href="trip.js.html#sunlight-1-line-1023">line 1023</a>
 			</li>
 		</ul>
 	</dd>
@@ -1320,156 +1320,6 @@ the end.</p>
         
             
 <dt>
-    <h4 class="name" id="getCurrentHeader"><span class="type-signature">&lt;static> </span>getCurrentHeader<span class="signature">(title)</span><span class="type-signature"> &rarr; {String}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>This method is used to get current trip title. Because users may need
-to show the tripIndex in the title, we will process passed title and
-replace any string matching {{tripIndex}} with current tripIndex.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-737">line 737</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>current title</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">String</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="getCurrentTripObject"><span class="type-signature">&lt;static> </span>getCurrentTripObject<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
@@ -1555,6 +1405,155 @@ replace any string matching {{tripIndex}} with current tripIndex.</p>
 	<dd>
 		
 <span class="param-type">Object</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getReplacedTripContent"><span class="type-signature">&lt;static> </span>getReplacedTripContent<span class="signature">(content)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>This method is used to replace all passed content with <code>tripIndex</code> and
+<code>tripTotal</code> information.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="trip.js.html">trip.js</a>,
+				 <a href="trip.js.html#sunlight-1-line-736">line 736</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>replaced content</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">String</span>
 
 
 	</dd>
@@ -1866,7 +1865,7 @@ replace any string matching {{tripIndex}} with current tripIndex.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-995">line 995</a>
+				 <a href="trip.js.html#sunlight-1-line-999">line 999</a>
 			</li>
 		</ul>
 	</dd>
@@ -2019,7 +2018,7 @@ to manipualte the value directly.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1095">line 1095</a>
+				 <a href="trip.js.html#sunlight-1-line-1099">line 1099</a>
 			</li>
 		</ul>
 	</dd>
@@ -3024,7 +3023,7 @@ override this.console if there is no window.console like IE.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-953">line 953</a>
+				 <a href="trip.js.html#sunlight-1-line-957">line 957</a>
 			</li>
 		</ul>
 	</dd>
@@ -3430,7 +3429,7 @@ we want like content, prev / next labels, close button, used animations.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-750">line 750</a>
+				 <a href="trip.js.html#sunlight-1-line-754">line 754</a>
 			</li>
 		</ul>
 	</dd>
@@ -3580,7 +3579,7 @@ block at the right location.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-816">line 816</a>
+				 <a href="trip.js.html#sunlight-1-line-820">line 820</a>
 			</li>
 		</ul>
 	</dd>
@@ -4084,7 +4083,7 @@ then make sure it is definitely on the screen.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-967">line 967</a>
+				 <a href="trip.js.html#sunlight-1-line-971">line 971</a>
 			</li>
 		</ul>
 	</dd>
@@ -4160,7 +4159,7 @@ then make sure it is definitely on the screen.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1116">line 1116</a>
+				 <a href="trip.js.html#sunlight-1-line-1120">line 1120</a>
 			</li>
 		</ul>
 	</dd>
@@ -4441,7 +4440,7 @@ then make sure it is definitely on the screen.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Sun Jul 20th 2014 using the <a
+		on Wed Jul 23rd 2014 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
