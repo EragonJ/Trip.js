@@ -725,18 +725,22 @@
     },
 
     /**
-     * This method is used to get current trip title. Because users may need
-     * to show the tripIndex in the title, we will process passed title and
-     * replace any string matching {{tripIndex}} with current tripIndex.
+     * This method is used to replace all passed content with `tripIndex` and
+     * `tripTotal` information.
      *
      * @memberOf Trip
      * @type {Function}
-     * @param {String} title
-     * @return {String} current title
+     * @param {String} content
+     * @return {String} replaced content
      */
-    getCurrentHeader: function(title) {
+    getReplacedTripContent: function(content) {
+      content = content || '';
       var reTripIndex = /\{\{(tripIndex)\}\}/g;
-      return title.replace(reTripIndex, this.tripIndex + 1);
+      var reTripTotal = /\{\{(tripTotal)\}\}/g;
+
+      content = content.replace(reTripIndex, this.tripIndex + 1);
+      content = content.replace(reTripTotal, this.tripData.length);
+      return content;
     },
 
     /**
@@ -766,12 +770,12 @@
 
       $tripBlock
         .find('.trip-header')
-        .html(this.getCurrentHeader(header))
+        .html(this.getReplacedTripContent(header))
         .toggle(showHeader);
 
       $tripBlock
         .find('.trip-content')
-        .html(o.content);
+        .html(this.getReplacedTripContent(o.content));
 
       $tripBlock
         .find('.trip-prev')
