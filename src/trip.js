@@ -978,9 +978,10 @@
       var windowHeight = $(window).height();
       var windowTop = $(window).scrollTop();
       var tripBlockTop = this.$tripBlock.offset().top;
+      var tripBlockHeight = this.$tripBlock.height();
       var OFFSET = 100; // make it look nice
 
-      if (tripBlockTop < windowTop + windowHeight &&
+      if (tripBlockTop + tripBlockHeight < windowTop + windowHeight &&
         tripBlockTop >= windowTop) {
           // tripBlock is located inside the current screen,
           // so we don't have to scroll
