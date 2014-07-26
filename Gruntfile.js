@@ -134,7 +134,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-text-replace');
 
   // Default task(s).
-  grunt.registerTask('test', ['connect', 'qunit']);
+  grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
   grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['jshint', 'uglify']);
