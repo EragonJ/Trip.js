@@ -120,7 +120,8 @@
       ESC: 27,
       SPACE: 32,
       TRIP_BLOCK_OFFSET_VERTICAL: 10,
-      TRIP_BLOCK_OFFSET_HORIZONTAL: 10
+      TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
+      RESIZE_TIMEOUT: 200
     };
 
     this.console = window.console || {};
@@ -205,8 +206,13 @@
      */
     bindResizeEvents: function() {
       var that = this;
+      var timer;
+
       $(window).on('resize.Trip', function() {
-        that.run();
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function() {
+          that.run();
+        }, that.CONSTANTS.RESIZE_TIMEOUT);
       });
     },
 
