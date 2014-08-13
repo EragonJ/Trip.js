@@ -420,11 +420,20 @@
      * @public
      */
     next: function() {
-      this.tripDirection = 'next';
-
+      // We have to make sure we can go next first,
+      // if not, let's just re-run
       if (!this.canGoNext()) {
         return this.run();
       }
+
+      this.tripDirection = 'next';
+
+      // This is te best timing to call tripEnd because no matter
+      // users use arrow key or trip was changed by timer, we will
+      // all be here.
+      var tripObject = this.getCurrentTripObject();
+      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
+      tripEnd(this.tripIndex, tripObject);
 
       if (this.isLast()) {
         this.doLastOperation();
@@ -589,7 +598,6 @@
       var tripObject = this.getCurrentTripObject();
       var tripStart = tripObject.onTripStart || this.settings.onTripStart;
       var tripChange = tripObject.onTripChange || this.settings.onTripChange;
-      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
       var delay = tripObject.delay || this.settings.delay;
 
       if (!this.isTripDataValid(tripObject)) {
@@ -617,7 +625,6 @@
       // it to be manually advanced
       if (delay >= 0) {
         this.timer = new Timer(function() {
-          tripEnd(that.tripIndex, tripObject);
           that.next();
         }, delay);
       }

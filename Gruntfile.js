@@ -12,6 +12,7 @@ module.exports = function(grunt) {
             'http://localhost:8000/tests/directions/test.html',
             'http://localhost:8000/tests/themes/test.html',
             'http://localhost:8000/tests/key_events/test.html',
+            'http://localhost:8000/tests/integration/test.html',
           ]
         }
       }
