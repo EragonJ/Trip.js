@@ -371,10 +371,6 @@
         return this.run();
       }
 
-      if (this.hasCallback()) {
-        this.callCallback();
-      }
-
       if (this.isLast()) {
         this.doLastOperation();
       }
@@ -626,17 +622,6 @@
           return false;
       }
       return true;
-    },
-
-    /**
-     * Check whether current trip has callback or not.
-     *
-     * @memberOf Trip
-     * @type {Function}
-     * @return {Boolean} whether current trip has callback
-     */
-    hasCallback: function() {
-      return (typeof this.tripData[this.tripIndex].callback !== 'undefined');
     },
 
     /**
