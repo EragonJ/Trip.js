@@ -120,7 +120,8 @@
       ESC: 27,
       SPACE: 32,
       TRIP_BLOCK_OFFSET_VERTICAL: 10,
-      TRIP_BLOCK_OFFSET_HORIZONTAL: 10
+      TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
+      RESIZE_TIMEOUT: 200
     };
 
     this.console = window.console || {};
@@ -205,8 +206,13 @@
      */
     bindResizeEvents: function() {
       var that = this;
+      var timer;
+
       $(window).on('resize.Trip', function() {
-        that.run();
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function() {
+          that.run();
+        }, that.CONSTANTS.RESIZE_TIMEOUT);
       });
     },
 
@@ -359,15 +365,20 @@
      * @public
      */
     next: function() {
-      this.tripDirection = 'next';
-
+      // We have to make sure we can go next first,
+      // if not, let's just re-run
       if (!this.canGoNext()) {
         return this.run();
       }
 
-      if (this.hasCallback()) {
-        this.callCallback();
-      }
+      this.tripDirection = 'next';
+
+      // This is te best timing to call tripEnd because no matter
+      // users use arrow key or trip was changed by timer, we will
+      // all be here.
+      var tripObject = this.getCurrentTripObject();
+      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
+      tripEnd(this.tripIndex, tripObject);
 
       if (this.isLast()) {
         this.doLastOperation();
@@ -532,7 +543,6 @@
       var tripObject = this.getCurrentTripObject();
       var tripStart = tripObject.onTripStart || this.settings.onTripStart;
       var tripChange = tripObject.onTripChange || this.settings.onTripChange;
-      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
       var delay = tripObject.delay || this.settings.delay;
 
       if (!this.isTripDataValid(tripObject)) {
@@ -560,7 +570,6 @@
       // it to be manually advanced
       if (delay >= 0) {
         this.timer = new Timer(function() {
-          tripEnd(that.tripIndex, tripObject);
           that.next();
         }, delay);
       }
@@ -620,27 +629,6 @@
           return false;
       }
       return true;
-    },
-
-    /**
-     * Check whether current trip has callback or not.
-     *
-     * @memberOf Trip
-     * @type {Function}
-     * @return {Boolean} whether current trip has callback
-     */
-    hasCallback: function() {
-      return (typeof this.tripData[this.tripIndex].callback !== 'undefined');
-    },
-
-    /**
-     * If current trip has callback, we will call it directly.
-     *
-     * @memberOf Trip
-     * @type {Function}
-     */
-    callCallback: function() {
-      this.tripData[this.tripIndex].callback(this.tripIndex);
     },
 
     /**
@@ -978,9 +966,10 @@
       var windowHeight = $(window).height();
       var windowTop = $(window).scrollTop();
       var tripBlockTop = this.$tripBlock.offset().top;
+      var tripBlockHeight = this.$tripBlock.height();
       var OFFSET = 100; // make it look nice
 
-      if (tripBlockTop < windowTop + windowHeight &&
+      if (tripBlockTop + tripBlockHeight < windowTop + windowHeight &&
         tripBlockTop >= windowTop) {
           // tripBlock is located inside the current screen,
           // so we don't have to scroll
