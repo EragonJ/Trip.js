@@ -625,16 +625,6 @@
     },
 
     /**
-     * If current trip has callback, we will call it directly.
-     *
-     * @memberOf Trip
-     * @type {Function}
-     */
-    callCallback: function() {
-      this.tripData[this.tripIndex].callback(this.tripIndex);
-    },
-
-    /**
      * Check whether we can go to previous trip or not.
      *
      * @memberOf Trip
