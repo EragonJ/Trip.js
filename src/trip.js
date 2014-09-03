@@ -309,6 +309,9 @@
       tripStop(this.tripIndex, tripObject);
 
       this.settings.onEnd();
+
+      // We have to reset tripIndex in stop action too
+      this.tripIndex = this.settings.tripIndex;
     },
 
     /**
@@ -473,8 +476,8 @@
         this.$root.animate({ scrollTop: 0 }, 'slow');
       }
 
-      this.tripIndex = this.settings.tripIndex;
       this.settings.onEnd();
+      this.tripIndex = this.settings.tripIndex;
 
       return false;
     },
