@@ -149,7 +149,7 @@ module.exports = function(grunt) {
   //
   // grunt bumpversion --oldv=1.3.0 --newv=2.0.0
   //
-  // NOTE: 
+  // NOTE:
   //
   // 1. After bumping versions, we will also build again to make sure
   // this change old get reflected into built files also.

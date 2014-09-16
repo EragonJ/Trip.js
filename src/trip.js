@@ -151,29 +151,35 @@
      *
      * @memberOf Trip
      * @type {Funtion}
-     * @param {jQuery} $sel
      */
-    showExpose: function($sel) {
+    showExpose: function() {
+      var o = this.getCurrentTripObject();
+      var $sel = $(o.sel);
       var oldCSS;
       var newCSS;
 
       this.hasExpose = true;
 
-      oldCSS = {
-        position: $sel.css('position'),
-        zIndex: $sel.css('z-Index')
-      };
+      // NOTE: issue #68
+      // we have to make sure $sel does exist because we may have no
+      // $sel when using special directions
+      if ($sel.get(0) !== undefined) {
+        oldCSS = {
+          position: $sel.css('position'),
+          zIndex: $sel.css('z-Index')
+        };
 
-      // we have to make it higher than the overlay
-      newCSS = {
-        position: 'relative',
-        zIndex: this.settings.overlayZindex + 1
-      };
+        // we have to make it higher than the overlay
+        newCSS = {
+          position: 'relative',
+          zIndex: this.settings.overlayZindex + 1
+        };
 
-      $sel
-        .data('trip-old-css', oldCSS)
-        .css(newCSS)
-        .addClass('trip-exposed');
+        $sel
+          .data('trip-old-css', oldCSS)
+          .css(newCSS)
+          .addClass('trip-exposed');
+      }
 
       this.$overlay.show();
     },
@@ -186,13 +192,18 @@
      */
     hideExpose: function() {
       var $exposedSel = $('.trip-exposed');
-      var oldCSS = $exposedSel.data('trip-old-css');
-
       this.hasExpose = false;
 
-      $exposedSel
-        .css(oldCSS)
-        .removeClass('trip-exposed');
+      // NOTE: issue #68
+      // we have to make sure $sel does exist because we may have no
+      // $sel when using special directions
+      if ($exposedSel.get(0) !== undefined) {
+        var oldCSS = $exposedSel.data('trip-old-css');
+
+        $exposedSel
+          .css(oldCSS)
+          .removeClass('trip-exposed');
+      }
 
       this.$overlay.hide();
     },
@@ -445,7 +456,7 @@
       }
 
       if (o.expose) {
-        this.showExpose($(o.sel));
+        this.showExpose();
       }
     },
 
@@ -609,17 +620,7 @@
      * @return {Boolean} whether tripData is valid
      */
     isTripDataValid: function(o) {
-      var specialDirections = [
-        'screen-ne',
-        'screen-se',
-        'screen-sw',
-        'screen-nw',
-        'screen-center'
-      ];
-
-      // if we have set special direction,
-      // we don't need to check sel
-      if ($.inArray(o.position, specialDirections) >= 0) {
+      if (this.hasSpeicalDirections()) {
         return true;
       }
 
@@ -632,6 +633,33 @@
           return false;
       }
       return true;
+    },
+
+    /**
+     * Check whether position is special or not
+     *
+     * @memberOf Trip
+     * @type {Function}
+     * @param {String} position position
+     * @return {Boolean} whether position is speical direction or not
+     */
+    hasSpeicalDirections: function() {
+      var o = this.getCurrentTripObject();
+      var position = o.position;
+      var specialDirections = [
+        'screen-ne',
+        'screen-se',
+        'screen-sw',
+        'screen-nw',
+        'screen-center'
+      ];
+
+      // if we have set special direction,
+      // we don't need to check sel
+      if ($.inArray(position, specialDirections) >= 0) {
+        return true;
+      }
+      return false;
     },
 
     /**
