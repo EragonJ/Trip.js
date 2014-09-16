@@ -1,6 +1,6 @@
 {
   "name": "Trip.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-qunit": "~0.4.0",
