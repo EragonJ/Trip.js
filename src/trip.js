@@ -50,6 +50,7 @@
       showCloseBox: false,
       showHeader: false,
       skipUndefinedTrip: false,
+      overlayHolder: 'body',
 
       // navigation
       showNavigation: false,
@@ -1095,7 +1096,7 @@
             zIndex: this.settings.overlayZindex
           });
 
-        $('body').append($overlay);
+        $(this.settings.overlayHolder).append($overlay);
       }
     },
 
