@@ -43,6 +43,7 @@
       tripIndex: 0,
       tripTheme: 'black',
       backToTopWhenEnded: false,
+      overlayHolder: 'body',
       overlayZindex: 99999,
       delay: 1000,
       enableKeyBinding: true,
@@ -50,7 +51,6 @@
       showCloseBox: false,
       showHeader: false,
       skipUndefinedTrip: false,
-      overlayHolder: 'body',
 
       // navigation
       showNavigation: false,

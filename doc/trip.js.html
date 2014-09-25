@@ -98,6 +98,7 @@
       tripIndex: 0,
       tripTheme: 'black',
       backToTopWhenEnded: false,
+      overlayHolder: 'body',
       overlayZindex: 99999,
       delay: 1000,
       enableKeyBinding: true,
@@ -1152,7 +1153,7 @@
             zIndex: this.settings.overlayZindex
           });
 
-        $('body').append($overlay);
+        $(this.settings.overlayHolder).append($overlay);
       }
     },
 
