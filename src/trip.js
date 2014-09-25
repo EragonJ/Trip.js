@@ -43,6 +43,7 @@
       tripIndex: 0,
       tripTheme: 'black',
       backToTopWhenEnded: false,
+      overlayHolder: 'body',
       overlayZindex: 99999,
       delay: 1000,
       enableKeyBinding: true,
@@ -319,7 +320,7 @@
       var tripStop = tripObject.onTripStop || this.settings.onTripStop;
       tripStop(this.tripIndex, tripObject);
 
-      this.settings.onEnd();
+      this.settings.onEnd(this.tripIndex, tripObject);
 
       // We have to reset tripIndex in stop action too
       this.tripIndex = this.settings.tripIndex;
@@ -487,9 +488,11 @@
         this.$root.animate({ scrollTop: 0 }, 'slow');
       }
 
-      this.settings.onEnd();
-      this.tripIndex = this.settings.tripIndex;
+      var tripObject = this.getCurrentTripObject();
+      this.settings.onEnd(this.tripIndex, tripObject);
 
+      // We have to reset tripIndex when trip got finished
+      this.tripIndex = this.settings.tripIndex;
       return false;
     },
 
@@ -1095,7 +1098,7 @@
             zIndex: this.settings.overlayZindex
           });
 
-        $('body').append($overlay);
+        $(this.settings.overlayHolder).append($overlay);
       }
     },
 
