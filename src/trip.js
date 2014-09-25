@@ -319,7 +319,7 @@
       var tripStop = tripObject.onTripStop || this.settings.onTripStop;
       tripStop(this.tripIndex, tripObject);
 
-      this.settings.onEnd();
+      this.settings.onEnd(this.tripIndex, tripObject);
 
       // We have to reset tripIndex in stop action too
       this.tripIndex = this.settings.tripIndex;
@@ -487,9 +487,11 @@
         this.$root.animate({ scrollTop: 0 }, 'slow');
       }
 
-      this.settings.onEnd();
-      this.tripIndex = this.settings.tripIndex;
+      var tripObject = this.getCurrentTripObject();
+      this.settings.onEnd(this.tripIndex, tripObject);
 
+      // We have to reset tripIndex when trip got finished
+      this.tripIndex = this.settings.tripIndex;
       return false;
     },
 
