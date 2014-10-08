@@ -81,9 +81,9 @@
   { sel : $(".demo-basic-1.step3"), content : "South", position : "s" },
   { sel : $(".demo-basic-1.step4"), content : "West",  position : "w" }
 ], {
-    
+
 });
- 
+
 $(".start-demo-basic-1").on("click", function() {
   trip1.start();
 });</code></pre>
@@ -111,7 +111,7 @@ $(".start-demo-basic-1").on("click", function() {
       $("body").css({ "background-color" : "#fff" });
   }
 });
- 
+
 $(".start-demo-basic-2").on("click", function() {
   trip2_1.start();
 });</code></pre>
@@ -135,7 +135,7 @@ $(".start-demo-basic-2").on("click", function() {
   showHeader : true,
   tripTheme : "yeti"
 });
- 
+
 $(".start-demo-basic-2").on("click", function() {
   trip2_2.start();
 });</code></pre>
@@ -151,7 +151,7 @@ $(".start-demo-basic-2").on("click", function() {
   backToTopWhenEnded : true,
   delay : 3000
 });
- 
+
 $(".start-demo-basic-3").on("click", function() {
   trip3.start();
 });</code></pre>
@@ -168,7 +168,7 @@ $(".start-demo-basic-3").on("click", function() {
   showCloseBox : true,
   delay : -1
 });
- 
+
 $(".start-demo-basic-4").on("click", function() {
   trip4.start();
 });</code></pre>
@@ -202,7 +202,7 @@ $(".start-demo-basic-4").on("click", function() {
     console.log("You close the trip at index : ", i);
   }
 });
- 
+
 $(".start-demo-basic-5").on("click", function() {
   trip5.start();
 });</code></pre>
@@ -213,7 +213,7 @@ $(".start-demo-basic-5").on("click", function() {
         <p>Note: we will use global one if not found.</p>
         <input type="button" value="Run Demo" class="btn btn-primary btn-small start-demo-basic-6">
         <pre><code class="javascript">var trip6 = new Trip([
-  { 
+  {
     sel: $('.demo-basic-6.step1'),
     content: 'onTripStart will be called when entering this trip',
     onTripStart: function(tripIndex) {
@@ -235,22 +235,23 @@ $(".start-demo-basic-5").on("click", function() {
     console.log('default onTripStart : ', tripIndex);
   }
 });
- 
+
 $('.start-demo-basic-6').on('click', function() {
   trip6.start();
 });</code></pre>
       </div>
       <div class="each-demo">
-        <h2 class="demo-basic-7 step1 step2">7. You can also highlight something</h2>
+        <h2 class="demo-basic-7 step1 step3">7. You can also <span class="demo-basic-7 step2">highlight</span> something</h2>
         <input type="button" value="Run Demo" class="btn btn-primary btn-small start-demo-basic-7">
-        <pre class="demo-basic-7 step3"><code class="javascript">var trip7 = new Trip([
+        <pre class="demo-basic-7 step4"><code class="javascript">var trip7 = new Trip([
   { sel : $(".demo-basic-7.step1"), content : "Highlight this", expose : true },
-  { sel : $(".demo-basic-7.step2"), content : "No highlight" },
-  { sel : $(".demo-basic-7.step3"), content : "Highlight that", expose : true }
+  { sel : $(".demo-basic-7.step2"), content : "Highlight other", expose : '.demo-basic-7.step1' },
+  { sel : $(".demo-basic-7.step3"), content : "No highlight" },
+  { sel : $(".demo-basic-7.step4"), content : "Highlight that", expose : true }
 ], {
   delay : 3000
 });
- 
+
 $(".start-demo-basic-7").on("click", function() {
   trip7.start();
 });</code></pre>
@@ -273,7 +274,7 @@ $(".start-demo-basic-7").on("click", function() {
   delay : 3000,
   animation: 'tada'
 });
- 
+
 $(".start-demo-basic-8").on("click", function() {
   trip8.start();
 });</code></pre>
