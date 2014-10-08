@@ -184,14 +184,15 @@ block content
                 | });
 
     div.each-demo
-        h2.demo-basic-7.step1.step2 7. You can also highlight something
+        h2.demo-basic-7.step1.step3 7. You can also <span class="demo-basic-7 step2">highlight</span> something
         input.btn.btn-primary.btn-small.start-demo-basic-7(type="button", value="Run Demo")
-        pre.demo-basic-7.step3
+        pre.demo-basic-7.step4
             code.javascript
                 | var trip7 = new Trip([
                 |   { sel : $(".demo-basic-7.step1"), content : "Highlight this", expose : true },
-                |   { sel : $(".demo-basic-7.step2"), content : "No highlight" },
-                |   { sel : $(".demo-basic-7.step3"), content : "Highlight that", expose : true }
+                |   { sel : $(".demo-basic-7.step2"), content : "Highlight multiple elements with selector or jQuery object", expose : '.demo-basic-7.step1, .start-demo-basic-7' },
+                |   { sel : $(".demo-basic-7.step3"), content : "No highlight" },
+                |   { sel : $(".demo-basic-7.step4"), content : "Highlight that", expose : true }
                 | ], {
                 |   delay : 3000
                 | });

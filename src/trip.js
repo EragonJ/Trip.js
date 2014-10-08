@@ -155,9 +155,17 @@
      */
     showExpose: function() {
       var o = this.getCurrentTripObject();
-      var $sel = $(o.sel);
       var oldCSS;
       var newCSS;
+      var $sel;
+
+      if (typeof o.expose === 'string') {
+        $sel = $(o.expose);
+      } else if (o.expose instanceof $) {
+        $sel = o.expose;
+      } else {
+        $sel = $(o.sel);
+      }
 
       this.hasExpose = true;
 

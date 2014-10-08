@@ -241,12 +241,13 @@ $('.start-demo-basic-6').on('click', function() {
 });</code></pre>
       </div>
       <div class="each-demo">
-        <h2 class="demo-basic-7 step1 step2">7. You can also highlight something</h2>
+        <h2 class="demo-basic-7 step1 step3">7. You can also <span class="demo-basic-7 step2">highlight</span> something</h2>
         <input type="button" value="Run Demo" class="btn btn-primary btn-small start-demo-basic-7">
-        <pre class="demo-basic-7 step3"><code class="javascript">var trip7 = new Trip([
+        <pre class="demo-basic-7 step4"><code class="javascript">var trip7 = new Trip([
   { sel : $(".demo-basic-7.step1"), content : "Highlight this", expose : true },
-  { sel : $(".demo-basic-7.step2"), content : "No highlight" },
-  { sel : $(".demo-basic-7.step3"), content : "Highlight that", expose : true }
+  { sel : $(".demo-basic-7.step2"), content : "Highlight multiple elements with selector or jQuery object", expose : '.demo-basic-7.step1, .start-demo-basic-7' },
+  { sel : $(".demo-basic-7.step3"), content : "No highlight" },
+  { sel : $(".demo-basic-7.step4"), content : "Highlight that", expose : true }
 ], {
   delay : 3000
 });
