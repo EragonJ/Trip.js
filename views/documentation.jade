@@ -436,6 +436,14 @@ block content
                     | Type :
                     code.type
                         | Boolean
+                    |  or
+                    | Type :
+                    code.type
+                        | String
+                    | (If your element is not present in DOM tree when initialization)
+                    |  or
+                    code.type
+                        | jQuery Object
                 p
                     | Default :
                     code
