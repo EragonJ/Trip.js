@@ -161,7 +161,7 @@
 
       if (typeof o.expose === 'string') {
         $sel = $(o.expose);
-      } else if (typeof o.expose === 'object') {
+      } else if (o.expose instanceof $) {
         $sel = o.expose;
       } else {
         $sel = $(o.sel);
