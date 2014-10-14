@@ -154,9 +154,10 @@ $(document).ready(function() {
    * basic-demo-7
    */
   var trip7 = new Trip([
-    { sel : $('.demo-basic-7.step1'), content : 'Highlight this', expose : true },
-    { sel : $('.demo-basic-7.step2'), content : 'No highlight' },
-    { sel : $('.demo-basic-7.step3'), content : 'Highlight that', expose : true }
+    { sel : $(".demo-basic-7.step1"), content : "Highlight this", expose : true },
+    { sel : $(".demo-basic-7.step2"), content : "Highlight multiple elements with selector or jQuery object", expose : '.demo-basic-7.step1, .start-demo-basic-7' },
+    { sel : $(".demo-basic-7.step3"), content : "No highlight" },
+    { sel : $(".demo-basic-7.step4"), content : "Highlight that", expose : true }
   ], {
     delay : 3000
   });
