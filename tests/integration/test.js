@@ -32,6 +32,54 @@ asyncTest('make sure arrow key would trigger onTripEnd', function() {
   trip.start();
 });
 
+asyncTest('next / prev will trigger onTripEnd too', function() {
+  expect(2);
+
+  var comingFromPrev = false;
+
+  var trip = new Trip([
+    {
+      sel: $('.demo'),
+      content: 'North',
+      position: 'n',
+      onTripStart: function() {
+        Helpers.sendKey('DOWN');
+      },
+      onTripEnd: function() {
+        ok(true, 'local onTripEnd is called');
+      }
+    },
+    {
+      sel: $('.demo'),
+      content: 'East',
+      position: 'e',
+      onTripEnd: function() {
+        if (comingFromPrev) {
+          ok(true, 'local onTripEnd is called');
+        }
+      }
+    },
+    {
+      sel: $('.demo'),
+      content: 'South',
+      position: 's',
+      onTripStart: function() {
+        if (!comingFromPrev) {
+          Helpers.sendKey('UP');
+          comingFromPrev = true;
+        }
+      }
+    }
+  ], {
+    delay: 1000,
+    onEnd: function() {
+      start();
+    }
+  });
+
+  trip.start();
+});
+
 asyncTest('expose would not make Trip throw exception, check #68', function() {
   var trip = new Trip([
     {
