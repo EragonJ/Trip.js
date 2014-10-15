@@ -422,9 +422,17 @@
     prev: function() {
       this.tripDirection = 'prev';
 
+      // When this is executed, it means users click on the arrow key to
+      // navigate back to previous trip. In that scenario, this is the better
+      // place to call onTripEnd before modifying tripIndex.
+      var tripObject = this.getCurrentTripObject();
+      var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
+      tripEnd(this.tripIndex, tripObject);
+
       if (!this.isFirst() && this.canGoPrev()) {
         this.decreaseIndex();
       }
+
       this.run();
     },
 
