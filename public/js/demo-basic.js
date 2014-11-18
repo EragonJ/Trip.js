@@ -55,6 +55,23 @@ $(document).ready(function() {
     trip2_2.start();
   });
 
+  /**
+   * basic-demo-2-3
+   */
+  var trip2_3 = new Trip([
+    { sel : $('.demo-basic-2.step1'), content : 'This is Dark!', position : 'n' },
+    { sel : $('.demo-basic-2.step2'), content : 'This is Dark!', position : 'e' },
+    { sel : $('.demo-basic-2.step3'), content : 'This is Dark!', position : 's' },
+    { sel : $('.demo-basic-2.step4'), content : 'This is Dark!', position : 'w' }
+  ], {
+    showHeader: true,
+    tripTheme : 'dark'
+  });
+
+  $('.start-demo-basic-2-3').on('click', function() {
+    trip2_3.start();
+  });
+
   /*
    * basic-demo-3
    */

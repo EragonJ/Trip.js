@@ -1512,6 +1512,7 @@
   -moz-box-shadow: rgba(0, 0, 0, 0.39) 0 2px 2px 0;
   box-shadow: rgba(0, 0, 0, 0.39) 0 2px 2px 0; }
   .trip-block.yeti.n:before {
+    margin-top: -1px;
     border-top-color: #008cba; }
   .trip-block.yeti.s:before {
     border-bottom-color: #006687; }
@@ -1552,3 +1553,61 @@
     display: none;
     float: left;
     border-radius: 0px 0px 0px 5px; }
+
+.trip-overlay.dark {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+  opacity: 0.2; }
+
+.trip-block.dark {
+  background: #333;
+  padding: 0;
+  color: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.39) 0 2px 2px 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.39) 0 2px 2px 0;
+  box-shadow: rgba(0, 0, 0, 0.39) 0 2px 2px 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=92);
+  opacity: 0.92; }
+  .trip-block.dark.n:before {
+    margin-top: -1px;
+    border-top-color: #333; }
+  .trip-block.dark.s:before {
+    border-bottom-color: #555; }
+  .trip-block.dark.e:before {
+    border-right-color: #333; }
+  .trip-block.dark.w:before {
+    border-left-color: #333; }
+  .trip-block.dark .trip-header {
+    position: relative;
+    font-size: 16px;
+    background: #555;
+    margin: 0;
+    border-radius: 3px 3px 0px 0px;
+    padding: 5px; }
+  .trip-block.dark .trip-content {
+    font-size: 12px;
+    padding: 1em;
+    max-width: 450px; }
+  .trip-block.dark .trip-close {
+    right: 0;
+    top: 0;
+    margin: 3px 8px 0 0;
+    color: #fff;
+    font-size: 16px; }
+    .trip-block.dark .trip-close:hover {
+      color: #000; }
+  .trip-block.dark .trip-progress-wrapper .trip-prev,
+  .trip-block.dark .trip-progress-wrapper .trip-next {
+    font-size: 12px;
+    color: #fff; }
+  .trip-block.dark .trip-progress-wrapper .trip-prev:hover,
+  .trip-block.dark .trip-progress-wrapper .trip-next:hover {
+    background: #666; }
+  .trip-block.dark .trip-progress-wrapper .trip-next {
+    float: right;
+    border-radius: 0px 0px 5px 0px; }
+  .trip-block.dark .trip-progress-wrapper .trip-prev {
+    display: none;
+    float: left;
+    border-radius: 0px 0px 0px 5px; }
+  .trip-block.dark .trip-progress-wrapper .trip-progress-bar {
+    background: green; }
