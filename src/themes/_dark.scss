@@ -1,50 +1,51 @@
-// Trip Theme - Yeti
-.trip-overlay.yeti {
+// Default Trip Theme - Dark
+.trip-overlay.dark {
   @include opacity(0.2);
 }
 
-.trip-block.yeti {
-  padding: 0px;
-  background: #008cba;
+.trip-block.dark {
+  background: #333;
+  padding: 0;
   color: #fff;
   @include box-shadow(rgba(0, 0, 0, 0.39) 0 2px 2px 0);
+  @include opacity(0.92);
 
   &.n:before {
     margin-top: -1px; // We have to hide the progress bar
-    border-top-color: #008cba;
+    border-top-color: #333;
   }
 
   &.s:before {
-    border-bottom-color: #006687;
+    border-bottom-color: #555;
   }
 
   &.e:before {
-    border-right-color: #008cba;
+    border-right-color: #333;
   }
 
   &.w:before {
-    border-left-color: #008cba;
+    border-left-color: #333;
   }
 
   .trip-header {
     position: relative;
-    font-size: 18px;
-    background: #006687;
-    margin: 0px;
+    font-size: 16px;
+    background: #555;
+    margin: 0;
     border-radius: 3px 3px 0px 0px;
     padding: 5px;
   }
 
   .trip-content {
     font-size: 12px;
-    padding: 15px;
+    padding: 1em; 
     max-width: 450px;
   }
 
   .trip-close {
-    right: 0px;
-    top: 0px;
-    margin:3px 8px 0px 0px;
+    right: 0;
+    top: 0;
+    margin: 3px 8px 0 0;
     color: #fff;
     font-size: 16px;
 
@@ -62,7 +63,7 @@
 
     .trip-prev:hover,
     .trip-next:hover {
-      background:#006687;
+      background:#666;
     }
 
     .trip-next {
@@ -74,6 +75,10 @@
       display: none;
       float:left;
       border-radius: 0px 0px 0px 5px;
+    }
+
+    .trip-progress-bar {
+      background: green;
     }
   }
 }

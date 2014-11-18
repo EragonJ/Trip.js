@@ -29,6 +29,8 @@ block content
                 a(href="#demo2-1", data-toggle="tab") Black and white theme
             li
                 a(href="#demo2-2", data-toggle="tab") Yeti theme
+            li
+                a(href="#demo2-3", data-toggle="tab") Dark theme
         div.tab-content
             div#demo2-1.tab-pane.active
                 input.btn.btn-primary.btn-small.start-demo-basic-2-1(type="button", value="Run Demo")
@@ -49,7 +51,7 @@ block content
                         |   }
                         | });
                         | 
-                        | $(".start-demo-basic-2").on("click", function() {
+                        | $(".start-demo-basic-2-1").on("click", function() {
                         |   trip2_1.start();
                         | });
             div#demo2-2.tab-pane
@@ -73,8 +75,32 @@ block content
                         |   tripTheme : "yeti"
                         | });
                         | 
-                        | $(".start-demo-basic-2").on("click", function() {
+                        | $(".start-demo-basic-2-2").on("click", function() {
                         |   trip2_2.start();
+                        | });
+            div#demo2-3.tab-pane
+                div.alert.alert-info This is included in version >= 2.0.0
+                p 
+                    | Note :
+                    | Dark theme is a special theme that is composed with header, so if you want to use this theme,
+                    | please remember to put <code>showHeader</code> to <code>true</code> and by the way, you can
+                    | use <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code> to show information on header
+                    | and content ! Trip.js will automatically replace them with right information for you !
+                input.btn.btn-primary.btn-small.start-demo-basic-2-3(type="button", value="Run Demo")
+                pre
+                    code.javascript
+                        | var trip2_3 = new Trip([
+                        |   { sel : $('.demo-basic-2.step1'), content : 'This is Dark!', position : 'n' },
+                        |   { sel : $('.demo-basic-2.step2'), content : 'This is Dark!', position : 'e' },
+                        |   { sel : $('.demo-basic-2.step3'), content : 'This is Dark!', position : 's' },
+                        |   { sel : $('.demo-basic-2.step4'), content : 'This is Dark!', position : 'w' }
+                        | ], {
+                        |   showHeader: true,
+                        |   tripTheme : 'dark'
+                        | });
+                        | 
+                        | $('.start-demo-basic-2-3').on('click', function() {
+                        |   trip2_3.start();
                         | });
 
     div.each-demo
