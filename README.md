@@ -99,7 +99,7 @@ Trip.js would detect following keys to do relative actions after loading it.
 * trip.start()  - start your trip
 * trip.stop()   - stop your trip
 * trip.pause()  - pause / resume your trip ( same as trip.resume() )
-* trip.resume() - pause / resume your trip ( same as trip.pasue()  )
+* trip.resume() - pause / resume your trip ( same as trip.pause()  )
 * trip.next()   - jump to next step
 * trip.prev()   - jump back to previous step
 
