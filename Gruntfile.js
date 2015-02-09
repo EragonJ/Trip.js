@@ -31,27 +31,35 @@ module.exports = function(grunt) {
           preserveComments: 'some'
         },
         files: {
-          'src/trip.min.js': ['src/trip.js']
+          'dist/trip.min.js': ['dist/trip.js']
         }
       }
     },
     sass: {
       dist_non_compressed: {
         options: {
-          compass: true
+          compass: true,
+          sourcemap: 'none'
         },
         files: {
-          'src/trip.css': 'src/trip.scss'
+          'dist/trip.css': 'src/trip.scss'
         }
       },
       dist_compressed: {
         options: {
           compass: true,
-          style: 'compressed'
+          style: 'compressed',
+          sourcemap: 'none'
         },
         files: {
-          'src/trip.min.css': 'src/trip.scss'
+          'dist/trip.min.css': 'src/trip.scss'
         }
+      }
+    },
+    concat: {
+      dist: {
+        src: ['src/trip.*.js'],
+        dest: 'dist/trip.js'
       }
     },
     jade: {
@@ -126,6 +134,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
@@ -138,7 +147,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
   grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
-  grunt.registerTask('minify', ['jshint', 'uglify']);
+  grunt.registerTask('minify', ['jshint', 'concat', 'uglify']);
   grunt.registerTask('build', ['minify', 'sass']);
   grunt.registerTask('doc', ['jsdoc', 'jade']);
   grunt.registerTask('all', ['build', 'doc']);
@@ -152,7 +161,7 @@ module.exports = function(grunt) {
   // NOTE:
   //
   // 1. After bumping versions, we will also build again to make sure
-  // this change old get reflected into built files also.
+  // this change get reflected into built files also.
   //
   // 2. Because the matching rule is very easy, we have to check version
   // again after bumping to make sure we won't override the wrong words.
