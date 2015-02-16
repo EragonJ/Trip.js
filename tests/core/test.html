@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Trip.js Tests - Core</title>
+      <link rel="stylesheet" href="../../public/vendor/qunit/qunit.css">
+      <link rel="stylesheet" href="../../dist/trip.css">
+  </head>
+  <body>
+      <!-- qunit stuffs -->
+      <div id="qunit"></div>
+      <div id="qunit-fixture"></div>
+
+      <!-- Trip.js DOM -->
+      <div class="demo"></div>
+
+      <!-- scripts -->
+      <script src="../../public/vendor/jquery-1.8.3.min.js"></script>
+      <script src="../../public/vendor/qunit/qunit.js"></script>
+      <script src="../../dist/trip.js"></script>
+      <script src="../global.js"></script>
+      <script src="../helpers.js"></script>
+      <script src="test.js"></script>
+  </body>
+
+  <div name="customized parser">
+    <div class="customized-trip-group" data-trip-index="1" data-trip-content="hi1" data-trip-delay="100" data-trip-position="n">test1</div>
+    <div class="customized-trip-group" data-trip-index="2" data-trip-content="hi2" data-trip-delay="200" data-trip-position="e">test2</div>
+    <div class="customized-trip-group" data-trip-index="3" data-trip-content="hi3" data-trip-delay="300" data-trip-position="s">test3</div>
+  </div>
+
+  <div name="default parser">
+    <div data-trip data-trip-index="1" data-trip-content="hi1" data-trip-position="n">test1</div>
+    <div data-trip data-trip-index="2" data-trip-content="hi2" data-trip-position="e">test2</div>
+    <div data-trip data-trip-index="3" data-trip-content="hi3" data-trip-position="s">test3</div>
+  </div>
+
+  <div name="programming parser">
+    <div class="step1"></div>
+    <div class="step2"></div>
+    <div class="step3"></div>
+  </div>
+</html>
