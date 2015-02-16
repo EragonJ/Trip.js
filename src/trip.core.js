@@ -1,17 +1,4 @@
-/**
- *  Trip.js
- *
- *  This is a jQuery plugin that can help you customize your tutorial trip
- *  with full flexibilities.
- *
- *  Version: 2.0.2
- *
- *  Author: EragonJ <eragonj@eragonj.me>
- *  Blog: http://eragonj.me
- *
- *  @preserve
- */
-(function(window, $) {
+(function(exports, $) {
 
   var CHECKED_ANIMATIONS = [
     'flash', 'bounce', 'shake', 'tada',
@@ -30,7 +17,49 @@
    * @param {Array.<Object>} tripData
    * @param {Object} userOptions
    */
-  var Trip = function(tripData, userOptions) {
+  var Trip = function() {
+    var tripData;
+    var userOptions;
+
+    // () - default parser mode without configurations
+    if (arguments.length === 0) {
+      tripData = window.TripParser.parse('default');
+      userOptions = {};
+    }
+    else if (arguments.length === 1) {
+      // ([]) - programming mode without configurations
+      if (this.isArray(arguments[0])) {
+        tripData = arguments[0];
+        userOptions = {};
+      }
+      // ({}) - default parser mode with configurations
+      else if (this.isObject(arguments[0])) {
+        tripData = window.TripParser.parse('default');
+        userOptions = arguments[0];
+      }
+      // ('.trip-nodes') - customized parser mode without configurations
+      else if (this.isString(arguments[0])) {
+        tripData = window.TripParser.parse(arguments[0]);
+        userOptions = {};
+      }
+      // we don't support other formats here, so let's throw error here
+      else {
+        throw 'Please check documents for passing parameters, you may pass' +
+          ' wrong parameters into constructor function !';
+      }
+    }
+    // Users pass tripData directly from codebase
+    else {
+      // ([], {}) - programming mode with configurations
+      if (this.isArray(arguments[0])) {
+        tripData = arguments[0];
+      }
+      // ('.trip-nodes', {}) - customized parser mode with configurations
+      else if (this.isString(arguments[0])) {
+        tripData = window.TripParser.parse(arguments[0]);
+      }
+      userOptions = arguments[1];
+    }
 
     /**
      * It is used to keep user and default settings.
@@ -340,7 +369,7 @@
      * @memberOf Trip
      * @type {Function}
      */
-    pauseAndResume: function() {
+    pauseOrResume: function() {
       if (this.progressing) {
         this.timer.pause();
         this.pauseProgressBar();
@@ -360,7 +389,7 @@
      * @public
      */
     pause: function() {
-      this.pauseAndResume();
+      this.pauseOrResume();
       var tripObject = this.getCurrentTripObject();
       var tripPause = tripObject.onTripPause || this.settings.onTripPause;
       tripPause(this.tripIndex, tripObject);
@@ -374,7 +403,7 @@
      * @public
      */
     resume: function() {
-      this.pauseAndResume();
+      this.pauseOrResume();
       var tripObject = this.getCurrentTripObject();
       var tripResume = tripObject.onTripResume || this.settings.onTripResume;
       tripResume(this.tripIndex, tripObject);
@@ -749,6 +778,48 @@
       else {
         this.tripIndex -= 1;
       }
+    },
+
+    /**
+     * We will use this native method to know whether this is an array.
+     *
+     * TODO
+     * we have to move this to TripUtils
+     *
+     * @memberOf Trip
+     * @type {Function}
+     * @return {Boolean}
+     */
+    isArray: function(target) {
+      return Object.prototype.toString.call(target) === '[object Array]';
+    },
+
+    /**
+     * We will use this native method to know whether this is an string.
+     *
+     * TODO
+     * we have to move this to TripUtils
+     *
+     * @memberOf Trip
+     * @type {Function}
+     * @return {Boolean}
+     */
+    isString: function(target) {
+      return (typeof target === 'string');
+    },
+
+    /**
+     * We will use this native method to know whether this is an object.
+     *
+     * TODO
+     * we have to move this to TripUtils
+     *
+     * @memberOf Trip
+     * @type {Function}
+     * @return {Boolean}
+     */
+    isObject: function(target) {
+      return Object.prototype.toString.call(target) === '[object Object]';
     },
 
     /**
@@ -1176,7 +1247,7 @@
   };
 
   // Expose to window
-  window.Trip = Trip;
+  exports.Trip = Trip;
 
   /**
    * 3rd party libraries / toolkits

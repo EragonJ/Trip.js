@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         options: {
           timeout: 10000,
           urls: [
+            'http://localhost:8000/tests/core/test.html',
             'http://localhost:8000/tests/trip_events/test.html',
             'http://localhost:8000/tests/directions/test.html',
             'http://localhost:8000/tests/themes/test.html',
@@ -58,7 +59,12 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['src/trip.*.js'],
+        // we have to sore this in order to make sure nothing would get wrong
+        src: [
+          'src/trip._header_.js',
+          'src/trip.parser.js',
+          'src/trip.core.js'
+        ],
         dest: 'dist/trip.js'
       }
     },
