@@ -1,6 +1,45 @@
-.step {
-    margin: 40px 0;
+.fork-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  z-index: 999;
 }
-.start-demo-index {
-    margin: 20px 0 0 0;
+
+.main-navbar {
+  margin: 20px auto;
+}
+
+.main-container {
+  width: 80%;
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.social-buttons-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.social-buttons {
+  display: inline-block;
+  width: auto;
+}
+
+.social-buttons > div {
+  float: left;
+  width: 100px;
+  overflow: hidden;
+}
+
+.section-tout {
+  padding: 20px;
+  background: #ecf9fb;
+  margin:20px 0;
+}
+
+.step {
+  margin: 40px 0;
 }

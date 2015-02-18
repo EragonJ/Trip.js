@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trip.js</title>
+    <meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="http://eragonj.github.io/Trip.js/public/img/logo-tiny.png">
+
+    <!-- styles-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/vendor/highlight/github.min.css">
+    <link rel="stylesheet" href="public/css/index.css">
+    <link rel="stylesheet" href="dist/trip.min.css">
+
+    <!-- 3rd parties -->
+    <script src="public/vendor/highlight/highlight.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="public/js/global.js"></script>
+
+    <!-- tracking stuffs-->
+    <script src="public/vendor/social/ga.js"></script>
+    <script src="public/vendor/social/fb.js"></script>
+    <script src="public/vendor/social/twitter.js"></script>
+
+    <!-- include trip-->
+    <script src="dist/trip.js"></script>
+    <script src="public/js/demo-index.js"></script>
+
+    <link rel="stylesheet" href="public/vendor/github-markdown-css/github-markdown.css">
+  </head>
+  <body>
+    
+    <div id="fb-root"></div>
+    <a class="fork-button" href="https://github.com/EragonJ/Trip.js">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+    </a>
+    <div class="container main-container">
+    <nav class="navbar navbar-default main-navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Trip.js</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Documentations <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="doc-setup.html">Setup</a></li>
+                <li><a href="doc-configuration.html">Configuration</a></li>
+                <li class="divider"></li>
+                <li><a href="doc/jsdoc/index.html">JSDoc for Source code</a></li>
+              </ul>
+            </li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/tags">Download</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/contributors">Contributors</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js">Github</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://github.com/EragonJ">By EragonJ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="logo-container">
+      <img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4">
+    </div>
+
+    <div class="social-buttons-container">
+      <div class="social-buttons clearfix">
+        <div data-href="http://eragonj.github.com/Trip.js/" data-layout="button_count" data-width="450" data-show-faces="false" data-send="false" class="fb-like"></div>
+        <div class="github">
+          <iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe>
+        </div>
+        <div class="twitter"><a data-url="http://eragonj.github.io/Trip.js" href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div>
+      </div>
+    </div>
+
+    <div class="markdown-body">
+      <h1 id="configuration">Configuration</h1>
+<p>In Trip.js, we provide three three kind of options for developers to customize their own trips.</p>
+<ol>
+<li>Global options - Change the default behavior of Trip.js and would influence all trips.</li>
+<li>Local options - Only change the behavior of specifc trip and won&#39;t influence the others.</li>
+<li>Parser options - There are small subsets of options that you can define in HTML if you are using parser mode.</li>
+</ol>
+<p><strong>Note: Parser options is supported in version 3.0.0+</strong></p>
+<h2 id="global-options">Global options</h2>
+<h4 id="tripindex">tripIndex</h4>
+<p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p>
+<ul>
+<li>Type : <code>Number</code></li>
+<li>Default : <code>0</code></li>
+</ul>
+<h4 id="triptheme">tripTheme</h4>
+<p>You can set which theme to use, now Trip.js support <strong>white</strong>, <strong>black</strong>, <strong>yeti</strong> and <strong>dark</strong> 4 themes.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default :<code>&#39;black&#39;</code></li>
+</ul>
+<h4 id="tripblockhtml">tripBlockHTML</h4>
+<p>Base HTML for tripBlock</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>An array contains base HTML of tripBlock</code> (Please check source code to know the default HTML)</li>
+</ul>
+<h4 id="backtotopwhenended">backToTopWhenEnded</h4>
+<p>You can ask Trip.js go back to top when ended.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="overlayzindex">overlayZindex</h4>
+<p>You can set the basic zIndex for overlay if you want to expose elements.</p>
+<ul>
+<li>Type : <code>Number</code></li>
+<li>Default : <code>99999</code></li>
+</ul>
+<h4 id="overlayholder">overlayHolder</h4>
+<p>You can decide where to be the container of the overlay.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;body&#39;</code></li>
+</ul>
+<h4 id="enablekeybinding">enableKeyBinding</h4>
+<p>You can decide to bind key events for trip navigations or not.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>true</code></li>
+</ul>
+<h4 id="enableanimation">enableAnimation</h4>
+<p>You can enable animations on tripBlock.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>true</code></li>
+</ul>
+<h4 id="showclosebox">showCloseBox</h4>
+<p>You can decide to add small close icon on each trip or not</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="showheader">showHeader</h4>
+<p>If you want to show no matter with default or customized header, you have to set this value to true. You can check <strong>header</strong> option for more details.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="shownavigation">showNavigation</h4>
+<p>Toggle navigation buttons</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="skipundefinedtrip">skipUndefinedTrip</h4>
+<p>You can enable this option to tell Trip.js skip undefined trips (Undefined trips mean the trips without content or without sel or can not be selected by jQuery)</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="delay">delay</h4>
+<p>Every trip will be presented for 1 second (1000 ms) by default. Set this value to <code>-1</code> will prevent auto-advancing and you must manually call <code>trip.next()</code>.</p>
+<ul>
+<li>Type : <code>Number</code></li>
+<li>Default : <code>1000</code></li>
+</ul>
+<h4 id="header">header</h4>
+<p>This is the header for each trip. You can customize your own if you don&#39;t want to use default one. You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code> in the title to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>Step {{tripIndex}}</code></li>
+</ul>
+<h4 id="prevlabel">prevLabel</h4>
+<p>Label for the previous button.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;Back&#39;</code></li>
+</ul>
+<h4 id="prevlabel">prevLabel</h4>
+<p>Label for the next button.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;Next&#39;</code></li>
+</ul>
+<h4 id="finishlabel">finishLabel</h4>
+<p>Label for the finish button.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;Dismiss&#39;</code></li>
+</ul>
+<h4 id="animation">animation</h4>
+<p>Animation that would be applied on the tripBlock.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;tada&#39;</code></li>
+</ul>
+<h4 id="cangoprev">canGoPrev</h4>
+<p>Determines if the user can go backwards. If set to a function it is called and the response is evaluated.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>true</code></li>
+</ul>
+<h4 id="cangonext">canGoNext</h4>
+<p>Determines if the user can go forward. If set to a function it is called and the response is evaluated.</p>
+<ul>
+<li>Type : <code>Boolean</code></li>
+<li>Default : <code>true</code></li>
+</ul>
+<h4 id="onstart-">onStart()</h4>
+<p>You can set a callback function triggered when Trip.js starts.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>Supported in 2.0.0+</strong></li>
+</ul>
+<h4 id="onend-">onEnd()</h4>
+<p>You can set a callback function triggered when Trip.js ends.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>supported in 2.0.0+</strong></li>
+</ul>
+<h4 id="ontripstart-tripindex-tripobject-">onTripStart(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when each trip starts. <code>tripObject</code> is your passed JSON for this current trip, and tripIndex is the index for current trip. You can add add your customized functions in your object and call them when this callback is called.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>supported in 2.0.0+</strong></li>
+</ul>
+<h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when each trip ends.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>updated in 2.0.0+</strong></li>
+</ul>
+<h4 id="ontripstop-tripindex-tripobject-">onTripStop(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when any trip is stopped.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+</ul>
+<h4 id="ontrippause-tripindex-tripobject-">onTripPause(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when any trip is paused.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+</ul>
+<h4 id="ontripresume-tripindex-tripobject-">onTripResume(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when any trip is resumed.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>supported in 2.0.0+</strong></li>
+</ul>
+<h4 id="ontripchange-tripindex-tripobject-">onTripChange(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when any trip changes to another one.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+</ul>
+<h4 id="ontripclose-tripindex-tripobject-">onTripClose(tripIndex, tripObject)</h4>
+<p>You can set a callback function triggered when any trip is closed.</p>
+<ul>
+<li>Type : <code>Function</code></li>
+<li>Default : <code>$.noop</code></li>
+<li><strong>supported in 2.0.0+</strong></li>
+</ul>
+<h2 id="local-options">Local options</h2>
+<h4 id="sel">sel</h4>
+<p>which selector is referenced in this step</p>
+<ul>
+<li>Type: <code>String</code> (for late referring) or <code>jQuery Object</code></li>
+<li>Default: <code>0</code></li>
+</ul>
+<h4 id="content-required-">content <strong>[required]</strong></h4>
+<p>What information that you want to show to users. You can put <code>{{tripIndex}}</code> and <code>{{tripTotal}}</code> in the content to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>No default</code></li>
+</ul>
+<h4 id="position">position</h4>
+<p>What position would you prefer for the tripBlock. We support 9 different positions : <code>e</code>, <code>w</code>, <code>n</code>, <code>s</code>, <code>screen-ne</code>, <code>screen-se</code>, <code>screen-sw</code>, <code>screen-nw</code>, <code>screen-center</code>.</p>
+<p>To be clear, <code>e</code>, <code>w</code>, <code>n</code>, <code>s</code> are related to the sel, so for this use case, sel is <strong>required</strong>. For <code>screen-ne</code>, <code>screen-se</code>, <code>screen-sw</code>, <code>screen-nw</code> and <code>screen-center</code>, they are related to the screen (fixed in CSS), so you don&#39;t have to put sel in this case.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default : <code>&#39;n&#39;</code></li>
+</ul>
+<h4 id="expose">expose</h4>
+<p>You can enable this option to expose your selected element in this trip.</p>
+<ul>
+<li>Type : <code>Boolean</code> or <code>String</code> (for late referring) or <code>jQuery Object</code></li>
+<li>Default : <code>false</code></li>
+</ul>
+<h4 id="delay">delay</h4>
+<h4 id="header">header</h4>
+<h4 id="showheader">showHeader</h4>
+<h4 id="cangoprev">canGoPrev</h4>
+<h4 id="cangonext">canGoNext</h4>
+<h4 id="animation">animation</h4>
+<h4 id="shownavigation">showNavigation</h4>
+<h4 id="showclosebox">showCloseBox</h4>
+<h4 id="prevlabel">prevLabel</h4>
+<h4 id="nextlabel">nextLabel</h4>
+<h4 id="finishlabel">finishLabel</h4>
+<h4 id="ontripstart-tripindex-tripobject-">onTripStart(tripIndex, tripObject)</h4>
+<h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
+<h4 id="ontripstop-tripindex-tripobject-">onTripStop(tripIndex, tripObject)</h4>
+<h4 id="ontrippause-tripindex-tripobject-">onTripPause(tripIndex, tripObject)</h4>
+<h4 id="ontripresume-tripindex-tripobject-">onTripResume(tripIndex, tripObject)</h4>
+<h4 id="ontripchange-tripindex-tripobject-">onTripChange(tripIndex, tripObject)</h4>
+<h4 id="ontripclose-tripindex-tripobject-">onTripClose(tripIndex, tripObject)</h4>
+<h2 id="parser-options">Parser Options</h2>
+<h4 id="data-trip-index">data-trip-index</h4>
+<h4 id="data-trip-content">data-trip-content</h4>
+<h4 id="data-trip-delay">data-trip-delay</h4>
+<h4 id="data-trip-position">data-trip-position</h4>
+<h4 id="data-trip-animation">data-trip-animation</h4>
+  
+    </div>
+  </body>
+</html>

@@ -68,19 +68,6 @@ module.exports = function(grunt) {
         dest: 'dist/trip.js'
       }
     },
-    jade: {
-      compile: {
-        options: {
-          pretty: true
-        },
-        files: {
-          'demo-basic.html': 'views/demo-basic.jade',
-          'doc/documentation-1.3.html': 'views/documentation-1.3.jade',
-          'doc/documentation.html': 'views/documentation.jade',
-          'index.html': 'views/index.jade'
-        }
-      }
-    },
     jshint: {
       options: {
         maxlen: 80,
@@ -112,7 +99,6 @@ module.exports = function(grunt) {
       },
       sourcefiles: {
         src: [
-          'views/index.jade',
           'src/trip.js',
           'README.md'
         ],
@@ -129,11 +115,47 @@ module.exports = function(grunt) {
     },
     jsdoc: {
       dist: {
-        src: ['src/trip.js', '.jsdoc_index.md'],
+        src: ['dist/trip.js', '.jsdoc_index.md'],
         options: {
-          destination: 'doc',
+          destination: 'doc/jsdoc',
           template : pathToInk + '/template',
           configure : pathToInk + '/template/jsdoc.conf.json'
+        }
+      }
+    },
+    markdown: {
+      all: {
+        files: [
+          {
+            expand: true,
+            src: 'doc/src/*.markdown',
+            dest: 'doc',
+            flatten: true,
+            ext: '.html'
+          }
+        ],
+        options: {
+          template: 'doc/src/_template.html',
+          autoTemplate: true,
+          autoTemplateFormat: 'html',
+          markdownOptions: {
+            gfm: true,
+            highlight: 'manual',
+            codeLines: {
+              before: '<span>',
+              after: '</span>'
+            }
+          }
+        }
+      }
+    },
+    includereplace: {
+      all: {
+        files: {
+          './index.html': ['views/src/_index.html'],
+          './demo.html': ['views/src/_demo.html'],
+          './doc-configuration.html': ['doc/configuration.html'],
+          './doc-setup.html': ['doc/setup.html']
         }
       }
     }
@@ -144,19 +166,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-text-replace');
+  grunt.loadNpmTasks('grunt-markdown');
+  grunt.loadNpmTasks('grunt-include-replace');
 
   // Default task(s).
   grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
-  grunt.registerTask('html', ['jade']);
   grunt.registerTask('scss', ['sass']);
   grunt.registerTask('minify', ['jshint', 'concat', 'uglify']);
   grunt.registerTask('build', ['minify', 'sass']);
-  grunt.registerTask('doc', ['jsdoc', 'jade']);
-  grunt.registerTask('all', ['build', 'doc']);
+  grunt.registerTask('doc', ['markdown', 'includereplace']);
+  grunt.registerTask('all', ['build', 'jsdoc']);
   grunt.registerTask('bumpversion',
     ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc']);
 
