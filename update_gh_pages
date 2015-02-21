@@ -4,6 +4,11 @@ git checkout master -- index.html
 git checkout master -- demo.html
 git checkout master -- doc-configuration.html
 git checkout master -- doc-setup.html
+rm -rf public
+rm -rf src
+rm -rf tests
+rm -rf doc
+rm -rf dist
 git checkout master -- public
 git checkout master -- src
 git checkout master -- tests
