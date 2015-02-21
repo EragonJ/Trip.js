@@ -1,8 +1,16 @@
 .each-demo {
-    margin: 3em 0; 
+  margin: 3em 0; 
+}
+
+.each-demo .btn {
+  margin: 10px 0;
+}
+
+.each-demo .tab-pane .alert {
+  margin-top: 10px;
 }
 
 code {
-    display: inline-block;
-    margin-top: 3px;
+  display: inline-block;
+  margin-top: 3px;
 }

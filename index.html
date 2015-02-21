@@ -1,116 +1,150 @@
 <!DOCTYPE html>
-<!--if lt IE 7html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='en')
--->
-<!--if IE 7html.no-js.lt-ie9.lt-ie8(lang='en')
--->
-<!--if IE 8html.no-js.lt-ie9(lang='en')
--->
-<!--[if gt IE 8]><!-->
-<html lang="en" class="no-js">
-  <!--<![endif]-->
+<html lang="en">
   <head>
-    <!-- we have to check path first, to make sure we can reference to the right files-->
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Trip.js </title>
-    <meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. (Based on jQuery)">
+    <title>Trip.js</title>
+    <meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="http://eragonj.github.io/Trip.js/public/img/logo-tiny.png">
+
     <!-- styles-->
-    <link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/vendor/bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/vendor/highlight/github.min.css">
-    <link rel="stylesheet" href="public/css/base.css">
-    <link rel="stylesheet" href="public/css/responsive.css">
+    <link rel="stylesheet" href="public/css/index.css">
     <link rel="stylesheet" href="dist/trip.min.css">
+
     <!-- 3rd parties -->
     <script src="public/vendor/highlight/highlight.min.js"></script>
-    <script src="public/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="public/vendor/jquery-1.8.3.min.js"></script>
-    <script src="public/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="public/js/global.js"></script>
+
     <!-- tracking stuffs-->
     <script src="public/vendor/social/ga.js"></script>
     <script src="public/vendor/social/fb.js"></script>
     <script src="public/vendor/social/twitter.js"></script>
+
     <!-- include trip-->
     <script src="dist/trip.js"></script>
-    <link rel="stylesheet" href="public/css/index.css">
     <script src="public/js/demo-index.js"></script>
+
   </head>
   <body>
-    <div id="fb-root"></div><a id="fork-button" href="https://github.com/EragonJ/Trip.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-    <div class="container">
-      <div id="top-header" class="navbar">
-        <div class="navbar-inner"><a href="#" class="brand demo-index step1">Trip.js</a>
-          <ul class="nav">
-            <li class="divider-vertical"></li>
+    
+    <div id="fb-root"></div>
+    <a class="fork-button" href="https://github.com/EragonJ/Trip.js">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+    </a>
+    <div class="container main-container">
+    <nav class="navbar navbar-default main-navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Trip.js</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
             <li><a href="index.html">Home</a></li>
-            <li><a href="demo-basic.html">Demos</a></li>
-            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Documentations<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="doc/documentation.html">2.0+ Docs</a></li>
-                <li><a href="doc/documentation-1.3.html">1.3 Docs</a></li>
-                <li><a href="doc/index.html">JSdoc for source code</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Documentations <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="doc-setup.html">Setup</a></li>
+                <li><a href="doc-configuration.html">Configuration</a></li>
+                <li class="divider"></li>
+                <li><a href="doc/jsdoc/index.html">JSDoc for Source code</a></li>
               </ul>
             </li>
+            <li><a href="demo.html">Demo</a></li>
             <li><a href="https://github.com/EragonJ/Trip.js/tags">Download</a></li>
             <li><a href="https://github.com/EragonJ/Trip.js/contributors">Contributors</a></li>
             <li><a href="https://github.com/EragonJ/Trip.js">Github</a></li>
           </ul>
-          <ul class="nav pull-right">
+          <ul class="nav navbar-nav navbar-right">
             <li><a href="http://github.com/EragonJ">By EragonJ</a></li>
           </ul>
         </div>
       </div>
-      <div class="jumbotron"><img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4"></div>
+    </nav>
+
+    <div class="logo-container">
+      <img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4">
+    </div>
+
+    <div class="social-buttons-container">
       <div class="social-buttons clearfix">
         <div data-href="http://eragonj.github.com/Trip.js/" data-layout="button_count" data-width="450" data-show-faces="false" data-send="false" class="fb-like"></div>
-        <div class="twitter"><a data-url="http://eragonj.github.io/Trip.js" href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div>
         <div class="github">
           <iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe>
         </div>
+        <div class="twitter"><a data-url="http://eragonj.github.io/Trip.js" href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div>
       </div>
-      <div class="text-center">
-        <input type="button" value="Show Me a Quick Demo" class="start-demo-index btn btn-success btn-large">
+    </div>
+
+
+    <div class="text-center">
+      <button type="button" class="start-demo-index btn btn-lg btn-success">Show Me a Quick Demo</button>
+    </div>
+
+    <div class="section-tout">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4">
+            <h3><i class="fa fa-github-alt"></i> Open Source</h3>
+            <p>Trip.js is released under MIT license and maintained on <a href="https://github.com/EragonJ/Trip.js">Github</a>.</p>
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <h3><i class="fa fa-book"></i> Documentations</h3>
+            <p>We have detailed documentations for your reference.</p>
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <h3><i class="fa fa-cog"></i> Customizable</h3>
+            <p>This plugin is designed to be highly customizable for all different scenarios.</p>
+          </div>
+        </div>
       </div>
-      <div class="steps">
-        <div class="step">
-          <h2><span class="demo-index step2">What is Trip.js ?</span></h2>
-          <p>Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities. ( Based on jQuery ) </p>
-        </div>
-        <div class="step">
-          <h2>Version</h2>
-          <p>2.0.2</p>
-        </div>
-        <div class="step">
-          <h2>Setup ( Minimal )</h2>
-          <ol>
-            <li>Include your jQuery
-              <script src="https://gist.github.com/EragonJ/5855718.js"></script>
-            </li>
-            <li>Include dist/trip.css
-              <script src="https://gist.github.com/EragonJ/5855723.js"></script>
-            </li>
-            <li>Include dist/trip.js
-              <script src="https://gist.github.com/EragonJ/5855736.js"></script>
-            </li>
-            <li class="demo-index step3 step4 step5 step6">Setup Trip.js
-              <script src="https://gist.github.com/EragonJ/5855739.js"></script>
-            </li>
-            <li class="demo-index step7">Take a Trip Now !
-              <script src="https://gist.github.com/EragonJ/5855742.js" class="step7"></script>
-            </li>
-          </ol>
-        </div>
-        <div class="step demo-index step8">
-          <h2>Notice</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <h2>
+          <span class="demo-index step1 step2">What is Trip.js ?</span>
+        </h2>
+        <p>Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.</p>
+      </div>
+      <div class="step">
+        <h2>Version</h2>
+        <p>2.0.2</p>
+      </div>
+      <div class="step">
+        <h2>Setup (Minimal)</h2>
+        <ol>
+          <li>Include your jQuery
+            <script src="https://gist.github.com/EragonJ/5855718.js"></script>
+          </li>
+          <li>Include dist/trip.css
+            <script src="https://gist.github.com/EragonJ/5855723.js"></script>
+          </li>
+          <li>Include dist/trip.js
+            <script src="https://gist.github.com/EragonJ/5855736.js"></script>
+          </li>
+          <li class="demo-index step3 step4 step5 step6">Setup Trip.js
+            <script src="https://gist.github.com/EragonJ/5855739.js"></script>
+          </li>
+          <li class="demo-index step7">Take a Trip Now !
+            <script src="https://gist.github.com/EragonJ/5855742.js" class="step7"></script>
+          </li>
+        </ol>
+      </div>
+      <div class="step demo-index step8">
+        <h2>Notice</h2>
+        <div class="alert alert-warning">
           <p>
             This plugin is still under development !
             If you find any bugs or want me to implement anything,
             please feel free to open an issue ;)
           </p>
-          <p><a href="https://github.com/EragonJ/Trip.js/issues">Open an issue</a></p>
         </div>
       </div>
     </div>
