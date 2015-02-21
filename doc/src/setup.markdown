@@ -19,8 +19,8 @@ bower install trip.js --save
 ### From CDN (OSSCDN by MaxCDN)
 
 ```html
-<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.css"/>
-<script src="//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.0.0/trip.min.css"/>
+<script src="//oss.maxcdn.com/jquery.trip.js/3.0.0/trip.min.js"></script>
 ```
 
 ## How to setup Trip.js properly ?

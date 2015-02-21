@@ -12,7 +12,7 @@ Trip.js is a jQuery plugin that can help you customize a tutorial trip easily wi
 
 # Version
 
-2.0.2
+3.0.0
 
 # Install
 
@@ -26,8 +26,8 @@ Or Install from Bower
 
 Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
 
-* `<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.css" />`
-* `<script src="//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.js"></script>`
+* `<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.0.0/trip.min.css" />`
+* `<script src="//oss.maxcdn.com/jquery.trip.js/3.0.0/trip.min.js"></script>`
 
 # Setup (minimal)
 

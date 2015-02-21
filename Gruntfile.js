@@ -99,7 +99,9 @@ module.exports = function(grunt) {
       },
       sourcefiles: {
         src: [
-          'src/trip.js',
+          'doc/src/setup.markdown',
+          'src/trip._header_.js',
+          'views/src/_index.html',
           'README.md'
         ],
         overwrite: true,
@@ -180,7 +182,7 @@ module.exports = function(grunt) {
   grunt.registerTask('doc', ['markdown', 'includereplace']);
   grunt.registerTask('all', ['build', 'jsdoc']);
   grunt.registerTask('bumpversion',
-    ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc']);
+    ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc', 'jsdoc']);
 
   // How to bump version ?
   //
