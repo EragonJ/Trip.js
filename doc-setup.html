@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trip.js</title>
+    <meta name="description" content="Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="http://eragonj.github.io/Trip.js/public/img/logo-tiny.png">
+
+    <!-- styles-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/vendor/highlight/github.min.css">
+    <link rel="stylesheet" href="public/css/index.css">
+    <link rel="stylesheet" href="dist/trip.min.css">
+
+    <!-- 3rd parties -->
+    <script src="public/vendor/highlight/highlight.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="public/js/global.js"></script>
+
+    <!-- tracking stuffs-->
+    <script src="public/vendor/social/ga.js"></script>
+    <script src="public/vendor/social/fb.js"></script>
+    <script src="public/vendor/social/twitter.js"></script>
+
+    <!-- include trip-->
+    <script src="dist/trip.js"></script>
+    <script src="public/js/demo-index.js"></script>
+
+    <link rel="stylesheet" href="public/vendor/github-markdown-css/github-markdown.css">
+  </head>
+  <body>
+    
+    <div id="fb-root"></div>
+    <a class="fork-button" href="https://github.com/EragonJ/Trip.js">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+    </a>
+    <div class="container main-container">
+    <nav class="navbar navbar-default main-navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Trip.js</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Documentations <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="doc-setup.html">Setup</a></li>
+                <li><a href="doc-configuration.html">Configuration</a></li>
+                <li class="divider"></li>
+                <li><a href="doc/jsdoc/index.html">JSDoc for Source code</a></li>
+              </ul>
+            </li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/tags">Download</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js/contributors">Contributors</a></li>
+            <li><a href="https://github.com/EragonJ/Trip.js">Github</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://github.com/EragonJ">By EragonJ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="logo-container">
+      <img src="public/img/logo-tiny.png" class="demo-basic-1 demo-basic-2 step1 step2 step3 step4">
+    </div>
+
+    <div class="social-buttons-container">
+      <div class="social-buttons clearfix">
+        <div data-href="http://eragonj.github.com/Trip.js/" data-layout="button_count" data-width="450" data-show-faces="false" data-send="false" class="fb-like"></div>
+        <div class="github">
+          <iframe src="http://ghbtns.com/github-btn.html?user=EragonJ&amp;repo=Trip.js&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="20"></iframe>
+        </div>
+        <div class="twitter"><a data-url="http://eragonj.github.io/Trip.js" href="https://twitter.com/share" data-hashtags="trip.js" class="twitter-share-button">Tweet</a></div>
+      </div>
+    </div>
+
+    <div class="markdown-body">
+      <h1 id="setup">Setup</h1>
+<p>In this chapter, we will tell you how to setup Trip.js properly steps by steps.</p>
+<h2 id="where-to-find-trip-js-">Where to find Trip.js ?</h2>
+<h3 id="from-github">From GitHub</h3>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> git://github.com/EragonJ/Trip.js.git
+</code></pre>
+<h3 id="from-bower">From Bower</h3>
+<pre><code class="lang-bash">bower install trip.js --save
+</code></pre>
+<h3 id="from-cdn-osscdn-by-maxcdn-">From CDN (OSSCDN by MaxCDN)</h3>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.css"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/2.0.2/trip.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<h2 id="how-to-setup-trip-js-properly-">How to setup Trip.js properly ?</h2>
+<ol>
+<li>include jQuery (I will try to remove this dependency in future version)</li>
+<li>include trip.min.css</li>
+<li>include trip.min.js</li>
+</ol>
+<p>Okay, it seems that we already have prepared enough resources for Trip.js, it&#39;s time to trigger Trip.js !</p>
+<h3 id="programming-mode">Programming mode</h3>
+<p>In programming mode, you can easily define your own trips easily in JavaScript. As you may see below, every trip is wrapped well in an object with defined properties to tell Trip.js to do related works for it.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = {}; <span class="hljs-comment">// details about options are listed in next chapter</span>
+<span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip([
+  { 
+    sel : $(<span class="hljs-string">'#element1'</span>),
+    content : <span class="hljs-string">'This is element 1'</span>
+  },
+  {
+    sel : $(<span class="hljs-string">'#element2'</span>),
+    content : <span class="hljs-string">'This is element 2'</span>
+  }
+], options);
+</code></pre>
+<p>If you want to use default behaviors, okay, just remove options and everything still works perfectly !</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip([
+  { 
+    sel : $(<span class="hljs-string">'#element1'</span>),
+    content : <span class="hljs-string">'This is element 1'</span>
+  },
+  {
+    sel : $(<span class="hljs-string">'#element2'</span>),
+    content : <span class="hljs-string">'This is element 2'</span>
+  }
+]);
+</code></pre>
+<h3 id="parser-mode-supported-in-3-0-0-">Parser mode (supported in 3.0.0+)</h3>
+<p>In parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.</p>
+<p>You can pass valid CSS selectors in <strong>String</strong> type as the first parameter to tell Trip.js which trips you are referring. With this, you can easily create many different groups of trips and control your own tutorial trips.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>hi<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>I am Trip.js<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = {}; <span class="hljs-comment">// details about options are listed in next chapter</span>
+<span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip(<span class="hljs-string">'.your-own-trips'</span>, options);
+</code></pre>
+<p>If you want to use default behaviors, okay, just remove options and everything still works perfectly !</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip(<span class="hljs-string">'.your-own-trips'</span>);
+</code></pre>
+<p>But sometimes, we just have one group of trips that wants to animate with, okay, Trip.js will automatically parse all elements with <strong>[data-trip]</strong> attribute and make them inside a group. What you need to do is define customized attribute on each DOM and Trip.js will try to parse them out and transform them into recognizable data to it.</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- We will talk about more customizable options for parser mode in next chapter --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">data-trip</span> <span class="hljs-attribute">data-trip-index</span>=<span class="hljs-value">"1"</span>&gt;</span>hi<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">data-trip</span> <span class="hljs-attribute">data-trip-index</span>=<span class="hljs-value">"2"</span>&gt;</span>I am Trip.js<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = {}; <span class="hljs-comment">// details about options are listed in next chapter</span>
+<span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip(options);
+</code></pre>
+<p>And once again, if you want to use default behaviors, okay, just remove options and everything still works perfectly !</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip(); <span class="hljs-comment">// quite simple huh ?!</span>
+</code></pre>
+<p>Last but not the least, you just have to start it and your fantastic trip would get presented one by one to users !</p>
+<pre><code class="lang-javascript">trip.start();
+</code></pre>
+  
+    </div>
+  </body>
+</html>
