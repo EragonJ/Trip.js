@@ -83,7 +83,6 @@ module.exports = function(grunt) {
     replace: {
       configfiles: {
         src: [
-          'trip.jquery.json',
           'package.json',
           'component.json'
         ],
