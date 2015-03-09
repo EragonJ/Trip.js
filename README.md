@@ -49,7 +49,7 @@ Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
 
 # Documentation
 
-Please check the [documentation](http://eragonj.github.io/Trip.js/doc/documentation.html) here !
+Please check the [setup](http://eragonj.github.io/Trip.js/doc-setup.html) and [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) here !
 
 # How to Contribute
 
