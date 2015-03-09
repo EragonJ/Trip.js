@@ -20,9 +20,13 @@ Clone the latest version from Github directly
 
 * `git clone git://github.com/EragonJ/Trip.js.git`
 
-Or Install from Bower
+Or install from Bower
 
 * `bower install trip.js`
+
+Or install from npm
+
+* `npm install trip.js`
 
 Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
 
