@@ -207,9 +207,20 @@
           zIndex: $sel.css('z-Index')
         };
 
-        // we have to make it higher than the overlay
         newCSS = {
-          position: 'relative',
+          position: (function() {
+            // NOTE: issue #63
+            // We can't direclty use 'relative' if the original element
+            // is using properties other than 'relative' because
+            // this would break the UI.
+            if (['absolute', 'fixed'].indexOf(oldCSS.position) > -1) {
+              return oldCSS.position;
+            }
+            else {
+              return 'relative';
+            }
+          }()),
+          // we have to make it higher than the overlay
           zIndex: this.settings.overlayZindex + 1
         };
 

@@ -172,3 +172,38 @@ asyncTest(
 
     trip.start();
 });
+
+asyncTest('#63, we can expose item to right position', function() {
+  var trip = new Trip([
+    {
+      sel: $('.demo-with-absolute'),
+      content: '1st block',
+      onTripStart: function() {
+        var selTop = parseInt($('.demo-with-absolute').css('top'), 10);
+        var blockTop = parseInt($('.trip-block').css('top'), 10);
+        var blockHeight = $('.trip-block').outerHeight();
+        equal(selTop,
+          blockTop + blockHeight + trip.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL);
+      }
+    },
+    {
+      sel: $('.demo-with-fixed'),
+      content: '2rd block',
+      isSecondTrip: true,
+      onTripEnd: function() {
+        var selTop = parseInt($('.demo-with-fixed').css('top'), 10);
+        var blockTop = parseInt($('.trip-block').css('top'), 10);
+        var blockHeight = $('.trip-block').outerHeight();
+        equal(selTop,
+          blockTop + blockHeight + trip.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL);
+      }
+    },
+  ], {
+    tripTheme : "white",
+    onEnd: function(tripIndex, tripObject) {
+      start();
+    }
+  });
+
+  trip.start();
+});
