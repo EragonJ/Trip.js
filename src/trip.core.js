@@ -109,6 +109,9 @@
       // animation
       animation: 'tada',
 
+      // wait for next element in tour to appear in DOM
+      waitForNextElement: false,
+
       // customizable HTML
       tripBlockHTML: [
         '<div class="trip-block">',
@@ -153,6 +156,8 @@
       TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
       RESIZE_TIMEOUT: 200
     };
+    this.waitForNextElementTries = 4;
+    this.waitForNextElementInterval = 200;
 
     this.console = window.console || {};
   };
@@ -447,8 +452,29 @@
         this.doLastOperation();
       }
       else {
-        this.increaseIndex();
-        this.run();
+        this.increaseIndex();       
+        if(this.settings.waitForNextElement){
+          this.checkForElementAndRun();
+        }else{
+          this.run();
+        }    
+      }
+    },
+
+    checkForElementAndRun: function(tries) {
+      tries = tries || 0;
+      
+      if(tries >= this.waitForNextElementTries){
+        this.run(); //This will fail
+      }
+
+      var o = this.getCurrentTripObject();
+      
+      if($(o.sel.selector).length === 0){
+        var that = this;
+        setTimeout(function(){ that.checkForElementAndRun(tries+1) }, this.waitForNextElementInterval)
+      }else{
+        this.run()
       }
     },
 
@@ -683,6 +709,10 @@
         return true;
       }
 
+      if(o.sel.length === 0){
+        o.sel = $(o.sel.selector)
+      }
+      
       // have to check `sel` & `content` two required fields
       if (typeof o.content === 'undefined' ||
         typeof o.sel === 'undefined' ||
