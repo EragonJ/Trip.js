@@ -818,7 +818,7 @@
      * @return {Boolean} whether tripData is valid
      */
     isTripDataValid: function(o) {
-      if (this.hasSpeicalDirections()) {
+      if (this.hasSpecialDirections()) {
         return true;
       }
 
@@ -841,7 +841,7 @@
      * @param {String} position position
      * @return {Boolean} whether position is speical direction or not
      */
-    hasSpeicalDirections: function() {
+    hasSpecialDirections: function() {
       var o = this.getCurrentTripObject();
       var position = o.position;
       var specialDirections = [
@@ -1012,7 +1012,7 @@
      */
     setTripBlock: function(o) {
       var $tripBlock = this.$tripBlock;
-
+      var that = this;
       // toggle used settings
       var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
       var showNavigation = o.showNavigation || this.settings.showNavigation;
@@ -1055,6 +1055,26 @@
       $tripBlock.removeClass(
         'e s w n screen-ne screen-se screen-sw screen-nw screen-center');
       $tripBlock.addClass(o.position);
+
+      // if we have a nextClickSelector use that as the trigger for the next button
+      if(o.nextClickSelector){
+        var eventName = (o.nextClickEvent || 'click')+'.Trip'
+        $(o.nextClickSelector).one(eventName, function(e) {
+          e.preventDefault();
+          // Force IE/FF to lose focus
+          $(this).blur();
+          that.next();
+        });
+
+        $tripBlock
+          .find('.trip-next')
+          .hide()
+
+      }else{
+        $tripBlock
+          .find('.trip-next')
+          .show()
+      }
 
       // NOTE: issue #27
       // we have to set position left first then position top
