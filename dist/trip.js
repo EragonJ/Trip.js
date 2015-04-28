@@ -570,6 +570,7 @@
      * @public
      */
     next: function() {
+      var that = this;
       // We have to make sure we can go next first,
       // if not, let's just re-run
       if (!this.canGoNext()) {
@@ -583,15 +584,17 @@
       // all be here.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (this.isLast()) {
-        this.doLastOperation();
-      }
-      else {
-        this.increaseIndex();
-        this.run();
-      }
+      $.when(tripEndDefer).then(function() {
+        if (that.isLast()) {
+          that.doLastOperation();
+        }
+        else {
+          that.increaseIndex();
+          that.run();
+        }
+      });
     },
 
     /**
@@ -602,6 +605,7 @@
      * @public
      */
     prev: function() {
+      var that = this;
       this.tripDirection = 'prev';
 
       // When this is executed, it means users click on the arrow key to
@@ -609,13 +613,14 @@
       // place to call onTripEnd before modifying tripIndex.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (!this.isFirst() && this.canGoPrev()) {
-        this.decreaseIndex();
-      }
-
-      this.run();
+      $.when(tripEndDefer).then(function() {
+        if (!that.isFirst() && that.canGoPrev()) {
+          that.decreaseIndex();
+        }
+        that.run();
+      });
     },
 
     /**
