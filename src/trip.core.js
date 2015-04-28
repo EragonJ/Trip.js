@@ -679,7 +679,7 @@
      * @return {Boolean} whether tripData is valid
      */
     isTripDataValid: function(o) {
-      if (this.hasSpeicalDirections()) {
+      if (this.hasSpecialDirections()) {
         return true;
       }
 
@@ -702,7 +702,7 @@
      * @param {String} position position
      * @return {Boolean} whether position is speical direction or not
      */
-    hasSpeicalDirections: function() {
+    hasSpecialDirections: function() {
       var o = this.getCurrentTripObject();
       var position = o.position;
       var specialDirections = [
