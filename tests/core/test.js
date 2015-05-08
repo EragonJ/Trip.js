@@ -55,3 +55,28 @@ asyncTest('programming mode with configuration', function() {
 
   trip.start();
 });
+
+asyncTest('with waitForNextElement option', function() {
+  var trip = new Trip([
+    { sel: '.step1', position: 'n', content: 'hi1' },
+    { sel: '.step2', position: 'e', content: 'hi2' },
+    { sel: '.step3', position: 's', content: 'hi3' }
+  ],{
+    showNavigation: true,
+    waitForNextElement: true,
+    onEnd: function() {
+      start(); 
+    }
+  });
+
+  trip.start();
+  $('.trip-next').click()
+  equal(trip.tripIndex, 1)
+
+  var savedStep = $('.step3').clone(true)
+  $('.step3').remove()
+  setTimeout( function(){$('body').append(savedStep)}, 100);
+
+  $('.trip-next').click()
+  equal(trip.tripIndex, 2)
+});
