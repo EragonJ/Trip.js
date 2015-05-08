@@ -469,12 +469,11 @@
       }
 
       var o = this.getCurrentTripObject();
-      
-      if($(o.sel.selector).length === 0){
-        var that = this;
+      var that = this;
+      if(!this.isTripDataValid(o)){
         setTimeout(function(){ that.checkForElementAndRun(tries+1) }, this.waitForNextElementInterval)
       }else{
-        this.run()
+        setTimeout(function(){ that.run() }, this.waitForNextElementInterval) // wait some more to make sure element is in place
       }
     },
 
