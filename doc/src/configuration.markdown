@@ -120,7 +120,7 @@ Label for the previous button.
 + Type : `String`
 + Default : `'Back'`
 
-#### prevLabel
+#### nextLabel
 
 Label for the next button.
 
