@@ -683,6 +683,10 @@
         return true;
       }
 
+      if (o.nextClickSelector && $(o.nextClickSelector).length === 0) {
+        return false;
+      }
+
       // have to check `sel` & `content` two required fields
       if (typeof o.content === 'undefined' ||
         typeof o.sel === 'undefined' ||
