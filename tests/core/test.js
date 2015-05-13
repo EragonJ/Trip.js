@@ -55,3 +55,22 @@ asyncTest('programming mode with configuration', function() {
 
   trip.start();
 });
+
+asyncTest('with nextClickSelector option', function() {
+  var trip = new Trip([
+    { sel: '.step1', position: 'n', content: 'hi1', nextClickSelector: '.step2' },
+    { sel: '.step2', position: 'e', content: 'hi2', nextClickSelector: '.step2' },
+    { sel: '.step3', position: 's', content: 'hi3', nextClickSelector: '.step2' }
+  ],{
+    onEnd: function() {
+      start(); 
+    }
+  });
+
+  trip.start();
+
+  $('.step2').click()
+  equal(trip.tripIndex, 1)
+  $('.step2').click()
+  equal(trip.tripIndex, 2)
+});
