@@ -905,7 +905,7 @@
       $tripBlock
         .find('.trip-next')
         .html(this.isLast() ? finishLabel: nextLabel)
-        .toggle(showNavigation);
+        .toggle(showNavigation && !o.nextClickSelector);
 
       $tripBlock
         .find('.trip-close')
@@ -919,22 +919,12 @@
 
       // if we have a nextClickSelector use that as the trigger for the next button
       if(o.nextClickSelector){
-        var eventName = (o.nextClickEvent || 'click')+'.Trip'
-        $(o.nextClickSelector).one(eventName, function(e) {
+        $(o.nextClickSelector).one('click.Trip', function(e) {
           e.preventDefault();
           // Force IE/FF to lose focus
           $(this).blur();
           that.next();
         });
-
-        $tripBlock
-          .find('.trip-next')
-          .hide()
-
-      }else{
-        $tripBlock
-          .find('.trip-next')
-          .show()
       }
 
       // NOTE: issue #27
