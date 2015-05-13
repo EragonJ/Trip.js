@@ -428,6 +428,7 @@
      * @public
      */
     next: function() {
+      var that = this;
       // We have to make sure we can go next first,
       // if not, let's just re-run
       if (!this.canGoNext()) {
@@ -441,15 +442,17 @@
       // all be here.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (this.isLast()) {
-        this.doLastOperation();
-      }
-      else {
-        this.increaseIndex();
-        this.run();
-      }
+      this.deferOrRun(tripEndDefer, function(){
+        if (that.isLast()) {
+          that.doLastOperation();
+        }
+        else {
+          that.increaseIndex();
+          that.run();
+        }
+      });
     },
 
     /**
@@ -460,6 +463,7 @@
      * @public
      */
     prev: function() {
+      var that = this;
       this.tripDirection = 'prev';
 
       // When this is executed, it means users click on the arrow key to
@@ -467,13 +471,15 @@
       // place to call onTripEnd before modifying tripIndex.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (!this.isFirst() && this.canGoPrev()) {
-        this.decreaseIndex();
-      }
+      this.deferOrRun(tripEndDefer, function(){
+        if (!that.isFirst() && that.canGoPrev()) {
+          that.decreaseIndex();
+        }
 
-      this.run();
+        that.run();
+      });
     },
 
     /**
@@ -788,6 +794,24 @@
       }
       else {
         this.tripIndex -= 1;
+      }
+    },
+
+    /*
+     * Check if an object is a deferred. If it is wait for it to resolve, otherwise run the
+     * given function.
+     *
+     * @memberOf Trip
+     * @type {Function}
+     */
+
+    deferOrRun: function(possibleDefer, functionToRun){
+      // check if deferred
+      if(possibleDefer && possibleDefer.then) {
+        $.when(possibleDefer).then(functionToRun);
+      } 
+      else {
+        functionToRun();
       }
     },
 
