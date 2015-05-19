@@ -51,7 +51,8 @@
       if (!node || typeof tripIndex === 'undefined' || tripContent === '') {
         // Let's ignore this tripData
         return null;
-      } else {
+      }
+      else {
         tripIndex = parseInt(tripIndex, 10);
         tripDelay = parseInt(tripDelay, 10);
 
@@ -97,13 +98,13 @@
       selector = (selector === 'default') ?
         this._DEFAULT_TRIP_NODES_SELECTOR : selector;
 
-      var self = this;
+      var that = this;
       var tripData = [];
       var nodes = this._getAllTripNodes(selector);
 
       if (nodes) {
         [].forEach.call(nodes, function(node) {
-          var tripDataForThatNode = self._parseTripData(node);
+          var tripDataForThatNode = that._parseTripData(node);
           if (tripDataForThatNode) {
             tripData.push(tripDataForThatNode);
           }

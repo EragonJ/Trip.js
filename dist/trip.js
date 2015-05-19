@@ -65,7 +65,8 @@
       if (!node || typeof tripIndex === 'undefined' || tripContent === '') {
         // Let's ignore this tripData
         return null;
-      } else {
+      }
+      else {
         tripIndex = parseInt(tripIndex, 10);
         tripDelay = parseInt(tripDelay, 10);
 
@@ -111,13 +112,13 @@
       selector = (selector === 'default') ?
         this._DEFAULT_TRIP_NODES_SELECTOR : selector;
 
-      var self = this;
+      var that = this;
       var tripData = [];
       var nodes = this._getAllTripNodes(selector);
 
       if (nodes) {
         [].forEach.call(nodes, function(node) {
-          var tripDataForThatNode = self._parseTripData(node);
+          var tripDataForThatNode = that._parseTripData(node);
           if (tripDataForThatNode) {
             tripData.push(tripDataForThatNode);
           }
@@ -306,11 +307,11 @@
      */
     preInit: function() {
       if (typeof this.console === 'undefined') {
-        var self = this;
+        var that = this;
         var methods = ['log', 'warn', 'debug', 'info', 'error'];
 
         $.each(methods, function(i, methodName) {
-          self.console[methodName] = $.noop;
+          that.console[methodName] = $.noop;
         });
       }
     },
@@ -329,9 +330,11 @@
 
       if (typeof o.expose === 'string') {
         $sel = $(o.expose);
-      } else if (o.expose instanceof $) {
+      }
+      else if (o.expose instanceof $) {
         $sel = o.expose;
-      } else {
+      }
+      else {
         $sel = $(o.sel);
       }
 
@@ -460,7 +463,7 @@
      * @param {Event} e
      */
     keyEvent: function(e) {
-      switch(e.which) {
+      switch (e.which) {
         case this.CONSTANTS.ESC:
           this.stop();
           break;
@@ -795,7 +798,7 @@
      * @return {Boolean} whether current trip is the first one
      */
     isFirst: function() {
-      return (this.tripIndex === 0) ? true: false;
+      return (this.tripIndex === 0) ? true : false;
     },
 
     /**
@@ -806,7 +809,7 @@
      * @return {Boolean} whether current trip is the last one
      */
     isLast: function() {
-      return (this.tripIndex === this.tripData.length - 1) ? true: false;
+      return (this.tripIndex === this.tripData.length - 1) ? true : false;
     },
 
     /**
@@ -1043,7 +1046,7 @@
 
       $tripBlock
         .find('.trip-next')
-        .html(this.isLast() ? finishLabel: nextLabel)
+        .html(this.isLast() ? finishLabel : nextLabel)
         .toggle(showNavigation);
 
       $tripBlock
@@ -1270,7 +1273,6 @@
       this.createTripBlock();
       this.createOverlay();
     },
-
 
     /**
      * This method is used to create a trip block at the first time when

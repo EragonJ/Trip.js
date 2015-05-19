@@ -68,6 +68,15 @@ module.exports = function(grunt) {
         dest: 'dist/trip.js'
       }
     },
+    jscs: {
+      // we will check distributed version directly and if there is any wrong,
+      // we can go find related line from sources.
+      src: 'dist/trip.js',
+      options: {
+        config: '.jscsrc',
+        verbose: true
+      }
+    },
     jshint: {
       options: {
         maxlen: 80,
@@ -172,11 +181,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-include-replace');
+  grunt.loadNpmTasks('grunt-jscs');
 
   // Default task(s).
   grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
   grunt.registerTask('scss', ['sass']);
-  grunt.registerTask('minify', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('minify', ['jshint', 'concat', 'jscs', 'uglify']);
   grunt.registerTask('build', ['minify', 'sass']);
   grunt.registerTask('doc', ['markdown', 'includereplace']);
   grunt.registerTask('all', ['build', 'jsdoc']);
