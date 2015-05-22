@@ -185,6 +185,8 @@ You can set a callback function triggered when each trip starts. `tripObject` is
 
 You can set a callback function triggered when each trip ends.
 
+**[Note]** for 3.1+, you can return a `jQuery deferred object` within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will **keep waiting until it is resolved**, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.
+
 + Type : `Function`
 + Default : `$.noop`
 + **updated in 2.0.0+**
@@ -259,28 +261,96 @@ You can enable this option to expose your selected element in this trip.
 + Default : `false`
 
 #### delay
+
+Check documentations above.
+
 #### header
+
+Check documentations above.
+
 #### showHeader
+
+Check documentations above.
+
 #### canGoPrev
+
+Check documentations above.
+
 #### canGoNext
+
+Check documentations above.
+
 #### animation
+
+Check documentations above.
+
 #### showNavigation
+
+Check documentations above.
+
 #### showCloseBox
+
+Check documentations above.
+
 #### prevLabel
+
+Check documentations above.
+
 #### nextLabel
+
+Check documentations above.
+
 #### finishLabel
+
+Check documentations above.
+
 #### onTripStart(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripEnd(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripStop(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripPause(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripResume(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripChange(tripIndex, tripObject)
+
+Check documentations above.
+
 #### onTripClose(tripIndex, tripObject)
+
+Check documentations above.
 
 ## Parser Options
 
 #### data-trip-index
+
+Check documentations above.
+
 #### data-trip-content
+
+Check documentations above.
+
 #### data-trip-delay
+
+Check documentations above.
+
 #### data-trip-position
+
+Check documentations above.
+
 #### data-trip-animation
+
+Check documentations above.
+

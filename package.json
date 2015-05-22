@@ -38,15 +38,6 @@
     "jquery-plugin",
     "ecosystem:jquery"
   ],
-  "ignore": [
-    "doc",
-    "node_modules",
-    "public",
-    "tests",
-    "views",
-    "./*.html",
-    "./.*"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/EragonJ/Trip.js/issues"

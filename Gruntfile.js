@@ -189,7 +189,7 @@ module.exports = function(grunt) {
   grunt.registerTask('minify', ['jshint', 'concat', 'jscs', 'uglify']);
   grunt.registerTask('build', ['minify', 'sass']);
   grunt.registerTask('doc', ['markdown', 'includereplace']);
-  grunt.registerTask('all', ['build', 'jsdoc']);
+  grunt.registerTask('all', ['build', 'jsdoc', 'doc']);
   grunt.registerTask('bumpversion',
     ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc', 'jsdoc']);
 

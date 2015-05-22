@@ -18,6 +18,15 @@
     "type" : "git",
     "url" : "git://github.com/EragonJ/Trip.js.git"
   },
+  "ignore": [
+    "doc",
+    "node_modules",
+    "public",
+    "tests",
+    "views",
+    "./*.html",
+    "./.*"
+  ],
   "demo" : "http://eragonj.github.io/Trip.js/",
   "keywords" : [ "trip", "tutorial", "guide" ],
   "version": "3.0.0",
