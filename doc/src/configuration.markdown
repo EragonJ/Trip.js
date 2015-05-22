@@ -185,7 +185,7 @@ You can set a callback function triggered when each trip starts. `tripObject` is
 
 You can set a callback function triggered when each trip ends.
 
-**[Note]** for 3.1+, you can return a `jQuery deferred object` within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will **keep waiting until it is resolved**, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.
+**[Note]** for 3.1.0+, you can return a `jQuery deferred object` within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will **keep waiting until it is resolved**, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.
 
 + Type : `Function`
 + Default : `$.noop`

@@ -159,7 +159,7 @@
 </ul>
 <h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when each trip ends.</p>
-<p><strong>[Note]</strong> for 3.1+, you can return a <code>jQuery deferred object</code> within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will <strong>keep waiting until it is resolved</strong>, don&#39;t do some heavy works here, otherwise, users will feel disappointed about this waiting time.</p>
+<p><strong>[Note]</strong> for 3.1.0+, you can return a <code>jQuery deferred object</code> within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will <strong>keep waiting until it is resolved</strong>, don&#39;t do some heavy works here, otherwise, users will feel disappointed about this waiting time.</p>
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
