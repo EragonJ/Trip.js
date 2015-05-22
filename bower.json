@@ -1,0 +1,35 @@
+{
+  "name": "Trip.js",
+  "version": "3.0.0",
+  "homepage": "https://github.com/EragonJ/Trip.js",
+  "authors": [
+    "EragonJ <eragonj@eragonj.me> (http://eragonj.me)"
+  ],
+  "description": "Trip.js is a plugin that can help you make tutorial trips easily on website",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests",
+    "public",
+    "doc",
+    "views",
+    "*.html"
+  ],
+  "moduleType": "globals",
+  "main": [
+    "dist/trip.css",
+    "dist/trip.js"
+  ],
+  "keywords": [
+    "trip",
+    "tutorial",
+    "guide",
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "dependencies": {
+    "jquery": "~1.8.0"
+  }
+}
