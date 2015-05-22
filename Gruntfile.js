@@ -93,7 +93,7 @@ module.exports = function(grunt) {
       configfiles: {
         src: [
           'package.json',
-          'component.json'
+          'bower.json'
         ],
         overwrite: true,
         replacements: [{
