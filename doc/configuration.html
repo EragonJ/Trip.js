@@ -106,7 +106,7 @@
 <li>Type : <code>String</code></li>
 <li>Default : <code>&#39;Back&#39;</code></li>
 </ul>
-<h4 id="prevlabel">prevLabel</h4>
+<h4 id="nextlabel">nextLabel</h4>
 <p>Label for the next button.</p>
 <ul>
 <li>Type : <code>String</code></li>
@@ -159,6 +159,7 @@
 </ul>
 <h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when each trip ends.</p>
+<p><strong>[Note]</strong> for 3.1+, you can return a <code>jQuery deferred object</code> within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will <strong>keep waiting until it is resolved</strong>, don&#39;t do some heavy works here, otherwise, users will feel disappointed about this waiting time.</p>
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
@@ -223,29 +224,52 @@
 <li>Default : <code>false</code></li>
 </ul>
 <h4 id="delay">delay</h4>
+<p>Check documentations above.</p>
 <h4 id="header">header</h4>
+<p>Check documentations above.</p>
 <h4 id="showheader">showHeader</h4>
+<p>Check documentations above.</p>
 <h4 id="cangoprev">canGoPrev</h4>
+<p>Check documentations above.</p>
 <h4 id="cangonext">canGoNext</h4>
+<p>Check documentations above.</p>
 <h4 id="animation">animation</h4>
+<p>Check documentations above.</p>
 <h4 id="shownavigation">showNavigation</h4>
+<p>Check documentations above.</p>
 <h4 id="showclosebox">showCloseBox</h4>
+<p>Check documentations above.</p>
 <h4 id="prevlabel">prevLabel</h4>
+<p>Check documentations above.</p>
 <h4 id="nextlabel">nextLabel</h4>
+<p>Check documentations above.</p>
 <h4 id="finishlabel">finishLabel</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripstart-tripindex-tripobject-">onTripStart(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripstop-tripindex-tripobject-">onTripStop(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontrippause-tripindex-tripobject-">onTripPause(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripresume-tripindex-tripobject-">onTripResume(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripchange-tripindex-tripobject-">onTripChange(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h4 id="ontripclose-tripindex-tripobject-">onTripClose(tripIndex, tripObject)</h4>
+<p>Check documentations above.</p>
 <h2 id="parser-options">Parser Options</h2>
 <h4 id="data-trip-index">data-trip-index</h4>
+<p>Check documentations above.</p>
 <h4 id="data-trip-content">data-trip-content</h4>
+<p>Check documentations above.</p>
 <h4 id="data-trip-delay">data-trip-delay</h4>
+<p>Check documentations above.</p>
 <h4 id="data-trip-position">data-trip-position</h4>
+<p>Check documentations above.</p>
 <h4 id="data-trip-animation">data-trip-animation</h4>
+<p>Check documentations above.</p>
   
     </div>
   </body>

@@ -167,11 +167,11 @@
      */
     preInit: function() {
       if (typeof this.console === 'undefined') {
-        var self = this;
+        var that = this;
         var methods = ['log', 'warn', 'debug', 'info', 'error'];
 
         $.each(methods, function(i, methodName) {
-          self.console[methodName] = $.noop;
+          that.console[methodName] = $.noop;
         });
       }
     },
@@ -190,9 +190,11 @@
 
       if (typeof o.expose === 'string') {
         $sel = $(o.expose);
-      } else if (o.expose instanceof $) {
+      }
+      else if (o.expose instanceof $) {
         $sel = o.expose;
-      } else {
+      }
+      else {
         $sel = $(o.sel);
       }
 
@@ -207,9 +209,20 @@
           zIndex: $sel.css('z-Index')
         };
 
-        // we have to make it higher than the overlay
         newCSS = {
-          position: 'relative',
+          position: (function() {
+            // NOTE: issue #63
+            // We can't direclty use 'relative' if the original element
+            // is using properties other than 'relative' because
+            // this would break the UI.
+            if (['absolute', 'fixed'].indexOf(oldCSS.position) > -1) {
+              return oldCSS.position;
+            }
+            else {
+              return 'relative';
+            }
+          }()),
+          // we have to make it higher than the overlay
           zIndex: this.settings.overlayZindex + 1
         };
 
@@ -310,7 +323,7 @@
      * @param {Event} e
      */
     keyEvent: function(e) {
-      switch(e.which) {
+      switch (e.which) {
         case this.CONSTANTS.ESC:
           this.stop();
           break;
@@ -417,6 +430,7 @@
      * @public
      */
     next: function() {
+      var that = this;
       // We have to make sure we can go next first,
       // if not, let's just re-run
       if (!this.canGoNext()) {
@@ -430,15 +444,17 @@
       // all be here.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (this.isLast()) {
-        this.doLastOperation();
-      }
-      else {
-        this.increaseIndex();
-        this.run();
-      }
+      $.when(tripEndDefer).then(function() {
+        if (that.isLast()) {
+          that.doLastOperation();
+        }
+        else {
+          that.increaseIndex();
+          that.run();
+        }
+      });
     },
 
     /**
@@ -449,6 +465,7 @@
      * @public
      */
     prev: function() {
+      var that = this;
       this.tripDirection = 'prev';
 
       // When this is executed, it means users click on the arrow key to
@@ -456,13 +473,14 @@
       // place to call onTripEnd before modifying tripIndex.
       var tripObject = this.getCurrentTripObject();
       var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-      tripEnd(this.tripIndex, tripObject);
+      var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-      if (!this.isFirst() && this.canGoPrev()) {
-        this.decreaseIndex();
-      }
-
-      this.run();
+      $.when(tripEndDefer).then(function() {
+        if (!that.isFirst() && that.canGoPrev()) {
+          that.decreaseIndex();
+        }
+        that.run();
+      });
     },
 
     /**
@@ -645,7 +663,7 @@
      * @return {Boolean} whether current trip is the first one
      */
     isFirst: function() {
-      return (this.tripIndex === 0) ? true: false;
+      return (this.tripIndex === 0) ? true : false;
     },
 
     /**
@@ -656,7 +674,7 @@
      * @return {Boolean} whether current trip is the last one
      */
     isLast: function() {
-      return (this.tripIndex === this.tripData.length - 1) ? true: false;
+      return (this.tripIndex === this.tripData.length - 1) ? true : false;
     },
 
     /**
@@ -668,8 +686,12 @@
      * @return {Boolean} whether tripData is valid
      */
     isTripDataValid: function(o) {
-      if (this.hasSpeicalDirections()) {
+      if (this.hasSpecialDirections()) {
         return true;
+      }
+
+      if (o.nextClickSelector && $(o.nextClickSelector).length === 0) {
+        return false;
       }
 
       // have to check `sel` & `content` two required fields
@@ -691,7 +713,7 @@
      * @param {String} position position
      * @return {Boolean} whether position is speical direction or not
      */
-    hasSpeicalDirections: function() {
+    hasSpecialDirections: function() {
       var o = this.getCurrentTripObject();
       var position = o.position;
       var specialDirections = [
@@ -862,6 +884,7 @@
      */
     setTripBlock: function(o) {
       var $tripBlock = this.$tripBlock;
+      var that = this;
 
       // toggle used settings
       var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
@@ -893,8 +916,8 @@
 
       $tripBlock
         .find('.trip-next')
-        .html(this.isLast() ? finishLabel: nextLabel)
-        .toggle(showNavigation);
+        .html(this.isLast() ? finishLabel : nextLabel)
+        .toggle(showNavigation && !o.nextClickSelector);
 
       $tripBlock
         .find('.trip-close')
@@ -905,6 +928,16 @@
       $tripBlock.removeClass(
         'e s w n screen-ne screen-se screen-sw screen-nw screen-center');
       $tripBlock.addClass(o.position);
+
+      // if we have a nextClickSelector use that as the trigger for the next button
+      if (o.nextClickSelector) {
+        $(o.nextClickSelector).one('click.Trip', function(e) {
+          e.preventDefault();
+          // Force IE/FF to lose focus
+          $(this).blur();
+          that.next();
+        });
+      }
 
       // NOTE: issue #27
       // we have to set position left first then position top
@@ -1120,7 +1153,6 @@
       this.createTripBlock();
       this.createOverlay();
     },
-
 
     /**
      * This method is used to create a trip block at the first time when
