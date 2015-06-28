@@ -1280,6 +1280,7 @@
      * @type {Function}
      */
     hideTripBlock: function() {
+      this.removeAnimation();
       this.$tripBlock.fadeOut('slow');
     },
 
