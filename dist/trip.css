@@ -1056,9 +1056,11 @@
   animation: rotateInUpRight 0.5s 0s ease both; }
 
 .trip-close {
+  position: relative;
   font-size: 80%;
   float: right;
-  margin-top: -5px; }
+  margin-top: -5px;
+  z-index: 1; }
   .trip-close:hover {
     text-decoration: none; }
 
