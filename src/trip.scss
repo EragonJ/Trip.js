@@ -98,9 +98,11 @@
 
 // define its basic rules
 .trip-close {
+  position: relative;
   font-size: 80%;
   float: right;
   margin-top: -5px;
+  z-index: 1;
 
   &:hover {
     text-decoration: none;
