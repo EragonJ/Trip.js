@@ -1,59 +1,38 @@
 # Trip.js
 
-[![Join the chat at https://gitter.im/EragonJ/Trip.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EragonJ/Trip.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ![Trip.js](https://raw.github.com/EragonJ/Trip.js/master/public/img/logo-tiny.png "Trip.js")
 
 Trip.js is a jQuery plugin that can help you customize a tutorial trip easily with more flexibilities. Right now Trip.js support lots of useful stuffs like **keyboard binding**, **animations**, **changing themes** ... etc. If you want to highly customize your own tutorial trip, then Trip.js is definitely worth to give it a try !
 
-# Build Status
+# Awesome badges
 
-[![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js)
+[![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js) [![Join the chat at https://gitter.im/EragonJ/Trip.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EragonJ/Trip.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Version
 
 3.1.0
 
-# Install
+# How to use
 
-Clone the latest version from Github directly
+Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj.github.io/Trip.js/doc-setup.html) and [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) :P
 
-* `git clone git://github.com/EragonJ/Trip.js.git`
+# Key Binding
 
-Or install from Bower
+Trip.js would detect following keys to do relative actions after loading it.
 
-* `bower install trip.js`
+* Right and Down arrows  - Go to next trip
+* Left and Up arrows     - Go back to previous trip
+* Space                  - pause / resume trip
+* Esc                    - Stop trip
 
-Or install from npm
+# API
 
-* `npm install trip.js`
-
-Or [OSSCDN by MaxCDN](http://osscdn.com/#/jquery.trip.js)
-
-* `<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.1.0/trip.min.css" />`
-* `<script src="//oss.maxcdn.com/jquery.trip.js/3.1.0/trip.min.js"></script>`
-
-# Setup (minimal)
-
-* include jQuery
-* include trip.min.css
-* include trip.min.js
-* setup trip codes shown below
-
-        var trip = new Trip([
-            { 
-                sel : $('#element1'),
-                content : 'This is element 1'
-            },
-            {
-                sel : $('#element2'),
-                content : 'This is element 2'
-            }
-        ], options); // details about options are listed below
-
-# Documentation
-
-Please check the [setup](http://eragonj.github.io/Trip.js/doc-setup.html) and [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) here !
+* trip.start()  - start your trip
+* trip.stop()   - stop your trip
+* trip.pause()  - pause / resume your trip ( same as trip.resume() )
+* trip.resume() - pause / resume your trip ( same as trip.pause()  )
+* trip.next()   - jump to next step
+* trip.prev()   - jump back to previous step
 
 # How to Contribute
 
@@ -65,11 +44,11 @@ If you are willing to contribute any commit for Trip.js, please follow the rule 
 
 1. Create an issue talking about your change and let's discuss here.
 2. Assign yourself as assignee.
-3. fork Trip.js.
-4. put your changes into a commit !
-5. press `grunt build` to build all necessary files. Notes: You need to install compass (I am sorry because it is ruby based), node and npm first, and don't forget to press `npm install` to install all needed building tools so that grunt can recognize it and help you minify js, compile jade and SCSS.
-6. send a pull request to Trip.js and make sure put `fix #xxx` in your commit title.
-7. make sure Travis is green and ping me :D
+3. Fork Trip.js.
+4. Put your changes into a commit !
+5. Press `grunt build` to build all necessary files. Notes: You need to install compass (I am sorry because it is ruby based), node and npm first, and don't forget to press `npm install` to install all needed building tools so that grunt can recognize it and help you minify js, compile jade and SCSS.
+6. Send a pull request to Trip.js and make sure put `fix #xxx` in your commit title.
+7. Make sure Travis is green and ping me :D
 
 Although the rule is not forced to follow, it would be helpful for me to review code to make sure there is nothing missing and make the code base consistent. 
 
@@ -91,37 +70,21 @@ Thanks for all your participations !!!
 
 `grunt doc` (This includes `jsdoc` for source code and documentations)
 
-# Key Binding
-
-Trip.js would detect following keys to do relative actions after loading it.
-
-* Right and Down arrows  - Go to next trip
-* Left and Up arrows     - Go back to previous trip
-* Space                  - pause / resume trip
-* Esc                    - Stop trip
-
-# API
-
-* trip.start()  - start your trip
-* trip.stop()   - stop your trip
-* trip.pause()  - pause / resume your trip ( same as trip.resume() )
-* trip.resume() - pause / resume your trip ( same as trip.pause()  )
-* trip.next()   - jump to next step
-* trip.prev()   - jump back to previous step
-
 # TODO
 
 * Add data-x to define steps ( make the setup easier )
 * Add UI for pause/play/stop to make users know how to interact
 * Don't depend on jQuery
 
-# Author
-EragonJ ( eragonj@eragonj.me )
-
-# License
-MIT
-
 # Special Thanks
 
 * Everyone who is engaged in this project.
 * [Animate.css](http://daneden.github.io/animate.css/)
+
+# Author
+
+EragonJ ( eragonj@eragonj.me )
+
+# License
+
+MIT
