@@ -1,5 +1,8 @@
 @import "compass/css3";
-@import "animate";
+
+@mixin animate($name: fadeIn, $duration: 1s, $delay: 0.2s, $function: ease, $mode: both) {
+  @include animation($name $duration $delay $function $mode);
+}
 
 @mixin trip-arrow-color($color) {
   &.n:before {

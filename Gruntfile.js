@@ -43,7 +43,8 @@ module.exports = function(grunt) {
           sourcemap: 'none'
         },
         files: {
-          'dist/trip.css': 'src/trip.scss'
+          'dist/trip.css': './src/styles/trip.all.scss',
+          'dist/trip.nodep.css': './src/styles/trip.nodep.scss'
         }
       },
       dist_compressed: {
@@ -53,7 +54,8 @@ module.exports = function(grunt) {
           sourcemap: 'none'
         },
         files: {
-          'dist/trip.min.css': 'src/trip.scss'
+          'dist/trip.min.css': './src/styles/trip.all.scss',
+          'dist/trip.nodep.min.css': './src/styles/trip.nodep.scss'
         }
       }
     },

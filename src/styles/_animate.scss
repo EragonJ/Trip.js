@@ -1,9 +1,3 @@
-//Animate Mixin Plugin
-
-@mixin animate($name: fadeIn, $duration: 1s, $delay: 0.2s, $function: ease, $mode: both) {
-  @include animation($name $duration $delay $function $mode);
-}
-
 //KeyFrame Defaults (pre-made don't edit)
 
 @-webkit-keyframes fadeIn {
