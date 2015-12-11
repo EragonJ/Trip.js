@@ -5,7 +5,7 @@ $(document).ready(function() {
       position : 's',
       content : 'Hi, I am Trip.js',
       delay : 2000,
-      callback : function(i) {
+      onTripEnd : function(i) {
         console.log("step "+ i +" is finished");
       }
     },
@@ -14,7 +14,7 @@ $(document).ready(function() {
       position : 'e',
       content : 'This is a plugin that can help you make hint flow easily !',
       delay : 3000,
-      callback : function(i) {
+      onTripEnd : function(i) {
         console.log("step "+ i +" is finished");
       }
     },
