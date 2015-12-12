@@ -1,3 +1,12 @@
+# Key Bindings
+
+Trip.js would detect following keys to do relative actions after loading it.
+
++ Right and Down arrows - Go to next trip
++ Left and Up arrows - Go back to previous trip
++ Space - pause / resume trip
++ Esc - Stop trip
+
 # API
 
 + `trip.start()`

@@ -12,27 +12,9 @@ Trip.js is a jQuery plugin that can help you customize a tutorial trip easily wi
 
 3.1.1
 
-# How to use
+# How to use this library
 
-Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj.github.io/Trip.js/doc-setup.html) and [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) :P
-
-# Key Binding
-
-Trip.js would detect following keys to do relative actions after loading it.
-
-* Right and Down arrows  - Go to next trip
-* Left and Up arrows     - Go back to previous trip
-* Space                  - pause / resume trip
-* Esc                    - Stop trip
-
-# API
-
-* trip.start()  - start your trip
-* trip.stop()   - stop your trip
-* trip.pause()  - pause / resume your trip ( same as trip.resume() )
-* trip.resume() - pause / resume your trip ( same as trip.pause()  )
-* trip.next()   - jump to next step
-* trip.prev()   - jump back to previous step
+Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj.github.io/Trip.js/doc-setup.html), [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) and [API](http://eragonj.github.io/Trip.js/doc-api.html) :P
 
 # How to Contribute
 
