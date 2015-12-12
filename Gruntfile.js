@@ -167,7 +167,8 @@ module.exports = function(grunt) {
           './index.html': ['views/src/_index.html'],
           './demo.html': ['views/src/_demo.html'],
           './doc-configuration.html': ['doc/configuration.html'],
-          './doc-setup.html': ['doc/setup.html']
+          './doc-setup.html': ['doc/setup.html'],
+          './doc-api.html': ['doc/api.html']
         }
       }
     }

@@ -31,6 +31,7 @@
     <script src="dist/trip.js"></script>
     <script src="public/js/demo-index.js"></script>
 
+    <link rel="stylesheet" href="public/vendor/github-markdown-css/github-markdown.css">
   </head>
   <body>
     
@@ -83,78 +84,33 @@
       </div>
     </div>
 
-
-    <div class="text-center">
-      <button type="button" class="start-demo-index btn btn-lg btn-success">Show Me a Quick Demo</button>
-    </div>
-
-    <div class="section-tout">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-4 col-sm-4">
-            <h3><i class="fa fa-github-alt"></i> Open Source</h3>
-            <p>Trip.js is released under MIT license and maintained on <a href="https://github.com/EragonJ/Trip.js">Github</a>.</p>
-          </div>
-          <div class="col-lg-4 col-sm-4">
-            <h3><i class="fa fa-book"></i> Documentations</h3>
-            <p>We have detailed documentations for your reference.</p>
-          </div>
-          <div class="col-lg-4 col-sm-4">
-            <h3><i class="fa fa-cog"></i> Customizable</h3>
-            <p>This plugin is designed to be highly customizable for all different scenarios.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <h2>
-          <span class="demo-index step1 step2">What is Trip.js ?</span>
-        </h2>
-        <p>Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.</p>
-      </div>
-      <div class="step">
-        <h2>Version</h2>
-        <p>3.1.1</p>
-      </div>
-      <div class="step">
-        <h2>Setup (Minimal)</h2>
-        <ol>
-          <li>
-            <p>Include your jQuery</p>
-            <script src="https://gist.github.com/EragonJ/5855718.js"></script>
-          </li>
-          <li>
-            <p>Include dist/trip.css (with animiate.css)</p>
-            <script src="https://gist.github.com/EragonJ/5855723.js"></script>
-            <p>Or you can just include the clean one without animate.css</p>
-            <script src="https://gist.github.com/EragonJ/42f82eafe62a8f570d1b.js"></script>
-          </li>
-          <li>
-            <p>Include dist/trip.js</p>
-            <script src="https://gist.github.com/EragonJ/5855736.js"></script>
-          </li>
-          <li class="demo-index step3 step4 step5 step6">
-            <p>Setup Trip.js</p>
-            <script src="https://gist.github.com/EragonJ/5855739.js"></script>
-          </li>
-          <li class="demo-index step7">
-            <p>Take a Trip Now !</p>
-            <script src="https://gist.github.com/EragonJ/5855742.js" class="step7"></script>
-          </li>
-        </ol>
-      </div>
-      <div class="step demo-index step8">
-        <h2>Notice</h2>
-        <div class="alert alert-warning">
-          <p>
-            This plugin is still under development !
-            If you find any bugs or want me to implement anything,
-            please feel free to open an issue ;)
-          </p>
-        </div>
-      </div>
+    <div class="markdown-body">
+      <h1 id="api">API</h1>
+<ul>
+<li><code>trip.start()</code></li>
+<li><code>trip.stop()</code></li>
+<li><code>trip.pause()</code></li>
+<li><code>trip.resume()</code></li>
+<li><code>trip.next()</code></li>
+<li><code>trip.prev()</code></li>
+</ul>
+<h2 id="introductions">Introductions</h2>
+<p>When using Trip.js, after initializing, you will get a <code>trip</code> object that has several APIs that you can use with in different situation. And here comes an example : </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> trip = <span class="hljs-keyword">new</span> Trip([...]);
+</code></pre>
+<h3 id="trip-start-">trip.start()</h3>
+<p>This is the entry point that to start the whole predefined trip.</p>
+<h3 id="trip-stop-">trip.stop()</h3>
+<p>This will finish the whole trip in time.</p>
+<h3 id="trip-pause-">trip.pause()</h3>
+<p>Sometimes, you may need to pause the trip for a while to let users do something, then, you can use this.</p>
+<h3 id="trip-resume-">trip.resume()</h3>
+<p>After a while, you want to make the paused trip back to work, you will need this one. But even if <code>trip.pause()</code> and <code>trip.resume()</code> sounds different, the implementation behind them are the same, so you can just treat them as same function but with different name.</p>
+<h3 id="trip-next-">trip.next()</h3>
+<p>Jump to the next step.</p>
+<h3 id="trip-prev-">trip.prev()</h3>
+<p>Jump back to previous step.</p>
+  
     </div>
   </body>
 </html>
