@@ -117,7 +117,7 @@ module.exports = function(grunt) {
         overwrite: true,
         replacements: [{
           from: (function() {
-            return new RegExp(grunt.option('oldv'));
+            return new RegExp(grunt.option('oldv'), 'g');
           })(),
           to: function() {
             return grunt.option('newv');
