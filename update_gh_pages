@@ -2,6 +2,7 @@
 git checkout gh-pages
 git checkout master -- index.html
 git checkout master -- demo.html
+git checkout master -- doc-api.html
 git checkout master -- doc-configuration.html
 git checkout master -- doc-setup.html
 rm -rf public
