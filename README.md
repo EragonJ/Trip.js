@@ -42,7 +42,7 @@ Thanks for all your participations !!!
 
 ## How to build
 
-`grunt build` (this will do `uglify`, `sass` at the same time)
+`grunt build` (this will build js & css together)
 
 ## How to compile html
 
