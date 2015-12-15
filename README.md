@@ -4,6 +4,12 @@
 
 Trip.js is a jQuery plugin that can help you customize a tutorial trip easily with more flexibilities. Right now Trip.js support lots of useful stuffs like **keyboard binding**, **animations**, **changing themes** ... etc. If you want to highly customize your own tutorial trip, then Trip.js is definitely worth to give it a try !
 
+# Nice works !
+
+If you do love Trip.js, feel free to buy me some beers ! :beers:
+
+My bitcoin wallet : **1KtpFtaLW52tCe2VhWxCMHmRt8Mrxqj4WB**
+
 # Awesome badges
 
 [![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js) [![Join the chat at https://gitter.im/EragonJ/Trip.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EragonJ/Trip.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
