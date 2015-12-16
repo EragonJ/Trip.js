@@ -33,17 +33,17 @@ function Trip() {
   }
   else if (arguments.length === 1) {
     // ([]) - programming mode without configurations
-    if (this.isArray(arguments[0])) {
+    if (TripUtils.isArray(arguments[0])) {
       tripData = arguments[0];
       userOptions = {};
     }
     // ({}) - default parser mode with configurations
-    else if (this.isObject(arguments[0])) {
+    else if (TripUtils.isObject(arguments[0])) {
       tripData = tripParser.parse('default');
       userOptions = arguments[0];
     }
     // ('.trip-nodes') - customized parser mode without configurations
-    else if (this.isString(arguments[0])) {
+    else if (TripUtils.isString(arguments[0])) {
       tripData = tripParser.parse(arguments[0]);
       userOptions = {};
     }
@@ -56,11 +56,11 @@ function Trip() {
   // Users pass tripData directly from codebase
   else {
     // ([], {}) - programming mode with configurations
-    if (this.isArray(arguments[0])) {
+    if (TripUtils.isArray(arguments[0])) {
       tripData = arguments[0];
     }
     // ('.trip-nodes', {}) - customized parser mode with configurations
-    else if (this.isString(arguments[0])) {
+    else if (TripUtils.isString(arguments[0])) {
       tripData = tripParser.parse(arguments[0]);
     }
     userOptions = arguments[1];
@@ -805,48 +805,6 @@ Trip.prototype = {
     else {
       this.tripIndex -= 1;
     }
-  },
-
-  /**
-   * We will use this native method to know whether this is an array.
-   *
-   * TODO
-   * we have to move this to TripUtils
-   *
-   * @memberOf Trip
-   * @type {Function}
-   * @return {Boolean}
-   */
-  isArray: function(target) {
-    return Object.prototype.toString.call(target) === '[object Array]';
-  },
-
-  /**
-   * We will use this native method to know whether this is an string.
-   *
-   * TODO
-   * we have to move this to TripUtils
-   *
-   * @memberOf Trip
-   * @type {Function}
-   * @return {Boolean}
-   */
-  isString: function(target) {
-    return (typeof target === 'string');
-  },
-
-  /**
-   * We will use this native method to know whether this is an object.
-   *
-   * TODO
-   * we have to move this to TripUtils
-   *
-   * @memberOf Trip
-   * @type {Function}
-   * @return {Boolean}
-   */
-  isObject: function(target) {
-    return Object.prototype.toString.call(target) === '[object Object]';
   },
 
   /**
