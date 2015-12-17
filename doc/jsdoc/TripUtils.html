@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Class: TripParser</title>
+	<title>DocStrap Class: TripUtils</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,12 +56,12 @@
 					
 
 
-	<h1 class="page-title">Class: TripParser</h1>
+	<h1 class="page-title">Class: TripUtils</h1>
 <section>
 
 <header>
     <h2>
-    TripParser
+    TripUtils
     </h2>
     
 </header>
@@ -73,7 +73,7 @@
     
         
 <dt>
-    <h4 class="name" id="TripParser"><span class="type-signature"></span>new TripParser<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TripUtils"><span class="type-signature"></span>new TripUtils<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -81,9 +81,7 @@
     
     
     <div class="description">
-        <p>TripParser - this is the parser that helps us parse DOM elements and
-return needed information to TripCore. By doing so, users can easily
-define their own trips from HTML.</p>
+        <p>TripUtils - some general used functions will be collected here.</p>
     </div>
     
 
@@ -121,7 +119,7 @@ define their own trips from HTML.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1337">line 1337</a>
+				 <a href="trip.js.html#sunlight-1-line-1462">line 1462</a>
 			</li>
 		</ul>
 	</dd>
@@ -169,7 +167,7 @@ define their own trips from HTML.</p>
         <dl>
             
 <dt>
-    <h4 class="name" id="_getAllTripNodes"><span class="type-signature">&lt;static> </span>_getAllTripNodes<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="isArray"><span class="type-signature">&lt;static> </span>isArray<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
     
 </dt>
@@ -177,7 +175,7 @@ define their own trips from HTML.</p>
     
     
     <div class="description">
-        <p>We will find out all pre-defined DOM elements from DOM tree.</p>
+        <p>We will use this native method to know whether this is an array.</p>
     </div>
     
 
@@ -215,7 +213,7 @@ define their own trips from HTML.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1358">line 1358</a>
+				 <a href="trip.js.html#sunlight-1-line-1476">line 1476</a>
 			</li>
 		</ul>
 	</dd>
@@ -241,10 +239,6 @@ define their own trips from HTML.</p>
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>Array of Element</p>
-</div>
-
 
 
 <dl>
@@ -253,7 +247,7 @@ define their own trips from HTML.</p>
 	</dt>
 	<dd>
 		
-<span class="param-type">Array</span>
+<span class="param-type">Boolean</span>
 
 
 	</dd>
@@ -268,7 +262,7 @@ define their own trips from HTML.</p>
         
             
 <dt>
-    <h4 class="name" id="_parseTripData"><span class="type-signature">&lt;static> </span>_parseTripData<span class="signature">(node)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="isObject"><span class="type-signature">&lt;static> </span>isObject<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
     
 </dt>
@@ -276,11 +270,7 @@ define their own trips from HTML.</p>
     
     
     <div class="description">
-        <p>we will use this function to parse out all needed information
-and wrap them into a tripData object then pass it out.</p>
-<p>TODO - <a href="http://caniuse.com/#search=dataset">http://caniuse.com/#search=dataset</a>
-IE 8~10 can't use dataset directly, so we may need to use
-getAttribute for this case later.</p>
+        <p>We will use this native method to know whether this is an object.</p>
     </div>
     
 
@@ -288,55 +278,6 @@ getAttribute for this case later.</p>
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>node</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Element</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
     
     
     
@@ -367,7 +308,7 @@ getAttribute for this case later.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1375">line 1375</a>
+				 <a href="trip.js.html#sunlight-1-line-1487">line 1487</a>
 			</li>
 		</ul>
 	</dd>
@@ -393,10 +334,6 @@ getAttribute for this case later.</p>
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>TripData</p>
-</div>
-
 
 
 <dl>
@@ -405,7 +342,7 @@ getAttribute for this case later.</p>
 	</dt>
 	<dd>
 		
-<span class="param-type">Object</span>
+<span class="param-type">Boolean</span>
 
 
 	</dd>
@@ -420,7 +357,7 @@ getAttribute for this case later.</p>
         
             
 <dt>
-    <h4 class="name" id="parse"><span class="type-signature">&lt;static> </span>parse<span class="signature">(selector)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="isString"><span class="type-signature">&lt;static> </span>isString<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
     
 </dt>
@@ -428,7 +365,7 @@ getAttribute for this case later.</p>
     
     
     <div class="description">
-        <p>This is the main entry point to use tripParser.</p>
+        <p>We will use this native method to know whether this is an string.</p>
     </div>
     
 
@@ -436,55 +373,6 @@ getAttribute for this case later.</p>
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>selector</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>selector to matches nodes from DOM tree</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
     
     
     
@@ -515,7 +403,7 @@ getAttribute for this case later.</p>
 		<ul class="dummy">
 			<li>
 				<a href="trip.js.html">trip.js</a>,
-				 <a href="trip.js.html#sunlight-1-line-1425">line 1425</a>
+				 <a href="trip.js.html#sunlight-1-line-1498">line 1498</a>
 			</li>
 		</ul>
 	</dd>
@@ -541,10 +429,6 @@ getAttribute for this case later.</p>
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    <p>Array of tripDatas</p>
-</div>
-
 
 
 <dl>
@@ -553,7 +437,106 @@ getAttribute for this case later.</p>
 	</dt>
 	<dd>
 		
-<span class="param-type">Array</span>
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="Timer"><span class="type-signature">&lt;static> </span>Timer<span class="signature">()</span><span class="type-signature"> &rarr; {Timer}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>3rd party libraries / toolkits</p>
+<p>We will keep our 3rd party libraries / toolkits here to make sure we can
+track where did we get the code from and its usage.</p>
+<p>See also:
+<a href="http://stackoverflow.com/questions/3969475/javascript-pause-settimeout">http://stackoverflow.com/questions/3969475/javascript-pause-settimeout</a></p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="trip.js.html">trip.js</a>,
+				 <a href="trip.js.html#sunlight-1-line-1515">line 1515</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Timer</span>
 
 
 	</dd>

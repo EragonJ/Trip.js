@@ -19,8 +19,8 @@ bower install trip.js --save
 ### From CDN (OSSCDN by MaxCDN)
 
 ```html
-<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.1.1/trip.min.css"/>
-<script src="//oss.maxcdn.com/jquery.trip.js/3.1.1/trip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.1.2/trip.min.css"/>
+<script src="//oss.maxcdn.com/jquery.trip.js/3.1.2/trip.min.js"></script>
 ```
 
 ## How to setup Trip.js properly ?
@@ -72,8 +72,8 @@ You can pass valid CSS selectors in **String** type as the first parameter to te
 
 ```html
 <div>
-  <div class="your-own-trips">hi</div>
-  <div class="your-own-trips">I am Trip.js</div>
+  <div data-trip-index="1" data-trip-content="hi1" data-trip-position="n" data-trip-delay="100" class="your-own-trips">hi</div>
+  <div data-trip-index="2" data-trip-content="hi2" data-trip-position="e" data-trip-delay="200" class="your-own-trips">I am Trip.js</div>
 </div>
 ```
 
