@@ -72,8 +72,8 @@ You can pass valid CSS selectors in **String** type as the first parameter to te
 
 ```html
 <div>
-  <div class="your-own-trips">hi</div>
-  <div class="your-own-trips">I am Trip.js</div>
+  <div data-trip-index="1" data-trip-content="hi1" data-trip-position="n" data-trip-delay="100" class="your-own-trips">hi</div>
+  <div data-trip-index="2" data-trip-content="hi2" data-trip-position="e" data-trip-delay="200" class="your-own-trips">I am Trip.js</div>
 </div>
 ```
 
