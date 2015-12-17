@@ -95,8 +95,8 @@
 <pre><code class="lang-bash">bower install trip.js --save
 </code></pre>
 <h3 id="from-cdn-osscdn-by-maxcdn-">From CDN (OSSCDN by MaxCDN)</h3>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.1/trip.min.css"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.1/trip.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.2/trip.min.css"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.2/trip.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre>
 <h2 id="how-to-setup-trip-js-properly-">How to setup Trip.js properly ?</h2>
 <ol>
@@ -135,8 +135,8 @@
 <p>In parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.</p>
 <p>You can pass valid CSS selectors in <strong>String</strong> type as the first parameter to tell Trip.js which trips you are referring. With this, you can easily create many different groups of trips and control your own tutorial trips.</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>hi<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>I am Trip.js<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">data-trip-index</span>=<span class="hljs-value">"1"</span> <span class="hljs-attribute">data-trip-content</span>=<span class="hljs-value">"hi1"</span> <span class="hljs-attribute">data-trip-position</span>=<span class="hljs-value">"n"</span> <span class="hljs-attribute">data-trip-delay</span>=<span class="hljs-value">"100"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>hi<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">data-trip-index</span>=<span class="hljs-value">"2"</span> <span class="hljs-attribute">data-trip-content</span>=<span class="hljs-value">"hi2"</span> <span class="hljs-attribute">data-trip-position</span>=<span class="hljs-value">"e"</span> <span class="hljs-attribute">data-trip-delay</span>=<span class="hljs-value">"200"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"your-own-trips"</span>&gt;</span>I am Trip.js<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 </code></pre>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = {}; <span class="hljs-comment">// details about options are listed in next chapter</span>

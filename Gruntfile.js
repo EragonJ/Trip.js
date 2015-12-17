@@ -174,7 +174,7 @@ module.exports = function(grunt) {
   grunt.registerTask('doc', ['markdown', 'includereplace']);
   grunt.registerTask('all', ['build', 'jsdoc', 'doc']);
   grunt.registerTask('bumpversion',
-    ['replace:configfiles', 'replace:sourcefiles', 'build', 'doc', 'jsdoc']);
+    ['replace:configfiles', 'replace:sourcefiles', 'all']);
 
   // How to bump version ?
   //

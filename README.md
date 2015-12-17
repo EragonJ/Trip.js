@@ -16,7 +16,7 @@ My bitcoin wallet : **1KtpFtaLW52tCe2VhWxCMHmRt8Mrxqj4WB**
 
 # Version
 
-3.1.1
+3.1.2
 
 # How to use this library
 
