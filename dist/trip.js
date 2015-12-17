@@ -816,7 +816,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  canGoPrev: function() {
 	    var trip = this.tripData[this.tripIndex];
-	    var canGoPrev = trip.canGoPrev || this.settings.canGoPrev;
+	    var canGoPrev = trip.canGoPrev;
+
+	    if (typeof canGoPrev === 'undefined') {
+	      canGoPrev = this.settings.canGoPrev;
+	    }
 
 	    if (typeof canGoPrev === 'function') {
 	      canGoPrev = canGoPrev.call(trip);
@@ -834,7 +838,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  canGoNext: function() {
 	    var trip = this.tripData[this.tripIndex];
-	    var canGoNext = trip.canGoNext || this.settings.canGoNext;
+	    var canGoNext = trip.canGoNext;
+
+	    if (typeof canGoNext === 'undefined') {
+	      canGoNext = this.settings.canGoNext;
+	    }
 
 	    if (typeof canGoNext === 'function') {
 	      canGoNext = canGoNext.call(trip);
