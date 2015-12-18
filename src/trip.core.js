@@ -933,6 +933,25 @@ Trip.prototype = {
    */
   setTripBlockPosition: function(o, horizontalOrVertical) {
     var $tripBlock = this.$tripBlock;
+
+    //Styles need to be reset before capturing outer height and width
+    if (horizontalOrVertical === 'horizontal') {
+        // reset styles first
+        $tripBlock.css({
+            left: '',
+            right: '',
+            marginLeft: '',
+        });
+    }
+    else if (horizontalOrVertical === 'vertical') {
+        // reset styles first
+        $tripBlock.css({
+            top: '',
+            bottom: '',
+            marginTop: '',
+        });
+    }
+
     var $sel = $(o.sel);
     var selWidth = $sel && $sel.outerWidth();
     var selHeight = $sel && $sel.outerHeight();
@@ -976,13 +995,6 @@ Trip.prototype = {
     }
 
     if (horizontalOrVertical === 'horizontal') {
-      // reset styles first
-      $tripBlock.css({
-        left: '',
-        right: '',
-        marginLeft: '',
-      });
-
       switch (o.position) {
         case 'screen-center':
           $tripBlock.css({
@@ -1011,12 +1023,6 @@ Trip.prototype = {
       }
     }
     else if (horizontalOrVertical === 'vertical') {
-      // reset styles first
-      $tripBlock.css({
-        top: '',
-        bottom: '',
-        marginTop: '',
-      });
 
       switch (o.position) {
         case 'screen-center':
