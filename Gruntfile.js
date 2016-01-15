@@ -1,5 +1,8 @@
+var fs = require('fs');
+
 module.exports = function(grunt) {
   var pathToInk = 'node_modules/grunt-jsdoc/node_modules/ink-docstrap';
+  var tripLicenseInfo = fs.readFileSync('./src/trip._header_.js', 'utf8');
 
   // Project configuration.
   grunt.initConfig({
@@ -50,8 +53,18 @@ module.exports = function(grunt) {
       }
     },
     webpack: {
-      'trip.js': require('./webpack.config.js'),
-      'trip.min.js': require('./webpack.config.min.js')
+      'trip.js': require('./webpack.config.js')
+    },
+    uglify: {
+      options: {
+        mangle: false,
+        banner: tripLicenseInfo
+      },
+      target: {
+        files: {
+          './dist/trip.min.js': ['./dist/trip.js']
+        }
+      }
     },
     jscs: {
       // we will check distributed version directly and if there is any wrong,
@@ -164,11 +177,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-include-replace');
   grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task(s).
   grunt.registerTask('test', ['connect', 'qunit']);
   grunt.registerTask('scss', ['sass']);
-  grunt.registerTask('build-js', ['jshint', 'jscs', 'webpack']);
+  grunt.registerTask('build-js', ['jshint', 'jscs', 'webpack', 'uglify']);
   grunt.registerTask('build-css', ['sass']);
   grunt.registerTask('build', ['build-js', 'build-css']);
   grunt.registerTask('doc', ['markdown', 'includereplace']);
