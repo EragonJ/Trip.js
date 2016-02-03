@@ -237,7 +237,7 @@ Trip.prototype = {
         .addClass('trip-exposed');
     }
 
-    this.$overlay.show();
+    this.$overlay.fadeIn();
   },
 
   /**
@@ -261,7 +261,7 @@ Trip.prototype = {
         .removeClass('trip-exposed');
     }
 
-    this.$overlay.hide();
+    this.$overlay.fadeOut();
   },
 
   /**

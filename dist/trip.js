@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.1.3
+ *  Version: 3.1.4
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -307,7 +307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .addClass('trip-exposed');
 	    }
 
-	    this.$overlay.show();
+	    this.$overlay.fadeIn();
 	  },
 
 	  /**
@@ -331,7 +331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .removeClass('trip-exposed');
 	    }
 
-	    this.$overlay.hide();
+	    this.$overlay.fadeOut();
 	  },
 
 	  /**
