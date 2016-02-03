@@ -10,13 +10,16 @@
       <h1 id="setup">Setup</h1>
 <p>In this chapter, we will tell you how to setup Trip.js properly steps by steps.</p>
 <h2 id="where-to-find-trip-js-">Where to find Trip.js ?</h2>
-<h3 id="from-github">From GitHub</h3>
+<h3 id="github">GitHub</h3>
 <pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> git://github.com/EragonJ/Trip.js.git
 </code></pre>
-<h3 id="from-bower">From Bower</h3>
+<h3 id="npm">NPM</h3>
+<pre><code class="lang-bash">npm install --save trip.js
+</code></pre>
+<h3 id="bower">Bower</h3>
 <pre><code class="lang-bash">bower install trip.js --save
 </code></pre>
-<h3 id="from-cdn-osscdn-by-maxcdn-">From CDN (OSSCDN by MaxCDN)</h3>
+<h3 id="cdn-osscdn-by-maxcdn-">CDN (OSSCDN by MaxCDN)</h3>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.3/trip.min.css"</span>/&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//oss.maxcdn.com/jquery.trip.js/3.1.3/trip.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre>
@@ -26,7 +29,23 @@
 <li>include trip.min.css</li>
 <li>include trip.min.js</li>
 </ol>
-<p>Okay, it seems that we already have prepared enough resources for Trip.js, it&#39;s time to trigger Trip.js !</p>
+<p>Powered with webpack, starting from <strong>3.1.3+</strong>, Trip.js has been refactored in UMD (Universal Module Definition) pattern which can be used in several ways below :</p>
+<h3 id="amd-style-supported-from-3-1-3-">AMD style (supported from 3.1.3+)</h3>
+<pre><code class="lang-javascript"><span class="hljs-built_in">require</span>([
+  <span class="hljs-string">'Trip'</span>
+], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Trip)</span> </span>{
+  <span class="hljs-comment">// ...</span>
+});
+</code></pre>
+<h3 id="commomjs-style-supported-from-3-1-3-">CommomJS style (supported from 3.1.3+)</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Trip = <span class="hljs-built_in">require</span>(<span class="hljs-string">'Trip'</span>);
+<span class="hljs-comment">// ...</span>
+</code></pre>
+<h3 id="vanilajs-style">VanilaJS style</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Trip = <span class="hljs-built_in">window</span>.Trip;
+<span class="hljs-comment">// ...</span>
+</code></pre>
+<h2 id="how-to-use-trip-js-">How to use Trip.js ?</h2>
 <h3 id="programming-mode">Programming mode</h3>
 <p>In programming mode, you can easily define your own trips easily in JavaScript. As you may see below, every trip is wrapped well in an object with defined properties to tell Trip.js to do related works for it.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = {}; <span class="hljs-comment">// details about options are listed in next chapter</span>
@@ -53,7 +72,7 @@
   }
 ]);
 </code></pre>
-<h3 id="parser-mode-supported-in-3-0-0-">Parser mode (supported in 3.0.0+)</h3>
+<h3 id="parser-mode-supported-from-3-0-0-">Parser mode (supported from 3.0.0+)</h3>
 <p>In parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.</p>
 <p>You can pass valid CSS selectors in <strong>String</strong> type as the first parameter to tell Trip.js which trips you are referring. With this, you can easily create many different groups of trips and control your own tutorial trips.</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>

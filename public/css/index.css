@@ -1,3 +1,8 @@
+/* TODO may can take this off when using latest bootstrap */
+p {
+  font-size: 15px;
+}
+
 .fork-button {
   position: absolute;
   top: 0;

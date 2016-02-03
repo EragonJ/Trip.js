@@ -3,7 +3,7 @@ $(document).ready(function() {
     {
       sel : $('.demo-index.step1'),
       position : 's',
-      content : 'Hi, I am Trip.js',
+      content : 'A short story behind Trip.js',
       delay : 2000,
       onTripEnd : function(i) {
         console.log("step "+ i +" is finished");
@@ -11,27 +11,18 @@ $(document).ready(function() {
     },
     {
       sel : $('.demo-index.step2'),
-      position : 'e',
-      content : 'This is a plugin that can help you make hint flow easily !',
-      delay : 3000,
-      onTripEnd : function(i) {
-        console.log("step "+ i +" is finished");
-      }
-    },
-    {
-      sel : $('.demo-index.step3'),
       position : 'n',
-      content : 'Can be placed in many directions - North',
+      content : 'North',
       delay : 2000
     },
     {
-      sel : $('.demo-index.step4'),
+      sel : $('.demo-index.step3'),
       position : 'e',
       content : 'East',
       delay : 2000
     },
     {
-      sel : $('.demo-index.step5'),
+      sel : $('.demo-index.step4'),
       position : 'w',
       content : 'West',
       delay : 2000
@@ -69,10 +60,10 @@ $(document).ready(function() {
     },
     {
       sel : $('.demo-index.step6'),
-      content : 'Can control if the user can proceed',
+      content : 'You can pass only if you agree !',
       delay : 2000,
       canGoNext: function() {
-        return confirm("You can only continue if you agree!");
+        return confirm('You can pass only if you agree !');
       }
     },
     {
@@ -83,7 +74,7 @@ $(document).ready(function() {
     },
     {
       sel : $('.demo-index.step7'),
-      content : 'The user can stop the tour by hitting Esc or clicking the Close box',
+      content : 'You can stop the tour by hitting Esc or clicking the close box',
       delay : -1,
       showNavigation: true,
       showCloseBox: true
@@ -91,7 +82,7 @@ $(document).ready(function() {
     {
       sel : $('.demo-index.step8'),
       position : 'n',
-      content : 'One more thing, plz read this !',
+      content : 'You can also highlight any important news for your users',
       expose : true,
       delay : 7000
     }
