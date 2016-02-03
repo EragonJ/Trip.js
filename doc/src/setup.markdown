@@ -4,19 +4,25 @@ In this chapter, we will tell you how to setup Trip.js properly steps by steps.
 
 ## Where to find Trip.js ?
 
-### From GitHub
+### GitHub
 
 ```bash
 git clone git://github.com/EragonJ/Trip.js.git
 ```
 
-### From Bower
+### NPM
+
+```bash
+npm install --save trip.js
+```
+
+### Bower
 
 ```bash
 bower install trip.js --save
 ```
 
-### From CDN (OSSCDN by MaxCDN)
+### CDN (OSSCDN by MaxCDN)
 
 ```html
 <link rel="stylesheet" type="text/css" href="//oss.maxcdn.com/jquery.trip.js/3.1.3/trip.min.css"/>
@@ -29,7 +35,33 @@ bower install trip.js --save
 2. include trip.min.css
 3. include trip.min.js
 
-Okay, it seems that we already have prepared enough resources for Trip.js, it's time to trigger Trip.js !
+Powered with webpack, starting from **3.1.3+**, Trip.js has been refactored in UMD (Universal Module Definition) pattern which can be used in several ways below :
+
+### AMD style (supported from 3.1.3+)
+
+```javascript
+require([
+  'Trip'
+], function(Trip) {
+  // ...
+});
+```
+
+### CommomJS style (supported from 3.1.3+)
+
+```javascript
+var Trip = require('Trip');
+// ...
+```
+
+### VanilaJS style
+
+```javascript
+var Trip = window.Trip;
+// ...
+```
+
+## How to use Trip.js ?
 
 ### Programming mode
 
@@ -64,7 +96,7 @@ var trip = new Trip([
 ]);
 ```
 
-### Parser mode (supported in 3.0.0+)
+### Parser mode (supported from 3.0.0+)
 
 In parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.
 
