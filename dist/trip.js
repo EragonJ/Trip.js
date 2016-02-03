@@ -307,7 +307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .addClass('trip-exposed');
 	    }
 
-	    this.$overlay.show();
+	    this.$overlay.fadeIn();
 	  },
 
 	  /**
@@ -331,7 +331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .removeClass('trip-exposed');
 	    }
 
-	    this.$overlay.hide();
+	    this.$overlay.fadeOut();
 	  },
 
 	  /**
