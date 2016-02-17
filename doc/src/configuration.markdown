@@ -354,3 +354,8 @@ Check documentations above.
 
 Check documentations above.
 
+#### data-trip-expose
+
+Check documentations above.
+
+**Note : ** only support `Boolean` and `String` type here, no `jQuery` object.

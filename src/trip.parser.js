@@ -42,7 +42,8 @@ TripParser.prototype = {
     var tripIndex = node.dataset.tripIndex;
     var tripContent = node.dataset.tripContent;
     var tripDelay = node.dataset.tripDelay;
-    var tripExpose = node.dataset.tripExpose=="true" ? true : (node.dataset.tripExpose || false);
+    var tripExpose = node.dataset.tripExpose === 'true' ?
+      true : (node.dataset.tripExpose || false);
     var tripPosition =
       node.dataset.tripPosition || this._DEFAULT_TRIP_POSITION;
     var tripAnimation =
