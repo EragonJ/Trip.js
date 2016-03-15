@@ -165,7 +165,7 @@ You can set a callback function triggered when Trip.js starts.
 + Default : `$.noop`
 + **Supported in 2.0.0+**
 
-#### onEnd()
+#### onEnd(tripIndex, tripObject)
 
 You can set a callback function triggered when Trip.js ends.
 
