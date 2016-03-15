@@ -185,7 +185,7 @@ You can set a callback function triggered when each trip starts. `tripObject` is
 
 You can set a callback function triggered when each trip ends.
 
-**[Note]** for 3.1.0+, you can return a `jQuery deferred object` within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will **keep waiting until it is resolved**, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.
+**Note**: for 3.1.0+, you can return a `jQuery deferred object` within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will **keep waiting until it is resolved**, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.
 
 + Type : `Function`
 + Default : `$.noop`
@@ -259,6 +259,15 @@ You can enable this option to expose your selected element in this trip.
 
 + Type : `Boolean` or `String` (for late referring) or `jQuery Object`
 + Default : `false`
+
+#### nextClickSelector
+
+If there is any specific trip that needs a customized **Next** button instead of the default one, you can set this variable to any jQuery Object and Trip.js will automatically bind a once-click event on it. When user clicking on it, the trip will be advanced to the next one.
+
+**Note**: This normally happens when you want to interact with the user and ask them to click on special thing to make sure they do understand how to use something before going to the next trip.
+
++ Type : `jQuery Object`
++ Default : `undefined`
 
 #### delay
 

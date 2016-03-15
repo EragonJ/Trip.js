@@ -159,7 +159,7 @@
 </ul>
 <h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when each trip ends.</p>
-<p><strong>[Note]</strong> for 3.1.0+, you can return a <code>jQuery deferred object</code> within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will <strong>keep waiting until it is resolved</strong>, don&#39;t do some heavy works here, otherwise, users will feel disappointed about this waiting time.</p>
+<p><strong>Note</strong>: for 3.1.0+, you can return a <code>jQuery deferred object</code> within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will <strong>keep waiting until it is resolved</strong>, don&#39;t do some heavy works here, otherwise, users will feel disappointed about this waiting time.</p>
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
@@ -222,6 +222,13 @@
 <ul>
 <li>Type : <code>Boolean</code> or <code>String</code> (for late referring) or <code>jQuery Object</code></li>
 <li>Default : <code>false</code></li>
+</ul>
+<h4 id="nextclickselector">nextClickSelector</h4>
+<p>If there is any specific trip that needs a customized <strong>Next</strong> button instead of the default one, you can set this variable to any jQuery Object and Trip.js will automatically bind a once-click event on it. When user clicking on it, the trip will be advanced to the next one.</p>
+<p><strong>Note</strong>: This normally happens when you want to interact with the user and ask them to click on special thing to make sure they do understand how to use something before going to the next trip.</p>
+<ul>
+<li>Type : <code>jQuery Object</code></li>
+<li>Default : <code>undefined</code></li>
 </ul>
 <h4 id="delay">delay</h4>
 <p>Check documentations above.</p>
