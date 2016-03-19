@@ -17,7 +17,6 @@ asyncTest('make sure arrow key would trigger onTripEnd', function() {
       }
     }
   ], {
-    delay: 1000,
     onTripChange: function() {
       Helpers.sendKey('DOWN');
     },
@@ -71,7 +70,6 @@ asyncTest('next / prev will trigger onTripEnd too', function() {
       }
     }
   ], {
-    delay: 1000,
     onEnd: function() {
       start();
     }
@@ -80,7 +78,7 @@ asyncTest('next / prev will trigger onTripEnd too', function() {
   trip.start();
 });
 
-asyncTest('expose would not make Trip throw exception, check #68', function() {
+asyncTest('#68, expose would not make Trip throw exception', function() {
   var trip = new Trip([
     {
       content: '<div class="welcome-block">Welcome!</div>',
@@ -113,64 +111,28 @@ asyncTest('expose would not make Trip throw exception, check #68', function() {
   trip.start();
 });
 
-asyncTest(
-  '#69, we would pass tripIndex and tripObject in onEnd (on last operation)',
-  function() {
-    var trip = new Trip([
-      {
-        sel: $('.demo'),
-        content: '1nd block',
-      },
-      {
-        sel: $('.demo'),
-        content: '2rd block',
-        isSecondTrip: true
-      }
-    ], {
-      tripTheme : "white",
-      onEnd: function(tripIndex, tripObject) {
-        equal(tripIndex, 1);
-        equal(tripObject.isSecondTrip, true)
-        ok(true, 'onEnd did exec');
-        start();
-      }
-    });
+asyncTest('#69, we would pass tripIndex and tripObject in onEnd', function() {
+  var trip = new Trip([
+    {
+      sel: $('.demo'),
+      content: '1nd block',
+    },
+    {
+      sel: $('.demo'),
+      content: '2rd block',
+      isSecondTrip: true
+    }
+  ], {
+    tripTheme : "white",
+    onEnd: function(tripIndex, tripObject) {
+      equal(tripIndex, 1);
+      equal(tripObject.isSecondTrip, true)
+      ok(true, 'onEnd did exec');
+      start();
+    }
+  });
 
-    trip.start();
-});
-
-asyncTest(
-  '#69, we would pass tripIndex and tripObject in onEnd (forced by user)',
-  function() {
-    var trip = new Trip([
-      {
-        sel: $('.demo'),
-        content: '1nd block',
-      },
-      {
-        sel: $('.demo'),
-        content: '2rd block',
-        isSecondTrip: true,
-        onTripStart: function() {
-          // force to exit here
-          Helpers.sendKey('ESC');
-        }
-      },
-      {
-        sel: $('.demo'),
-        content: '3rd block',
-      }
-    ], {
-      tripTheme : "white",
-      onEnd: function(tripIndex, tripObject) {
-        equal(tripIndex, 1);
-        equal(tripObject.isSecondTrip, true)
-        ok(true, 'onEnd did exec');
-        start();
-      }
-    });
-
-    trip.start();
+  trip.start();
 });
 
 asyncTest('#63, we can expose item to right position', function() {

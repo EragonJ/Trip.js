@@ -903,6 +903,7 @@ Trip.prototype = {
     // if we have a nextClickSelector use that as the trigger for
     // the next button
     if (o.nextClickSelector) {
+      $(o.nextClickSelector).off('click.Trip');
       $(o.nextClickSelector).one('click.Trip', function(e) {
         e.preventDefault();
         // Force IE/FF to lose focus
