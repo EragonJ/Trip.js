@@ -372,6 +372,10 @@ Trip.prototype = {
     this.unbindResizeEvents();
 
     var tripObject = this.getCurrentTripObject();
+    if (tripObject.nextClickSelector) {
+      $(tripObject.nextClickSelector).off('click.Trip');
+    }
+
     var tripStop = tripObject.onTripStop || this.settings.onTripStop;
     tripStop(this.tripIndex, tripObject);
 
