@@ -14,13 +14,13 @@
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("jQuery"));
+		module.exports = factory(require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["jQuery"], factory);
+		define(["jquery"], factory);
 	else if(typeof exports === 'object')
-		exports["Trip"] = factory(require("jQuery"));
+		exports["Trip"] = factory(require("jquery"));
 	else
-		root["Trip"] = factory(root["jQuery"]);
+		root["Trip"] = factory(root["jquery"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
