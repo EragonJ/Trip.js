@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.1.5
+ *  Version: 3.1.6
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -14,11 +14,11 @@
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("jQuery"));
+		module.exports = factory(require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["jQuery"], factory);
+		define(["jquery"], factory);
 	else if(typeof exports === 'object')
-		exports["Trip"] = factory(require("jQuery"));
+		exports["Trip"] = factory(require("jquery"));
 	else
 		root["Trip"] = factory(root["jQuery"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
@@ -442,6 +442,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.unbindResizeEvents();
 
 	    var tripObject = this.getCurrentTripObject();
+	    if (tripObject.nextClickSelector) {
+	      $(tripObject.nextClickSelector).off('click.Trip');
+	    }
+
 	    var tripStop = tripObject.onTripStop || this.settings.onTripStop;
 	    tripStop(this.tripIndex, tripObject);
 
@@ -973,6 +977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // if we have a nextClickSelector use that as the trigger for
 	    // the next button
 	    if (o.nextClickSelector) {
+	      $(o.nextClickSelector).off('click.Trip');
 	      $(o.nextClickSelector).one('click.Trip', function(e) {
 	        e.preventDefault();
 	        // Force IE/FF to lose focus
