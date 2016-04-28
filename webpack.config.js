@@ -12,7 +12,12 @@ module.exports = {
     libraryTarget: 'umd'
   },
   externals: {
-    'jquery': 'jQuery'
+    'jquery': {
+      amd: 'jquery',
+      root: 'jQuery',
+      commonjs: 'jquery',
+      commonjs2: 'jquery'
+    }
   },
   plugins: [
     new webpack.BannerPlugin(tripLicenseInfo, {
