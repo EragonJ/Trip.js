@@ -1,5 +1,10 @@
 # History
 
+## 2016-06-30 - version 3.1.7
+
++ moved animations into trip.animation.js
++ trip.next(i) now accepts the index to let you jump to different trip
+
 ## 2016-04-28 - version 3.1.6
 
 + Fixed wrong configuration in UMD which makes Trip.js can't be used in AMD
