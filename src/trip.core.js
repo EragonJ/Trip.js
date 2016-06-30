@@ -3,16 +3,7 @@ module.exports = Trip;
 var $ = require('jquery');
 var TripParser = require('./trip.parser');
 var TripUtils = require('./trip.utils');
-
-var CHECKED_ANIMATIONS = [
-  'flash', 'bounce', 'shake', 'tada',
-  'fadeIn', 'fadeInUp', 'fadeInDown',
-  'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
-  'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
-  'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
-  'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
-  'rotateInUpRight'
-];
+var TripAnimation = require('./trip.animation');
 
 /**
  * Trip
@@ -1067,7 +1058,7 @@ Trip.prototype = {
    */
   addAnimation: function(o) {
     var animation = o.animation || this.settings.animation;
-    if ($.inArray(animation, CHECKED_ANIMATIONS) >= 0) {
+    if (TripAnimation.has(animation)) {
       this.$tripBlock.addClass('animated');
       this.$tripBlock.addClass(animation);
     }
@@ -1080,7 +1071,7 @@ Trip.prototype = {
    * @type {Function}
    */
   removeAnimation: function() {
-    this.$tripBlock.removeClass(CHECKED_ANIMATIONS.join(' '));
+    this.$tripBlock.removeClass(TripAnimation.getAllInString());
     this.$tripBlock.removeClass('animated');
   },
 
