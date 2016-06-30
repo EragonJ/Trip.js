@@ -73,16 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var $ = __webpack_require__(1);
 	var TripParser = __webpack_require__(2);
 	var TripUtils = __webpack_require__(3);
-
-	var CHECKED_ANIMATIONS = [
-	  'flash', 'bounce', 'shake', 'tada',
-	  'fadeIn', 'fadeInUp', 'fadeInDown',
-	  'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
-	  'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
-	  'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
-	  'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
-	  'rotateInUpRight'
-	];
+	var TripAnimation = __webpack_require__(4);
 
 	/**
 	 * Trip
@@ -505,13 +496,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * next API, which will jump to next the trip.
 	   *
 	   * @memberOf Trip
+	   * @param {Number} tripIndex
 	   * @type {Function}
 	   * @public
 	   */
-	  next: function() {
+	  next: function(tripIndex) {
 	    var that = this;
-	    // We have to make sure we can go next first,
-	    // if not, let's just re-run
+	    var useDifferentIndex = !isNaN(tripIndex);
+
 	    if (!this.canGoNext()) {
 	      return this.run();
 	    }
@@ -526,6 +518,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
 	    $.when(tripEndDefer).then(function() {
+	      if (useDifferentIndex) {
+	        if (that.timer) {
+	          that.timer.stop();
+	        }
+	        that.setIndex(tripIndex);
+	        that.run();
+	        return;
+	      }
+
 	      if (that.isLast()) {
 	        that.doLastOperation();
 	      }
@@ -855,6 +856,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return canGoNext;
 	  },
 
+	  setIndex: function(tripIndex) {
+	    tripIndex = Math.max(0, Math.min(tripIndex, this.tripData.length - 1));
+	    this.tripIndex = tripIndex;
+	  },
+
 	  /**
 	   * We can call this method to increase tripIndex because we are not allowed
 	   * to manipualte the value directly.
@@ -863,13 +869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  increaseIndex: function() {
-	    if (this.tripIndex >= this.tripData.length - 1) {
-	      // how about hitting the last item ?
-	      // do nothing
-	    }
-	    else {
-	      this.tripIndex += 1;
-	    }
+	    this.setIndex(this.tripIndex + 1);
 	  },
 
 	  /**
@@ -880,13 +880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  decreaseIndex: function() {
-	    if (this.tripIndex <= 0) {
-	      // how about hitting the first item ?
-	      // do nothing
-	    }
-	    else {
-	      this.tripIndex -= 1;
-	    }
+	    this.setIndex(this.tripIndex - 1);
 	  },
 
 	  /**
@@ -1137,7 +1131,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  addAnimation: function(o) {
 	    var animation = o.animation || this.settings.animation;
-	    if ($.inArray(animation, CHECKED_ANIMATIONS) >= 0) {
+	    if (TripAnimation.has(animation)) {
 	      this.$tripBlock.addClass('animated');
 	      this.$tripBlock.addClass(animation);
 	    }
@@ -1150,7 +1144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  removeAnimation: function() {
-	    this.$tripBlock.removeClass(CHECKED_ANIMATIONS.join(' '));
+	    this.$tripBlock.removeClass(TripAnimation.getAllInString());
 	    this.$tripBlock.removeClass('animated');
 	  },
 
@@ -1551,6 +1545,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = TripUtils;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = TripAnimation;
+
+	function TripAnimation() {
+
+	}
+
+	var animations = [
+	  'flash', 'bounce', 'shake', 'tada',
+	  'fadeIn', 'fadeInUp', 'fadeInDown',
+	  'fadeInLeft', 'fadeInRight', 'fadeInUpBig', 'fadeInDownBig',
+	  'fadeInLeftBig', 'fadeInRightBig', 'bounceIn', 'bounceInDown',
+	  'bounceInUp', 'bounceInLeft', 'bounceInRight', 'rotateIn',
+	  'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft',
+	  'rotateInUpRight'
+	];
+
+	TripAnimation.has = function(name) {
+	  return animations.indexOf(name) >= 0;
+	};
+
+	TripAnimation.getAllInString = function() {
+	  return animations.join(' ');
+	};
 
 
 /***/ }

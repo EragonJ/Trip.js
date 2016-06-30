@@ -426,13 +426,14 @@ Trip.prototype = {
    * next API, which will jump to next the trip.
    *
    * @memberOf Trip
+   * @param {Number} tripIndex
    * @type {Function}
    * @public
    */
-  next: function() {
+  next: function(tripIndex) {
     var that = this;
-    // We have to make sure we can go next first,
-    // if not, let's just re-run
+    var useDifferentIndex = !isNaN(tripIndex);
+
     if (!this.canGoNext()) {
       return this.run();
     }
@@ -447,6 +448,15 @@ Trip.prototype = {
     var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
     $.when(tripEndDefer).then(function() {
+      if (useDifferentIndex) {
+        if (that.timer) {
+          that.timer.stop();
+        }
+        that.setIndex(tripIndex);
+        that.run();
+        return;
+      }
+
       if (that.isLast()) {
         that.doLastOperation();
       }
@@ -776,6 +786,11 @@ Trip.prototype = {
     return canGoNext;
   },
 
+  setIndex: function(tripIndex) {
+    tripIndex = Math.max(0, Math.min(tripIndex, this.tripData.length - 1));
+    this.tripIndex = tripIndex;
+  },
+
   /**
    * We can call this method to increase tripIndex because we are not allowed
    * to manipualte the value directly.
@@ -784,13 +799,7 @@ Trip.prototype = {
    * @type {Function}
    */
   increaseIndex: function() {
-    if (this.tripIndex >= this.tripData.length - 1) {
-      // how about hitting the last item ?
-      // do nothing
-    }
-    else {
-      this.tripIndex += 1;
-    }
+    this.setIndex(this.tripIndex + 1);
   },
 
   /**
@@ -801,13 +810,7 @@ Trip.prototype = {
    * @type {Function}
    */
   decreaseIndex: function() {
-    if (this.tripIndex <= 0) {
-      // how about hitting the first item ?
-      // do nothing
-    }
-    else {
-      this.tripIndex -= 1;
-    }
+    this.setIndex(this.tripIndex - 1);
   },
 
   /**
