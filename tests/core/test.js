@@ -100,3 +100,26 @@ asyncTest('when tripEnds returns a deferred, wait for it to be resolved ',
     deferred.resolve();
     equal(trip.tripIndex, 1);
 });
+
+asyncTest('next() can be called with index', function() {
+  var count = 0;
+
+  var trip = new Trip([
+    { sel: '.step1', position: 'n', content: 'hi1' },
+    { sel: '.step2', position: 'e', content: 'hi2' },
+    { sel: '.step3', position: 's', content: 'hi3' }
+  ], {
+    onTripChange: function(i) {
+      count++;
+      if (i === 0) {
+        trip.next(2);
+      }
+    },
+    onEnd: function() {
+      equal(count, 2);
+      start();
+    }
+  });
+
+  trip.start();
+});
