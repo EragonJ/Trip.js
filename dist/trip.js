@@ -207,28 +207,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // for testing
 	  this.CONSTANT = TripConstant;
-	  this.console = window.console || {};
 	}
 
 	Trip.prototype = {
-	  /**
-	   * This is used to preInit Trip.js. For current use, we will try to
-	   * override this.console if there is no window.console like IE.
-	   *
-	   * @memberOf Trip
-	   * @type {Function}
-	   */
-	  preInit: function() {
-	    if (typeof this.console === 'undefined') {
-	      var that = this;
-	      var methods = ['log', 'warn', 'debug', 'info', 'error'];
-
-	      $.each(methods, function(i, methodName) {
-	        that.console[methodName] = noop;
-	      });
-	    }
-	  },
-
 	  /**
 	   * Expose element which has hasExpose property.
 	   *
@@ -694,8 +675,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!this.isTripDataValid(tripObject)) {
 	      // force developers to double check tripData again
 	      if (this.settings.skipUndefinedTrip === false) {
-	        this.console.error(
-	          'Your tripData is not valid at index: ' + this.tripIndex);
+	        TripUtils.log('Your tripData is not valid at index: ' + this.tripIndex);
 	        this.stop();
 	        return false;
 	      }
@@ -1329,8 +1309,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  init: function() {
-	    this.preInit();
-
 	    if (this.settings.enableKeyBinding) {
 	      this.bindKeyEvents();
 	    }
@@ -1523,6 +1501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isArray: function(target) {
@@ -1534,6 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isObject: function(target) {
@@ -1545,10 +1525,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isString: function(target) {
 	    return (typeof target === 'string');
+	  },
+
+	  /**
+	   * Handy wrapper of console.log
+	   *
+	   * @memberOf TripUtils
+	   * @type {Function}
+	   */
+	  log: function() {
+	    var console = window.console;
+	    if (typeof console !== 'undefined' && console.log) {
+	      console.log.apply(console, arguments);
+	    }
 	  },
 
 	  /**
@@ -1562,6 +1556,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {Function} callback
+	   * @param {Number} delay
 	   * @return {Timer}
 	   */
 	  Timer: function(callback, delay) {

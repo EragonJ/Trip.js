@@ -10,6 +10,7 @@ var TripUtils = {
    *
    * @memberOf TripUtils
    * @type {Function}
+   * @param {*} target
    * @return {Boolean}
    */
   isArray: function(target) {
@@ -21,6 +22,7 @@ var TripUtils = {
    *
    * @memberOf TripUtils
    * @type {Function}
+   * @param {*} target
    * @return {Boolean}
    */
   isObject: function(target) {
@@ -32,10 +34,24 @@ var TripUtils = {
    *
    * @memberOf TripUtils
    * @type {Function}
+   * @param {*} target
    * @return {Boolean}
    */
   isString: function(target) {
     return (typeof target === 'string');
+  },
+
+  /**
+   * Handy wrapper of console.log
+   *
+   * @memberOf TripUtils
+   * @type {Function}
+   */
+  log: function() {
+    var console = window.console;
+    if (typeof console !== 'undefined' && console.log) {
+      console.log.apply(console, arguments);
+    }
   },
 
   /**
@@ -49,6 +65,8 @@ var TripUtils = {
    *
    * @memberOf TripUtils
    * @type {Function}
+   * @param {Function} callback
+   * @param {Number} delay
    * @return {Timer}
    */
   Timer: function(callback, delay) {

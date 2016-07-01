@@ -137,28 +137,9 @@ function Trip() {
 
   // for testing
   this.CONSTANT = TripConstant;
-  this.console = window.console || {};
 }
 
 Trip.prototype = {
-  /**
-   * This is used to preInit Trip.js. For current use, we will try to
-   * override this.console if there is no window.console like IE.
-   *
-   * @memberOf Trip
-   * @type {Function}
-   */
-  preInit: function() {
-    if (typeof this.console === 'undefined') {
-      var that = this;
-      var methods = ['log', 'warn', 'debug', 'info', 'error'];
-
-      $.each(methods, function(i, methodName) {
-        that.console[methodName] = noop;
-      });
-    }
-  },
-
   /**
    * Expose element which has hasExpose property.
    *
@@ -624,8 +605,7 @@ Trip.prototype = {
     if (!this.isTripDataValid(tripObject)) {
       // force developers to double check tripData again
       if (this.settings.skipUndefinedTrip === false) {
-        this.console.error(
-          'Your tripData is not valid at index: ' + this.tripIndex);
+        TripUtils.log('Your tripData is not valid at index: ' + this.tripIndex);
         this.stop();
         return false;
       }
@@ -1259,8 +1239,6 @@ Trip.prototype = {
    * @type {Function}
    */
   init: function() {
-    this.preInit();
-
     if (this.settings.enableKeyBinding) {
       this.bindKeyEvents();
     }
