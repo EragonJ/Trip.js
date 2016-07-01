@@ -74,6 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TripParser = __webpack_require__(2);
 	var TripUtils = __webpack_require__(3);
 	var TripAnimation = __webpack_require__(4);
+	var TripTheme = __webpack_require__(5);
 
 	/**
 	 * Trip
@@ -174,22 +175,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onTripClose: noop,
 
 	    // animation
-	    animation: 'tada',
-
-	    // customizable HTML
-	    tripBlockHTML: [
-	      '<div class="trip-block">',
-	        '<a href="#" class="trip-close"></a>',
-	        '<div class="trip-header"></div>',
-	        '<div class="trip-content"></div>',
-	        '<div class="trip-progress-wrapper">',
-	          '<div class="trip-progress-bar"></div>',
-	          '<a href="#" class="trip-prev"></a>',
-	          '<a href="#" class="trip-next"></a>',
-	        '</div>',
-	      '</div>'
-	    ]
+	    animation: 'tada'
 	  }, userOptions);
+
+	  if (!this.settings.tripBlockHTML) {
+	    var html = TripTheme.get(this.settings.tripTheme);
+	    if (!html) {
+	      html = TripTheme.get('default');
+	    }
+	    this.settings.tripBlockHTML = html;
+	  }
 
 	  this.tripData = tripData;
 
@@ -1216,7 +1211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // make sure the element doesn't exist in the DOM tree
 	    if (typeof $('.trip-block').get(0) === 'undefined') {
 	      var that = this;
-	      var tripBlockHTML = this.settings.tripBlockHTML.join('');
+	      var tripBlockHTML = this.settings.tripBlockHTML;
 	      var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
 
 	      $('body').append($tripBlock);
@@ -1578,6 +1573,55 @@ return /******/ (function(modules) { // webpackBootstrap
 	TripAnimation.getAllInString = function() {
 	  return animations.join(' ');
 	};
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = TripTheme;
+
+	var Themes = __webpack_require__(6);
+
+	function TripTheme() {
+
+	}
+
+	TripTheme.get = function(name) {
+	  var theme = Themes[name];
+	  return theme;
+	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  black: __webpack_require__(7),
+	  dark: __webpack_require__(7),
+	  white: __webpack_require__(7),
+	  yeti: __webpack_require__(7),
+	  default: __webpack_require__(7)
+	};
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  '<div class="trip-block">',
+	    '<a href="#" class="trip-close"></a>',
+	    '<div class="trip-header"></div>',
+	    '<div class="trip-content"></div>',
+	    '<div class="trip-progress-wrapper">',
+	      '<div class="trip-progress-bar"></div>',
+	      '<a href="#" class="trip-prev"></a>',
+	      '<a href="#" class="trip-next"></a>',
+	    '</div>',
+	  '</div>'
+	].join('');
 
 
 /***/ }

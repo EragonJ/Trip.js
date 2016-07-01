@@ -4,6 +4,7 @@ var $ = require('jquery');
 var TripParser = require('./trip.parser');
 var TripUtils = require('./trip.utils');
 var TripAnimation = require('./trip.animation');
+var TripTheme = require('./trip.theme');
 
 /**
  * Trip
@@ -104,22 +105,16 @@ function Trip() {
     onTripClose: noop,
 
     // animation
-    animation: 'tada',
-
-    // customizable HTML
-    tripBlockHTML: [
-      '<div class="trip-block">',
-        '<a href="#" class="trip-close"></a>',
-        '<div class="trip-header"></div>',
-        '<div class="trip-content"></div>',
-        '<div class="trip-progress-wrapper">',
-          '<div class="trip-progress-bar"></div>',
-          '<a href="#" class="trip-prev"></a>',
-          '<a href="#" class="trip-next"></a>',
-        '</div>',
-      '</div>'
-    ]
+    animation: 'tada'
   }, userOptions);
+
+  if (!this.settings.tripBlockHTML) {
+    var html = TripTheme.get(this.settings.tripTheme);
+    if (!html) {
+      html = TripTheme.get('default');
+    }
+    this.settings.tripBlockHTML = html;
+  }
 
   this.tripData = tripData;
 
@@ -1146,7 +1141,7 @@ Trip.prototype = {
     // make sure the element doesn't exist in the DOM tree
     if (typeof $('.trip-block').get(0) === 'undefined') {
       var that = this;
-      var tripBlockHTML = this.settings.tripBlockHTML.join('');
+      var tripBlockHTML = this.settings.tripBlockHTML;
       var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
 
       $('body').append($tripBlock);

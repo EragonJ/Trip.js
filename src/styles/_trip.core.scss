@@ -153,9 +153,7 @@
 }
 
 // include default themes
-@import "themes/black";
-@import "themes/white";
-
-// Include other customized themes
-@import "themes/yeti";
-@import "themes/dark";
+@import "../themes/black/theme";
+@import "../themes/white/theme";
+@import "../themes/yeti/theme";
+@import "../themes/dark/theme";
