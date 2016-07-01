@@ -145,7 +145,7 @@ asyncTest('#63, we can expose item to right position', function() {
         var blockTop = parseInt($('.trip-block').css('top'), 10);
         var blockHeight = $('.trip-block').outerHeight();
         equal(selTop,
-          blockTop + blockHeight + trip.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL);
+          blockTop + blockHeight + trip.CONSTANT.TRIP_BLOCK_OFFSET_VERTICAL);
       }
     },
     {
@@ -157,7 +157,7 @@ asyncTest('#63, we can expose item to right position', function() {
         var blockTop = parseInt($('.trip-block').css('top'), 10);
         var blockHeight = $('.trip-block').outerHeight();
         equal(selTop,
-          blockTop + blockHeight + trip.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL);
+          blockTop + blockHeight + trip.CONSTANT.TRIP_BLOCK_OFFSET_VERTICAL);
       }
     },
   ], {

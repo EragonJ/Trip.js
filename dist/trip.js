@@ -75,6 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TripUtils = __webpack_require__(3);
 	var TripAnimation = __webpack_require__(4);
 	var TripTheme = __webpack_require__(5);
+	var TripConstant = __webpack_require__(8);
 
 	/**
 	 * Trip
@@ -204,19 +205,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // about expose
 	  this.hasExpose = false;
 
-	  // contants
-	  this.CONSTANTS = {
-	    LEFT_ARROW: 37,
-	    UP_ARROW: 38,
-	    RIGHT_ARROW: 39,
-	    DOWN_ARROW: 40,
-	    ESC: 27,
-	    SPACE: 32,
-	    TRIP_BLOCK_OFFSET_VERTICAL: 10,
-	    TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
-	    RESIZE_TIMEOUT: 200
-	  };
-
+	  // for testing
+	  this.CONSTANT = TripConstant;
 	  this.console = window.console || {};
 	}
 
@@ -337,7 +327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.clearTimeout(timer);
 	      timer = window.setTimeout(function() {
 	        that.run();
-	      }, that.CONSTANTS.RESIZE_TIMEOUT);
+	      }, TripConstant.RESIZE_TIMEOUT);
 	    });
 	  },
 
@@ -387,23 +377,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  keyEvent: function(e) {
 	    switch (e.which) {
-	      case this.CONSTANTS.ESC:
+	      case TripConstant.ESC:
 	        this.stop();
 	        break;
 
-	      case this.CONSTANTS.SPACE:
+	      case TripConstant.SPACE:
 	        // space will make the page jump
 	        e.preventDefault();
 	        this.pause();
 	        break;
 
-	      case this.CONSTANTS.LEFT_ARROW:
-	      case this.CONSTANTS.UP_ARROW:
+	      case TripConstant.LEFT_ARROW:
+	      case TripConstant.UP_ARROW:
 	        this.prev();
 	        break;
 
-	      case this.CONSTANTS.RIGHT_ARROW:
-	      case this.CONSTANTS.DOWN_ARROW:
+	      case TripConstant.RIGHT_ARROW:
+	      case TripConstant.DOWN_ARROW:
 	        this.next();
 	        break;
 	    }
@@ -1056,8 +1046,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'screen-se':
 	      case 'screen-nw':
 	      case 'screen-sw':
-	        cssHorizontal = this.CONSTANTS.TRIP_BLOCK_OFFSET_HORIZONTAL;
-	        cssVertical = this.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL;
+	        cssHorizontal = TripConstant.TRIP_BLOCK_OFFSET_HORIZONTAL;
+	        cssVertical = TripConstant.TRIP_BLOCK_OFFSET_VERTICAL;
 	        break;
 	      case 'e':
 	        cssHorizontal = $sel.offset().left + selWidth + arrowWidth;
@@ -1679,6 +1669,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    '<div class="trip-progress-bar"></div>',
 	  '</div>'
 	].join('');
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  LEFT_ARROW: 37,
+	  UP_ARROW: 38,
+	  RIGHT_ARROW: 39,
+	  DOWN_ARROW: 40,
+	  ESC: 27,
+	  SPACE: 32,
+	  TRIP_BLOCK_OFFSET_VERTICAL: 10,
+	  TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
+	  RESIZE_TIMEOUT: 200
+	};
 
 
 /***/ }

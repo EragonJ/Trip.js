@@ -1,7 +1,7 @@
 (function(exports) {
   var Helpers = {
     _debug: false,
-    _CONSTANTS: {
+    _CONSTANT: {
       ESC: 27,
       SPACE: 32,
       LEFT: 37,
@@ -15,14 +15,14 @@
     sendKey: function(keyName, delay) {
       var that = this;
       delay = delay || 300;
-      if (this._CONSTANTS[keyName]) {
+      if (this._CONSTANT[keyName]) {
         if (this._debug) {
-          console.log('[DEBUG] SendKey > ', this._CONSTANTS[keyName]);
+          console.log('[DEBUG] SendKey > ', this._CONSTANT[keyName]);
         }
         setTimeout(function() {
           $('body').trigger({
             type: 'keydown',
-            which: that._CONSTANTS[keyName]
+            which: that._CONSTANT[keyName]
           });
         }, delay);
       }
