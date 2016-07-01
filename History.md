@@ -1,5 +1,15 @@
 # History
 
+## 2016-07-01 - version 3.2.0
+
++ added `data-trip-step` class on trip-block so that devs can do more controls in CSS.
++ added skip button (and skipLabel settings)
++ added steps UI (and showSteps settings)
++ updated existing styles to make it work better with steps UI
++ changed default animation to `fadeIn`
++ changed themes strucutre to make it neat
++ renamed `.trip-progress-wrapper` to `.trip-navigation`
+
 ## 2016-06-30 - version 3.1.7
 
 + moved animations into trip.animation.js
