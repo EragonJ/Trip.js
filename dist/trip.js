@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.1.7
+ *  Version: 3.2.0
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -74,6 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TripParser = __webpack_require__(2);
 	var TripUtils = __webpack_require__(3);
 	var TripAnimation = __webpack_require__(4);
+	var TripTheme = __webpack_require__(5);
 
 	/**
 	 * Trip
@@ -83,8 +84,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} userOptions
 	 */
 	function Trip() {
-	  var tripData;
+	  var noop = function() {};
 	  var userOptions;
+	  var tripData;
 	  var tripParser = new TripParser();
 
 	  // () - default parser mode without configurations
@@ -143,6 +145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    delay: 1000,
 	    enableKeyBinding: true,
 	    enableAnimation: true,
+	    showSteps: false,
 	    showCloseBox: false,
 	    showHeader: false,
 	    skipUndefinedTrip: false,
@@ -157,38 +160,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    prevLabel: 'Back',
 	    finishLabel: 'Dismiss',
 	    closeBoxLabel: '&#215;',
+	    skipLabel: 'Skip',
 	    header: 'Step {{tripIndex}}',
 
 	    // callbacks for whole process
-	    onStart: $.noop,
-	    onEnd: $.noop,
+	    onStart: noop,
+	    onEnd: noop,
 
 	    // callbacks for each trip
-	    onTripStart: $.noop,
-	    onTripEnd: $.noop,
-	    onTripStop: $.noop,
-	    onTripPause: $.noop,
-	    onTripResume: $.noop,
-	    onTripChange: $.noop,
-	    onTripClose: $.noop,
+	    onTripStart: noop,
+	    onTripEnd: noop,
+	    onTripStop: noop,
+	    onTripPause: noop,
+	    onTripResume: noop,
+	    onTripChange: noop,
+	    onTripClose: noop,
 
 	    // animation
-	    animation: 'tada',
-
-	    // customizable HTML
-	    tripBlockHTML: [
-	      '<div class="trip-block">',
-	        '<a href="#" class="trip-close"></a>',
-	        '<div class="trip-header"></div>',
-	        '<div class="trip-content"></div>',
-	        '<div class="trip-progress-wrapper">',
-	          '<div class="trip-progress-bar"></div>',
-	          '<a href="#" class="trip-prev"></a>',
-	          '<a href="#" class="trip-next"></a>',
-	        '</div>',
-	      '</div>'
-	    ]
+	    animation: 'fadeIn'
 	  }, userOptions);
+
+	  if (!this.settings.tripBlockHTML) {
+	    var html = TripTheme.get(this.settings.tripTheme);
+	    if (!html) {
+	      html = TripTheme.get('default');
+	    }
+	    this.settings.tripBlockHTML = html;
+	  }
 
 	  this.tripData = tripData;
 
@@ -196,10 +194,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.$tripBlock = null;
 	  this.$overlay = null;
 	  this.$bar = null;
-	  this.$root = $('body, html');
+	  this.$root = $('body');
 
 	  // save the current trip index
-	  this.tripIndex = this.settings.tripIndex;
 	  this.tripDirection = 'next';
 	  this.timer = null;
 	  this.progressing = false;
@@ -237,7 +234,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var methods = ['log', 'warn', 'debug', 'info', 'error'];
 
 	      $.each(methods, function(i, methodName) {
-	        that.console[methodName] = $.noop;
+	        that.console[methodName] = noop;
 	      });
 	    }
 	  },
@@ -442,8 +439,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.settings.onEnd(this.tripIndex, tripObject);
 
-	    // We have to reset tripIndex in stop action too
-	    this.tripIndex = this.settings.tripIndex;
+	    // reset tripIndex when stopped
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
@@ -634,9 +631,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tripObject = this.getCurrentTripObject();
 	    this.settings.onEnd(this.tripIndex, tripObject);
 
-	    // We have to reset tripIndex when trip got finished
-	    this.tripIndex = this.settings.tripIndex;
-	    return false;
+	    // reset tripIndex when finished
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
@@ -859,6 +855,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  setIndex: function(tripIndex) {
 	    tripIndex = Math.max(0, Math.min(tripIndex, this.tripData.length - 1));
 	    this.tripIndex = tripIndex;
+
+	    // reflect the trip information on UI
+	    this.$tripBlock.attr('data-trip-step', this.tripIndex);
 	  },
 
 	  /**
@@ -929,39 +928,56 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
 	    var showNavigation = o.showNavigation || this.settings.showNavigation;
 	    var showHeader = o.showHeader || this.settings.showHeader;
+	    var showSteps = o.showSteps || this.settings.showSteps;
 
 	    // labels
 	    var closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel;
 	    var prevLabel = o.prevLabel || this.settings.prevLabel;
 	    var nextLabel = o.nextLabel || this.settings.nextLabel;
 	    var finishLabel = o.finishLabel || this.settings.finishLabel;
+	    var skipLabel = o.skipLabel || this.settings.skipLabel;
 
 	    // other user customized contents
 	    var header = o.header || this.settings.header;
 
 	    $tripBlock
 	      .find('.trip-header')
-	      .html(this.getReplacedTripContent(header))
-	      .toggle(showHeader);
+	        .html(this.getReplacedTripContent(header))
+	        .toggle(showHeader);
 
 	    $tripBlock
 	      .find('.trip-content')
-	      .html(this.getReplacedTripContent(o.content));
+	        .html(this.getReplacedTripContent(o.content));
 
 	    $tripBlock
 	      .find('.trip-prev')
-	      .html(prevLabel)
-	      .toggle(showNavigation && !this.isFirst());
+	        .html(prevLabel)
+	        .toggle(showNavigation && !this.isFirst());
 
 	    $tripBlock
 	      .find('.trip-next')
-	      .html(this.isLast() ? finishLabel : nextLabel)
-	      .toggle(showNavigation && !o.nextClickSelector);
+	        .html(this.isLast() ? finishLabel : nextLabel)
+	        .toggle(showNavigation && !o.nextClickSelector);
+
+	    $tripBlock
+	      .find('.trip-skip')
+	        .html(skipLabel)
+	        .toggle(showNavigation);
 
 	    $tripBlock
 	      .find('.trip-close')
-	      .html(closeBoxLabel)
-	      .toggle(showCloseBox);
+	        .html(closeBoxLabel)
+	        .toggle(showCloseBox);
+
+	    $tripBlock
+	      .find('.trip-progress-steps')
+	        .toggle(showSteps)
+	      .find('.trip-progress-step')
+	        .not(':eq(' + this.tripIndex + ')')
+	          .removeClass('selected')
+	          .end()
+	        .eq(this.tripIndex)
+	          .addClass('selected');
 
 	    // remove old styles then add new one
 	    $tripBlock.removeClass(
@@ -1214,32 +1230,68 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // make sure the element doesn't exist in the DOM tree
 	    if (typeof $('.trip-block').get(0) === 'undefined') {
 	      var that = this;
-	      var tripBlockHTML = this.settings.tripBlockHTML.join('');
+	      var tripBlockHTML = this.settings.tripBlockHTML;
 	      var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
 
 	      $('body').append($tripBlock);
 
-	      $tripBlock.find('.trip-close').on('click', function(e) {
-	        e.preventDefault();
-	        var tripObject = that.getCurrentTripObject();
-	        var tripClose = tripObject.onTripClose || that.settings.onTripClose;
-	        tripClose(that.tripIndex, tripObject);
-	        that.stop();
-	      });
+	      var $progressSteps = $tripBlock.find('.trip-progress-steps');
+	      if ($progressSteps) {
+	        var stepCache = [];
+	        var $step = $('<div class="trip-progress-step"></div>');
 
-	      $tripBlock.find('.trip-prev').on('click', function(e) {
-	        e.preventDefault();
-	        // Force IE/FF to lose focus
-	        $(this).blur();
-	        that.prev();
-	      });
+	        for (var i = 0; i < this.tripData.length; i++) {
+	          stepCache.push($step.clone());
+	        }
 
-	      $tripBlock.find('.trip-next').on('click', function(e) {
-	        e.preventDefault();
-	        // Force IE/FF to lose focus
-	        $(this).blur();
-	        that.next();
-	      });
+	        $progressSteps.append(stepCache);
+	      }
+
+	      var $closeButton = $tripBlock.find('.trip-close');
+	      if ($closeButton) {
+	        $closeButton.off('click.Trip');
+	        $closeButton.on('click.Trip', function(e) {
+	          e.preventDefault();
+	          var tripObject = that.getCurrentTripObject();
+	          var tripClose = tripObject.onTripClose || that.settings.onTripClose;
+	          tripClose(that.tripIndex, tripObject);
+	          that.stop();
+	        });
+	      }
+
+	      var $skipButton = $tripBlock.find('.trip-skip');
+	      if ($skipButton) {
+	        $skipButton.off('click.Trip');
+	        $skipButton.on('click.Trip', function(e) {
+	          e.preventDefault();
+	          var tripObject = that.getCurrentTripObject();
+	          var tripClose = tripObject.onTripClose || that.settings.onTripClose;
+	          tripClose(that.tripIndex, tripObject);
+	          that.stop();
+	        });
+	      }
+
+	      var $prevButton = $tripBlock.find('.trip-prev');
+	      if ($prevButton) {
+	        $prevButton.off('click.Trip');
+	        $prevButton.on('click', function(e) {
+	          e.preventDefault();
+	          // Force IE/FF to lose focus
+	          $(this).blur();
+	          that.prev();
+	        });
+	      }
+
+	      var $nextButton = $tripBlock.find('.trip-next');
+	      if ($nextButton) {
+	        $nextButton.off('click.Trip');
+	        $nextButton.on('click', function(e) {
+	          e.preventDefault();
+	          // Force IE/FF to lose focus
+	          $(this).blur();
+	          that.next();
+	        });
+	      }
 	    }
 	  },
 
@@ -1299,6 +1351,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.$tripBlock = $('.trip-block');
 	    this.$bar = $('.trip-progress-bar');
 	    this.$overlay = $('.trip-overlay');
+
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
@@ -1574,6 +1628,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	TripAnimation.getAllInString = function() {
 	  return animations.join(' ');
 	};
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = TripTheme;
+
+	var Themes = __webpack_require__(6);
+
+	function TripTheme() {
+
+	}
+
+	TripTheme.get = function(name) {
+	  var theme = Themes[name];
+	  return theme;
+	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  black: __webpack_require__(7),
+	  dark: __webpack_require__(7),
+	  white: __webpack_require__(7),
+	  yeti: __webpack_require__(7),
+	  default: __webpack_require__(7)
+	};
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  '<div class="trip-block">',
+	    '<a href="#" class="trip-close"></a>',
+	    '<div class="trip-header"></div>',
+	    '<div class="trip-content"></div>',
+	    '<div class="trip-progress-steps"></div>',
+	    '<div class="trip-navigation">',
+	      '<a href="#" class="trip-prev"></a>',
+	      '<a href="#" class="trip-skip"></a>',
+	      '<a href="#" class="trip-next"></a>',
+	    '</div>',
+	    '<div class="trip-progress-bar"></div>',
+	  '</div>'
+	].join('');
 
 
 /***/ }

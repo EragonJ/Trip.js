@@ -87,7 +87,8 @@ $(document).ready(function() {
       delay : 7000
     }
   ], {
-    tripTheme : "black",
+    tripTheme : "dark",
+    animation: "fadeIn",
     onStart : function() {
       console.log("onStart");
     },

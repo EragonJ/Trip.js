@@ -53,26 +53,26 @@
     }
   }
 
-  .trip-progress-wrapper {
+  .trip-navigation {
     .trip-prev,
-    .trip-next {
+    .trip-next,
+    .trip-skip {
       font-size: 12px;
       color:#fff;
     }
 
     .trip-prev:hover,
-    .trip-next:hover {
+    .trip-next:hover,
+    .trip-skip:hover {
       background:#006687;
     }
 
     .trip-next {
-      float:right;
       border-radius: 0px 0px 5px 0px;
     }
 
     .trip-prev {
       display: none;
-      float:left;
       border-radius: 0px 0px 0px 5px;
     }
   }

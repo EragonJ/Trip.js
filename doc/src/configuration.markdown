@@ -78,6 +78,13 @@ You can decide to add small close icon on each trip or not
 + Default : `false`
 
 
+#### showSteps
+
+You can now show steps UI to let users know the index of current trip
+
++ Type : `Boolean`
++ Default : `false`
+
 #### showHeader
 
 If you want to show no matter with default or customized header, you have to set this value to true. You can check **header** option for more details.
@@ -126,6 +133,13 @@ Label for the next button.
 
 + Type : `String`
 + Default : `'Next'`
+
+#### skipLabel
+
+Label for the skip button.
+
++ Type : `String`
++ Default : `'Skip'`
 
 #### finishLabel
 
@@ -301,11 +315,19 @@ Check documentations above.
 
 Check documentations above.
 
+#### showSteps
+
+Check documentations above.
+
 #### prevLabel
 
 Check documentations above.
 
 #### nextLabel
+
+Check documentations above.
+
+#### skipLabel
 
 Check documentations above.
 
