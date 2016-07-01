@@ -83,8 +83,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} userOptions
 	 */
 	function Trip() {
-	  var tripData;
+	  var noop = function() {};
 	  var userOptions;
+	  var tripData;
 	  var tripParser = new TripParser();
 
 	  // () - default parser mode without configurations
@@ -160,17 +161,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    header: 'Step {{tripIndex}}',
 
 	    // callbacks for whole process
-	    onStart: $.noop,
-	    onEnd: $.noop,
+	    onStart: noop,
+	    onEnd: noop,
 
 	    // callbacks for each trip
-	    onTripStart: $.noop,
-	    onTripEnd: $.noop,
-	    onTripStop: $.noop,
-	    onTripPause: $.noop,
-	    onTripResume: $.noop,
-	    onTripChange: $.noop,
-	    onTripClose: $.noop,
+	    onTripStart: noop,
+	    onTripEnd: noop,
+	    onTripStop: noop,
+	    onTripPause: noop,
+	    onTripResume: noop,
+	    onTripChange: noop,
+	    onTripClose: noop,
 
 	    // animation
 	    animation: 'tada',
@@ -237,7 +238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var methods = ['log', 'warn', 'debug', 'info', 'error'];
 
 	      $.each(methods, function(i, methodName) {
-	        that.console[methodName] = $.noop;
+	        that.console[methodName] = noop;
 	      });
 	    }
 	  },
