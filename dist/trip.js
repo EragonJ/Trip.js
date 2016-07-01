@@ -200,7 +200,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.$root = $('body, html');
 
 	  // save the current trip index
-	  this.tripIndex = this.settings.tripIndex;
 	  this.tripDirection = 'next';
 	  this.timer = null;
 	  this.progressing = false;
@@ -443,8 +442,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.settings.onEnd(this.tripIndex, tripObject);
 
-	    // We have to reset tripIndex in stop action too
-	    this.tripIndex = this.settings.tripIndex;
+	    // reset tripIndex when stopped
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
@@ -635,9 +634,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tripObject = this.getCurrentTripObject();
 	    this.settings.onEnd(this.tripIndex, tripObject);
 
-	    // We have to reset tripIndex when trip got finished
-	    this.tripIndex = this.settings.tripIndex;
-	    return false;
+	    // reset tripIndex when finished
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
@@ -860,6 +858,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  setIndex: function(tripIndex) {
 	    tripIndex = Math.max(0, Math.min(tripIndex, this.tripData.length - 1));
 	    this.tripIndex = tripIndex;
+
+	    // reflect the trip information on UI
+	    this.$tripBlock.attr('data-trip-step', this.tripIndex);
 	  },
 
 	  /**
@@ -1300,6 +1301,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.$tripBlock = $('.trip-block');
 	    this.$bar = $('.trip-progress-bar');
 	    this.$overlay = $('.trip-overlay');
+
+	    this.setIndex(this.settings.tripIndex);
 	  },
 
 	  /**
