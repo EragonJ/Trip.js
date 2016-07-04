@@ -3,5 +3,6 @@ module.exports = {
   dark: require('./default'),
   white: require('./default'),
   yeti: require('./default'),
-  default: require('./default')
+  default: require('./default'),
+  minimalism: require('./minimalism')
 };

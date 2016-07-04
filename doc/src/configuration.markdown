@@ -6,7 +6,7 @@ In Trip.js, we provide three three kind of options for developers to customize t
 2. Local options - Only change the behavior of specifc trip and won't influence the others.
 3. Parser options - There are small subsets of options that you can define in HTML if you are using parser mode.
 
-**Note: Parser options is supported in version 3.0.0+**
+**Note: Parser options was supported since 3.0.0+**
 
 ## Global options
 
@@ -19,11 +19,19 @@ You can set tripIndex ( start from 0 ) to specific trip block at start.
 
 #### tripTheme
 
-You can set which theme to use, now Trip.js support **white**, **black**, **yeti** and **dark** 4 themes.
+You can set which theme to use, now Trip.js support **white**, **black**, **yeti** and **dark** and **minimalism** 5 themes.
 
 + Type : `String`
 + Default :`'black'`
++ **Note : `minimalism` theme was supported since 3.2.1+**
 
+#### tripClass
+
+You can add custom class to Trip.js so that you can easily tweak something based on that classname in your CSS.
+
++ Type : `String`
++ Default :`''`
++ **Note : supported since 3.2.1+**
 
 #### tripBlockHTML
 
@@ -31,7 +39,6 @@ Base HTML for tripBlock
 
 + Type : `String`
 + Default : `An array contains base HTML of tripBlock` (Please check source code to know the default HTML)
-
 
 #### backToTopWhenEnded
 
@@ -84,6 +91,7 @@ You can now show steps UI to let users know the index of current trip
 
 + Type : `Boolean`
 + Default : `false`
++ **Note : supported since 3.2.1+**
 
 #### showHeader
 
@@ -140,6 +148,7 @@ Label for the skip button.
 
 + Type : `String`
 + Default : `'Skip'`
++ **Note : supported since 3.2.1+**
 
 #### finishLabel
 
@@ -177,7 +186,7 @@ You can set a callback function triggered when Trip.js starts.
 
 + Type : `Function`
 + Default : `$.noop`
-+ **Supported in 2.0.0+**
++ **Note : supported since 2.0.0+**
 
 #### onEnd(tripIndex, tripObject)
 
@@ -185,7 +194,7 @@ You can set a callback function triggered when Trip.js ends.
 
 + Type : `Function`
 + Default : `$.noop`
-+ **supported in 2.0.0+**
++ **Note : supported since 2.0.0+**
 
 #### onTripStart(tripIndex, tripObject)
 
@@ -193,7 +202,7 @@ You can set a callback function triggered when each trip starts. `tripObject` is
 
 + Type : `Function`
 + Default : `$.noop`
-+ **supported in 2.0.0+**
++ **Note : supported since 2.0.0+**
 
 #### onTripEnd(tripIndex, tripObject)
 
@@ -203,7 +212,7 @@ You can set a callback function triggered when each trip ends.
 
 + Type : `Function`
 + Default : `$.noop`
-+ **updated in 2.0.0+**
++ **Note : changed since 2.0.0+**
 
 #### onTripStop(tripIndex, tripObject)
 
@@ -225,7 +234,7 @@ You can set a callback function triggered when any trip is resumed.
 
 + Type : `Function`
 + Default : `$.noop`
-+ **supported in 2.0.0+**
++ **Note : supported since 2.0.0+**
 
 #### onTripChange(tripIndex, tripObject)
 
@@ -240,7 +249,7 @@ You can set a callback function triggered when any trip is closed.
 
 + Type : `Function`
 + Default : `$.noop`
-+ **supported in 2.0.0+**
++ **Note : supported since 2.0.0+**
 
 ## Local options
 
@@ -389,4 +398,4 @@ Check documentations above.
 
 Check documentations above.
 
-**Note : ** only support `Boolean` and `String` type here, no `jQuery` object.
+**Note : only support `Boolean` and `String` type here, no `jQuery` object.**

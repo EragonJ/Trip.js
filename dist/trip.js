@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.2.0
+ *  Version: 3.2.1
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -75,6 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TripUtils = __webpack_require__(3);
 	var TripAnimation = __webpack_require__(4);
 	var TripTheme = __webpack_require__(5);
+	var TripConstant = __webpack_require__(9);
 
 	/**
 	 * Trip
@@ -137,6 +138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.settings = $.extend({
 	    // basic config
+	    tripClass: '',
 	    tripIndex: 0,
 	    tripTheme: 'black',
 	    backToTopWhenEnded: false,
@@ -204,41 +206,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // about expose
 	  this.hasExpose = false;
 
-	  // contants
-	  this.CONSTANTS = {
-	    LEFT_ARROW: 37,
-	    UP_ARROW: 38,
-	    RIGHT_ARROW: 39,
-	    DOWN_ARROW: 40,
-	    ESC: 27,
-	    SPACE: 32,
-	    TRIP_BLOCK_OFFSET_VERTICAL: 10,
-	    TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
-	    RESIZE_TIMEOUT: 200
-	  };
-
-	  this.console = window.console || {};
+	  // for testing
+	  this.CONSTANT = TripConstant;
 	}
 
 	Trip.prototype = {
-	  /**
-	   * This is used to preInit Trip.js. For current use, we will try to
-	   * override this.console if there is no window.console like IE.
-	   *
-	   * @memberOf Trip
-	   * @type {Function}
-	   */
-	  preInit: function() {
-	    if (typeof this.console === 'undefined') {
-	      var that = this;
-	      var methods = ['log', 'warn', 'debug', 'info', 'error'];
-
-	      $.each(methods, function(i, methodName) {
-	        that.console[methodName] = noop;
-	      });
-	    }
-	  },
-
 	  /**
 	   * Expose element which has hasExpose property.
 	   *
@@ -337,7 +309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.clearTimeout(timer);
 	      timer = window.setTimeout(function() {
 	        that.run();
-	      }, that.CONSTANTS.RESIZE_TIMEOUT);
+	      }, TripConstant.RESIZE_TIMEOUT);
 	    });
 	  },
 
@@ -387,23 +359,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  keyEvent: function(e) {
 	    switch (e.which) {
-	      case this.CONSTANTS.ESC:
+	      case TripConstant.ESC:
 	        this.stop();
 	        break;
 
-	      case this.CONSTANTS.SPACE:
+	      case TripConstant.SPACE:
 	        // space will make the page jump
 	        e.preventDefault();
 	        this.pause();
 	        break;
 
-	      case this.CONSTANTS.LEFT_ARROW:
-	      case this.CONSTANTS.UP_ARROW:
+	      case TripConstant.LEFT_ARROW:
+	      case TripConstant.UP_ARROW:
 	        this.prev();
 	        break;
 
-	      case this.CONSTANTS.RIGHT_ARROW:
-	      case this.CONSTANTS.DOWN_ARROW:
+	      case TripConstant.RIGHT_ARROW:
+	      case TripConstant.DOWN_ARROW:
 	        this.next();
 	        break;
 	    }
@@ -419,6 +391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  stop: function() {
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.hasExpose) {
@@ -450,6 +423,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  pauseOrResume: function() {
+	    if (!this.timer) {
+	      return;
+	    }
+
 	    if (this.progressing) {
 	      this.timer.pause();
 	      this.pauseProgressBar();
@@ -458,6 +435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var remainingTime = this.timer.resume();
 	      this.resumeProgressBar(remainingTime);
 	    }
+
 	    this.progressing = !this.progressing;
 	  },
 
@@ -576,6 +554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // preprocess when we have to show trip block
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.hasExpose) {
@@ -611,6 +590,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  doLastOperation: function() {
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.settings.enableKeyBinding) {
@@ -704,8 +684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!this.isTripDataValid(tripObject)) {
 	      // force developers to double check tripData again
 	      if (this.settings.skipUndefinedTrip === false) {
-	        this.console.error(
-	          'Your tripData is not valid at index: ' + this.tripIndex);
+	        TripUtils.log('Your tripData is not valid at index: ' + this.tripIndex);
 	        this.stop();
 	        return false;
 	      }
@@ -952,7 +931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    $tripBlock
 	      .find('.trip-prev')
 	        .html(prevLabel)
-	        .toggle(showNavigation && !this.isFirst());
+	        .toggle(showNavigation);
 
 	    $tripBlock
 	      .find('.trip-next')
@@ -1056,8 +1035,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'screen-se':
 	      case 'screen-nw':
 	      case 'screen-sw':
-	        cssHorizontal = this.CONSTANTS.TRIP_BLOCK_OFFSET_HORIZONTAL;
-	        cssVertical = this.CONSTANTS.TRIP_BLOCK_OFFSET_VERTICAL;
+	        cssHorizontal = TripConstant.TRIP_BLOCK_OFFSET_HORIZONTAL;
+	        cssVertical = TripConstant.TRIP_BLOCK_OFFSET_VERTICAL;
 	        break;
 	      case 'e':
 	        cssHorizontal = $sel.offset().left + selWidth + arrowWidth;
@@ -1231,7 +1210,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof $('.trip-block').get(0) === 'undefined') {
 	      var that = this;
 	      var tripBlockHTML = this.settings.tripBlockHTML;
-	      var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
+	      var $tripBlock = $(tripBlockHTML);
+
+	      $tripBlock
+	        .addClass(this.settings.tripTheme)
+	        .addClass(this.settings.tripClass)
+	        .addClass('tripjs');
 
 	      $('body').append($tripBlock);
 
@@ -1339,8 +1323,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  init: function() {
-	    this.preInit();
-
 	    if (this.settings.enableKeyBinding) {
 	      this.bindKeyEvents();
 	    }
@@ -1533,6 +1515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isArray: function(target) {
@@ -1544,6 +1527,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isObject: function(target) {
@@ -1555,10 +1539,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {*} target
 	   * @return {Boolean}
 	   */
 	  isString: function(target) {
 	    return (typeof target === 'string');
+	  },
+
+	  /**
+	   * Handy wrapper of console.log
+	   *
+	   * @memberOf TripUtils
+	   * @type {Function}
+	   */
+	  log: function() {
+	    var console = window.console;
+	    if (typeof console !== 'undefined' && console.log) {
+	      console.log.apply(console, arguments);
+	    }
 	  },
 
 	  /**
@@ -1572,6 +1570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @memberOf TripUtils
 	   * @type {Function}
+	   * @param {Function} callback
+	   * @param {Number} delay
 	   * @return {Timer}
 	   */
 	  Timer: function(callback, delay) {
@@ -1657,7 +1657,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  dark: __webpack_require__(7),
 	  white: __webpack_require__(7),
 	  yeti: __webpack_require__(7),
-	  default: __webpack_require__(7)
+	  default: __webpack_require__(7),
+	  minimalism: __webpack_require__(8)
 	};
 
 
@@ -1679,6 +1680,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	    '<div class="trip-progress-bar"></div>',
 	  '</div>'
 	].join('');
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  '<div class="trip-block">',
+	    '<a href="#" class="trip-close"></a>',
+	    '<div class="trip-header"></div>',
+	    '<div class="trip-content"></div>',
+	    '<div class="trip-progress-steps"></div>',
+	    '<div class="trip-navigation">',
+	      '<a href="#" class="trip-prev"></a>',
+	      '<a href="#" class="trip-next"></a>',
+	      '<a href="#" class="trip-skip"></a>',
+	    '</div>',
+	    '<div class="trip-progress-bar"></div>',
+	  '</div>'
+	].join('');
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  LEFT_ARROW: 37,
+	  UP_ARROW: 38,
+	  RIGHT_ARROW: 39,
+	  DOWN_ARROW: 40,
+	  ESC: 27,
+	  SPACE: 32,
+	  TRIP_BLOCK_OFFSET_VERTICAL: 10,
+	  TRIP_BLOCK_OFFSET_HORIZONTAL: 10,
+	  RESIZE_TIMEOUT: 200
+	};
 
 
 /***/ }

@@ -14,7 +14,7 @@
 <li>Local options - Only change the behavior of specifc trip and won&#39;t influence the others.</li>
 <li>Parser options - There are small subsets of options that you can define in HTML if you are using parser mode.</li>
 </ol>
-<p><strong>Note: Parser options is supported in version 3.0.0+</strong></p>
+<p><strong>Note: Parser options was supported since 3.0.0+</strong></p>
 <h2 id="global-options">Global options</h2>
 <h4 id="tripindex">tripIndex</h4>
 <p>You can set tripIndex ( start from 0 ) to specific trip block at start.</p>
@@ -23,10 +23,18 @@
 <li>Default : <code>0</code></li>
 </ul>
 <h4 id="triptheme">tripTheme</h4>
-<p>You can set which theme to use, now Trip.js support <strong>white</strong>, <strong>black</strong>, <strong>yeti</strong> and <strong>dark</strong> 4 themes.</p>
+<p>You can set which theme to use, now Trip.js support <strong>white</strong>, <strong>black</strong>, <strong>yeti</strong> and <strong>dark</strong> and <strong>minimalism</strong> 5 themes.</p>
 <ul>
 <li>Type : <code>String</code></li>
 <li>Default :<code>&#39;black&#39;</code></li>
+<li><strong>Note : <code>minimalism</code> theme was supported since 3.2.1+</strong></li>
+</ul>
+<h4 id="tripclass">tripClass</h4>
+<p>You can add custom class to Trip.js so that you can easily tweak something based on that classname in your CSS.</p>
+<ul>
+<li>Type : <code>String</code></li>
+<li>Default :<code>&#39;&#39;</code></li>
+<li><strong>Note : supported since 3.2.1+</strong></li>
 </ul>
 <h4 id="tripblockhtml">tripBlockHTML</h4>
 <p>Base HTML for tripBlock</p>
@@ -75,6 +83,7 @@
 <ul>
 <li>Type : <code>Boolean</code></li>
 <li>Default : <code>false</code></li>
+<li><strong>Note : supported since 3.2.1+</strong></li>
 </ul>
 <h4 id="showheader">showHeader</h4>
 <p>If you want to show no matter with default or customized header, you have to set this value to true. You can check <strong>header</strong> option for more details.</p>
@@ -123,6 +132,7 @@
 <ul>
 <li>Type : <code>String</code></li>
 <li>Default : <code>&#39;Skip&#39;</code></li>
+<li><strong>Note : supported since 3.2.1+</strong></li>
 </ul>
 <h4 id="finishlabel">finishLabel</h4>
 <p>Label for the finish button.</p>
@@ -153,21 +163,21 @@
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>Supported in 2.0.0+</strong></li>
+<li><strong>Note : supported since 2.0.0+</strong></li>
 </ul>
 <h4 id="onend-tripindex-tripobject-">onEnd(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when Trip.js ends.</p>
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>supported in 2.0.0+</strong></li>
+<li><strong>Note : supported since 2.0.0+</strong></li>
 </ul>
 <h4 id="ontripstart-tripindex-tripobject-">onTripStart(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when each trip starts. <code>tripObject</code> is your passed JSON for this current trip, and tripIndex is the index for current trip. You can add add your customized functions in your object and call them when this callback is called.</p>
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>supported in 2.0.0+</strong></li>
+<li><strong>Note : supported since 2.0.0+</strong></li>
 </ul>
 <h4 id="ontripend-tripindex-tripobject-">onTripEnd(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when each trip ends.</p>
@@ -175,7 +185,7 @@
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>updated in 2.0.0+</strong></li>
+<li><strong>Note : changed since 2.0.0+</strong></li>
 </ul>
 <h4 id="ontripstop-tripindex-tripobject-">onTripStop(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when any trip is stopped.</p>
@@ -194,7 +204,7 @@
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>supported in 2.0.0+</strong></li>
+<li><strong>Note : supported since 2.0.0+</strong></li>
 </ul>
 <h4 id="ontripchange-tripindex-tripobject-">onTripChange(tripIndex, tripObject)</h4>
 <p>You can set a callback function triggered when any trip changes to another one.</p>
@@ -207,7 +217,7 @@
 <ul>
 <li>Type : <code>Function</code></li>
 <li>Default : <code>$.noop</code></li>
-<li><strong>supported in 2.0.0+</strong></li>
+<li><strong>Note : supported since 2.0.0+</strong></li>
 </ul>
 <h2 id="local-options">Local options</h2>
 <h4 id="sel">sel</h4>
@@ -295,7 +305,7 @@
 <p>Check documentations above.</p>
 <h4 id="data-trip-expose">data-trip-expose</h4>
 <p>Check documentations above.</p>
-<p><strong>Note : </strong> only support <code>Boolean</code> and <code>String</code> type here, no <code>jQuery</code> object.</p>
+<p><strong>Note : only support <code>Boolean</code> and <code>String</code> type here, no <code>jQuery</code> object.</strong></p>
   
     </div>
   </body>
