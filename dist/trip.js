@@ -138,6 +138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.settings = $.extend({
 	    // basic config
+	    tripClass: '',
 	    tripIndex: 0,
 	    tripTheme: 'black',
 	    backToTopWhenEnded: false,
@@ -1209,7 +1210,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof $('.trip-block').get(0) === 'undefined') {
 	      var that = this;
 	      var tripBlockHTML = this.settings.tripBlockHTML;
-	      var $tripBlock = $(tripBlockHTML).addClass(this.settings.tripTheme);
+	      var $tripBlock = $(tripBlockHTML);
+
+	      $tripBlock
+	        .addClass(this.settings.tripTheme)
+	        .addClass(this.settings.tripClass)
+	        .addClass('tripjs');
 
 	      $('body').append($tripBlock);
 

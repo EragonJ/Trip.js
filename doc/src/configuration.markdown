@@ -24,6 +24,12 @@ You can set which theme to use, now Trip.js support **white**, **black**, **yeti
 + Type : `String`
 + Default :`'black'`
 
+#### tripClass
+
+You can add custom class to Trip.js so that you can easily tweak something based on that classname in your CSS.
+
++ Type : `String`
++ Default :`''`
 
 #### tripBlockHTML
 
