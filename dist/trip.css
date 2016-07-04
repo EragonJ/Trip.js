@@ -1285,6 +1285,8 @@
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px; }
+  .trip-block.minimalism .trip-header {
+    padding: 10px; }
   .trip-block.minimalism h1 {
     font-size: 25px;
     color: #1e2224;

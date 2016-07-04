@@ -9,6 +9,10 @@
   @include box-shadow(0 2px 7px 2px rgba(0, 0, 0, 0.5));
   @include border-radius(8px);
 
+  .trip-header {
+    padding: 10px;
+  }
+
   h1 {
     font-size: 25px;
     color: #1e2224;
