@@ -12,7 +12,7 @@ Trip.js has been tested and work well on `IE 9+`, `Chrome 32+`, `Firefox 32+` an
 
 ## Version
 
-3.2.0
+3.2.1
 
 ## How to
 
@@ -56,7 +56,7 @@ grunt doc # jsdoc and our documentations
 
 ```bash
 grunt bumpversion --oldv=VERSION_FROM --newv=VERSION_TO # below is an example
-grunt bumpversion --oldv=3.1.7 --newv=3.2.0 # change version number in src
+grunt bumpversion --oldv=3.1.7 --newv=3.1.8 # change version number in src
 ```
 
 ```bash

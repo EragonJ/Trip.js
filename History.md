@@ -1,8 +1,14 @@
 # History
 
+## 2016-07-04 - version 3.2.1
++ added TripConstant model
++ added a new theme called `minimalism`
++ added `tripClass` settings so that users can add extra class on it for more customization works
++ showed `prev` button even if users are on the first step
+
 ## 2016-07-01 - version 3.2.0
 
-+ added `data-trip-step` class on trip-block so that devs can do more controls in CSS.
++ added `data-trip-step` class on trip-block so that devs can do more controls in CSS
 + added skip button (and skipLabel settings)
 + added steps UI (and showSteps settings)
 + updated existing styles to make it work better with steps UI
