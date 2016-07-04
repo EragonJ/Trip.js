@@ -19,7 +19,7 @@ You can set tripIndex ( start from 0 ) to specific trip block at start.
 
 #### tripTheme
 
-You can set which theme to use, now Trip.js support **white**, **black**, **yeti** and **dark** 4 themes.
+You can set which theme to use, now Trip.js support **white**, **black**, **yeti** and **dark** and **minimalism** 5 themes.
 
 + Type : `String`
 + Default :`'black'`

@@ -75,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TripUtils = __webpack_require__(3);
 	var TripAnimation = __webpack_require__(4);
 	var TripTheme = __webpack_require__(5);
-	var TripConstant = __webpack_require__(8);
+	var TripConstant = __webpack_require__(9);
 
 	/**
 	 * Trip
@@ -390,6 +390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  stop: function() {
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.hasExpose) {
@@ -421,6 +422,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @type {Function}
 	   */
 	  pauseOrResume: function() {
+	    if (!this.timer) {
+	      return;
+	    }
+
 	    if (this.progressing) {
 	      this.timer.pause();
 	      this.pauseProgressBar();
@@ -429,6 +434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var remainingTime = this.timer.resume();
 	      this.resumeProgressBar(remainingTime);
 	    }
+
 	    this.progressing = !this.progressing;
 	  },
 
@@ -547,6 +553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // preprocess when we have to show trip block
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.hasExpose) {
@@ -582,6 +589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  doLastOperation: function() {
 	    if (this.timer) {
 	      this.timer.stop();
+	      this.timer = null;
 	    }
 
 	    if (this.settings.enableKeyBinding) {
@@ -922,7 +930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    $tripBlock
 	      .find('.trip-prev')
 	        .html(prevLabel)
-	        .toggle(showNavigation && !this.isFirst());
+	        .toggle(showNavigation);
 
 	    $tripBlock
 	      .find('.trip-next')
@@ -1643,7 +1651,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  dark: __webpack_require__(7),
 	  white: __webpack_require__(7),
 	  yeti: __webpack_require__(7),
-	  default: __webpack_require__(7)
+	  default: __webpack_require__(7),
+	  minimalism: __webpack_require__(8)
 	};
 
 
@@ -1669,6 +1678,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  '<div class="trip-block">',
+	    '<a href="#" class="trip-close"></a>',
+	    '<div class="trip-header"></div>',
+	    '<div class="trip-content"></div>',
+	    '<div class="trip-progress-steps"></div>',
+	    '<div class="trip-navigation">',
+	      '<a href="#" class="trip-prev"></a>',
+	      '<a href="#" class="trip-next"></a>',
+	      '<a href="#" class="trip-skip"></a>',
+	    '</div>',
+	    '<div class="trip-progress-bar"></div>',
+	  '</div>'
+	].join('');
+
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = {

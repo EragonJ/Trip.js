@@ -320,6 +320,7 @@ Trip.prototype = {
   stop: function() {
     if (this.timer) {
       this.timer.stop();
+      this.timer = null;
     }
 
     if (this.hasExpose) {
@@ -351,6 +352,10 @@ Trip.prototype = {
    * @type {Function}
    */
   pauseOrResume: function() {
+    if (!this.timer) {
+      return;
+    }
+
     if (this.progressing) {
       this.timer.pause();
       this.pauseProgressBar();
@@ -359,6 +364,7 @@ Trip.prototype = {
       var remainingTime = this.timer.resume();
       this.resumeProgressBar(remainingTime);
     }
+
     this.progressing = !this.progressing;
   },
 
@@ -477,6 +483,7 @@ Trip.prototype = {
     // preprocess when we have to show trip block
     if (this.timer) {
       this.timer.stop();
+      this.timer = null;
     }
 
     if (this.hasExpose) {
@@ -512,6 +519,7 @@ Trip.prototype = {
   doLastOperation: function() {
     if (this.timer) {
       this.timer.stop();
+      this.timer = null;
     }
 
     if (this.settings.enableKeyBinding) {
@@ -852,7 +860,7 @@ Trip.prototype = {
     $tripBlock
       .find('.trip-prev')
         .html(prevLabel)
-        .toggle(showNavigation && !this.isFirst());
+        .toggle(showNavigation);
 
     $tripBlock
       .find('.trip-next')
