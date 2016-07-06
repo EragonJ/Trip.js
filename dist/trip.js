@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.2.1
+ *  Version: 3.2.2
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -1348,7 +1348,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.cleanup();
 
 	    // we will call this before initializing all stuffs
-	    this.settings.onStart();
+	    this.settings.onStart.call(this);
 
 	    // create some necessary DOM elements at the first time like jQuery UI
 	    this.create();

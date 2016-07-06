@@ -1,5 +1,10 @@
 # History
 
+## 2016-07-06 - version 3.2.2
+
++ fixed callback scope, all bound to `trip` itself, so you can use `this.next()` API in your tripObject
++ fixed arrow color for all themes
+
 ## 2016-07-04 - version 3.2.1
 + added TripConstant model
 + added a new theme called `minimalism`
