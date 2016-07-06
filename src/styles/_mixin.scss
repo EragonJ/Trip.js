@@ -1,0 +1,22 @@
+@mixin animate($name: fadeIn, $duration: 1s, $delay: 0.2s, $function: ease, $mode: both) {
+  @include animation($name $duration $delay $function $mode);
+}
+
+@mixin trip-arrow-color($color) {
+  &.n:before {
+    border-top-color: $color;
+  }
+
+  &.s:before {
+    border-bottom-color: $color;
+  }
+
+  &.e:before {
+    border-right-color: $color;
+  }
+
+  &.w:before {
+    border-left-color: $color;
+  }
+}
+

@@ -1285,6 +1285,16 @@
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px; }
+  .trip-block.minimalism.n:before {
+    border-top-color: #ffffff; }
+  .trip-block.minimalism.s:before {
+    border-bottom-color: #ffffff; }
+  .trip-block.minimalism.e:before {
+    border-right-color: #ffffff; }
+  .trip-block.minimalism.w:before {
+    border-left-color: #ffffff; }
+  .trip-block.minimalism .trip-content {
+    padding: 5px; }
   .trip-block.minimalism .trip-header {
     padding: 10px; }
   .trip-block.minimalism h1 {
