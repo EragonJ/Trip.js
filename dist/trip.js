@@ -408,7 +408,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var tripStop = tripObject.onTripStop || this.settings.onTripStop;
-	    tripStop(this.tripIndex, tripObject);
+	    tripStop.call(this, this.tripIndex, tripObject);
 
 	    this.settings.onEnd(this.tripIndex, tripObject);
 
@@ -450,7 +450,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.pauseOrResume();
 	    var tripObject = this.getCurrentTripObject();
 	    var tripPause = tripObject.onTripPause || this.settings.onTripPause;
-	    tripPause(this.tripIndex, tripObject);
+	    tripPause.call(this, this.tripIndex, tripObject);
 	  },
 
 	  /**
@@ -464,7 +464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.pauseOrResume();
 	    var tripObject = this.getCurrentTripObject();
 	    var tripResume = tripObject.onTripResume || this.settings.onTripResume;
-	    tripResume(this.tripIndex, tripObject);
+	    tripResume.call(this, this.tripIndex, tripObject);
 	  },
 
 	  /**
@@ -490,7 +490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // all be here.
 	    var tripObject = this.getCurrentTripObject();
 	    var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
-	    var tripEndDefer = tripEnd(this.tripIndex, tripObject);
+	    var tripEndDefer = tripEnd.call(this, this.tripIndex, tripObject);
 
 	    $.when(tripEndDefer).then(function() {
 	      if (useDifferentIndex) {
@@ -698,8 +698,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.showProgressBar(delay);
 	    this.progressing = true;
 
-	    tripChange(this.tripIndex, tripObject);
-	    tripStart(this.tripIndex, tripObject);
+	    tripChange.call(this, this.tripIndex, tripObject);
+	    tripStart.call(this, this.tripIndex, tripObject);
 
 	    // set timer to show next, if the timer is less than zero we expect
 	    // it to be manually advanced
@@ -795,15 +795,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {Boolean} whether we can go to previous trip
 	   */
 	  canGoPrev: function() {
-	    var trip = this.tripData[this.tripIndex];
-	    var canGoPrev = trip.canGoPrev;
+	    var tripObject = this.getCurrentTripObject();
+	    var canGoPrev = tripObject.canGoPrev;
 
 	    if (typeof canGoPrev === 'undefined') {
 	      canGoPrev = this.settings.canGoPrev;
 	    }
 
 	    if (typeof canGoPrev === 'function') {
-	      canGoPrev = canGoPrev.call(trip);
+	      canGoPrev = canGoPrev.call(this, this.tripIndex, tripObject);
 	    }
 
 	    return canGoPrev;
@@ -817,15 +817,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {Boolean} whether we can go to next trip
 	   */
 	  canGoNext: function() {
-	    var trip = this.tripData[this.tripIndex];
-	    var canGoNext = trip.canGoNext;
+	    var tripObject = this.getCurrentTripObject();
+	    var canGoNext = tripObject.canGoNext;
 
 	    if (typeof canGoNext === 'undefined') {
 	      canGoNext = this.settings.canGoNext;
 	    }
 
 	    if (typeof canGoNext === 'function') {
-	      canGoNext = canGoNext.call(trip);
+	      canGoNext = canGoNext.call(this, this.tripIndex, tripObject);
 	    }
 
 	    return canGoNext;
@@ -1238,7 +1238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          e.preventDefault();
 	          var tripObject = that.getCurrentTripObject();
 	          var tripClose = tripObject.onTripClose || that.settings.onTripClose;
-	          tripClose(that.tripIndex, tripObject);
+	          tripClose.call(that, that.tripIndex, tripObject);
 	          that.stop();
 	        });
 	      }
@@ -1250,7 +1250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          e.preventDefault();
 	          var tripObject = that.getCurrentTripObject();
 	          var tripClose = tripObject.onTripClose || that.settings.onTripClose;
-	          tripClose(that.tripIndex, tripObject);
+	          tripClose.call(that, that.tripIndex, tripObject);
 	          that.stop();
 	        });
 	      }
