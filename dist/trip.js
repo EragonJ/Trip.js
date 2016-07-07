@@ -480,7 +480,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var useDifferentIndex = !isNaN(tripIndex);
 
 	    if (!this.canGoNext()) {
-	      return this.run();
+	      return;
 	    }
 
 	    this.tripDirection = 'next';
@@ -521,6 +521,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  prev: function() {
 	    var that = this;
+
+	    if (!this.canGoPrev()) {
+	      return;
+	    }
+
 	    this.tripDirection = 'prev';
 
 	    // When this is executed, it means users click on the arrow key to
@@ -531,7 +536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
 	    $.when(tripEndDefer).then(function() {
-	      if (!that.isFirst() && that.canGoPrev()) {
+	      if (!that.isFirst()) {
 	        that.decreaseIndex();
 	      }
 	      that.run();
@@ -806,6 +811,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      canGoPrev = canGoPrev.call(this, this.tripIndex, tripObject);
 	    }
 
+	    if (this.tripIndex === 0) {
+	      canGoPrev = false;
+	    }
+
 	    return canGoPrev;
 	  },
 
@@ -930,11 +939,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    $tripBlock
 	      .find('.trip-prev')
+	        .toggleClass('disabled', !this.canGoPrev())
 	        .html(prevLabel)
 	        .toggle(showNavigation);
 
 	    $tripBlock
 	      .find('.trip-next')
+	        .toggleClass('disabled', !this.canGoNext())
 	        .html(this.isLast() ? finishLabel : nextLabel)
 	        .toggle(showNavigation && !o.nextClickSelector);
 

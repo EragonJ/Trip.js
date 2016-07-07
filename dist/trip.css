@@ -930,6 +930,24 @@
     transform: scale(1.1) rotate(3deg); }
   100% {
     transform: scale(1) rotate(0); } }
+/*
+ *  TODO:
+ *  implement with more details later
+ */
+.trip-exposed {
+  background: white; }
+
+.trip-overlay {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: black;
+  width: 100%;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7; }
+
 .trip-block {
   display: none;
   padding: 8px;
@@ -961,170 +979,147 @@
     left: 100%; }
   .trip-block.screen-ne, .trip-block.screen-se, .trip-block.screen-sw, .trip-block.screen-nw, .trip-block.screen-center {
     position: fixed; }
-
-.trip-block.animated.flash {
-  -moz-animation: flash 0.5s 0s ease both;
-  -webkit-animation: flash 0.5s 0s ease both;
-  animation: flash 0.5s 0s ease both; }
-.trip-block.animated.bounce {
-  -moz-animation: bounce 0.5s 0s ease both;
-  -webkit-animation: bounce 0.5s 0s ease both;
-  animation: bounce 0.5s 0s ease both; }
-.trip-block.animated.shake {
-  -moz-animation: shake 0.5s 0s ease both;
-  -webkit-animation: shake 0.5s 0s ease both;
-  animation: shake 0.5s 0s ease both; }
-.trip-block.animated.tada {
-  -moz-animation: tada 0.5s 0s ease both;
-  -webkit-animation: tada 0.5s 0s ease both;
-  animation: tada 0.5s 0s ease both; }
-.trip-block.animated.fadeIn {
-  -moz-animation: fadeIn 0.5s 0s ease both;
-  -webkit-animation: fadeIn 0.5s 0s ease both;
-  animation: fadeIn 0.5s 0s ease both; }
-.trip-block.animated.fadeInUp {
-  -moz-animation: fadeInUp 0.5s 0s ease both;
-  -webkit-animation: fadeInUp 0.5s 0s ease both;
-  animation: fadeInUp 0.5s 0s ease both; }
-.trip-block.animated.fadeInDown {
-  -moz-animation: fadeInDown 0.5s 0s ease both;
-  -webkit-animation: fadeInDown 0.5s 0s ease both;
-  animation: fadeInDown 0.5s 0s ease both; }
-.trip-block.animated.fadeInLeft {
-  -moz-animation: fadeInLeft 0.5s 0s ease both;
-  -webkit-animation: fadeInLeft 0.5s 0s ease both;
-  animation: fadeInLeft 0.5s 0s ease both; }
-.trip-block.animated.fadeInRight {
-  -moz-animation: fadeInRight 0.5s 0s ease both;
-  -webkit-animation: fadeInRight 0.5s 0s ease both;
-  animation: fadeInRight 0.5s 0s ease both; }
-.trip-block.animated.fadeInUpBig {
-  -moz-animation: fadeInUpBig 0.5s 0s ease both;
-  -webkit-animation: fadeInUpBig 0.5s 0s ease both;
-  animation: fadeInUpBig 0.5s 0s ease both; }
-.trip-block.animated.fadeInDownBig {
-  -moz-animation: fadeInDownBig 0.5s 0s ease both;
-  -webkit-animation: fadeInDownBig 0.5s 0s ease both;
-  animation: fadeInDownBig 0.5s 0s ease both; }
-.trip-block.animated.fadeInLeftBig {
-  -moz-animation: fadeInLeftBig 0.5s 0s ease both;
-  -webkit-animation: fadeInLeftBig 0.5s 0s ease both;
-  animation: fadeInLeftBig 0.5s 0s ease both; }
-.trip-block.animated.fadeInRightBig {
-  -moz-animation: fadeInRightBig 0.5s 0s ease both;
-  -webkit-animation: fadeInRightBig 0.5s 0s ease both;
-  animation: fadeInRightBig 0.5s 0s ease both; }
-.trip-block.animated.bounceIn {
-  -moz-animation: bounceIn 0.5s 0s ease both;
-  -webkit-animation: bounceIn 0.5s 0s ease both;
-  animation: bounceIn 0.5s 0s ease both; }
-.trip-block.animated.bounceInDown {
-  -moz-animation: bounceInDown 0.5s 0s ease both;
-  -webkit-animation: bounceInDown 0.5s 0s ease both;
-  animation: bounceInDown 0.5s 0s ease both; }
-.trip-block.animated.bounceInUp {
-  -moz-animation: bounceInUp 0.5s 0s ease both;
-  -webkit-animation: bounceInUp 0.5s 0s ease both;
-  animation: bounceInUp 0.5s 0s ease both; }
-.trip-block.animated.bounceInLeft {
-  -moz-animation: bounceInLeft 0.5s 0s ease both;
-  -webkit-animation: bounceInLeft 0.5s 0s ease both;
-  animation: bounceInLeft 0.5s 0s ease both; }
-.trip-block.animated.bounceInRight {
-  -moz-animation: bounceInRight 0.5s 0s ease both;
-  -webkit-animation: bounceInRight 0.5s 0s ease both;
-  animation: bounceInRight 0.5s 0s ease both; }
-.trip-block.animated.rotateIn {
-  -moz-animation: rotateIn 0.5s 0s ease both;
-  -webkit-animation: rotateIn 0.5s 0s ease both;
-  animation: rotateIn 0.5s 0s ease both; }
-.trip-block.animated.rotateInDownLeft {
-  -moz-animation: rotateInDownLeft 0.5s 0s ease both;
-  -webkit-animation: rotateInDownLeft 0.5s 0s ease both;
-  animation: rotateInDownLeft 0.5s 0s ease both; }
-.trip-block.animated.rotateInDownRight {
-  -moz-animation: rotateInDownRight 0.5s 0s ease both;
-  -webkit-animation: rotateInDownRight 0.5s 0s ease both;
-  animation: rotateInDownRight 0.5s 0s ease both; }
-.trip-block.animated.rotateInUpLeft {
-  -moz-animation: rotateInUpLeft 0.5s 0s ease both;
-  -webkit-animation: rotateInUpLeft 0.5s 0s ease both;
-  animation: rotateInUpLeft 0.5s 0s ease both; }
-.trip-block.animated.rotateInUpRight {
-  -moz-animation: rotateInUpRight 0.5s 0s ease both;
-  -webkit-animation: rotateInUpRight 0.5s 0s ease both;
-  animation: rotateInUpRight 0.5s 0s ease both; }
-
-.trip-close {
-  position: relative;
-  font-size: 80%;
-  float: right;
-  margin-top: -5px;
-  z-index: 1; }
-  .trip-close:hover {
-    text-decoration: none; }
-
-.trip-content {
-  clear: right; }
-
-.trip-navigation {
-  display: -webkit-flex;
-  display: flex; }
-
-.trip-progress-steps {
-  border: 1px solid #ddd;
-  border-width: 1px 0; }
-  .trip-progress-steps .trip-progress-step {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 100%;
-    background: #ddd;
-    margin: 15px 5px 11px; }
-    .trip-progress-steps .trip-progress-step.selected {
-      background: none;
-      border: 1px solid;
-      -moz-transform: scale(1.25, 1.25);
-      -ms-transform: scale(1.25, 1.25);
-      -webkit-transform: scale(1.25, 1.25);
-      transform: scale(1.25, 1.25); }
-
-.trip-progress-bar {
-  height: 1px;
-  background-color: #444;
-  width: 0; }
-
-.trip-overlay {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background: black;
-  width: 100%;
-  height: 100%;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  opacity: 0.7; }
-
-.trip-prev,
-.trip-next,
-.trip-skip {
-  padding: 5px 10px; }
-
-.trip-prev,
-.trip-next {
-  -webkit-flex: 1;
-  flex: 1; }
-
-.trip-skip {
-  -webkit-flex: 2;
-  flex: 2; }
-
-/*
- *  TODO:
- *  implement with more details later
- */
-.trip-exposed {
-  background: white; }
+  .trip-block.animated.flash {
+    -moz-animation: flash 0.5s 0s ease both;
+    -webkit-animation: flash 0.5s 0s ease both;
+    animation: flash 0.5s 0s ease both; }
+  .trip-block.animated.bounce {
+    -moz-animation: bounce 0.5s 0s ease both;
+    -webkit-animation: bounce 0.5s 0s ease both;
+    animation: bounce 0.5s 0s ease both; }
+  .trip-block.animated.shake {
+    -moz-animation: shake 0.5s 0s ease both;
+    -webkit-animation: shake 0.5s 0s ease both;
+    animation: shake 0.5s 0s ease both; }
+  .trip-block.animated.tada {
+    -moz-animation: tada 0.5s 0s ease both;
+    -webkit-animation: tada 0.5s 0s ease both;
+    animation: tada 0.5s 0s ease both; }
+  .trip-block.animated.fadeIn {
+    -moz-animation: fadeIn 0.5s 0s ease both;
+    -webkit-animation: fadeIn 0.5s 0s ease both;
+    animation: fadeIn 0.5s 0s ease both; }
+  .trip-block.animated.fadeInUp {
+    -moz-animation: fadeInUp 0.5s 0s ease both;
+    -webkit-animation: fadeInUp 0.5s 0s ease both;
+    animation: fadeInUp 0.5s 0s ease both; }
+  .trip-block.animated.fadeInDown {
+    -moz-animation: fadeInDown 0.5s 0s ease both;
+    -webkit-animation: fadeInDown 0.5s 0s ease both;
+    animation: fadeInDown 0.5s 0s ease both; }
+  .trip-block.animated.fadeInLeft {
+    -moz-animation: fadeInLeft 0.5s 0s ease both;
+    -webkit-animation: fadeInLeft 0.5s 0s ease both;
+    animation: fadeInLeft 0.5s 0s ease both; }
+  .trip-block.animated.fadeInRight {
+    -moz-animation: fadeInRight 0.5s 0s ease both;
+    -webkit-animation: fadeInRight 0.5s 0s ease both;
+    animation: fadeInRight 0.5s 0s ease both; }
+  .trip-block.animated.fadeInUpBig {
+    -moz-animation: fadeInUpBig 0.5s 0s ease both;
+    -webkit-animation: fadeInUpBig 0.5s 0s ease both;
+    animation: fadeInUpBig 0.5s 0s ease both; }
+  .trip-block.animated.fadeInDownBig {
+    -moz-animation: fadeInDownBig 0.5s 0s ease both;
+    -webkit-animation: fadeInDownBig 0.5s 0s ease both;
+    animation: fadeInDownBig 0.5s 0s ease both; }
+  .trip-block.animated.fadeInLeftBig {
+    -moz-animation: fadeInLeftBig 0.5s 0s ease both;
+    -webkit-animation: fadeInLeftBig 0.5s 0s ease both;
+    animation: fadeInLeftBig 0.5s 0s ease both; }
+  .trip-block.animated.fadeInRightBig {
+    -moz-animation: fadeInRightBig 0.5s 0s ease both;
+    -webkit-animation: fadeInRightBig 0.5s 0s ease both;
+    animation: fadeInRightBig 0.5s 0s ease both; }
+  .trip-block.animated.bounceIn {
+    -moz-animation: bounceIn 0.5s 0s ease both;
+    -webkit-animation: bounceIn 0.5s 0s ease both;
+    animation: bounceIn 0.5s 0s ease both; }
+  .trip-block.animated.bounceInDown {
+    -moz-animation: bounceInDown 0.5s 0s ease both;
+    -webkit-animation: bounceInDown 0.5s 0s ease both;
+    animation: bounceInDown 0.5s 0s ease both; }
+  .trip-block.animated.bounceInUp {
+    -moz-animation: bounceInUp 0.5s 0s ease both;
+    -webkit-animation: bounceInUp 0.5s 0s ease both;
+    animation: bounceInUp 0.5s 0s ease both; }
+  .trip-block.animated.bounceInLeft {
+    -moz-animation: bounceInLeft 0.5s 0s ease both;
+    -webkit-animation: bounceInLeft 0.5s 0s ease both;
+    animation: bounceInLeft 0.5s 0s ease both; }
+  .trip-block.animated.bounceInRight {
+    -moz-animation: bounceInRight 0.5s 0s ease both;
+    -webkit-animation: bounceInRight 0.5s 0s ease both;
+    animation: bounceInRight 0.5s 0s ease both; }
+  .trip-block.animated.rotateIn {
+    -moz-animation: rotateIn 0.5s 0s ease both;
+    -webkit-animation: rotateIn 0.5s 0s ease both;
+    animation: rotateIn 0.5s 0s ease both; }
+  .trip-block.animated.rotateInDownLeft {
+    -moz-animation: rotateInDownLeft 0.5s 0s ease both;
+    -webkit-animation: rotateInDownLeft 0.5s 0s ease both;
+    animation: rotateInDownLeft 0.5s 0s ease both; }
+  .trip-block.animated.rotateInDownRight {
+    -moz-animation: rotateInDownRight 0.5s 0s ease both;
+    -webkit-animation: rotateInDownRight 0.5s 0s ease both;
+    animation: rotateInDownRight 0.5s 0s ease both; }
+  .trip-block.animated.rotateInUpLeft {
+    -moz-animation: rotateInUpLeft 0.5s 0s ease both;
+    -webkit-animation: rotateInUpLeft 0.5s 0s ease both;
+    animation: rotateInUpLeft 0.5s 0s ease both; }
+  .trip-block.animated.rotateInUpRight {
+    -moz-animation: rotateInUpRight 0.5s 0s ease both;
+    -webkit-animation: rotateInUpRight 0.5s 0s ease both;
+    animation: rotateInUpRight 0.5s 0s ease both; }
+  .trip-block .trip-content {
+    clear: right; }
+  .trip-block .trip-close {
+    position: relative;
+    font-size: 80%;
+    float: right;
+    margin-top: -5px;
+    z-index: 1; }
+    .trip-block .trip-close:hover {
+      text-decoration: none; }
+  .trip-block .trip-navigation {
+    display: -webkit-flex;
+    display: flex; }
+  .trip-block .trip-prev,
+  .trip-block .trip-next,
+  .trip-block .trip-skip {
+    padding: 5px 10px; }
+  .trip-block .trip-prev,
+  .trip-block .trip-next {
+    -webkit-flex: 1;
+    flex: 1; }
+    .trip-block .trip-prev.disabled,
+    .trip-block .trip-next.disabled {
+      color: grey;
+      pointer-events: none; }
+  .trip-block .trip-skip {
+    -webkit-flex: 2;
+    flex: 2; }
+  .trip-block .trip-progress-bar {
+    height: 1px;
+    background-color: #444;
+    width: 0; }
+  .trip-block .trip-progress-steps {
+    border: 1px solid #ddd;
+    border-width: 1px 0; }
+    .trip-block .trip-progress-steps .trip-progress-step {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background: #ddd;
+      margin: 15px 5px 11px; }
+      .trip-block .trip-progress-steps .trip-progress-step.selected {
+        background: none;
+        border: 1px solid;
+        -moz-transform: scale(1.25, 1.25);
+        -ms-transform: scale(1.25, 1.25);
+        -webkit-transform: scale(1.25, 1.25);
+        transform: scale(1.25, 1.25); }
 
 .trip-block.black {
   background: #333;
@@ -1147,7 +1142,8 @@
 
 .trip-block.white {
   background: #fff;
-  color: #333; }
+  color: #333;
+  border: 1px solid #ddd; }
   .trip-block.white .trip-close {
     color: #333; }
     .trip-block.white .trip-close:hover {
@@ -1200,20 +1196,24 @@
     font-size: 16px; }
     .trip-block.yeti .trip-close:hover {
       color: #000; }
-  .trip-block.yeti .trip-navigation .trip-prev,
-  .trip-block.yeti .trip-navigation .trip-next,
-  .trip-block.yeti .trip-navigation .trip-skip {
+  .trip-block.yeti .trip-prev,
+  .trip-block.yeti .trip-next,
+  .trip-block.yeti .trip-skip {
     font-size: 12px;
     color: #fff; }
-  .trip-block.yeti .trip-navigation .trip-prev:hover,
-  .trip-block.yeti .trip-navigation .trip-next:hover,
-  .trip-block.yeti .trip-navigation .trip-skip:hover {
+  .trip-block.yeti .trip-prev:hover,
+  .trip-block.yeti .trip-next:hover,
+  .trip-block.yeti .trip-skip:hover {
     background: #006687; }
-  .trip-block.yeti .trip-navigation .trip-next {
+  .trip-block.yeti .trip-prev.disabled,
+  .trip-block.yeti .trip-next.disabled {
+    color: #bfbfbf; }
+  .trip-block.yeti .trip-next {
     border-radius: 0px 0px 5px 0px; }
-  .trip-block.yeti .trip-navigation .trip-prev {
-    display: none;
+  .trip-block.yeti .trip-prev {
     border-radius: 0px 0px 0px 5px; }
+  .trip-block.yeti .trip-progress-bar {
+    background: #acf9ac; }
 
 .trip-overlay.dark {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
@@ -1256,22 +1256,24 @@
     font-size: 16px; }
     .trip-block.dark .trip-close:hover {
       color: #000; }
-  .trip-block.dark .trip-navigation .trip-prev,
-  .trip-block.dark .trip-navigation .trip-next,
-  .trip-block.dark .trip-navigation .trip-skip {
+  .trip-block.dark .trip-prev,
+  .trip-block.dark .trip-next,
+  .trip-block.dark .trip-skip {
     font-size: 12px;
     color: #fff; }
-  .trip-block.dark .trip-navigation .trip-prev:hover,
-  .trip-block.dark .trip-navigation .trip-next:hover,
-  .trip-block.dark .trip-navigation .trip-skip:hover {
-    background: #666; }
-  .trip-block.dark .trip-navigation .trip-next {
+    .trip-block.dark .trip-prev:hover,
+    .trip-block.dark .trip-next:hover,
+    .trip-block.dark .trip-skip:hover {
+      background: #666; }
+  .trip-block.dark .trip-prev.disabled,
+  .trip-block.dark .trip-next.disabled {
+    color: grey; }
+  .trip-block.dark .trip-next {
     border-radius: 0px 0px 5px 0px; }
-  .trip-block.dark .trip-navigation .trip-prev {
-    display: none;
+  .trip-block.dark .trip-prev {
     border-radius: 0px 0px 0px 5px; }
-  .trip-block.dark .trip-navigation .trip-progress-bar {
-    background: green; }
+  .trip-block.dark .trip-progress-bar {
+    background: #acf9ac; }
 
 .trip-block.minimalism {
   padding: 0;
@@ -1317,24 +1319,27 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between; }
-    .trip-block.minimalism .trip-navigation .trip-prev,
-    .trip-block.minimalism .trip-navigation .trip-next,
-    .trip-block.minimalism .trip-navigation .trip-skip {
-      font-size: 12px;
-      text-decoration: none;
+  .trip-block.minimalism .trip-prev,
+  .trip-block.minimalism .trip-next,
+  .trip-block.minimalism .trip-skip {
+    font-size: 12px;
+    text-decoration: none;
+    color: #bebebe; }
+  .trip-block.minimalism .trip-prev,
+  .trip-block.minimalism .trip-next {
+    padding: 18px 36px;
+    margin: 10px;
+    max-width: 150px; }
+    .trip-block.minimalism .trip-prev.disabled,
+    .trip-block.minimalism .trip-next.disabled {
       color: #bebebe; }
-    .trip-block.minimalism .trip-navigation .trip-prev,
-    .trip-block.minimalism .trip-navigation .trip-next {
-      padding: 18px 36px;
-      margin: 10px;
-      max-width: 150px; }
-    .trip-block.minimalism .trip-navigation .trip-next {
-      background: #383f43;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      border-radius: 3px; }
-    .trip-block.minimalism .trip-navigation .trip-skip {
-      display: block;
-      border-top: 1px solid #bebebe;
-      padding: 15px;
-      flex-basis: 100%; }
+  .trip-block.minimalism .trip-next {
+    background: #383f43;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; }
+  .trip-block.minimalism .trip-skip {
+    display: block;
+    border-top: 1px solid #bebebe;
+    padding: 15px;
+    flex-basis: 100%; }

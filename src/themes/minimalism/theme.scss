@@ -48,36 +48,40 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
 
-    .trip-prev,
-    .trip-next,
-    .trip-skip {
-      font-size: 12px;
-      text-decoration: none;
+  .trip-prev,
+  .trip-next,
+  .trip-skip {
+    font-size: 12px;
+    text-decoration: none;
+    color: #bebebe;
+  }
+
+  .trip-prev,
+  .trip-next {
+    &.disabled {
       color: #bebebe;
     }
 
-    .trip-prev,
-    .trip-next {
-      padding: 18px 36px;
-      margin: 10px;
-      max-width: 150px;
-    }
+    padding: 18px 36px;
+    margin: 10px;
+    max-width: 150px;
+  }
 
-    .trip-prev {
+  .trip-prev {
 
-    }
+  }
 
-    .trip-next {
-      background: #383f43;
-      @include border-radius(3px);
-    }
+  .trip-next {
+    background: #383f43;
+    @include border-radius(3px);
+  }
 
-    .trip-skip {
-      display: block;
-      border-top: 1px solid #bebebe;
-      padding: 15px;
-      flex-basis: 100%;
-    }
+  .trip-skip {
+    display: block;
+    border-top: 1px solid #bebebe;
+    padding: 15px;
+    flex-basis: 100%;
   }
 }
