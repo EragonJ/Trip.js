@@ -409,7 +409,9 @@ Trip.prototype = {
     var that = this;
     var useDifferentIndex = !isNaN(tripIndex);
 
-    if (!this.canGoNext()) {
+    // If we do give `tripIndex` here, it means that we want to directly jump
+    // to that index no matter how. So in that case, ignore `canGoNext` check.
+    if (!useDifferentIndex && !this.canGoNext()) {
       return;
     }
 
