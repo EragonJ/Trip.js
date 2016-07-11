@@ -12,7 +12,7 @@ Trip.js has been tested and work well on `IE 9+`, `Chrome 32+`, `Firefox 32+` an
 
 ## Version
 
-3.2.2
+3.3.0
 
 ## How to
 
