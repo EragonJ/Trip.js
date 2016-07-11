@@ -9,7 +9,8 @@ module.exports = {
     path: './dist',
     filename: 'trip.js',
     library: 'Trip',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   externals: {
     'jquery': {
