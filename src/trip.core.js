@@ -409,8 +409,10 @@ Trip.prototype = {
     var that = this;
     var useDifferentIndex = !isNaN(tripIndex);
 
-    if (!this.canGoNext()) {
-      return this.run();
+    // If we do give `tripIndex` here, it means that we want to directly jump
+    // to that index no matter how. So in that case, ignore `canGoNext` check.
+    if (!useDifferentIndex && !this.canGoNext()) {
+      return;
     }
 
     this.tripDirection = 'next';
@@ -451,6 +453,11 @@ Trip.prototype = {
    */
   prev: function() {
     var that = this;
+
+    if (!this.canGoPrev()) {
+      return;
+    }
+
     this.tripDirection = 'prev';
 
     // When this is executed, it means users click on the arrow key to
@@ -461,7 +468,7 @@ Trip.prototype = {
     var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
     $.when(tripEndDefer).then(function() {
-      if (!that.isFirst() && that.canGoPrev()) {
+      if (!that.isFirst()) {
         that.decreaseIndex();
       }
       that.run();
@@ -736,6 +743,12 @@ Trip.prototype = {
       canGoPrev = canGoPrev.call(this, this.tripIndex, tripObject);
     }
 
+    // For this special case, there is no need to let users go back to previous
+    // state.
+    if (this.tripIndex === 0) {
+      canGoPrev = false;
+    }
+
     return canGoPrev;
   },
 
@@ -860,11 +873,13 @@ Trip.prototype = {
 
     $tripBlock
       .find('.trip-prev')
+        .toggleClass('disabled', !this.canGoPrev())
         .html(prevLabel)
         .toggle(showNavigation);
 
     $tripBlock
       .find('.trip-next')
+        .toggleClass('disabled', !this.canGoNext())
         .html(this.isLast() ? finishLabel : nextLabel)
         .toggle(showNavigation && !o.nextClickSelector);
 

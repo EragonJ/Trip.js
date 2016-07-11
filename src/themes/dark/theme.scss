@@ -55,30 +55,36 @@
   }
 
   .trip-navigation {
-    .trip-prev,
-    .trip-next,
-    .trip-skip {
-      font-size: 12px;
-      color:#fff;
-    }
 
-    .trip-prev:hover,
-    .trip-next:hover,
-    .trip-skip:hover {
+  }
+
+  .trip-prev,
+  .trip-next,
+  .trip-skip {
+    font-size: 12px;
+    color:#fff;
+
+    &:hover {
       background:#666;
     }
+  }
 
-    .trip-next {
-      border-radius: 0px 0px 5px 0px;
+  .trip-prev,
+  .trip-next {
+    &.disabled {
+      color: grey
     }
+  }
 
-    .trip-prev {
-      display: none;
-      border-radius: 0px 0px 0px 5px;
-    }
+  .trip-next {
+    border-radius: 0px 0px 5px 0px;
+  }
 
-    .trip-progress-bar {
-      background: green;
-    }
+  .trip-prev {
+    border-radius: 0px 0px 0px 5px;
+  }
+
+  .trip-progress-bar {
+    background: #acf9ac;
   }
 }

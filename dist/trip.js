@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.2.2
+ *  Version: 3.3.0
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -16,7 +16,7 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["jquery"], factory);
+		define("Trip", ["jquery"], factory);
 	else if(typeof exports === 'object')
 		exports["Trip"] = factory(require("jquery"));
 	else
@@ -479,8 +479,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var that = this;
 	    var useDifferentIndex = !isNaN(tripIndex);
 
-	    if (!this.canGoNext()) {
-	      return this.run();
+	    // If we do give `tripIndex` here, it means that we want to directly jump
+	    // to that index no matter how. So in that case, ignore `canGoNext` check.
+	    if (!useDifferentIndex && !this.canGoNext()) {
+	      return;
 	    }
 
 	    this.tripDirection = 'next';
@@ -521,6 +523,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  prev: function() {
 	    var that = this;
+
+	    if (!this.canGoPrev()) {
+	      return;
+	    }
+
 	    this.tripDirection = 'prev';
 
 	    // When this is executed, it means users click on the arrow key to
@@ -531,7 +538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
 	    $.when(tripEndDefer).then(function() {
-	      if (!that.isFirst() && that.canGoPrev()) {
+	      if (!that.isFirst()) {
 	        that.decreaseIndex();
 	      }
 	      that.run();
@@ -806,6 +813,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      canGoPrev = canGoPrev.call(this, this.tripIndex, tripObject);
 	    }
 
+	    // For this special case, there is no need to let users go back to previous
+	    // state.
+	    if (this.tripIndex === 0) {
+	      canGoPrev = false;
+	    }
+
 	    return canGoPrev;
 	  },
 
@@ -930,11 +943,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    $tripBlock
 	      .find('.trip-prev')
+	        .toggleClass('disabled', !this.canGoPrev())
 	        .html(prevLabel)
 	        .toggle(showNavigation);
 
 	    $tripBlock
 	      .find('.trip-next')
+	        .toggleClass('disabled', !this.canGoNext())
 	        .html(this.isLast() ? finishLabel : nextLabel)
 	        .toggle(showNavigation && !o.nextClickSelector);
 
