@@ -276,7 +276,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @memberOf Trip
 	   * @type {Funtion}
 	   */
-	  hideExpose: function() {
+	  hideExpose: function(hideOverlay) {
+	  	hideOverlay = typeof hideOverlay !== 'undefined' ? hideOverlay : true;
 	    var $exposedSel = $('.trip-exposed');
 	    this.hasExpose = false;
 
@@ -290,8 +291,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .css(oldCSS)
 	        .removeClass('trip-exposed');
 	    }
-
-	    this.$overlay.fadeOut();
+		if (hideOverlay)
+	    	this.$overlay.fadeOut();
 	  },
 
 	  /**
@@ -564,9 +565,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.timer = null;
 	    }
 
-	    if (this.hasExpose) {
-	      this.hideExpose();
+	    if (this.hasExpose&&o.expose) {
+	      this.hideExpose(false);
 	    }
+	  	else this.hideExpose();
 
 	    if (this.progressing) {
 	      this.hideProgressBar();
@@ -582,7 +584,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.addAnimation(o);
 	    }
 
-	    if (o.expose) {
+	    if (o.expose&&!this.hasExpose) {
 	      this.showExpose();
 	    }
 	  },
