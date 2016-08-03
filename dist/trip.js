@@ -564,7 +564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.timer = null;
 	    }
 
-	    if (this.hasExpose) {
+	    if (this.hasExpose && !o.expose) {
 	      this.hideExpose();
 	    }
 
@@ -582,7 +582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.addAnimation(o);
 	    }
 
-	    if (o.expose) {
+	    if (!this.hasExpose && o.expose) {
 	      this.showExpose();
 	    }
 	  },

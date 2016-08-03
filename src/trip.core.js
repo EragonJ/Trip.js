@@ -494,7 +494,7 @@ Trip.prototype = {
       this.timer = null;
     }
 
-    if (this.hasExpose) {
+    if (this.hasExpose && !o.expose) {
       this.hideExpose();
     }
 
@@ -512,7 +512,7 @@ Trip.prototype = {
       this.addAnimation(o);
     }
 
-    if (o.expose) {
+    if (!this.hasExpose && o.expose) {
       this.showExpose();
     }
   },
