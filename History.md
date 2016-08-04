@@ -1,5 +1,9 @@
 # History
 
+## 2016-08-04 - version 3.3.1
+
++ fixed blinking expose problem
+
 ## 2016-07-11 - version 3.3.0
 
 + changed some DOM structures
