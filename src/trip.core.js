@@ -132,9 +132,7 @@ function Trip() {
   this.tripDirection = 'next';
   this.timer = null;
   this.progressing = false;
-
-  // about expose
-  this.hasExpose = false;
+  this.hasExposedElements = false;
 
   // for testing
   this.CONSTANT = TripConstant;
@@ -142,12 +140,12 @@ function Trip() {
 
 Trip.prototype = {
   /**
-   * Expose element which has hasExpose property.
+   * Expose element which has hasExposedElements property.
    *
    * @memberOf Trip
    * @type {Funtion}
    */
-  showExpose: function() {
+  showExposedElements: function() {
     var o = this.getCurrentTripObject();
     var oldCSS;
     var newCSS;
@@ -163,7 +161,7 @@ Trip.prototype = {
       $sel = $(o.sel);
     }
 
-    this.hasExpose = true;
+    this.hasExposedElements = true;
 
     // NOTE: issue #68
     // we have to make sure $sel does exist because we may have no
@@ -196,8 +194,6 @@ Trip.prototype = {
         .css(newCSS)
         .addClass('trip-exposed');
     }
-
-    this.$overlay.fadeIn();
   },
 
   /**
@@ -206,9 +202,9 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Funtion}
    */
-  hideExpose: function() {
+  hideExposedElements: function() {
     var $exposedSel = $('.trip-exposed');
-    this.hasExpose = false;
+    this.hasExposedElements = false;
 
     // NOTE: issue #68
     // we have to make sure $sel does exist because we may have no
@@ -220,8 +216,6 @@ Trip.prototype = {
         .css(oldCSS)
         .removeClass('trip-exposed');
     }
-
-    this.$overlay.fadeOut();
   },
 
   /**
@@ -324,8 +318,9 @@ Trip.prototype = {
       this.timer = null;
     }
 
-    if (this.hasExpose) {
-      this.hideExpose();
+    if (this.hasExposedElements) {
+      this.hideExposedElements();
+      this.toggleExposedOverlay(false);
     }
 
     this.hideTripBlock();
@@ -494,8 +489,12 @@ Trip.prototype = {
       this.timer = null;
     }
 
-    if (this.hasExpose) {
-      this.hideExpose();
+    if (this.hasExposedElements) {
+      this.hideExposedElements();
+
+      if (!o.expose) {
+        this.toggleExposedOverlay(false);
+      }
     }
 
     if (this.progressing) {
@@ -513,7 +512,8 @@ Trip.prototype = {
     }
 
     if (o.expose) {
-      this.showExpose();
+      this.showExposedElements();
+      this.toggleExposedOverlay(true);
     }
   },
 
@@ -537,8 +537,9 @@ Trip.prototype = {
     this.hideTripBlock();
     this.unbindResizeEvents();
 
-    if (this.hasExpose) {
-      this.hideExpose();
+    if (this.hasExposedElements) {
+      this.hideExposedElements();
+      this.toggleExposedOverlay(false);
     }
 
     if (this.settings.backToTopWhenEnded) {
@@ -1247,6 +1248,21 @@ Trip.prototype = {
         });
 
       $(this.settings.overlayHolder).append($overlay);
+    }
+  },
+
+  /**
+   * This is the handy function to toggle overlay.
+   *
+   * @memberOf Trip
+   * @type {Function}
+   */
+  toggleExposedOverlay: function(toShow) {
+    if (toshow) {
+      this.$overlay.fadeIn();
+    }
+    else {
+      this.$overlay.fadeOut();
     }
   },
 

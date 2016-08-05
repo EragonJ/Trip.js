@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.3.0
+ *  Version: 3.3.2
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -202,9 +202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.tripDirection = 'next';
 	  this.timer = null;
 	  this.progressing = false;
-
-	  // about expose
-	  this.hasExpose = false;
+	  this.hasExposedElements = false;
 
 	  // for testing
 	  this.CONSTANT = TripConstant;
@@ -212,12 +210,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Trip.prototype = {
 	  /**
-	   * Expose element which has hasExpose property.
+	   * Expose element which has hasExposedElements property.
 	   *
 	   * @memberOf Trip
 	   * @type {Funtion}
 	   */
-	  showExpose: function() {
+	  showExposedElements: function() {
 	    var o = this.getCurrentTripObject();
 	    var oldCSS;
 	    var newCSS;
@@ -233,7 +231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      $sel = $(o.sel);
 	    }
 
-	    this.hasExpose = true;
+	    this.hasExposedElements = true;
 
 	    // NOTE: issue #68
 	    // we have to make sure $sel does exist because we may have no
@@ -266,8 +264,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .css(newCSS)
 	        .addClass('trip-exposed');
 	    }
-
-	    this.$overlay.fadeIn();
 	  },
 
 	  /**
@@ -276,9 +272,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @memberOf Trip
 	   * @type {Funtion}
 	   */
-	  hideExpose: function() {
+	  hideExposedElements: function() {
 	    var $exposedSel = $('.trip-exposed');
-	    this.hasExpose = false;
+	    this.hasExposedElements = false;
 
 	    // NOTE: issue #68
 	    // we have to make sure $sel does exist because we may have no
@@ -290,8 +286,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .css(oldCSS)
 	        .removeClass('trip-exposed');
 	    }
-
-	    this.$overlay.fadeOut();
 	  },
 
 	  /**
@@ -394,8 +388,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.timer = null;
 	    }
 
-	    if (this.hasExpose) {
-	      this.hideExpose();
+	    if (this.hasExposedElements) {
+	      this.hideExposedElements();
+	      this.toggleExposedOverlay(false);
 	    }
 
 	    this.hideTripBlock();
@@ -564,8 +559,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.timer = null;
 	    }
 
-	    if (this.hasExpose) {
-	      this.hideExpose();
+	    if (this.hasExposedElements) {
+	      this.hideExposedElements();
+
+	      if (!o.expose) {
+	        this.toggleExposedOverlay(false);
+	      }
 	    }
 
 	    if (this.progressing) {
@@ -583,7 +582,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    if (o.expose) {
-	      this.showExpose();
+	      this.showExposedElements();
+	      this.toggleExposedOverlay(true);
 	    }
 	  },
 
@@ -607,8 +607,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.hideTripBlock();
 	    this.unbindResizeEvents();
 
-	    if (this.hasExpose) {
-	      this.hideExpose();
+	    if (this.hasExposedElements) {
+	      this.hideExposedElements();
+	      this.toggleExposedOverlay(false);
 	    }
 
 	    if (this.settings.backToTopWhenEnded) {
@@ -1317,6 +1318,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 
 	      $(this.settings.overlayHolder).append($overlay);
+	    }
+	  },
+
+	  /**
+	   * This is the handy function to toggle overlay.
+	   *
+	   * @memberOf Trip
+	   * @type {Function}
+	   */
+	  toggleExposedOverlay: function(toShow) {
+	    if (toshow) {
+	      this.$overlay.fadeIn();
+	    }
+	    else {
+	      this.$overlay.fadeOut();
 	    }
 	  },
 
