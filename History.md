@@ -1,5 +1,9 @@
 # History
 
+## 2016-08-04 - version 3.3.3
+
++ fixed a typo in 3.3.2
+
 ## 2016-08-04 - version 3.3.2
 
 + fixed the regression issue caused by #146
