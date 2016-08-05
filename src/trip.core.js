@@ -1258,7 +1258,7 @@ Trip.prototype = {
    * @type {Function}
    */
   toggleExposedOverlay: function(toShow) {
-    if (toshow) {
+    if (toShow) {
       this.$overlay.fadeIn();
     }
     else {
