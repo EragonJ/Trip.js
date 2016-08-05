@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.3.1
+ *  Version: 3.3.2
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -1327,8 +1327,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @memberOf Trip
 	   * @type {Function}
 	   */
-	  toggleExposedOverlay: function(toToggle) {
-	    if (toToggle) {
+	  toggleExposedOverlay: function(toShow) {
+	    if (toshow) {
 	      this.$overlay.fadeIn();
 	    }
 	    else {
