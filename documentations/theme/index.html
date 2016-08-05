@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="EragonJ (Chia-Lung, Chen)">
+        <link rel="canonical" href="http://eragonj.github.io/Trip.js/documentations/theme/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Theme - Trip.js</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../vendor/trip.js/trip.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-41178936-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+
+        <!-- Facebook -->
+        <script>
+						(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=491695290890106";
+								fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <!-- GitHub -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Trip.js</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentations <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../setup/">Setup</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../configuration/">Configuration</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../api/">API</a>
+</li>
+
+                    
+                        
+<li class="active">
+    <a href="./">Theme</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../demo/basic/">Basic</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../api/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../../demo/basic/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/EragonJ/Trip.js">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#theme">Theme</a></li>
+        
+            <li><a href="#black">Black</a></li>
+        
+            <li><a href="#white">White</a></li>
+        
+            <li><a href="#dark">Dark</a></li>
+        
+            <li><a href="#yeti">Yeti</a></li>
+        
+            <li><a href="#minimalism">Minimalism</a></li>
+        
+    
+        <li class="main "><a href="#theme-details">Theme details</a></li>
+        
+            <li><a href="#trip-block">.trip-block</a></li>
+        
+            <li><a href="#trip-close">.trip-close</a></li>
+        
+            <li><a href="#trip-header">.trip-header</a></li>
+        
+            <li><a href="#trip-content">.trip-content</a></li>
+        
+            <li><a href="#trip-progress-steps">.trip-progress-steps</a></li>
+        
+            <li><a href="#trip-navigation">.trip-navigation</a></li>
+        
+            <li><a href="#trip-prev">.trip-prev</a></li>
+        
+            <li><a href="#trip-skip">.trip-skip</a></li>
+        
+            <li><a href="#trip-next">.trip-next</a></li>
+        
+            <li><a href="#trip-progress-bar">.trip-progress-bar</a></li>
+        
+    
+        <li class="main "><a href="#how-to-make-a-new-theme">How to make a new theme</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="theme">Theme</h1>
+<p>In Trip.js, we do support five built-in themes for devs to use ! They have different looks and feels so just choose whichever you like for your works :)</p>
+<h2 id="black">Black</h2>
+<p><button class="documentation-theme-black step1">Demo</button></p>
+<h2 id="white">White</h2>
+<p><button class="documentation-theme-white step1">Demo</button></p>
+<h2 id="dark">Dark</h2>
+<p><button class="documentation-theme-dark step1">Demo</button></p>
+<h2 id="yeti">Yeti</h2>
+<p><button class="documentation-theme-yeti step1">Demo</button></p>
+<h2 id="minimalism">Minimalism</h2>
+<p><button class="documentation-theme-minimalism step1">Demo</button></p>
+<h1 id="theme-details">Theme details</h1>
+<p>Go check <a href="https://github.com/EragonJ/Trip.js/tree/master/src/themes">theme folder</a> first, you will notice there are several default themes got supported by Trip.js. If you check the <code>default</code> one as reference, you will see the theme structure below : </p>
+<pre><code class="javascript">module.exports = [
+  '&lt;div class=&quot;trip-block&quot;&gt;',
+    '&lt;a href=&quot;#&quot; class=&quot;trip-close&quot;&gt;&lt;/a&gt;',
+    '&lt;div class=&quot;trip-header&quot;&gt;&lt;/div&gt;',
+    '&lt;div class=&quot;trip-content&quot;&gt;&lt;/div&gt;',
+    '&lt;div class=&quot;trip-progress-steps&quot;&gt;&lt;/div&gt;',
+    '&lt;div class=&quot;trip-navigation&quot;&gt;',
+      '&lt;a href=&quot;#&quot; class=&quot;trip-prev&quot;&gt;&lt;/a&gt;',
+      '&lt;a href=&quot;#&quot; class=&quot;trip-skip&quot;&gt;&lt;/a&gt;',
+      '&lt;a href=&quot;#&quot; class=&quot;trip-next&quot;&gt;&lt;/a&gt;',
+    '&lt;/div&gt;',
+    '&lt;div class=&quot;trip-progress-bar&quot;&gt;&lt;/div&gt;',
+  '&lt;/div&gt;'
+].join('');
+</code></pre>
+
+<p>As you can see, a theme will be composed with several components :</p>
+<h2 id="trip-block">.trip-block</h2>
+<p>This is the main container for all components, so if you want to customize your own theme later, you need to make sure to use <code>.trip-block.YOUR_TRIP_CLASS_NAME</code> to override the default styles.</p>
+<h2 id="trip-close">.trip-close</h2>
+<p>This is the UI for users to <em>click</em> and to close the whole trip. when clickin on this, <code>onTripClose()</code> callback will be triggered and you can some follow-up works there.</p>
+<h2 id="trip-header">.trip-header</h2>
+<p>By default, Trip.js will put <code>Step {{tripIndex}}</code> into your header. In order to show this, don't forget to set <code>showHeader</code> to <code>true</code> !</p>
+<h2 id="trip-content">.trip-content</h2>
+<p>This is the container that you can put anything. In order to make it highly customized, we use <code>innerHTML</code> here to help you inject your content. So you can put any valid HTML tags here if you want !</p>
+<h2 id="trip-progress-steps">.trip-progress-steps</h2>
+<p>Sometimes you want to let users know how many steps left to finish the whole trip. In this case, you need to set <code>showSteps</code> to <code>true</code> to show it.</p>
+<h2 id="trip-navigation">.trip-navigation</h2>
+<p>This is the container to wraps <code>.trip-prev</code>, <code>.trip-skip</code> and <code>.trip-next</code> three buttons.</p>
+<h2 id="trip-prev">.trip-prev</h2>
+<p>This is the button that users can click to go back to previous step.</p>
+<h2 id="trip-skip">.trip-skip</h2>
+<p>This is the UI for users to <em>click</em> and to close the whole trip. when clickin on this, <code>onTripClose()</code> callback will be triggered and you can some follow-up works there. (same with <code>.trip-close</code>)</p>
+<h2 id="trip-next">.trip-next</h2>
+<p>This is the button that users can click to go ahead to next step.</p>
+<h2 id="trip-progress-bar">.trip-progress-bar</h2>
+<p>This is the UI to let users know how many time left before going to next step.</p>
+<h1 id="how-to-make-a-new-theme">How to make a new theme</h1>
+<p>AWESOME !! You are reading this part ! But there is no much information here because the strucutre behind Trip.js is damn simple !</p>
+<p>To quickly know how to make your own, please go check source code of <a href="https://github.com/EragonJ/Trip.js/tree/master/src/themes/default">default theme</a> and <a href="https://github.com/EragonJ/Trip.js/tree/master/src/themes/minimalism">minimalism</a> theme.</p>
+<p>As you can see, the default one follows the basic strucutre and CSS, but the other one has differnt structure and its own style which overrides the base, so you can just follow it and make your own !</p>
+<p>Later, when you finish a new theme, feel free to send Trip.js a PR for your new theme so that everyone can use it too ! Big thanks !</p></div>
+        </div>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../vendor/trip.js/trip.min.js"></script>
+        <script src="../../js/bootup.js"></script>
+        <script src="../../js/demo.js"></script>
+        <script src="../../js/documentation.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

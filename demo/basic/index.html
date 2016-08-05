@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="EragonJ (Chia-Lung, Chen)">
+        <link rel="canonical" href="http://eragonj.github.io/Trip.js/demo/basic/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Basic - Trip.js</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link href="../../vendor/trip.js/trip.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-41178936-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+
+        <!-- Facebook -->
+        <script>
+						(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=491695290890106";
+								fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <!-- GitHub -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Trip.js</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentations <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../documentations/setup/">Setup</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../documentations/configuration/">Configuration</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../documentations/api/">API</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../documentations/theme/">Theme</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li class="active">
+    <a href="./">Basic</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../../documentations/theme/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a rel="prev" >
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/EragonJ/Trip.js">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#change-position">Change position</a></li>
+        
+    
+        <li class="main "><a href="#change-theme">Change theme</a></li>
+        
+    
+        <li class="main "><a href="#scoll-to-top-when-finished">Scoll to top when finished</a></li>
+        
+    
+        <li class="main "><a href="#show-close-box-and-navigation-buttons">Show close box and navigation buttons</a></li>
+        
+    
+        <li class="main "><a href="#global-options">Global options</a></li>
+        
+    
+        <li class="main "><a href="#local-options">Local options</a></li>
+        
+    
+        <li class="main "><a href="#highlight-target">Highlight target</a></li>
+        
+    
+        <li class="main "><a href="#animation">Animation</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<blockquote>
+<p>Reminder : please turn on your inspector first because we may put logs there if needed.</p>
+</blockquote>
+<h1 id="change-position">Change position</h1>
+<p><button class="demo-change-position step1 step2 step3 step4">Run this demo</button></p>
+<pre><code class="javascript">var tripToChangePosition = new Trip([
+  { sel : $(&quot;.demo-change-position.step1&quot;), content : &quot;North&quot;, position : &quot;n&quot; },
+  { sel : $(&quot;.demo-change-position.step2&quot;), content : &quot;East&quot;,  position : &quot;e&quot; },
+  { sel : $(&quot;.demo-change-position.step3&quot;), content : &quot;South&quot;, position : &quot;s&quot; },
+  { sel : $(&quot;.demo-change-position.step4&quot;), content : &quot;West&quot;,  position : &quot;w&quot; }
+], {
+
+});
+
+$(&quot;.demo-change-position&quot;).on(&quot;click&quot;, function() {
+  tripToChangePosition.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#position">documentation</a> for more supported positions.</p>
+<h1 id="change-theme">Change theme</h1>
+<p><button class="demo-change-theme step1 step2 step3 step4">Run this demo</button></p>
+<pre><code class="javascript">var tripToChangeTheme = new Trip([
+  { sel : $(&quot;.demo-change-theme.step1&quot;), content : &quot;North&quot;, position : &quot;n&quot; },
+  { sel : $(&quot;.demo-change-theme.step2&quot;), content : &quot;East&quot;,  position : &quot;e&quot; },
+  { sel : $(&quot;.demo-change-theme.step3&quot;), content : &quot;South&quot;, position : &quot;s&quot; },
+  { sel : $(&quot;.demo-change-theme.step4&quot;), content : &quot;West&quot;,  position : &quot;w&quot; }
+], {
+  tripTheme : &quot;white&quot;,
+  onStart : function() {
+    $(&quot;body&quot;).css({ &quot;background-color&quot; : &quot;#eee&quot; });
+  },
+  onEnd : function() {
+    $(&quot;body&quot;).css({ &quot;background-color&quot; : &quot;#fff&quot; });
+  }
+});
+
+$(&quot;.demo-change-theme&quot;).on(&quot;click&quot;, function() {
+  tripToChangeTheme.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#triptheme">documentation</a> for more supported themes.</p>
+<h1 id="scoll-to-top-when-finished">Scoll to top when finished</h1>
+<p><button class="demo-scroll-to-top step1">Run this demo</button></p>
+<pre><code class="javascript">var tripToScrollToTop = new Trip([
+  { sel : $(&quot;.demo-scroll-to-top.step1&quot;), content : &quot;Let's fly ...&quot;, position : &quot;e&quot; }
+], {
+  backToTopWhenEnded : true,
+  delay : 2000
+});
+
+$(&quot;.demo-scroll-to-top&quot;).on(&quot;click&quot;, function() {
+  tripToScrollToTop.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#backtotopwhenended">documentation here</a>.</p>
+<h1 id="show-close-box-and-navigation-buttons">Show close box and navigation buttons</h1>
+<p><button class="demo-show-navigation step1 step2">Run this demo</button></p>
+<pre><code class="javascript">var tripToShowNavigation = new Trip([
+  { sel : $(&quot;.demo-show-navigation.step1&quot;), content : &quot;Hola!&quot;, position : &quot;n&quot; },
+  { sel : $(&quot;.demo-show-navigation.step2&quot;), content : &quot;Adios!&quot;, position : &quot;s&quot; }
+], {
+  showNavigation : true,
+  showCloseBox : true,
+  delay : -1
+});
+
+$(&quot;.demo-show-navigation&quot;).on(&quot;click&quot;, function() {
+  tripToShowNavigation.start();
+});
+</code></pre>
+
+<p>Check documentation about <a href="../../documentations/configuration/#shownavigation">showNavigation</a> and <a href="../../documentations/configuration/#showclosebox">showCloseBox</a></p>
+<p><strong> Note: </strong> When enabling <code>showNavigation</code>, sometimes it means that you don't need the countdown timer ! Users will mainly use navigation buttons to go next / previous. So don't forget to set <code>delay</code> to <code>-1</code> to disable it.</p>
+<h1 id="global-options">Global options</h1>
+<blockquote>
+<p>Please use inspector to check logs before starting this trip</p>
+</blockquote>
+<p><button class="demo-global-options step1 step2 step3">Run this demo</button></p>
+<pre><code>var tripToCheckGlobalOptions = new Trip([
+  { sel : $(&quot;.demo-global-options.step1&quot;), content : &quot;Hi&quot;, position : &quot;n&quot; },
+  { sel : $(&quot;.demo-global-options.step2&quot;), content : &quot;Press ESC to stop this step !&quot;, position : &quot;s&quot;, delay : 3000, myFunction : function() { return &quot;this is user's function&quot;; } },
+  { sel : $(&quot;.demo-global-options.step3&quot;), content : &quot;Click the close icon to see what's going on in your console log&quot;, delay: -1, showCloseBox: true }
+], {
+  onStart : function() {
+    console.log(&quot;onStart&quot;);
+  },
+  onEnd : function() {
+    console.log(&quot;onEnd&quot;);
+  },
+  onTripStop : function() {
+    console.log(&quot;onTripStop&quot;);
+  },
+  onTripChange : function(i, tripData) {
+    if (i === 1) {
+      console.log(&quot;You can put your own function or data in tripData andaccess it onTripChange !&quot;);
+      console.log(&quot;current tripIndex : &quot; + i);
+      console.log(&quot;current tripData : &quot;, tripData);
+      console.log(&quot;User's function : &quot; + tripData.myFunction());
+    }
+  },
+  onTripClose: function(i) {
+    console.log(&quot;You close the trip at index : &quot;, i);
+  }
+});
+
+$(&quot;.demo-global-options&quot;).on(&quot;click&quot;, function() {
+  tripToCheckGlobalOptions.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#global-options">documentation</a> for more supported options;</p>
+<p><strong>Note : </strong> There are tons of settings that you can tweak, please remember to check other missing settings.</p>
+<h1 id="local-options">Local options</h1>
+<blockquote>
+<p>Supported after 2.0.0+</p>
+<p>Please use inspector to check logs before starting this trip</p>
+</blockquote>
+<p><button class="demo-local-options step1 step2">Run this demo</button></p>
+<pre><code class="javascript">var tripToCheckLocalOptions = new Trip([
+  { 
+    sel: $('.demo-local-options.step1'),
+    content: 'onTripStart will be called when entering this trip',
+    onTripStart: function(tripIndex) {
+      console.log('onTripStart : ', tripIndex);
+    },
+    onTripEnd: function(tripIndex) {
+      console.log('onTripEnd : ', tripIndex);
+    }
+  },
+  {
+    sel: $('.demo-local-options.step2'),
+    content: 'We will use global onTripStart if there is no local one',
+    onTripEnd: function(tripIndex) {
+      console.log('onTripEnd : ', tripIndex);
+    }
+  }
+], {
+  delay: 3000,
+  onTripStart: function(tripIndex) {
+    console.log('default onTripStart : ', tripIndex);
+  }
+});
+
+$('.demo-local-options').on('click', function() {
+  tripToCheckLocalOptions.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#local-options">documentation</a> for more supported options;</p>
+<p><strong>Note :</strong> If local options exist, then global options will be suppressed by default !</p>
+<h1 id="highlight-target">Highlight target</h1>
+<p><button class="demo-highlight step1">Run this demo</button></p>
+<pre><code>var tripToHighlight = new Trip([
+  { sel : $(&quot;.demo-highlight.step1&quot;), content : &quot;Highlight this&quot;, expose : true }
+], {
+  delay : 3000
+});
+
+$(&quot;.demo-highlight&quot;).on(&quot;click&quot;, function() {
+  tripToHighlight.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#expose">documentation here</a>.</p>
+<h1 id="animation">Animation</h1>
+<blockquote>
+<p>Powered by animate.css</p>
+</blockquote>
+<p><button class="demo-animation step1 step2 step3 step4 step5 step6 step7 step8">Run this demo</button></p>
+<pre><code class="javascript">var tripToChangeAnimation = new Trip([
+  { sel : $(&quot;.demo-animation.step1&quot;), content : &quot;hi&quot;},
+  { sel : $(&quot;.demo-animation.step2&quot;), content : &quot;hi&quot;, animation: 'bounce'},
+  { sel : $(&quot;.demo-animation.step3&quot;), content : &quot;hi&quot;, animation: 'shake'},
+  { sel : $(&quot;.demo-animation.step4&quot;), content : &quot;hi&quot;, animation: 'fadeIn'},
+  { sel : $(&quot;.demo-animation.step5&quot;), content : &quot;hi&quot;, animation: 'fadeInUp'},
+  { sel : $(&quot;.demo-animation.step6&quot;), content : &quot;hi&quot;, animation: 'fadeInDown'},
+  { sel : $(&quot;.demo-animation.step7&quot;), content : &quot;hi&quot;, animation: 'fadeInLeft'},
+  { sel : $(&quot;.demo-animation.step8&quot;), content : &quot;hi&quot;, animation: 'rotateInUpRight'}
+], {
+  delay : 1500,
+  animation: 'tada'
+});
+
+$(&quot;.demo-animation&quot;).on(&quot;click&quot;, function() {
+  tripToChangeAnimation.start();
+});
+</code></pre>
+
+<p>Check its <a href="../../documentations/configuration/#animation">documentation and supported animations here</a>.</p></div>
+        </div>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../vendor/trip.js/trip.min.js"></script>
+        <script src="../../js/bootup.js"></script>
+        <script src="../../js/demo.js"></script>
+        <script src="../../js/documentation.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

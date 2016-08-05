@@ -1,0 +1,624 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "What is Trip.js\n\n\nFor websites, it's quite common that you need to have a tutorial trip to teach new comers how to user your own services. In addition to this, when there is any new feature coming up, you also need that to make sure your hard works do have been seen and used by users. Same like you, we have been making tons of routine works like that and that's why we are going to make a super lightweight library - Trip.js that you can use for most cases ! Hope you will like it :)\n\n\nBrowser Support\n\n\nTrip.js has been tested and it works well on \nIE 9+\n, \nChrome 32+\n, \nFirefox 32+\n and \nSafari 9+\n\n\nLatest version\n\n\n3.3.3\n\n\nShare with the web\n\n\n\n\nTweet #tripjs\n\n\nStar", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#what-is-tripjs", 
+            "text": "For websites, it's quite common that you need to have a tutorial trip to teach new comers how to user your own services. In addition to this, when there is any new feature coming up, you also need that to make sure your hard works do have been seen and used by users. Same like you, we have been making tons of routine works like that and that's why we are going to make a super lightweight library - Trip.js that you can use for most cases ! Hope you will like it :)", 
+            "title": "What is Trip.js"
+        }, 
+        {
+            "location": "/#browser-support", 
+            "text": "Trip.js has been tested and it works well on  IE 9+ ,  Chrome 32+ ,  Firefox 32+  and  Safari 9+", 
+            "title": "Browser Support"
+        }, 
+        {
+            "location": "/#latest-version", 
+            "text": "3.3.3", 
+            "title": "Latest version"
+        }, 
+        {
+            "location": "/#share-with-the-web", 
+            "text": "Tweet #tripjs  Star", 
+            "title": "Share with the web"
+        }, 
+        {
+            "location": "/documentations/setup/", 
+            "text": "Setup\n\n\nIn this chapter, we will tell you how to setup Trip.js properly steps by steps.\n\n\nHow to install Trip.js ?\n\n\nGitHub\n\n\ngit clone git://github.com/EragonJ/Trip.js.git\n\n\n\n\nnpm\n\n\nnpm install --save trip.js\n\n\n\n\nBower\n\n\nbower install trip.js --save\n\n\n\n\nCDN (OSSCDN by MaxCDN)\n\n\nlink rel=\nstylesheet\n type=\ntext/css\n href=\n//oss.maxcdn.com/jquery.trip.js/3.2.2/trip.min.css\n/\n\n\nscript src=\n//oss.maxcdn.com/jquery.trip.js/3.2.2/trip.min.js\n/script\n\n\n\n\n\nHow to setup Trip.js properly ?\n\n\n\n\ninclude jQuery (I will try to remove this dependency in future version)\n\n\ninclude trip.min.css\n\n\ninclude trip.min.js\n\n\n\n\nPowered with webpack, starting from \n3.1.3+\n, Trip.js has been refactored in UMD (Universal Module Definition) pattern which can be used in several ways below :\n\n\nAMD style (supported from 3.1.3+)\n\n\nrequire([\n  'Trip'\n], function(Trip) {\n  // ...\n});\n\n\n\n\nCommomJS style (supported from 3.1.3+)\n\n\nvar Trip = require('Trip');\n// ...\n\n\n\n\nVanilaJS style\n\n\nvar Trip = window.Trip;\n// ...\n\n\n\n\nHow to use Trip.js ?\n\n\nProgramming mode\n\n\nIn programming mode, you can easily define your own trips easily in JavaScript. As you may see below, every trip is wrapped well in an object with defined properties to tell Trip.js to do related works for it.\n\n\nvar options = {}; // details about options are listed in next chapter\nvar trip = new Trip([\n  { \n    sel : $('#element1'),\n    content : 'This is element 1'\n  },\n  {\n    sel : $('#element2'),\n    content : 'This is element 2'\n  }\n], options);\n\n\n\n\nIf you want to use default behaviors, okay, just remove options and everything still works perfectly !\n\n\nvar trip = new Trip([\n  { \n    sel : $('#element1'),\n    content : 'This is element 1'\n  },\n  {\n    sel : $('#element2'),\n    content : 'This is element 2'\n  }\n]);\n\n\n\n\nParser mode (supported from 3.0.0+)\n\n\nIn parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.\n\n\nYou can pass valid CSS selectors in \nString\n type as the first parameter to tell Trip.js which trips you are referring. With this, you can easily create many different groups of trips and control your own tutorial trips.\n\n\ndiv\n\n  \ndiv class=\nyour-own-trips\n data-trip-index=\n1\n data-trip-content=\nhi1\n data-trip-position=\nn\n data-trip-delay=\n100\nhi\n/div\n\n  \ndiv class=\nyour-own-trips\n data-trip-index=\n2\n data-trip-content=\nhi2\n data-trip-position=\ne\n data-trip-delay=\n200\n data-trip-expose=\ntrue\nI am Trip.js\n/div\n\n\n/div\n\n\n\n\n\nvar options = {}; // details about options are listed in next chapter\nvar trip = new Trip('.your-own-trips', options);\n\n\n\n\nIf you want to use default behaviors, okay, just remove options and everything still works perfectly !\n\n\nvar trip = new Trip('.your-own-trips');\n\n\n\n\nBut sometimes, we just have one group of trips that wants to animate with, okay, Trip.js will automatically parse all elements with \n[data-trip]\n attribute and make them inside a group. What you need to do is define customized attribute on each DOM and Trip.js will try to parse them out and transform them into recognizable data to it.\n\n\n!-- We will talk about more customizable options for parser mode in next chapter --\n\n\ndiv\n\n  \ndiv data-trip data-trip-index=\n1\nhi\n/div\n\n  \ndiv data-trip data-trip-index=\n2\nI am Trip.js\n/div\n\n\n/div\n\n\n\n\n\nvar options = {}; // details about options are listed in next chapter\nvar trip = new Trip(options);\n\n\n\n\nAnd once again, if you want to use default behaviors, okay, just remove options and everything still works perfectly !\n\n\nvar trip = new Trip(); // quite simple huh ?!\n\n\n\n\nLast but not the least, you just have to start it and your fantastic trip would get presented one by one to users !\n\n\ntrip.start();", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/documentations/setup/#setup", 
+            "text": "In this chapter, we will tell you how to setup Trip.js properly steps by steps.", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/documentations/setup/#how-to-install-tripjs", 
+            "text": "", 
+            "title": "How to install Trip.js ?"
+        }, 
+        {
+            "location": "/documentations/setup/#github", 
+            "text": "git clone git://github.com/EragonJ/Trip.js.git", 
+            "title": "GitHub"
+        }, 
+        {
+            "location": "/documentations/setup/#npm", 
+            "text": "npm install --save trip.js", 
+            "title": "npm"
+        }, 
+        {
+            "location": "/documentations/setup/#bower", 
+            "text": "bower install trip.js --save", 
+            "title": "Bower"
+        }, 
+        {
+            "location": "/documentations/setup/#cdn-osscdn-by-maxcdn", 
+            "text": "link rel= stylesheet  type= text/css  href= //oss.maxcdn.com/jquery.trip.js/3.2.2/trip.min.css /  script src= //oss.maxcdn.com/jquery.trip.js/3.2.2/trip.min.js /script", 
+            "title": "CDN (OSSCDN by MaxCDN)"
+        }, 
+        {
+            "location": "/documentations/setup/#how-to-setup-tripjs-properly", 
+            "text": "include jQuery (I will try to remove this dependency in future version)  include trip.min.css  include trip.min.js   Powered with webpack, starting from  3.1.3+ , Trip.js has been refactored in UMD (Universal Module Definition) pattern which can be used in several ways below :", 
+            "title": "How to setup Trip.js properly ?"
+        }, 
+        {
+            "location": "/documentations/setup/#amd-style-supported-from-313", 
+            "text": "require([\n  'Trip'\n], function(Trip) {\n  // ...\n});", 
+            "title": "AMD style (supported from 3.1.3+)"
+        }, 
+        {
+            "location": "/documentations/setup/#commomjs-style-supported-from-313", 
+            "text": "var Trip = require('Trip');\n// ...", 
+            "title": "CommomJS style (supported from 3.1.3+)"
+        }, 
+        {
+            "location": "/documentations/setup/#vanilajs-style", 
+            "text": "var Trip = window.Trip;\n// ...", 
+            "title": "VanilaJS style"
+        }, 
+        {
+            "location": "/documentations/setup/#how-to-use-tripjs", 
+            "text": "", 
+            "title": "How to use Trip.js ?"
+        }, 
+        {
+            "location": "/documentations/setup/#programming-mode", 
+            "text": "In programming mode, you can easily define your own trips easily in JavaScript. As you may see below, every trip is wrapped well in an object with defined properties to tell Trip.js to do related works for it.  var options = {}; // details about options are listed in next chapter\nvar trip = new Trip([\n  { \n    sel : $('#element1'),\n    content : 'This is element 1'\n  },\n  {\n    sel : $('#element2'),\n    content : 'This is element 2'\n  }\n], options);  If you want to use default behaviors, okay, just remove options and everything still works perfectly !  var trip = new Trip([\n  { \n    sel : $('#element1'),\n    content : 'This is element 1'\n  },\n  {\n    sel : $('#element2'),\n    content : 'This is element 2'\n  }\n]);", 
+            "title": "Programming mode"
+        }, 
+        {
+            "location": "/documentations/setup/#parser-mode-supported-from-300", 
+            "text": "In parser mode, you can define your own trip inside HTML instead of passing it from JavaScript. With this, we can easily define our own logic for each trip in HTML and keep our JavaScript cleaner. For some fans for Angular.js or some frameworks, it would be more familiar to them to define stuffs in this way.  You can pass valid CSS selectors in  String  type as the first parameter to tell Trip.js which trips you are referring. With this, you can easily create many different groups of trips and control your own tutorial trips.  div \n   div class= your-own-trips  data-trip-index= 1  data-trip-content= hi1  data-trip-position= n  data-trip-delay= 100 hi /div \n   div class= your-own-trips  data-trip-index= 2  data-trip-content= hi2  data-trip-position= e  data-trip-delay= 200  data-trip-expose= true I am Trip.js /div  /div   var options = {}; // details about options are listed in next chapter\nvar trip = new Trip('.your-own-trips', options);  If you want to use default behaviors, okay, just remove options and everything still works perfectly !  var trip = new Trip('.your-own-trips');  But sometimes, we just have one group of trips that wants to animate with, okay, Trip.js will automatically parse all elements with  [data-trip]  attribute and make them inside a group. What you need to do is define customized attribute on each DOM and Trip.js will try to parse them out and transform them into recognizable data to it.  !-- We will talk about more customizable options for parser mode in next chapter --  div \n   div data-trip data-trip-index= 1 hi /div \n   div data-trip data-trip-index= 2 I am Trip.js /div  /div   var options = {}; // details about options are listed in next chapter\nvar trip = new Trip(options);  And once again, if you want to use default behaviors, okay, just remove options and everything still works perfectly !  var trip = new Trip(); // quite simple huh ?!  Last but not the least, you just have to start it and your fantastic trip would get presented one by one to users !  trip.start();", 
+            "title": "Parser mode (supported from 3.0.0+)"
+        }, 
+        {
+            "location": "/documentations/configuration/", 
+            "text": "Configuration\n\n\nIn Trip.js, we provide three three kind of options for developers to customize their own trips.\n\n\n\n\nGlobal options - Change the default behavior of Trip.js and would influence all trips.\n\n\nLocal options - Only change the behavior of specifc trip and won't influence the others.\n\n\nParser options - There are small subsets of options that you can define in HTML if you are using parser mode.\n\n\n\n\nNote: Parser options was supported since 3.0.0+\n\n\nGlobal options\n\n\ntripIndex\n\n\nYou can set tripIndex ( start from 0 ) to specific trip block at start.\n\n\n\n\nType : \nNumber\n\n\nDefault : \n0\n\n\n\n\ntripTheme\n\n\nYou can set which theme to use, now Trip.js support \nwhite\n, \nblack\n, \nyeti\n and \ndark\n and \nminimalism\n 5 themes.\n\n\n\n\nType : \nString\n\n\nDefault :\n'black'\n\n\nNote : \nminimalism\n theme was supported since 3.2.1+\n\n\n\n\ntripClass\n\n\nYou can add custom class to Trip.js so that you can easily tweak something based on that classname in your CSS.\n\n\n\n\nType : \nString\n\n\nDefault :\n''\n\n\nNote : supported since 3.2.1+\n\n\n\n\ntripBlockHTML\n\n\nBase HTML for tripBlock\n\n\n\n\nType : \nString\n\n\nDefault : \nAn array contains base HTML of tripBlock\n (Please check source code to know the default HTML)\n\n\n\n\nbackToTopWhenEnded\n\n\nYou can ask Trip.js go back to top when ended.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\n\n\noverlayZindex\n\n\nYou can set the basic zIndex for overlay if you want to expose elements.\n\n\n\n\nType : \nNumber\n\n\nDefault : \n99999\n\n\n\n\noverlayHolder\n\n\nYou can decide where to be the container of the overlay.\n\n\n\n\nType : \nString\n\n\nDefault : \n'body'\n\n\n\n\nenableKeyBinding\n\n\nYou can decide to bind key events for trip navigations or not.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \ntrue\n\n\n\n\nenableAnimation\n\n\nYou can enable animations on tripBlock.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \ntrue\n\n\n\n\nshowCloseBox\n\n\nYou can decide to add small close icon on each trip or not\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\n\n\nshowSteps\n\n\nYou can now show steps UI to let users know the index of current trip\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\nNote : supported since 3.2.1+\n\n\n\n\nshowHeader\n\n\nIf you want to show no matter with default or customized header, you have to set this value to true. You can check \nheader\n option for more details.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\n\n\nshowNavigation\n\n\nToggle navigation buttons\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\n\n\nskipUndefinedTrip\n\n\nYou can enable this option to tell Trip.js skip undefined trips (Undefined trips mean the trips without content or without sel or can not be selected by jQuery)\n\n\n\n\nType : \nBoolean\n\n\nDefault : \nfalse\n\n\n\n\ndelay\n\n\nEvery trip will be presented for 1 second (1000 ms) by default. Set this value to \n-1\n will prevent auto-advancing and you must manually call \ntrip.next()\n.\n\n\n\n\nType : \nNumber\n\n\nDefault : \n1000\n\n\n\n\nheader\n\n\nThis is the header for each trip. You can customize your own if you don't want to use default one. You can put \n{{tripIndex}}\n and \n{{tripTotal}}\n in the title to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.\n\n\n\n\nType : \nString\n\n\nDefault : \nStep {{tripIndex}}\n\n\n\n\nprevLabel\n\n\nLabel for the previous button.\n\n\n\n\nType : \nString\n\n\nDefault : \n'Back'\n\n\n\n\nnextLabel\n\n\nLabel for the next button.\n\n\n\n\nType : \nString\n\n\nDefault : \n'Next'\n\n\n\n\nskipLabel\n\n\nLabel for the skip button.\n\n\n\n\nType : \nString\n\n\nDefault : \n'Skip'\n\n\nNote : supported since 3.2.1+\n\n\n\n\nfinishLabel\n\n\nLabel for the finish button.\n\n\n\n\nType : \nString\n\n\nDefault : \n'Dismiss'\n\n\n\n\nanimation\n\n\nAnimation that would be applied on the tripBlock.\n\n\n\n\nType : \nString\n\n\nDefault : \n'tada'\n\n\n\n\ncanGoPrev\n\n\nDetermines if the user can go backwards. If set to a function it is called and the response is evaluated.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \ntrue\n\n\n\n\ncanGoNext\n\n\nDetermines if the user can go forward. If set to a function it is called and the response is evaluated.\n\n\n\n\nType : \nBoolean\n\n\nDefault : \ntrue\n\n\n\n\nonStart()\n\n\nYou can set a callback function triggered when Trip.js starts.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : supported since 2.0.0+\n\n\n\n\nonEnd(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when Trip.js ends.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : supported since 2.0.0+\n\n\n\n\nonTripStart(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when each trip starts. \ntripObject\n is your passed JSON for this current trip, and tripIndex is the index for current trip. You can add add your customized functions in your object and call them when this callback is called.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : supported since 2.0.0+\n\n\n\n\nonTripEnd(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when each trip ends.\n\n\nNote\n: for 3.1.0+, you can return a \njQuery deferred object\n within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will \nkeep waiting until it is resolved\n, don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : changed since 2.0.0+\n\n\n\n\nonTripStop(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when any trip is stopped.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\n\n\nonTripPause(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when any trip is paused.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\n\n\nonTripResume(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when any trip is resumed.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : supported since 2.0.0+\n\n\n\n\nonTripChange(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when any trip changes to another one.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\n\n\nonTripClose(tripIndex, tripObject)\n\n\nYou can set a callback function triggered when any trip is closed.\n\n\n\n\nType : \nFunction\n\n\nDefault : \n$.noop\n\n\nNote : supported since 2.0.0+\n\n\n\n\nLocal options\n\n\nsel\n\n\nwhich selector is referenced in this step\n\n\n\n\nType: \nString\n (for late referring) or \njQuery Object\n\n\nDefault: \n0\n\n\n\n\ncontent \n[required]\n\n\nWhat information that you want to show to users. You can put \n{{tripIndex}}\n and \n{{tripTotal}}\n in the content to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.\n\n\n\n\nType : \nString\n\n\nDefault : \nNo default\n\n\n\n\nposition\n\n\nWhat position would you prefer for the tripBlock. We support 9 different positions : \ne\n, \nw\n, \nn\n, \ns\n, \nscreen-ne\n, \nscreen-se\n, \nscreen-sw\n, \nscreen-nw\n, \nscreen-center\n.\n\n\nTo be clear, \ne\n, \nw\n, \nn\n, \ns\n are related to the sel, so for this use case, sel is \nrequired\n. For \nscreen-ne\n, \nscreen-se\n, \nscreen-sw\n, \nscreen-nw\n and \nscreen-center\n, they are related to the screen (fixed in CSS), so you don't have to put sel in this case.\n\n\n\n\nType : \nString\n\n\nDefault : \n'n'\n\n\n\n\nexpose\n\n\nYou can enable this option to expose your selected element in this trip.\n\n\n\n\nType : \nBoolean\n or \nString\n (for late referring) or \njQuery Object\n\n\nDefault : \nfalse\n\n\n\n\nnextClickSelector\n\n\nIf there is any specific trip that needs a customized \nNext\n button instead of the default one, you can set this variable to any jQuery Object and Trip.js will automatically bind a once-click event on it. When user clicking on it, the trip will be advanced to the next one.\n\n\nNote\n: This normally happens when you want to interact with the user and ask them to click on special thing to make sure they do understand how to use something before going to the next trip.\n\n\n\n\nType : \njQuery Object\n\n\nDefault : \nundefined\n\n\n\n\ndelay\n\n\nheader\n\n\nshowHeader\n\n\ncanGoPrev\n\n\ncanGoNext\n\n\nanimation\n\n\nshowNavigation\n\n\nshowCloseBox\n\n\nshowSteps\n\n\nprevLabel\n\n\nnextLabel\n\n\nskipLabel\n\n\nfinishLabel\n\n\nonTripStart(tripIndex, tripObject)\n\n\nonTripEnd(tripIndex, tripObject)\n\n\nonTripStop(tripIndex, tripObject)\n\n\nonTripPause(tripIndex, tripObject)\n\n\nonTripResume(tripIndex, tripObject)\n\n\nonTripChange(tripIndex, tripObject)\n\n\nonTripClose(tripIndex, tripObject)\n\n\nCheck documentations above.\n\n\nParser Options\n\n\ndata-trip-index\n\n\ndata-trip-content\n\n\ndata-trip-delay\n\n\ndata-trip-position\n\n\ndata-trip-animation\n\n\ndata-trip-expose\n\n\nCheck documentations above.\n\n\nNote : only support \nBoolean\n and \nString\n type here, no \njQuery\n object.", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/documentations/configuration/#configuration", 
+            "text": "In Trip.js, we provide three three kind of options for developers to customize their own trips.   Global options - Change the default behavior of Trip.js and would influence all trips.  Local options - Only change the behavior of specifc trip and won't influence the others.  Parser options - There are small subsets of options that you can define in HTML if you are using parser mode.   Note: Parser options was supported since 3.0.0+", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/documentations/configuration/#global-options", 
+            "text": "", 
+            "title": "Global options"
+        }, 
+        {
+            "location": "/documentations/configuration/#tripindex", 
+            "text": "You can set tripIndex ( start from 0 ) to specific trip block at start.   Type :  Number  Default :  0", 
+            "title": "tripIndex"
+        }, 
+        {
+            "location": "/documentations/configuration/#triptheme", 
+            "text": "You can set which theme to use, now Trip.js support  white ,  black ,  yeti  and  dark  and  minimalism  5 themes.   Type :  String  Default : 'black'  Note :  minimalism  theme was supported since 3.2.1+", 
+            "title": "tripTheme"
+        }, 
+        {
+            "location": "/documentations/configuration/#tripclass", 
+            "text": "You can add custom class to Trip.js so that you can easily tweak something based on that classname in your CSS.   Type :  String  Default : ''  Note : supported since 3.2.1+", 
+            "title": "tripClass"
+        }, 
+        {
+            "location": "/documentations/configuration/#tripblockhtml", 
+            "text": "Base HTML for tripBlock   Type :  String  Default :  An array contains base HTML of tripBlock  (Please check source code to know the default HTML)", 
+            "title": "tripBlockHTML"
+        }, 
+        {
+            "location": "/documentations/configuration/#backtotopwhenended", 
+            "text": "You can ask Trip.js go back to top when ended.   Type :  Boolean  Default :  false", 
+            "title": "backToTopWhenEnded"
+        }, 
+        {
+            "location": "/documentations/configuration/#overlayzindex", 
+            "text": "You can set the basic zIndex for overlay if you want to expose elements.   Type :  Number  Default :  99999", 
+            "title": "overlayZindex"
+        }, 
+        {
+            "location": "/documentations/configuration/#overlayholder", 
+            "text": "You can decide where to be the container of the overlay.   Type :  String  Default :  'body'", 
+            "title": "overlayHolder"
+        }, 
+        {
+            "location": "/documentations/configuration/#enablekeybinding", 
+            "text": "You can decide to bind key events for trip navigations or not.   Type :  Boolean  Default :  true", 
+            "title": "enableKeyBinding"
+        }, 
+        {
+            "location": "/documentations/configuration/#enableanimation", 
+            "text": "You can enable animations on tripBlock.   Type :  Boolean  Default :  true", 
+            "title": "enableAnimation"
+        }, 
+        {
+            "location": "/documentations/configuration/#showclosebox", 
+            "text": "You can decide to add small close icon on each trip or not   Type :  Boolean  Default :  false", 
+            "title": "showCloseBox"
+        }, 
+        {
+            "location": "/documentations/configuration/#showsteps", 
+            "text": "You can now show steps UI to let users know the index of current trip   Type :  Boolean  Default :  false  Note : supported since 3.2.1+", 
+            "title": "showSteps"
+        }, 
+        {
+            "location": "/documentations/configuration/#showheader", 
+            "text": "If you want to show no matter with default or customized header, you have to set this value to true. You can check  header  option for more details.   Type :  Boolean  Default :  false", 
+            "title": "showHeader"
+        }, 
+        {
+            "location": "/documentations/configuration/#shownavigation", 
+            "text": "Toggle navigation buttons   Type :  Boolean  Default :  false", 
+            "title": "showNavigation"
+        }, 
+        {
+            "location": "/documentations/configuration/#skipundefinedtrip", 
+            "text": "You can enable this option to tell Trip.js skip undefined trips (Undefined trips mean the trips without content or without sel or can not be selected by jQuery)   Type :  Boolean  Default :  false", 
+            "title": "skipUndefinedTrip"
+        }, 
+        {
+            "location": "/documentations/configuration/#delay", 
+            "text": "Every trip will be presented for 1 second (1000 ms) by default. Set this value to  -1  will prevent auto-advancing and you must manually call  trip.next() .   Type :  Number  Default :  1000", 
+            "title": "delay"
+        }, 
+        {
+            "location": "/documentations/configuration/#header", 
+            "text": "This is the header for each trip. You can customize your own if you don't want to use default one. You can put  {{tripIndex}}  and  {{tripTotal}}  in the title to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.   Type :  String  Default :  Step {{tripIndex}}", 
+            "title": "header"
+        }, 
+        {
+            "location": "/documentations/configuration/#prevlabel", 
+            "text": "Label for the previous button.   Type :  String  Default :  'Back'", 
+            "title": "prevLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#nextlabel", 
+            "text": "Label for the next button.   Type :  String  Default :  'Next'", 
+            "title": "nextLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#skiplabel", 
+            "text": "Label for the skip button.   Type :  String  Default :  'Skip'  Note : supported since 3.2.1+", 
+            "title": "skipLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#finishlabel", 
+            "text": "Label for the finish button.   Type :  String  Default :  'Dismiss'", 
+            "title": "finishLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#animation", 
+            "text": "Animation that would be applied on the tripBlock.   Type :  String  Default :  'tada'", 
+            "title": "animation"
+        }, 
+        {
+            "location": "/documentations/configuration/#cangoprev", 
+            "text": "Determines if the user can go backwards. If set to a function it is called and the response is evaluated.   Type :  Boolean  Default :  true", 
+            "title": "canGoPrev"
+        }, 
+        {
+            "location": "/documentations/configuration/#cangonext", 
+            "text": "Determines if the user can go forward. If set to a function it is called and the response is evaluated.   Type :  Boolean  Default :  true", 
+            "title": "canGoNext"
+        }, 
+        {
+            "location": "/documentations/configuration/#onstart", 
+            "text": "You can set a callback function triggered when Trip.js starts.   Type :  Function  Default :  $.noop  Note : supported since 2.0.0+", 
+            "title": "onStart()"
+        }, 
+        {
+            "location": "/documentations/configuration/#onendtripindex-tripobject", 
+            "text": "You can set a callback function triggered when Trip.js ends.   Type :  Function  Default :  $.noop  Note : supported since 2.0.0+", 
+            "title": "onEnd(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripstarttripindex-tripobject", 
+            "text": "You can set a callback function triggered when each trip starts.  tripObject  is your passed JSON for this current trip, and tripIndex is the index for current trip. You can add add your customized functions in your object and call them when this callback is called.   Type :  Function  Default :  $.noop  Note : supported since 2.0.0+", 
+            "title": "onTripStart(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripendtripindex-tripobject", 
+            "text": "You can set a callback function triggered when each trip ends.  Note : for 3.1.0+, you can return a  jQuery deferred object  within this function to make sure all needed works are done before switching to the next step (e.g. append needed element in DOM tree). But remember, because Trip.js will  keep waiting until it is resolved , don't do some heavy works here, otherwise, users will feel disappointed about this waiting time.   Type :  Function  Default :  $.noop  Note : changed since 2.0.0+", 
+            "title": "onTripEnd(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripstoptripindex-tripobject", 
+            "text": "You can set a callback function triggered when any trip is stopped.   Type :  Function  Default :  $.noop", 
+            "title": "onTripStop(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontrippausetripindex-tripobject", 
+            "text": "You can set a callback function triggered when any trip is paused.   Type :  Function  Default :  $.noop", 
+            "title": "onTripPause(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripresumetripindex-tripobject", 
+            "text": "You can set a callback function triggered when any trip is resumed.   Type :  Function  Default :  $.noop  Note : supported since 2.0.0+", 
+            "title": "onTripResume(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripchangetripindex-tripobject", 
+            "text": "You can set a callback function triggered when any trip changes to another one.   Type :  Function  Default :  $.noop", 
+            "title": "onTripChange(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripclosetripindex-tripobject", 
+            "text": "You can set a callback function triggered when any trip is closed.   Type :  Function  Default :  $.noop  Note : supported since 2.0.0+", 
+            "title": "onTripClose(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#local-options", 
+            "text": "", 
+            "title": "Local options"
+        }, 
+        {
+            "location": "/documentations/configuration/#sel", 
+            "text": "which selector is referenced in this step   Type:  String  (for late referring) or  jQuery Object  Default:  0", 
+            "title": "sel"
+        }, 
+        {
+            "location": "/documentations/configuration/#content-required", 
+            "text": "What information that you want to show to users. You can put  {{tripIndex}}  and  {{tripTotal}}  in the content to notify users about the number of trips and current index of trip. Later when rendering, Trip.js will replace them with right information.   Type :  String  Default :  No default", 
+            "title": "content [required]"
+        }, 
+        {
+            "location": "/documentations/configuration/#position", 
+            "text": "What position would you prefer for the tripBlock. We support 9 different positions :  e ,  w ,  n ,  s ,  screen-ne ,  screen-se ,  screen-sw ,  screen-nw ,  screen-center .  To be clear,  e ,  w ,  n ,  s  are related to the sel, so for this use case, sel is  required . For  screen-ne ,  screen-se ,  screen-sw ,  screen-nw  and  screen-center , they are related to the screen (fixed in CSS), so you don't have to put sel in this case.   Type :  String  Default :  'n'", 
+            "title": "position"
+        }, 
+        {
+            "location": "/documentations/configuration/#expose", 
+            "text": "You can enable this option to expose your selected element in this trip.   Type :  Boolean  or  String  (for late referring) or  jQuery Object  Default :  false", 
+            "title": "expose"
+        }, 
+        {
+            "location": "/documentations/configuration/#nextclickselector", 
+            "text": "If there is any specific trip that needs a customized  Next  button instead of the default one, you can set this variable to any jQuery Object and Trip.js will automatically bind a once-click event on it. When user clicking on it, the trip will be advanced to the next one.  Note : This normally happens when you want to interact with the user and ask them to click on special thing to make sure they do understand how to use something before going to the next trip.   Type :  jQuery Object  Default :  undefined", 
+            "title": "nextClickSelector"
+        }, 
+        {
+            "location": "/documentations/configuration/#delay_1", 
+            "text": "", 
+            "title": "delay"
+        }, 
+        {
+            "location": "/documentations/configuration/#header_1", 
+            "text": "", 
+            "title": "header"
+        }, 
+        {
+            "location": "/documentations/configuration/#showheader_1", 
+            "text": "", 
+            "title": "showHeader"
+        }, 
+        {
+            "location": "/documentations/configuration/#cangoprev_1", 
+            "text": "", 
+            "title": "canGoPrev"
+        }, 
+        {
+            "location": "/documentations/configuration/#cangonext_1", 
+            "text": "", 
+            "title": "canGoNext"
+        }, 
+        {
+            "location": "/documentations/configuration/#animation_1", 
+            "text": "", 
+            "title": "animation"
+        }, 
+        {
+            "location": "/documentations/configuration/#shownavigation_1", 
+            "text": "", 
+            "title": "showNavigation"
+        }, 
+        {
+            "location": "/documentations/configuration/#showclosebox_1", 
+            "text": "", 
+            "title": "showCloseBox"
+        }, 
+        {
+            "location": "/documentations/configuration/#showsteps_1", 
+            "text": "", 
+            "title": "showSteps"
+        }, 
+        {
+            "location": "/documentations/configuration/#prevlabel_1", 
+            "text": "", 
+            "title": "prevLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#nextlabel_1", 
+            "text": "", 
+            "title": "nextLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#skiplabel_1", 
+            "text": "", 
+            "title": "skipLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#finishlabel_1", 
+            "text": "", 
+            "title": "finishLabel"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripstarttripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripStart(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripendtripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripEnd(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripstoptripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripStop(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontrippausetripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripPause(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripresumetripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripResume(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripchangetripindex-tripobject_1", 
+            "text": "", 
+            "title": "onTripChange(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#ontripclosetripindex-tripobject_1", 
+            "text": "Check documentations above.", 
+            "title": "onTripClose(tripIndex, tripObject)"
+        }, 
+        {
+            "location": "/documentations/configuration/#parser-options", 
+            "text": "", 
+            "title": "Parser Options"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-index", 
+            "text": "", 
+            "title": "data-trip-index"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-content", 
+            "text": "", 
+            "title": "data-trip-content"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-delay", 
+            "text": "", 
+            "title": "data-trip-delay"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-position", 
+            "text": "", 
+            "title": "data-trip-position"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-animation", 
+            "text": "", 
+            "title": "data-trip-animation"
+        }, 
+        {
+            "location": "/documentations/configuration/#data-trip-expose", 
+            "text": "Check documentations above.  Note : only support  Boolean  and  String  type here, no  jQuery  object.", 
+            "title": "data-trip-expose"
+        }, 
+        {
+            "location": "/documentations/api/", 
+            "text": "Key Bindings\n\n\nTrip.js would detect following keys to do relative actions after loading it.\n\n\n\n\nRight and Down arrows - Go to next trip\n\n\nLeft and Up arrows - Go back to previous trip\n\n\nSpace - pause / resume trip\n\n\nEsc - Stop trip\n\n\n\n\nAPI\n\n\nWhen using Trip.js, after initializing, you will get a \ntrip\n object that has several APIs that you can use with in different situation. And here comes an example : \n\n\nvar trip = new Trip([...]);\n\n\n\n\ntrip.start()\n\n\nThis is the entry point that to start the whole predefined trip.\n\n\ntrip.stop()\n\n\nThis will finish the whole trip in time.\n\n\ntrip.pause()\n\n\nSometimes, you may need to pause the trip for a while to let users do something, then, you can use this.\n\n\ntrip.resume()\n\n\nAfter a while, you want to make the paused trip back to work, you will need this one. But even if \ntrip.pause()\n and \ntrip.resume()\n sounds different, the implementation behind them are the same, so you can just treat them as same function but with different name.\n\n\ntrip.next(tripIndex)\n\n\nJump to the next step by default. If you do pass \ntripIndex\n into this method, then you can directly jump to that step.\n\n\n Note: \n If you do put \ntripIndex\n here, for most cases, it means that no matter what \ncanGoNext()\n value is, you are keen to go there, so that value will be ignored. (This is a small change from 3.3.0+)\n\n\ntrip.prev()\n\n\nJump back to previous step.", 
+            "title": "API"
+        }, 
+        {
+            "location": "/documentations/api/#key-bindings", 
+            "text": "Trip.js would detect following keys to do relative actions after loading it.   Right and Down arrows - Go to next trip  Left and Up arrows - Go back to previous trip  Space - pause / resume trip  Esc - Stop trip", 
+            "title": "Key Bindings"
+        }, 
+        {
+            "location": "/documentations/api/#api", 
+            "text": "When using Trip.js, after initializing, you will get a  trip  object that has several APIs that you can use with in different situation. And here comes an example :   var trip = new Trip([...]);", 
+            "title": "API"
+        }, 
+        {
+            "location": "/documentations/api/#tripstart", 
+            "text": "This is the entry point that to start the whole predefined trip.", 
+            "title": "trip.start()"
+        }, 
+        {
+            "location": "/documentations/api/#tripstop", 
+            "text": "This will finish the whole trip in time.", 
+            "title": "trip.stop()"
+        }, 
+        {
+            "location": "/documentations/api/#trippause", 
+            "text": "Sometimes, you may need to pause the trip for a while to let users do something, then, you can use this.", 
+            "title": "trip.pause()"
+        }, 
+        {
+            "location": "/documentations/api/#tripresume", 
+            "text": "After a while, you want to make the paused trip back to work, you will need this one. But even if  trip.pause()  and  trip.resume()  sounds different, the implementation behind them are the same, so you can just treat them as same function but with different name.", 
+            "title": "trip.resume()"
+        }, 
+        {
+            "location": "/documentations/api/#tripnexttripindex", 
+            "text": "Jump to the next step by default. If you do pass  tripIndex  into this method, then you can directly jump to that step.   Note:   If you do put  tripIndex  here, for most cases, it means that no matter what  canGoNext()  value is, you are keen to go there, so that value will be ignored. (This is a small change from 3.3.0+)", 
+            "title": "trip.next(tripIndex)"
+        }, 
+        {
+            "location": "/documentations/api/#tripprev", 
+            "text": "Jump back to previous step.", 
+            "title": "trip.prev()"
+        }, 
+        {
+            "location": "/documentations/theme/", 
+            "text": "Theme\n\n\nIn Trip.js, we do support five built-in themes for devs to use ! They have different looks and feels so just choose whichever you like for your works :)\n\n\nBlack\n\n\nDemo\n\n\nWhite\n\n\nDemo\n\n\nDark\n\n\nDemo\n\n\nYeti\n\n\nDemo\n\n\nMinimalism\n\n\nDemo\n\n\nTheme details\n\n\nGo check \ntheme folder\n first, you will notice there are several default themes got supported by Trip.js. If you check the \ndefault\n one as reference, you will see the theme structure below : \n\n\nmodule.exports = [\n  '\ndiv class=\ntrip-block\n',\n    '\na href=\n#\n class=\ntrip-close\n/a\n',\n    '\ndiv class=\ntrip-header\n/div\n',\n    '\ndiv class=\ntrip-content\n/div\n',\n    '\ndiv class=\ntrip-progress-steps\n/div\n',\n    '\ndiv class=\ntrip-navigation\n',\n      '\na href=\n#\n class=\ntrip-prev\n/a\n',\n      '\na href=\n#\n class=\ntrip-skip\n/a\n',\n      '\na href=\n#\n class=\ntrip-next\n/a\n',\n    '\n/div\n',\n    '\ndiv class=\ntrip-progress-bar\n/div\n',\n  '\n/div\n'\n].join('');\n\n\n\n\nAs you can see, a theme will be composed with several components :\n\n\n.trip-block\n\n\nThis is the main container for all components, so if you want to customize your own theme later, you need to make sure to use \n.trip-block.YOUR_TRIP_CLASS_NAME\n to override the default styles.\n\n\n.trip-close\n\n\nThis is the UI for users to \nclick\n and to close the whole trip. when clickin on this, \nonTripClose()\n callback will be triggered and you can some follow-up works there.\n\n\n.trip-header\n\n\nBy default, Trip.js will put \nStep {{tripIndex}}\n into your header. In order to show this, don't forget to set \nshowHeader\n to \ntrue\n !\n\n\n.trip-content\n\n\nThis is the container that you can put anything. In order to make it highly customized, we use \ninnerHTML\n here to help you inject your content. So you can put any valid HTML tags here if you want !\n\n\n.trip-progress-steps\n\n\nSometimes you want to let users know how many steps left to finish the whole trip. In this case, you need to set \nshowSteps\n to \ntrue\n to show it.\n\n\n.trip-navigation\n\n\nThis is the container to wraps \n.trip-prev\n, \n.trip-skip\n and \n.trip-next\n three buttons.\n\n\n.trip-prev\n\n\nThis is the button that users can click to go back to previous step.\n\n\n.trip-skip\n\n\nThis is the UI for users to \nclick\n and to close the whole trip. when clickin on this, \nonTripClose()\n callback will be triggered and you can some follow-up works there. (same with \n.trip-close\n)\n\n\n.trip-next\n\n\nThis is the button that users can click to go ahead to next step.\n\n\n.trip-progress-bar\n\n\nThis is the UI to let users know how many time left before going to next step.\n\n\nHow to make a new theme\n\n\nAWESOME !! You are reading this part ! But there is no much information here because the strucutre behind Trip.js is damn simple !\n\n\nTo quickly know how to make your own, please go check source code of \ndefault theme\n and \nminimalism\n theme.\n\n\nAs you can see, the default one follows the basic strucutre and CSS, but the other one has differnt structure and its own style which overrides the base, so you can just follow it and make your own !\n\n\nLater, when you finish a new theme, feel free to send Trip.js a PR for your new theme so that everyone can use it too ! Big thanks !", 
+            "title": "Theme"
+        }, 
+        {
+            "location": "/documentations/theme/#theme", 
+            "text": "In Trip.js, we do support five built-in themes for devs to use ! They have different looks and feels so just choose whichever you like for your works :)", 
+            "title": "Theme"
+        }, 
+        {
+            "location": "/documentations/theme/#black", 
+            "text": "Demo", 
+            "title": "Black"
+        }, 
+        {
+            "location": "/documentations/theme/#white", 
+            "text": "Demo", 
+            "title": "White"
+        }, 
+        {
+            "location": "/documentations/theme/#dark", 
+            "text": "Demo", 
+            "title": "Dark"
+        }, 
+        {
+            "location": "/documentations/theme/#yeti", 
+            "text": "Demo", 
+            "title": "Yeti"
+        }, 
+        {
+            "location": "/documentations/theme/#minimalism", 
+            "text": "Demo", 
+            "title": "Minimalism"
+        }, 
+        {
+            "location": "/documentations/theme/#theme-details", 
+            "text": "Go check  theme folder  first, you will notice there are several default themes got supported by Trip.js. If you check the  default  one as reference, you will see the theme structure below :   module.exports = [\n  ' div class= trip-block ',\n    ' a href= #  class= trip-close /a ',\n    ' div class= trip-header /div ',\n    ' div class= trip-content /div ',\n    ' div class= trip-progress-steps /div ',\n    ' div class= trip-navigation ',\n      ' a href= #  class= trip-prev /a ',\n      ' a href= #  class= trip-skip /a ',\n      ' a href= #  class= trip-next /a ',\n    ' /div ',\n    ' div class= trip-progress-bar /div ',\n  ' /div '\n].join('');  As you can see, a theme will be composed with several components :", 
+            "title": "Theme details"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-block", 
+            "text": "This is the main container for all components, so if you want to customize your own theme later, you need to make sure to use  .trip-block.YOUR_TRIP_CLASS_NAME  to override the default styles.", 
+            "title": ".trip-block"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-close", 
+            "text": "This is the UI for users to  click  and to close the whole trip. when clickin on this,  onTripClose()  callback will be triggered and you can some follow-up works there.", 
+            "title": ".trip-close"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-header", 
+            "text": "By default, Trip.js will put  Step {{tripIndex}}  into your header. In order to show this, don't forget to set  showHeader  to  true  !", 
+            "title": ".trip-header"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-content", 
+            "text": "This is the container that you can put anything. In order to make it highly customized, we use  innerHTML  here to help you inject your content. So you can put any valid HTML tags here if you want !", 
+            "title": ".trip-content"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-progress-steps", 
+            "text": "Sometimes you want to let users know how many steps left to finish the whole trip. In this case, you need to set  showSteps  to  true  to show it.", 
+            "title": ".trip-progress-steps"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-navigation", 
+            "text": "This is the container to wraps  .trip-prev ,  .trip-skip  and  .trip-next  three buttons.", 
+            "title": ".trip-navigation"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-prev", 
+            "text": "This is the button that users can click to go back to previous step.", 
+            "title": ".trip-prev"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-skip", 
+            "text": "This is the UI for users to  click  and to close the whole trip. when clickin on this,  onTripClose()  callback will be triggered and you can some follow-up works there. (same with  .trip-close )", 
+            "title": ".trip-skip"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-next", 
+            "text": "This is the button that users can click to go ahead to next step.", 
+            "title": ".trip-next"
+        }, 
+        {
+            "location": "/documentations/theme/#trip-progress-bar", 
+            "text": "This is the UI to let users know how many time left before going to next step.", 
+            "title": ".trip-progress-bar"
+        }, 
+        {
+            "location": "/documentations/theme/#how-to-make-a-new-theme", 
+            "text": "AWESOME !! You are reading this part ! But there is no much information here because the strucutre behind Trip.js is damn simple !  To quickly know how to make your own, please go check source code of  default theme  and  minimalism  theme.  As you can see, the default one follows the basic strucutre and CSS, but the other one has differnt structure and its own style which overrides the base, so you can just follow it and make your own !  Later, when you finish a new theme, feel free to send Trip.js a PR for your new theme so that everyone can use it too ! Big thanks !", 
+            "title": "How to make a new theme"
+        }, 
+        {
+            "location": "/demo/basic/", 
+            "text": "Reminder : please turn on your inspector first because we may put logs there if needed.\n\n\n\n\nChange position\n\n\nRun this demo\n\n\nvar tripToChangePosition = new Trip([\n  { sel : $(\n.demo-change-position.step1\n), content : \nNorth\n, position : \nn\n },\n  { sel : $(\n.demo-change-position.step2\n), content : \nEast\n,  position : \ne\n },\n  { sel : $(\n.demo-change-position.step3\n), content : \nSouth\n, position : \ns\n },\n  { sel : $(\n.demo-change-position.step4\n), content : \nWest\n,  position : \nw\n }\n], {\n\n});\n\n$(\n.demo-change-position\n).on(\nclick\n, function() {\n  tripToChangePosition.start();\n});\n\n\n\n\nCheck its \ndocumentation\n for more supported positions.\n\n\nChange theme\n\n\nRun this demo\n\n\nvar tripToChangeTheme = new Trip([\n  { sel : $(\n.demo-change-theme.step1\n), content : \nNorth\n, position : \nn\n },\n  { sel : $(\n.demo-change-theme.step2\n), content : \nEast\n,  position : \ne\n },\n  { sel : $(\n.demo-change-theme.step3\n), content : \nSouth\n, position : \ns\n },\n  { sel : $(\n.demo-change-theme.step4\n), content : \nWest\n,  position : \nw\n }\n], {\n  tripTheme : \nwhite\n,\n  onStart : function() {\n    $(\nbody\n).css({ \nbackground-color\n : \n#eee\n });\n  },\n  onEnd : function() {\n    $(\nbody\n).css({ \nbackground-color\n : \n#fff\n });\n  }\n});\n\n$(\n.demo-change-theme\n).on(\nclick\n, function() {\n  tripToChangeTheme.start();\n});\n\n\n\n\nCheck its \ndocumentation\n for more supported themes.\n\n\nScoll to top when finished\n\n\nRun this demo\n\n\nvar tripToScrollToTop = new Trip([\n  { sel : $(\n.demo-scroll-to-top.step1\n), content : \nLet's fly ...\n, position : \ne\n }\n], {\n  backToTopWhenEnded : true,\n  delay : 2000\n});\n\n$(\n.demo-scroll-to-top\n).on(\nclick\n, function() {\n  tripToScrollToTop.start();\n});\n\n\n\n\nCheck its \ndocumentation here\n.\n\n\nShow close box and navigation buttons\n\n\nRun this demo\n\n\nvar tripToShowNavigation = new Trip([\n  { sel : $(\n.demo-show-navigation.step1\n), content : \nHola!\n, position : \nn\n },\n  { sel : $(\n.demo-show-navigation.step2\n), content : \nAdios!\n, position : \ns\n }\n], {\n  showNavigation : true,\n  showCloseBox : true,\n  delay : -1\n});\n\n$(\n.demo-show-navigation\n).on(\nclick\n, function() {\n  tripToShowNavigation.start();\n});\n\n\n\n\nCheck documentation about \nshowNavigation\n and \nshowCloseBox\n\n\n Note: \n When enabling \nshowNavigation\n, sometimes it means that you don't need the countdown timer ! Users will mainly use navigation buttons to go next / previous. So don't forget to set \ndelay\n to \n-1\n to disable it.\n\n\nGlobal options\n\n\n\n\nPlease use inspector to check logs before starting this trip\n\n\n\n\nRun this demo\n\n\nvar tripToCheckGlobalOptions = new Trip([\n  { sel : $(\n.demo-global-options.step1\n), content : \nHi\n, position : \nn\n },\n  { sel : $(\n.demo-global-options.step2\n), content : \nPress ESC to stop this step !\n, position : \ns\n, delay : 3000, myFunction : function() { return \nthis is user's function\n; } },\n  { sel : $(\n.demo-global-options.step3\n), content : \nClick the close icon to see what's going on in your console log\n, delay: -1, showCloseBox: true }\n], {\n  onStart : function() {\n    console.log(\nonStart\n);\n  },\n  onEnd : function() {\n    console.log(\nonEnd\n);\n  },\n  onTripStop : function() {\n    console.log(\nonTripStop\n);\n  },\n  onTripChange : function(i, tripData) {\n    if (i === 1) {\n      console.log(\nYou can put your own function or data in tripData andaccess it onTripChange !\n);\n      console.log(\ncurrent tripIndex : \n + i);\n      console.log(\ncurrent tripData : \n, tripData);\n      console.log(\nUser's function : \n + tripData.myFunction());\n    }\n  },\n  onTripClose: function(i) {\n    console.log(\nYou close the trip at index : \n, i);\n  }\n});\n\n$(\n.demo-global-options\n).on(\nclick\n, function() {\n  tripToCheckGlobalOptions.start();\n});\n\n\n\n\nCheck its \ndocumentation\n for more supported options;\n\n\nNote : \n There are tons of settings that you can tweak, please remember to check other missing settings.\n\n\nLocal options\n\n\n\n\nSupported after 2.0.0+\n\n\nPlease use inspector to check logs before starting this trip\n\n\n\n\nRun this demo\n\n\nvar tripToCheckLocalOptions = new Trip([\n  { \n    sel: $('.demo-local-options.step1'),\n    content: 'onTripStart will be called when entering this trip',\n    onTripStart: function(tripIndex) {\n      console.log('onTripStart : ', tripIndex);\n    },\n    onTripEnd: function(tripIndex) {\n      console.log('onTripEnd : ', tripIndex);\n    }\n  },\n  {\n    sel: $('.demo-local-options.step2'),\n    content: 'We will use global onTripStart if there is no local one',\n    onTripEnd: function(tripIndex) {\n      console.log('onTripEnd : ', tripIndex);\n    }\n  }\n], {\n  delay: 3000,\n  onTripStart: function(tripIndex) {\n    console.log('default onTripStart : ', tripIndex);\n  }\n});\n\n$('.demo-local-options').on('click', function() {\n  tripToCheckLocalOptions.start();\n});\n\n\n\n\nCheck its \ndocumentation\n for more supported options;\n\n\nNote :\n If local options exist, then global options will be suppressed by default !\n\n\nHighlight target\n\n\nRun this demo\n\n\nvar tripToHighlight = new Trip([\n  { sel : $(\n.demo-highlight.step1\n), content : \nHighlight this\n, expose : true }\n], {\n  delay : 3000\n});\n\n$(\n.demo-highlight\n).on(\nclick\n, function() {\n  tripToHighlight.start();\n});\n\n\n\n\nCheck its \ndocumentation here\n.\n\n\nAnimation\n\n\n\n\nPowered by animate.css\n\n\n\n\nRun this demo\n\n\nvar tripToChangeAnimation = new Trip([\n  { sel : $(\n.demo-animation.step1\n), content : \nhi\n},\n  { sel : $(\n.demo-animation.step2\n), content : \nhi\n, animation: 'bounce'},\n  { sel : $(\n.demo-animation.step3\n), content : \nhi\n, animation: 'shake'},\n  { sel : $(\n.demo-animation.step4\n), content : \nhi\n, animation: 'fadeIn'},\n  { sel : $(\n.demo-animation.step5\n), content : \nhi\n, animation: 'fadeInUp'},\n  { sel : $(\n.demo-animation.step6\n), content : \nhi\n, animation: 'fadeInDown'},\n  { sel : $(\n.demo-animation.step7\n), content : \nhi\n, animation: 'fadeInLeft'},\n  { sel : $(\n.demo-animation.step8\n), content : \nhi\n, animation: 'rotateInUpRight'}\n], {\n  delay : 1500,\n  animation: 'tada'\n});\n\n$(\n.demo-animation\n).on(\nclick\n, function() {\n  tripToChangeAnimation.start();\n});\n\n\n\n\nCheck its \ndocumentation and supported animations here\n.", 
+            "title": "Basic"
+        }, 
+        {
+            "location": "/demo/basic/#change-position", 
+            "text": "Run this demo  var tripToChangePosition = new Trip([\n  { sel : $( .demo-change-position.step1 ), content :  North , position :  n  },\n  { sel : $( .demo-change-position.step2 ), content :  East ,  position :  e  },\n  { sel : $( .demo-change-position.step3 ), content :  South , position :  s  },\n  { sel : $( .demo-change-position.step4 ), content :  West ,  position :  w  }\n], {\n\n});\n\n$( .demo-change-position ).on( click , function() {\n  tripToChangePosition.start();\n});  Check its  documentation  for more supported positions.", 
+            "title": "Change position"
+        }, 
+        {
+            "location": "/demo/basic/#change-theme", 
+            "text": "Run this demo  var tripToChangeTheme = new Trip([\n  { sel : $( .demo-change-theme.step1 ), content :  North , position :  n  },\n  { sel : $( .demo-change-theme.step2 ), content :  East ,  position :  e  },\n  { sel : $( .demo-change-theme.step3 ), content :  South , position :  s  },\n  { sel : $( .demo-change-theme.step4 ), content :  West ,  position :  w  }\n], {\n  tripTheme :  white ,\n  onStart : function() {\n    $( body ).css({  background-color  :  #eee  });\n  },\n  onEnd : function() {\n    $( body ).css({  background-color  :  #fff  });\n  }\n});\n\n$( .demo-change-theme ).on( click , function() {\n  tripToChangeTheme.start();\n});  Check its  documentation  for more supported themes.", 
+            "title": "Change theme"
+        }, 
+        {
+            "location": "/demo/basic/#scoll-to-top-when-finished", 
+            "text": "Run this demo  var tripToScrollToTop = new Trip([\n  { sel : $( .demo-scroll-to-top.step1 ), content :  Let's fly ... , position :  e  }\n], {\n  backToTopWhenEnded : true,\n  delay : 2000\n});\n\n$( .demo-scroll-to-top ).on( click , function() {\n  tripToScrollToTop.start();\n});  Check its  documentation here .", 
+            "title": "Scoll to top when finished"
+        }, 
+        {
+            "location": "/demo/basic/#show-close-box-and-navigation-buttons", 
+            "text": "Run this demo  var tripToShowNavigation = new Trip([\n  { sel : $( .demo-show-navigation.step1 ), content :  Hola! , position :  n  },\n  { sel : $( .demo-show-navigation.step2 ), content :  Adios! , position :  s  }\n], {\n  showNavigation : true,\n  showCloseBox : true,\n  delay : -1\n});\n\n$( .demo-show-navigation ).on( click , function() {\n  tripToShowNavigation.start();\n});  Check documentation about  showNavigation  and  showCloseBox   Note:   When enabling  showNavigation , sometimes it means that you don't need the countdown timer ! Users will mainly use navigation buttons to go next / previous. So don't forget to set  delay  to  -1  to disable it.", 
+            "title": "Show close box and navigation buttons"
+        }, 
+        {
+            "location": "/demo/basic/#global-options", 
+            "text": "Please use inspector to check logs before starting this trip   Run this demo  var tripToCheckGlobalOptions = new Trip([\n  { sel : $( .demo-global-options.step1 ), content :  Hi , position :  n  },\n  { sel : $( .demo-global-options.step2 ), content :  Press ESC to stop this step ! , position :  s , delay : 3000, myFunction : function() { return  this is user's function ; } },\n  { sel : $( .demo-global-options.step3 ), content :  Click the close icon to see what's going on in your console log , delay: -1, showCloseBox: true }\n], {\n  onStart : function() {\n    console.log( onStart );\n  },\n  onEnd : function() {\n    console.log( onEnd );\n  },\n  onTripStop : function() {\n    console.log( onTripStop );\n  },\n  onTripChange : function(i, tripData) {\n    if (i === 1) {\n      console.log( You can put your own function or data in tripData andaccess it onTripChange ! );\n      console.log( current tripIndex :   + i);\n      console.log( current tripData :  , tripData);\n      console.log( User's function :   + tripData.myFunction());\n    }\n  },\n  onTripClose: function(i) {\n    console.log( You close the trip at index :  , i);\n  }\n});\n\n$( .demo-global-options ).on( click , function() {\n  tripToCheckGlobalOptions.start();\n});  Check its  documentation  for more supported options;  Note :   There are tons of settings that you can tweak, please remember to check other missing settings.", 
+            "title": "Global options"
+        }, 
+        {
+            "location": "/demo/basic/#local-options", 
+            "text": "Supported after 2.0.0+  Please use inspector to check logs before starting this trip   Run this demo  var tripToCheckLocalOptions = new Trip([\n  { \n    sel: $('.demo-local-options.step1'),\n    content: 'onTripStart will be called when entering this trip',\n    onTripStart: function(tripIndex) {\n      console.log('onTripStart : ', tripIndex);\n    },\n    onTripEnd: function(tripIndex) {\n      console.log('onTripEnd : ', tripIndex);\n    }\n  },\n  {\n    sel: $('.demo-local-options.step2'),\n    content: 'We will use global onTripStart if there is no local one',\n    onTripEnd: function(tripIndex) {\n      console.log('onTripEnd : ', tripIndex);\n    }\n  }\n], {\n  delay: 3000,\n  onTripStart: function(tripIndex) {\n    console.log('default onTripStart : ', tripIndex);\n  }\n});\n\n$('.demo-local-options').on('click', function() {\n  tripToCheckLocalOptions.start();\n});  Check its  documentation  for more supported options;  Note :  If local options exist, then global options will be suppressed by default !", 
+            "title": "Local options"
+        }, 
+        {
+            "location": "/demo/basic/#highlight-target", 
+            "text": "Run this demo  var tripToHighlight = new Trip([\n  { sel : $( .demo-highlight.step1 ), content :  Highlight this , expose : true }\n], {\n  delay : 3000\n});\n\n$( .demo-highlight ).on( click , function() {\n  tripToHighlight.start();\n});  Check its  documentation here .", 
+            "title": "Highlight target"
+        }, 
+        {
+            "location": "/demo/basic/#animation", 
+            "text": "Powered by animate.css   Run this demo  var tripToChangeAnimation = new Trip([\n  { sel : $( .demo-animation.step1 ), content :  hi },\n  { sel : $( .demo-animation.step2 ), content :  hi , animation: 'bounce'},\n  { sel : $( .demo-animation.step3 ), content :  hi , animation: 'shake'},\n  { sel : $( .demo-animation.step4 ), content :  hi , animation: 'fadeIn'},\n  { sel : $( .demo-animation.step5 ), content :  hi , animation: 'fadeInUp'},\n  { sel : $( .demo-animation.step6 ), content :  hi , animation: 'fadeInDown'},\n  { sel : $( .demo-animation.step7 ), content :  hi , animation: 'fadeInLeft'},\n  { sel : $( .demo-animation.step8 ), content :  hi , animation: 'rotateInUpRight'}\n], {\n  delay : 1500,\n  animation: 'tada'\n});\n\n$( .demo-animation ).on( click , function() {\n  tripToChangeAnimation.start();\n});  Check its  documentation and supported animations here .", 
+            "title": "Animation"
+        }
+    ]
+}
