@@ -102,9 +102,7 @@ module.exports = function(grunt) {
       },
       sourcefiles: {
         src: [
-          'doc/src/setup.markdown',
           'src/trip._header_.js',
-          'views/src/_index.html',
           'README.md'
         ],
         overwrite: true,
@@ -117,53 +115,6 @@ module.exports = function(grunt) {
           }
         }]
       }
-    },
-    jsdoc: {
-      dist: {
-        src: ['dist/trip.js', '.jsdoc_index.md'],
-        options: {
-          destination: 'doc/jsdoc',
-          template : pathToInk + '/template',
-          configure : pathToInk + '/template/jsdoc.conf.json'
-        }
-      }
-    },
-    markdown: {
-      all: {
-        files: [
-          {
-            expand: true,
-            src: 'doc/src/*.markdown',
-            dest: 'doc',
-            flatten: true,
-            ext: '.html'
-          }
-        ],
-        options: {
-          template: 'doc/src/_template.html',
-          autoTemplate: true,
-          autoTemplateFormat: 'html',
-          markdownOptions: {
-            gfm: true,
-            highlight: 'manual',
-            codeLines: {
-              before: '<span>',
-              after: '</span>'
-            }
-          }
-        }
-      }
-    },
-    includereplace: {
-      all: {
-        files: {
-          './index.html': ['views/src/_index.html'],
-          './demo.html': ['views/src/_demo.html'],
-          './doc-configuration.html': ['doc/configuration.html'],
-          './doc-setup.html': ['doc/setup.html'],
-          './doc-api.html': ['doc/api.html']
-        }
-      }
     }
   });
 
@@ -171,28 +122,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-text-replace');
-  grunt.loadNpmTasks('grunt-markdown');
-  grunt.loadNpmTasks('grunt-include-replace');
   grunt.loadNpmTasks('grunt-jscs');
+
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task(s).
   grunt.registerTask('test', ['connect', 'qunit']);
-  grunt.registerTask('scss', ['sass']);
   grunt.registerTask('build-js', ['jshint', 'jscs', 'webpack', 'uglify']);
   grunt.registerTask('build-css', ['sass']);
   grunt.registerTask('build', ['build-js', 'build-css']);
-  grunt.registerTask('doc', ['markdown', 'includereplace']);
-  grunt.registerTask('all', ['build', 'jsdoc', 'doc']);
   grunt.registerTask('bumpversion',
     ['replace:configfiles', 'replace:sourcefiles']);
 
   // How to bump version ?
   //
-  // grunt bumpversion --oldv=1.3.0 --newv=2.0.0 && grunt all
+  // grunt bumpversion --oldv=1.3.0 --newv=2.0.0 && grunt build
   //
   // NOTE:
   //

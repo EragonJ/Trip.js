@@ -38,33 +38,11 @@ grunt build-js # build only js files
 grunt build-css # build only CSS files
 ```
 
-### Compile HTML
-
-```bash
-grunt html # static files that will be displayed on website
-```
-
-### Genereate docs
-
-```bash
-grunt doc # jsdoc and our documentations
-```
-
 ### Bump version
 
 ```bash
 grunt bumpversion --oldv=VERSION_FROM --newv=VERSION_TO # below is an example
 grunt bumpversion --oldv=3.1.7 --newv=3.1.8 # change version number in src
-```
-
-```bash
-grunt all # regenerate everything including docs, HTML, CSS, dist scripts
-```
-
-### Deploy website
-
-```bash
-./update_gh_pages # this will make sure to include needed data for gh-pages branch
 ```
 
 ## Special thanks
