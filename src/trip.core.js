@@ -848,10 +848,12 @@ Trip.prototype = {
     var that = this;
 
     // toggle used settings
-    var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
-    var showNavigation = o.showNavigation || this.settings.showNavigation;
-    var showHeader = o.showHeader || this.settings.showHeader;
-    var showSteps = o.showSteps || this.settings.showSteps;
+    var showCloseBox =
+          TripUtils.isSet(o.showCloseBox, this.settings.showCloseBox);
+    var showNavigation =
+          TripUtils.isSet(o.showNavigation, this.settings.showNavigation);
+    var showHeader = TripUtils.isSet(o.showHeader, this.settings.showHeader);
+    var showSteps = TripUtils.isSet(o.showSteps, this.settings.showSteps);
 
     // labels
     var closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel;

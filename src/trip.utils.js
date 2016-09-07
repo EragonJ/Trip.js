@@ -42,6 +42,21 @@ var TripUtils = {
   },
 
   /**
+   * We will use this function to compute the resulting boolean option
+   * based on the local and global settings.
+   *
+   * @memberOf TripUtils
+   * @type {Function}
+   * @param {*} local setting, global setting
+   * @return {Boolean}
+   */
+  isSet: function(localSetting, globalSetting) {
+    return typeof localSetting !== 'undefined' ?
+           localSetting :
+           globalSetting;
+  },
+
+  /**
    * Handy wrapper of console.log
    *
    * @memberOf TripUtils
