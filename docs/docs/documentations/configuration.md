@@ -114,6 +114,13 @@ You can enable this option to tell Trip.js skip undefined trips (Undefined trips
 + Type : `Boolean`
 + Default : `false`
 
+### stopClickPropagation
+
+You can stop any click from Trip.js to be propagated to the root by setting this value.
+
++ Type : `Boolean`
++ Default : `false`
+
 ### delay
 
 Every trip will be presented for 1 second (1000 ms) by default. Set this value to `-1` will prevent auto-advancing and you must manually call `trip.next()`.
@@ -307,6 +314,8 @@ If there is any specific trip that needs a customized **Next** button instead of
 ### showNavigation
 
 ### showCloseBox
+
+### stopClickPropagation
 
 ### showSteps
 
