@@ -1180,11 +1180,13 @@ Trip.prototype = {
         $progressSteps.append(stepCache);
       }
 
+      $tripBlock.off('click.Trip');
       $tripBlock.on('click.Trip', function(e) {
         var tripObject = that.getCurrentTripObject();
-        var tripStopClickPropagation =
-              TripUtils.isSet(tripObject.stopClickPropagation,
-                              that.settings.stopClickPropagation);
+        var toStopClickPropagation =
+          TripUtils.isSet(tripObject.stopClickPropagation,
+            that.settings.stopClickPropagation);
+
         if (tripStopClickPropagation) {
           e.stopPropagation();
         }
