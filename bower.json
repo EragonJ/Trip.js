@@ -13,7 +13,7 @@
     "bower_components",
     "tests",
     "public",
-    "doc",
+    "docs",
     "views",
     "*.html"
   ],

@@ -1,0 +1,24 @@
+site_name: Trip.js
+site_description: Trip.js is a plugin that can help you customize a tutorial trip easily with more flexibilities.
+site_url: http://eragonj.github.io/Trip.js
+site_author: EragonJ (Chia-Lung, Chen)
+google_analytics: ['UA-41178936-1', 'auto']
+repo_url: https://github.com/EragonJ/Trip.js
+theme: cosmo
+theme_dir: 'override_cosmo_theme'
+extra_css:
+  - vendor/trip.js/trip.min.css
+extra_javascript:
+  - vendor/trip.js/trip.min.js
+  - js/bootup.js
+  - js/demo.js
+  - js/documentation.js
+pages:
+  - Home: 'index.md'
+  - Documentations:
+    - 'Setup': 'documentations/setup.md'
+    - 'Configuration': 'documentations/configuration.md'
+    - 'API': 'documentations/api.md'
+    - 'Theme': 'documentations/theme.md'
+  - Demo:
+    - 'Basic': 'demo/basic.md'

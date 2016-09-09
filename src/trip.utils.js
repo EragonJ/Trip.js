@@ -47,13 +47,13 @@ var TripUtils = {
    *
    * @memberOf TripUtils
    * @type {Function}
-   * @param {*} local setting, global setting
+   * @param {*} local setting
+   * @param {*} global setting
    * @return {Boolean}
    */
   isSet: function(localSetting, globalSetting) {
     return typeof localSetting !== 'undefined' ?
-           localSetting :
-           globalSetting;
+      localSetting : globalSetting;
   },
 
   /**

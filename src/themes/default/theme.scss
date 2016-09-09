@@ -1,12 +1,8 @@
 @import "compass/css3";
 @import "../../styles/mixin";
 
-/*
- *  TODO:
- *  implement with more details later
- */
 .trip-exposed {
-  background: white
+  outline: 2px solid white;
 }
 
 .trip-overlay {

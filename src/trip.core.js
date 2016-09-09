@@ -81,6 +81,7 @@ function Trip() {
     showCloseBox: false,
     showHeader: false,
     skipUndefinedTrip: false,
+    stopClickPropagation: false,
 
     // navigation
     showNavigation: false,
@@ -1178,6 +1179,18 @@ Trip.prototype = {
 
         $progressSteps.append(stepCache);
       }
+
+      $tripBlock.off('click.Trip');
+      $tripBlock.on('click.Trip', function(e) {
+        var tripObject = that.getCurrentTripObject();
+        var toStopClickPropagation =
+          TripUtils.isSet(tripObject.stopClickPropagation,
+            that.settings.stopClickPropagation);
+
+        if (tripStopClickPropagation) {
+          e.stopPropagation();
+        }
+      });
 
       var $closeButton = $tripBlock.find('.trip-close');
       if ($closeButton) {

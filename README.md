@@ -24,6 +24,14 @@ Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj
 grunt test # run all QUnit tests
 ```
 
+## Development
+
+### Environment
+
+1. use `node 5.1.1`
+2. use `npm 2.15.6`
+3. `npm i # to instasll dependencies`
+
 ### Build
 
 ```bash
