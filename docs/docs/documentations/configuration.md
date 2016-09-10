@@ -313,6 +313,8 @@ If there is any specific trip that needs a customized **Next** button instead of
 
 ### showNavigation
 
+### enableAnimation
+
 ### showCloseBox
 
 ### stopClickPropagation

@@ -480,7 +480,7 @@ Trip.prototype = {
    * @param {Object} o
    */
   showCurrentTrip: function(o) {
-    if (this.settings.enableAnimation) {
+    if (TripUtils.isSet(o.enableAnimation, this.settings.enableAnimation)) {
       this.removeAnimation();
     }
 
@@ -508,7 +508,7 @@ Trip.prototype = {
     this.setTripBlock(o);
     this.showTripBlock(o);
 
-    if (this.settings.enableAnimation) {
+    if (TripUtils.isSet(o.enableAnimation, this.settings.enableAnimation)) {
       this.addAnimation(o);
     }
 
