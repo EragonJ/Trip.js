@@ -480,9 +480,7 @@ Trip.prototype = {
    * @param {Object} o
    */
   showCurrentTrip: function(o) {
-    if (TripUtils.isSet(o.enableAnimation, this.settings.enableAnimation)) {
-      this.removeAnimation();
-    }
+    this.removeAnimation();
 
     // preprocess when we have to show trip block
     if (this.timer) {
