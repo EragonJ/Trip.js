@@ -1,4 +1,4 @@
-# Trip.js [![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js) [![Join the chat at https://gitter.im/EragonJ/Trip.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EragonJ/Trip.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Trip.js [![Build Status](https://travis-ci.org/EragonJ/Trip.js.png?branch=master)](https://travis-ci.org/EragonJ/Trip.js) [![Join the chat at https://gitter.im/EragonJ/Trip.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EragonJ/Trip.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![CDNJS](https://img.shields.io/cdnjs/v/Trip.js.svg)](https://cdnjs.com/libraries/Trip.js)
 
 ![Trip.js](https://raw.github.com/EragonJ/Trip.js/master/public/img/logo-tiny.png "Trip.js")
 
