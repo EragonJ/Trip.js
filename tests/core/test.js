@@ -123,3 +123,41 @@ asyncTest('next() can be called with index', function() {
 
   trip.start();
 });
+
+asyncTest('target inside iframe', function() {
+  var arrowHeight = 10;
+  var arrowWidth = 10;
+  
+  var frame = $('[name="iframe parser"]');
+  var trip = new Trip([
+    { sel: frame.contents().find('.iframe-step1'), position: 'n', content: 'hi1' },
+    { sel: frame.contents().find('.iframe-step2'), content: 'hi2' },
+    { sel: frame.contents().find('.iframe-step3'), content: 'hi3' }
+  ], {
+    onStart: function () {
+      frame.contents().scrollTop(frame.height() * Math.random());
+      frame.contents().scrollLeft(frame.width() * Math.random());
+    },
+    onTripChange: function(i, o) {
+      var $tripBlock = $(".trip-block");
+      var blockWidth = $tripBlock.outerWidth();
+      var blockHeight = $tripBlock.outerHeight();
+      
+      var selWidth = $(o.sel) && $(o.sel).outerWidth();
+      var selHeight = $(o.sel) && $(o.sel).outerHeight();
+      
+      var top = frame.position().top - $(o.sel).parents('html,body').scrollTop();
+      var left = frame.position().left - $(o.sel).parents('html,body').scrollLeft();
+      var blockPos = $tripBlock.position();
+      var pointerTop = $(o.sel).position().top - arrowHeight - blockHeight;
+      var pointerLeft = $(o.sel).position().left + ((selWidth - blockWidth) / 2);
+      equal(Math.round(left + pointerLeft), Math.round(blockPos.left), "Left of tripBlock is wrong for iframe element "+ i);
+      equal(Math.round(top + pointerTop), Math.round(blockPos.top), "Top of tripBlock is wrong for iframe element "+ i);
+    },
+    onEnd: function() {
+      start(); 
+    }
+  })
+
+  trip.start();
+});
