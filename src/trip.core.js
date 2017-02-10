@@ -970,8 +970,8 @@ Trip.prototype = {
     var blockHeight = $tripBlock.outerHeight();
     var arrowHeight = 10;
     var arrowWidth = 10;
-    var cssHorizontal;
-    var cssVertical;
+    var cssHorizontal = this.getIframeScrollLeft(o);
+    var cssVertical = this.getIframeScrollTop(o);
 
     switch (o.position) {
       case 'screen-center':
@@ -986,22 +986,22 @@ Trip.prototype = {
         cssVertical = TripConstant.TRIP_BLOCK_OFFSET_VERTICAL;
         break;
       case 'e':
-        cssHorizontal = $sel.offset().left + selWidth + arrowWidth;
-        cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
+        cssHorizontal += $sel.offset().left + selWidth + arrowWidth;
+        cssVertical += $sel.offset().top - ((blockHeight - selHeight) / 2);
         break;
       case 's':
-        cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
-        cssVertical = $sel.offset().top + selHeight + arrowHeight;
+        cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
+        cssVertical += $sel.offset().top + selHeight + arrowHeight;
         break;
       case 'w':
-        cssHorizontal = $sel.offset().left - (arrowWidth + blockWidth);
-        cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
+        cssHorizontal += $sel.offset().left - (arrowWidth + blockWidth);
+        cssVertical += $sel.offset().top - ((blockHeight - selHeight) / 2);
         break;
       case 'n':
         /* falls through */
       default:
-        cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
-        cssVertical = $sel.offset().top - arrowHeight - blockHeight;
+        cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
+        cssVertical += $sel.offset().top - arrowHeight - blockHeight;
         break;
     }
 
@@ -1108,7 +1108,11 @@ Trip.prototype = {
 
     var windowHeight = $(window).height();
     var windowTop = $(window).scrollTop();
-    var tripBlockTop = this.$tripBlock.offset().top;
+    var frameTop = this.getIframeScrollTop(o);
+    if (frameTop != 0) {
+      frameTop -= windowTop;
+    }
+    var tripBlockTop = this.$tripBlock.offset().top + frameTop;
     var tripBlockHeight = this.$tripBlock.height();
     var OFFSET = 100; // make it look nice
 
@@ -1121,6 +1125,50 @@ Trip.prototype = {
       this.$root.animate({ scrollTop: tripBlockTop - OFFSET }, 'slow');
     }
   },
+
+  /**
+     * Return the scroll top offset needed in case the element is contained in an iframe,
+     * else return 0
+     * 
+     * @memberOf Trip
+     * @type {Function}
+     * @param {Object} o
+     */
+    getIframeScrollTop : function(o) {
+      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+        var offsetTop = 0;
+        $(document).find('iframe').each(function(index, frame) {
+          if ($(frame).contents().has($(o.sel))) {
+            offsetTop = $(frame).offset().top;
+            return false;
+          }
+        });
+        return offsetTop - $(o.sel).parents('html,body').scrollTop()
+      }
+      return 0;
+    },
+    
+    /**
+     * Return the scroll left offset needed in case the element is contained in an iframe,
+     * else return 0
+     * 
+     * @memberOf Trip
+     * @type {Function}
+     * @param {Object} o
+     */
+    getIframeScrollLeft : function(o) {
+      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+        var offsetLeft = 0;
+        $(document).find('iframe').each(function(index, frame) {
+          if ($(frame).contents().has($(o.sel))) {
+            offsetLeft = $(frame).offset().left;
+            return false;
+          }
+        });
+        return offsetLeft - $(o.sel).parents('html,body').scrollLeft()
+      }
+      return 0;
+    },
 
   /**
    * Hide the trip block.
