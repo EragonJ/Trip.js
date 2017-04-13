@@ -62,7 +62,7 @@ grunt bumpversion --oldv=3.1.7 --newv=3.1.8 # change version number in src
 
 If you do love Trip.js, feel free to buy me some beers ! :beers:
 
-My bitcoin wallet : **1KtpFtaLW52tCe2VhWxCMHmRt8Mrxqj4WB**
+My bitcoin wallet : **3Ar6wuyrta9AciZAYMFi3QCByXF6S5HneT**
 
 ## Author
 
