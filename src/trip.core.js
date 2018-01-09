@@ -15,7 +15,7 @@ var TripConstant = require('./trip.constant');
  * @param {Object} userOptions
  */
 function Trip() {
-  var noop = function () { };
+  var noop = function() {};
   var userOptions;
   var tripData;
   var tripParser = new TripParser();
@@ -44,7 +44,7 @@ function Trip() {
     // we don't support other formats here, so let's throw error here
     else {
       throw 'Please check documents for passing parameters, you may pass' +
-      ' wrong parameters into constructor function !';
+        ' wrong parameters into constructor function !';
     }
   }
   // Users pass tripData directly from codebase
@@ -146,7 +146,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Funtion}
    */
-  showExposedElements: function () {
+  showExposedElements: function() {
     var o = this.getCurrentTripObject();
     var oldCSS;
     var newCSS;
@@ -174,7 +174,7 @@ Trip.prototype = {
       };
 
       newCSS = {
-        position: (function () {
+        position: (function() {
           // NOTE: issue #63
           // We can't direclty use 'relative' if the original element
           // is using properties other than 'relative' because
@@ -203,7 +203,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Funtion}
    */
-  hideExposedElements: function () {
+  hideExposedElements: function() {
     var $exposedSel = $('.trip-exposed');
     this.hasExposedElements = false;
 
@@ -226,13 +226,13 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  bindResizeEvents: function () {
+  bindResizeEvents: function() {
     var that = this;
     var timer;
 
-    $(window).on('resize.Trip', function () {
+    $(window).on('resize.Trip', function() {
       window.clearTimeout(timer);
-      timer = window.setTimeout(function () {
+      timer = window.setTimeout(function() {
         that.run();
       }, TripConstant.RESIZE_TIMEOUT);
     });
@@ -244,7 +244,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  unbindResizeEvents: function () {
+  unbindResizeEvents: function() {
     $(window).off('resize.Trip');
   },
 
@@ -254,10 +254,10 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  bindKeyEvents: function () {
+  bindKeyEvents: function() {
     var that = this;
     $(document).on({
-      'keydown.Trip': function (e) {
+      'keydown.Trip': function(e) {
         // `this` will be bound to #document DOM element here
         that.keyEvent.call(that, e);
       }
@@ -270,7 +270,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  unbindKeyEvents: function () {
+  unbindKeyEvents: function() {
     $(document).off('keydown.Trip');
   },
 
@@ -282,7 +282,7 @@ Trip.prototype = {
    * @type {function}
    * @param {Event} e
    */
-  keyEvent: function (e) {
+  keyEvent: function(e) {
     switch (e.which) {
       case TripConstant.ESC:
         this.stop();
@@ -313,7 +313,7 @@ Trip.prototype = {
    * @type {Function}
    * @public
    */
-  stop: function () {
+  stop: function() {
     if (this.timer) {
       this.timer.stop();
       this.timer = null;
@@ -348,7 +348,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  pauseOrResume: function () {
+  pauseOrResume: function() {
     if (!this.timer) {
       return;
     }
@@ -372,7 +372,7 @@ Trip.prototype = {
    * @type {Function}
    * @public
    */
-  pause: function () {
+  pause: function() {
     this.pauseOrResume();
     var tripObject = this.getCurrentTripObject();
     var tripPause = tripObject.onTripPause || this.settings.onTripPause;
@@ -386,7 +386,7 @@ Trip.prototype = {
    * @type {Function}
    * @public
    */
-  resume: function () {
+  resume: function() {
     this.pauseOrResume();
     var tripObject = this.getCurrentTripObject();
     var tripResume = tripObject.onTripResume || this.settings.onTripResume;
@@ -401,7 +401,7 @@ Trip.prototype = {
    * @type {Function}
    * @public
    */
-  next: function (tripIndex) {
+  next: function(tripIndex) {
     var that = this;
     var useDifferentIndex = !isNaN(tripIndex);
 
@@ -420,7 +420,7 @@ Trip.prototype = {
     var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
     var tripEndDefer = tripEnd.call(this, this.tripIndex, tripObject);
 
-    $.when(tripEndDefer).then(function () {
+    $.when(tripEndDefer).then(function() {
       if (useDifferentIndex) {
         if (that.timer) {
           that.timer.stop();
@@ -447,7 +447,7 @@ Trip.prototype = {
    * @type {Function}
    * @public
    */
-  prev: function () {
+  prev: function() {
     var that = this;
 
     if (!this.canGoPrev()) {
@@ -463,7 +463,7 @@ Trip.prototype = {
     var tripEnd = tripObject.onTripEnd || this.settings.onTripEnd;
     var tripEndDefer = tripEnd(this.tripIndex, tripObject);
 
-    $.when(tripEndDefer).then(function () {
+    $.when(tripEndDefer).then(function() {
       if (!that.isFirst()) {
         that.decreaseIndex();
       }
@@ -479,7 +479,7 @@ Trip.prototype = {
    * @type {Function}
    * @param {Object} o
    */
-  showCurrentTrip: function (o) {
+  showCurrentTrip: function(o) {
     this.removeAnimation();
 
     // preprocess when we have to show trip block
@@ -523,7 +523,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  doLastOperation: function () {
+  doLastOperation: function() {
     if (this.timer) {
       this.timer.stop();
       this.timer = null;
@@ -560,12 +560,12 @@ Trip.prototype = {
    * @type {Function}
    * @param {Number} delay
    */
-  showProgressBar: function (delay) {
+  showProgressBar: function(delay) {
     var that = this;
 
     this.$bar.animate({
       width: '100%'
-    }, delay, 'linear', function () {
+    }, delay, 'linear', function() {
       that.$bar.width(0);
     });
   },
@@ -576,7 +576,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  hideProgressBar: function () {
+  hideProgressBar: function() {
     this.$bar.width(0);
     this.$bar.stop(true);
   },
@@ -587,7 +587,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  pauseProgressBar: function () {
+  pauseProgressBar: function() {
     this.$bar.stop(true);
   },
 
@@ -598,7 +598,7 @@ Trip.prototype = {
    * @type {Function}
    * @param {Number} remainingTime
    */
-  resumeProgressBar: function (remainingTime) {
+  resumeProgressBar: function(remainingTime) {
     this.showProgressBar(remainingTime);
   },
 
@@ -611,7 +611,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  run: function () {
+  run: function() {
     var that = this;
     var tripObject = this.getCurrentTripObject();
     var tripStart = tripObject.onTripStart || this.settings.onTripStart;
@@ -641,7 +641,7 @@ Trip.prototype = {
     // set timer to show next, if the timer is less than zero we expect
     // it to be manually advanced
     if (delay >= 0) {
-      this.timer = new TripUtils.Timer(function () {
+      this.timer = new TripUtils.Timer(function() {
         that.next();
       }, delay);
     }
@@ -654,7 +654,7 @@ Trip.prototype = {
    * @type {Function}
    * @return {Boolean} whether current trip is the first one
    */
-  isFirst: function () {
+  isFirst: function() {
     return (this.tripIndex === 0) ? true : false;
   },
 
@@ -665,7 +665,7 @@ Trip.prototype = {
    * @type {Function}
    * @return {Boolean} whether current trip is the last one
    */
-  isLast: function () {
+  isLast: function() {
     return (this.tripIndex === this.tripData.length - 1) ? true : false;
   },
 
@@ -677,7 +677,7 @@ Trip.prototype = {
    * @param {Object} o tripData
    * @return {Boolean} whether tripData is valid
    */
-  isTripDataValid: function (o) {
+  isTripDataValid: function(o) {
     if (this.hasSpecialDirections()) {
       return true;
     }
@@ -692,7 +692,7 @@ Trip.prototype = {
       o.sel === null ||
       o.sel.length === 0 ||
       $(o.sel).length === 0) {
-      return false;
+        return false;
     }
     return true;
   },
@@ -705,7 +705,7 @@ Trip.prototype = {
    * @param {String} position position
    * @return {Boolean} whether position is speical direction or not
    */
-  hasSpecialDirections: function () {
+  hasSpecialDirections: function() {
     var o = this.getCurrentTripObject();
     var position = o.position;
     var specialDirections = [
@@ -731,7 +731,7 @@ Trip.prototype = {
    * @type {Function}
    * @return {Boolean} whether we can go to previous trip
    */
-  canGoPrev: function () {
+  canGoPrev: function() {
     var tripObject = this.getCurrentTripObject();
     var canGoPrev = tripObject.canGoPrev;
 
@@ -759,7 +759,7 @@ Trip.prototype = {
    * @type {Function}
    * @return {Boolean} whether we can go to next trip
    */
-  canGoNext: function () {
+  canGoNext: function() {
     var tripObject = this.getCurrentTripObject();
     var canGoNext = tripObject.canGoNext;
 
@@ -774,7 +774,7 @@ Trip.prototype = {
     return canGoNext;
   },
 
-  setIndex: function (tripIndex) {
+  setIndex: function(tripIndex) {
     tripIndex = Math.max(0, Math.min(tripIndex, this.tripData.length - 1));
     this.tripIndex = tripIndex;
 
@@ -789,7 +789,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  increaseIndex: function () {
+  increaseIndex: function() {
     this.setIndex(this.tripIndex + 1);
   },
 
@@ -800,7 +800,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  decreaseIndex: function () {
+  decreaseIndex: function() {
     this.setIndex(this.tripIndex - 1);
   },
 
@@ -811,7 +811,7 @@ Trip.prototype = {
    * @type {Function}
    * @return {Object} current trip data
    */
-  getCurrentTripObject: function () {
+  getCurrentTripObject: function() {
     return this.tripData[this.tripIndex];
   },
 
@@ -824,7 +824,7 @@ Trip.prototype = {
    * @param {String} content
    * @return {String} replaced content
    */
-  getReplacedTripContent: function (content) {
+  getReplacedTripContent: function(content) {
     content = content || '';
     var reTripIndex = /\{\{(tripIndex)\}\}/g;
     var reTripTotal = /\{\{(tripTotal)\}\}/g;
@@ -842,15 +842,15 @@ Trip.prototype = {
    * @type {Function}
    * @param {Object} o
    */
-  setTripBlock: function (o) {
+  setTripBlock: function(o) {
     var $tripBlock = this.$tripBlock;
     var that = this;
 
     // toggle used settings
     var showCloseBox =
-      TripUtils.isSet(o.showCloseBox, this.settings.showCloseBox);
+          TripUtils.isSet(o.showCloseBox, this.settings.showCloseBox);
     var showNavigation =
-      TripUtils.isSet(o.showNavigation, this.settings.showNavigation);
+          TripUtils.isSet(o.showNavigation, this.settings.showNavigation);
     var showHeader = TripUtils.isSet(o.showHeader, this.settings.showHeader);
     var showSteps = TripUtils.isSet(o.showSteps, this.settings.showSteps);
 
@@ -866,44 +866,44 @@ Trip.prototype = {
 
     $tripBlock
       .find('.trip-header')
-      .html(this.getReplacedTripContent(header))
-      .toggle(showHeader);
+        .html(this.getReplacedTripContent(header))
+        .toggle(showHeader);
 
     $tripBlock
       .find('.trip-content')
-      .html(this.getReplacedTripContent(o.content));
+        .html(this.getReplacedTripContent(o.content));
 
     $tripBlock
       .find('.trip-prev')
-      .toggleClass('disabled', !this.canGoPrev())
-      .html(prevLabel)
-      .toggle(showNavigation);
+        .toggleClass('disabled', !this.canGoPrev())
+        .html(prevLabel)
+        .toggle(showNavigation);
 
     $tripBlock
       .find('.trip-next')
-      .toggleClass('disabled', !this.canGoNext())
-      .html(this.isLast() ? finishLabel : nextLabel)
-      .toggle(showNavigation && !o.nextClickSelector);
+        .toggleClass('disabled', !this.canGoNext())
+        .html(this.isLast() ? finishLabel : nextLabel)
+        .toggle(showNavigation && !o.nextClickSelector);
 
     $tripBlock
       .find('.trip-skip')
-      .html(skipLabel)
-      .toggle(showNavigation);
+        .html(skipLabel)
+        .toggle(showNavigation);
 
     $tripBlock
       .find('.trip-close')
-      .html(closeBoxLabel)
-      .toggle(showCloseBox);
+        .html(closeBoxLabel)
+        .toggle(showCloseBox);
 
     $tripBlock
       .find('.trip-progress-steps')
-      .toggle(showSteps)
+        .toggle(showSteps)
       .find('.trip-progress-step')
-      .not(':eq(' + this.tripIndex + ')')
-      .removeClass('selected')
-      .end()
-      .eq(this.tripIndex)
-      .addClass('selected');
+        .not(':eq(' + this.tripIndex + ')')
+          .removeClass('selected')
+          .end()
+        .eq(this.tripIndex)
+          .addClass('selected');
 
     // remove old styles then add new one
     $tripBlock.removeClass(
@@ -914,7 +914,7 @@ Trip.prototype = {
     // the next button
     if (o.nextClickSelector) {
       $(o.nextClickSelector).off('click.Trip');
-      $(o.nextClickSelector).one('click.Trip', function (e) {
+      $(o.nextClickSelector).one('click.Trip', function(e) {
         e.preventDefault();
         // Force IE/FF to lose focus
         $(this).blur();
@@ -942,25 +942,25 @@ Trip.prototype = {
    * @param {Object} o
    * @param {String} horizontalOrVertical
    */
-  setTripBlockPosition: function (o, horizontalOrVertical) {
+  setTripBlockPosition: function(o, horizontalOrVertical) {
     var $tripBlock = this.$tripBlock;
 
     //Styles need to be reset before capturing outer height and width
     if (horizontalOrVertical === 'horizontal') {
-      // reset styles first
-      $tripBlock.css({
-        left: '',
-        right: '',
-        marginLeft: '',
-      });
+        // reset styles first
+        $tripBlock.css({
+            left: '',
+            right: '',
+            marginLeft: '',
+        });
     }
     else if (horizontalOrVertical === 'vertical') {
-      // reset styles first
-      $tripBlock.css({
-        top: '',
-        bottom: '',
-        marginTop: '',
-      });
+        // reset styles first
+        $tripBlock.css({
+            top: '',
+            bottom: '',
+            marginTop: '',
+        });
     }
 
     var $sel = $(o.sel);
@@ -998,7 +998,7 @@ Trip.prototype = {
         cssVertical += $sel.offset().top - ((blockHeight - selHeight) / 2);
         break;
       case 'n':
-      /* falls through */
+        /* falls through */
       default:
         cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
         cssVertical += $sel.offset().top - arrowHeight - blockHeight;
@@ -1025,7 +1025,7 @@ Trip.prototype = {
         case 's':
         case 'w':
         case 'n':
-        /* falls through */
+          /* falls through */
         default:
           $tripBlock.css({
             left: cssHorizontal
@@ -1054,7 +1054,7 @@ Trip.prototype = {
         case 's':
         case 'w':
         case 'n':
-        /* falls through */
+          /* falls through */
         default:
           $tripBlock.css({
             top: cssVertical
@@ -1071,7 +1071,7 @@ Trip.prototype = {
    * @type {Function}
    * @param {Object} o
    */
-  addAnimation: function (o) {
+  addAnimation: function(o) {
     var animation = o.animation || this.settings.animation;
     if (TripAnimation.has(animation)) {
       this.$tripBlock.addClass('animated');
@@ -1085,7 +1085,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  removeAnimation: function () {
+  removeAnimation: function() {
     this.$tripBlock.removeClass(TripAnimation.getAllInString());
     this.$tripBlock.removeClass('animated');
   },
@@ -1099,7 +1099,7 @@ Trip.prototype = {
    * @type {Function}
    * @param {Object} o
    */
-  showTripBlock: function (o) {
+  showTripBlock: function(o) {
     this.$tripBlock.css({
       display: 'inline-block',
       // we have to make it higher than the overlay
@@ -1118,8 +1118,8 @@ Trip.prototype = {
 
     if (tripBlockTop + tripBlockHeight < windowTop + windowHeight &&
       tripBlockTop >= windowTop) {
-      // tripBlock is located inside the current screen,
-      // so we don't have to scroll
+        // tripBlock is located inside the current screen,
+        // so we don't have to scroll
     }
     else {
       this.$root.animate({ scrollTop: tripBlockTop - OFFSET }, 'slow');
@@ -1134,41 +1134,41 @@ Trip.prototype = {
      * @type {Function}
      * @param {Object} o
      */
-  getIframeScrollTop: function (o) {
-    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
-      var offsetTop = 0;
-      $(document).find('iframe').each(function (index, frame) {
-        if ($(frame).contents().has($(o.sel))) {
-          offsetTop = $(frame).offset().top;
-          return false;
-        }
-      });
-      return offsetTop - $(o.sel).parents('html,body').scrollTop()
-    }
-    return 0;
-  },
-
-  /**
-   * Return the scroll left offset needed in case the element is contained in an iframe,
-   * else return 0
-   * 
-   * @memberOf Trip
-   * @type {Function}
-   * @param {Object} o
-   */
-  getIframeScrollLeft: function (o) {
-    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
-      var offsetLeft = 0;
-      $(document).find('iframe').each(function (index, frame) {
-        if ($(frame).contents().has($(o.sel))) {
-          offsetLeft = $(frame).offset().left;
-          return false;
-        }
-      });
-      return offsetLeft - $(o.sel).parents('html,body').scrollLeft()
-    }
-    return 0;
-  },
+    getIframeScrollTop : function(o) {
+      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+        var offsetTop = 0;
+        $(document).find('iframe').each(function(index, frame) {
+          if ($(frame).contents().has($(o.sel))) {
+            offsetTop = $(frame).offset().top;
+            return false;
+          }
+        });
+        return offsetTop - $(o.sel).parents('html,body').scrollTop()
+      }
+      return 0;
+    },
+    
+    /**
+     * Return the scroll left offset needed in case the element is contained in an iframe,
+     * else return 0
+     * 
+     * @memberOf Trip
+     * @type {Function}
+     * @param {Object} o
+     */
+    getIframeScrollLeft : function(o) {
+      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+        var offsetLeft = 0;
+        $(document).find('iframe').each(function(index, frame) {
+          if ($(frame).contents().has($(o.sel))) {
+            offsetLeft = $(frame).offset().left;
+            return false;
+          }
+        });
+        return offsetLeft - $(o.sel).parents('html,body').scrollLeft()
+      }
+      return 0;
+    },
 
   /**
    * Hide the trip block.
@@ -1176,7 +1176,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  hideTripBlock: function () {
+  hideTripBlock: function() {
     this.removeAnimation();
     this.$tripBlock.fadeOut('slow');
   },
@@ -1187,7 +1187,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  create: function () {
+  create: function() {
     this.createTripBlock();
     this.createOverlay();
   },
@@ -1200,7 +1200,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  createTripBlock: function () {
+  createTripBlock: function() {
     // make sure the element doesn't exist in the DOM tree
     if (typeof $('.trip-block').get(0) === 'undefined') {
       var that = this;
@@ -1227,7 +1227,7 @@ Trip.prototype = {
       }
 
       $tripBlock.off('click.Trip');
-      $tripBlock.on('click.Trip', function (e) {
+      $tripBlock.on('click.Trip', function(e) {
         var tripObject = that.getCurrentTripObject();
         var toStopClickPropagation =
           TripUtils.isSet(tripObject.stopClickPropagation,
@@ -1241,7 +1241,7 @@ Trip.prototype = {
       var $closeButton = $tripBlock.find('.trip-close');
       if ($closeButton) {
         $closeButton.off('click.Trip');
-        $closeButton.on('click.Trip', function (e) {
+        $closeButton.on('click.Trip', function(e) {
           e.preventDefault();
           var tripObject = that.getCurrentTripObject();
           var tripClose = tripObject.onTripClose || that.settings.onTripClose;
@@ -1253,7 +1253,7 @@ Trip.prototype = {
       var $skipButton = $tripBlock.find('.trip-skip');
       if ($skipButton) {
         $skipButton.off('click.Trip');
-        $skipButton.on('click.Trip', function (e) {
+        $skipButton.on('click.Trip', function(e) {
           e.preventDefault();
           var tripObject = that.getCurrentTripObject();
           var tripClose = tripObject.onTripClose || that.settings.onTripClose;
@@ -1265,7 +1265,7 @@ Trip.prototype = {
       var $prevButton = $tripBlock.find('.trip-prev');
       if ($prevButton) {
         $prevButton.off('click.Trip');
-        $prevButton.on('click', function (e) {
+        $prevButton.on('click', function(e) {
           e.preventDefault();
           // Force IE/FF to lose focus
           $(this).blur();
@@ -1276,7 +1276,7 @@ Trip.prototype = {
       var $nextButton = $tripBlock.find('.trip-next');
       if ($nextButton) {
         $nextButton.off('click.Trip');
-        $nextButton.on('click', function (e) {
+        $nextButton.on('click', function(e) {
           e.preventDefault();
           // Force IE/FF to lose focus
           $(this).blur();
@@ -1293,7 +1293,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  createOverlay: function () {
+  createOverlay: function() {
     // make sure the element doesn't exist in the DOM tree
     if (typeof $('.trip-overlay').get(0) === 'undefined') {
       var html = [
@@ -1318,7 +1318,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  toggleExposedOverlay: function (toShow) {
+  toggleExposedOverlay: function(toShow) {
     if (toShow) {
       this.$overlay.fadeIn();
     }
@@ -1334,7 +1334,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  cleanup: function () {
+  cleanup: function() {
     $('.trip-overlay, .trip-block').remove();
   },
 
@@ -1344,7 +1344,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  init: function () {
+  init: function() {
     if (this.settings.enableKeyBinding) {
       this.bindKeyEvents();
     }
@@ -1365,7 +1365,7 @@ Trip.prototype = {
    * @memberOf Trip
    * @type {Function}
    */
-  start: function () {
+  start: function() {
     // cleanup old DOM first
     this.cleanup();
 
