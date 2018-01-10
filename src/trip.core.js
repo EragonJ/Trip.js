@@ -127,7 +127,7 @@ function Trip() {
   this.$tripBlock = null;
   this.$overlay = null;
   this.$bar = null;
-  this.$root = $('body');
+  this.$root = $('html>body');
 
   // save the current trip index
   this.tripDirection = 'next';
@@ -1212,7 +1212,7 @@ Trip.prototype = {
         .addClass(this.settings.tripClass)
         .addClass('tripjs');
 
-      $('body').append($tripBlock);
+      $('html>body').append($tripBlock);
 
       var $progressSteps = $tripBlock.find('.trip-progress-steps');
       if ($progressSteps) {
