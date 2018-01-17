@@ -203,6 +203,17 @@ You can set a callback function triggered when Trip.js ends.
 + Default : `$.noop`
 + **Note : supported since 2.0.0+**
 
+### onError(tripIndex, tripObject, message)
+
+You can set a callback function triggered when there is an error to report.
+
+This is called when an undefined trip is encountered (returning `true` will NOT skipUndefinedTrip, whatever the value of skipUndefinedTrip global setting). It is also called if any Deferred object fails on `next` or `prev`.
+
++ Type : `Function`
++ Default : `$.noop`
++ Return : anything evaluating to `true` will stop Trip.js.
++ **Note : supported since 3.3.4+**
+
 ### onTripStart(tripIndex, tripObject)
 
 You can set a callback function triggered when each trip starts. `tripObject` is your passed JSON for this current trip, and tripIndex is the index for current trip. You can add add your customized functions in your object and call them when this callback is called.
