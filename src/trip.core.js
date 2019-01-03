@@ -127,7 +127,7 @@ function Trip() {
   this.$tripBlock = null;
   this.$overlay = null;
   this.$bar = null;
-  this.$root = $('html>body');
+  this.$root = $('html');
 
   // save the current trip index
   this.tripDirection = 'next';
@@ -963,7 +963,7 @@ Trip.prototype = {
         });
     }
 
-    var $sel = $(o.sel);
+    var $sel = $(o.sel + ':visible');
     var selWidth = $sel && $sel.outerWidth();
     var selHeight = $sel && $sel.outerHeight();
     var blockWidth = $tripBlock.outerWidth();
