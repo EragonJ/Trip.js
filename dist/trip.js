@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.3.3
+ *  Version: 3.3.5
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -151,6 +151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    showCloseBox: false,
 	    showHeader: false,
 	    skipUndefinedTrip: false,
+	    stopClickPropagation: false,
 
 	    // navigation
 	    showNavigation: false,
@@ -196,7 +197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.$tripBlock = null;
 	  this.$overlay = null;
 	  this.$bar = null;
-	  this.$root = $('body');
+	  this.$root = $('html');
 
 	  // save the current trip index
 	  this.tripDirection = 'next';
@@ -549,9 +550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Object} o
 	   */
 	  showCurrentTrip: function(o) {
-	    if (this.settings.enableAnimation) {
-	      this.removeAnimation();
-	    }
+	    this.removeAnimation();
 
 	    // preprocess when we have to show trip block
 	    if (this.timer) {
@@ -577,7 +576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.setTripBlock(o);
 	    this.showTripBlock(o);
 
-	    if (this.settings.enableAnimation) {
+	    if (TripUtils.isSet(o.enableAnimation, this.settings.enableAnimation)) {
 	      this.addAnimation(o);
 	    }
 
@@ -918,10 +917,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var that = this;
 
 	    // toggle used settings
-	    var showCloseBox = o.showCloseBox || this.settings.showCloseBox;
-	    var showNavigation = o.showNavigation || this.settings.showNavigation;
-	    var showHeader = o.showHeader || this.settings.showHeader;
-	    var showSteps = o.showSteps || this.settings.showSteps;
+	    var showCloseBox =
+	          TripUtils.isSet(o.showCloseBox, this.settings.showCloseBox);
+	    var showNavigation =
+	          TripUtils.isSet(o.showNavigation, this.settings.showNavigation);
+	    var showHeader = TripUtils.isSet(o.showHeader, this.settings.showHeader);
+	    var showSteps = TripUtils.isSet(o.showSteps, this.settings.showSteps);
 
 	    // labels
 	    var closeBoxLabel = o.closeBoxLabel || this.settings.closeBoxLabel;
@@ -1039,8 +1040,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var blockHeight = $tripBlock.outerHeight();
 	    var arrowHeight = 10;
 	    var arrowWidth = 10;
-	    var cssHorizontal;
-	    var cssVertical;
+	    var cssHorizontal = this.getIframeScrollLeft(o);
+	    var cssVertical = this.getIframeScrollTop(o);
 
 	    switch (o.position) {
 	      case 'screen-center':
@@ -1055,22 +1056,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        cssVertical = TripConstant.TRIP_BLOCK_OFFSET_VERTICAL;
 	        break;
 	      case 'e':
-	        cssHorizontal = $sel.offset().left + selWidth + arrowWidth;
-	        cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
+	        cssHorizontal += $sel.offset().left + selWidth + arrowWidth;
+	        cssVertical += $sel.offset().top - ((blockHeight - selHeight) / 2);
 	        break;
 	      case 's':
-	        cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
-	        cssVertical = $sel.offset().top + selHeight + arrowHeight;
+	        cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
+	        cssVertical += $sel.offset().top + selHeight + arrowHeight;
 	        break;
 	      case 'w':
-	        cssHorizontal = $sel.offset().left - (arrowWidth + blockWidth);
-	        cssVertical = $sel.offset().top - ((blockHeight - selHeight) / 2);
+	        cssHorizontal += $sel.offset().left - (arrowWidth + blockWidth);
+	        cssVertical += $sel.offset().top - ((blockHeight - selHeight) / 2);
 	        break;
 	      case 'n':
 	        /* falls through */
 	      default:
-	        cssHorizontal = $sel.offset().left + ((selWidth - blockWidth) / 2);
-	        cssVertical = $sel.offset().top - arrowHeight - blockHeight;
+	        cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
+	        cssVertical += $sel.offset().top - arrowHeight - blockHeight;
 	        break;
 	    }
 
@@ -1177,7 +1178,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var windowHeight = $(window).height();
 	    var windowTop = $(window).scrollTop();
-	    var tripBlockTop = this.$tripBlock.offset().top;
+	    var frameTop = this.getIframeScrollTop(o);
+	    if (frameTop != 0) {
+	      frameTop -= windowTop;
+	    }
+	    var tripBlockTop = this.$tripBlock.offset().top + frameTop;
 	    var tripBlockHeight = this.$tripBlock.height();
 	    var OFFSET = 100; // make it look nice
 
@@ -1189,6 +1194,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	    else {
 	      this.$root.animate({ scrollTop: tripBlockTop - OFFSET }, 'slow');
 	    }
+	  },
+
+	  /**
+	   * Return the scroll top offset needed in case the element is contained
+	   * in an iframe, else return 0
+	   *
+	   * @memberOf Trip
+	   * @type {Function}
+	   * @param {Object} o
+	   */
+	  getIframeScrollTop: function(o) {
+	    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+	      var offsetTop = 0;
+	      $(document).find('iframe').each(function(index, frame) {
+	        if ($(frame).contents().has($(o.sel))) {
+	          offsetTop = $(frame).offset().top;
+	          return false;
+	        }
+	      });
+	      return offsetTop - $(o.sel).parents('html,body').scrollTop();
+	    }
+	    return 0;
+	  },
+
+	  /**
+	   * Return the scroll left offset needed in case the element is contained
+	   * in an iframe, else return 0
+	   *
+	   * @memberOf Trip
+	   * @type {Function}
+	   * @param {Object} o
+	   */
+	  getIframeScrollLeft: function(o) {
+	    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+	      var offsetLeft = 0;
+	      $(document).find('iframe').each(function(index, frame) {
+	        if ($(frame).contents().has($(o.sel))) {
+	          offsetLeft = $(frame).offset().left;
+	          return false;
+	        }
+	      });
+	      return offsetLeft - $(o.sel).parents('html,body').scrollLeft();
+	    }
+	    return 0;
 	  },
 
 	  /**
@@ -1233,7 +1282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .addClass(this.settings.tripClass)
 	        .addClass('tripjs');
 
-	      $('body').append($tripBlock);
+	      $('html>body').append($tripBlock);
 
 	      var $progressSteps = $tripBlock.find('.trip-progress-steps');
 	      if ($progressSteps) {
@@ -1246,6 +1295,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        $progressSteps.append(stepCache);
 	      }
+
+	      $tripBlock.off('click.Trip');
+	      $tripBlock.on('click.Trip', function(e) {
+	        var tripObject = that.getCurrentTripObject();
+	        var toStopClickPropagation =
+	          TripUtils.isSet(tripObject.stopClickPropagation,
+	            that.settings.stopClickPropagation);
+
+	        if (toStopClickPropagation) {
+	          e.stopPropagation();
+	        }
+	      });
 
 	      var $closeButton = $tripBlock.find('.trip-close');
 	      if ($closeButton) {
@@ -1575,6 +1636,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  isString: function(target) {
 	    return (typeof target === 'string');
+	  },
+
+	  /**
+	   * We will use this function to compute the resulting boolean option
+	   * based on the local and global settings.
+	   *
+	   * @memberOf TripUtils
+	   * @type {Function}
+	   * @param {*} local setting
+	   * @param {*} global setting
+	   * @return {Boolean}
+	   */
+	  isSet: function(localSetting, globalSetting) {
+	    return typeof localSetting !== 'undefined' ?
+	      localSetting : globalSetting;
 	  },
 
 	  /**

@@ -1127,48 +1127,48 @@ Trip.prototype = {
   },
 
   /**
-     * Return the scroll top offset needed in case the element is contained in an iframe,
-     * else return 0
-     * 
-     * @memberOf Trip
-     * @type {Function}
-     * @param {Object} o
-     */
-    getIframeScrollTop : function(o) {
-      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
-        var offsetTop = 0;
-        $(document).find('iframe').each(function(index, frame) {
-          if ($(frame).contents().has($(o.sel))) {
-            offsetTop = $(frame).offset().top;
-            return false;
-          }
-        });
-        return offsetTop - $(o.sel).parents('html,body').scrollTop()
-      }
-      return 0;
-    },
-    
-    /**
-     * Return the scroll left offset needed in case the element is contained in an iframe,
-     * else return 0
-     * 
-     * @memberOf Trip
-     * @type {Function}
-     * @param {Object} o
-     */
-    getIframeScrollLeft : function(o) {
-      if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
-        var offsetLeft = 0;
-        $(document).find('iframe').each(function(index, frame) {
-          if ($(frame).contents().has($(o.sel))) {
-            offsetLeft = $(frame).offset().left;
-            return false;
-          }
-        });
-        return offsetLeft - $(o.sel).parents('html,body').scrollLeft()
-      }
-      return 0;
-    },
+   * Return the scroll top offset needed in case the element is contained
+   * in an iframe, else return 0
+   *
+   * @memberOf Trip
+   * @type {Function}
+   * @param {Object} o
+   */
+  getIframeScrollTop: function(o) {
+    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+      var offsetTop = 0;
+      $(document).find('iframe').each(function(index, frame) {
+        if ($(frame).contents().has($(o.sel))) {
+          offsetTop = $(frame).offset().top;
+          return false;
+        }
+      });
+      return offsetTop - $(o.sel).parents('html,body').scrollTop();
+    }
+    return 0;
+  },
+
+  /**
+   * Return the scroll left offset needed in case the element is contained
+   * in an iframe, else return 0
+   *
+   * @memberOf Trip
+   * @type {Function}
+   * @param {Object} o
+   */
+  getIframeScrollLeft: function(o) {
+    if ($(o.sel).parents('html')[0] != this.$tripBlock.parents('html')[0]) {
+      var offsetLeft = 0;
+      $(document).find('iframe').each(function(index, frame) {
+        if ($(frame).contents().has($(o.sel))) {
+          offsetLeft = $(frame).offset().left;
+          return false;
+        }
+      });
+      return offsetLeft - $(o.sel).parents('html,body').scrollLeft();
+    }
+    return 0;
+  },
 
   /**
    * Hide the trip block.
@@ -1233,7 +1233,7 @@ Trip.prototype = {
           TripUtils.isSet(tripObject.stopClickPropagation,
             that.settings.stopClickPropagation);
 
-        if (tripStopClickPropagation) {
+        if (toStopClickPropagation) {
           e.stopPropagation();
         }
       });
