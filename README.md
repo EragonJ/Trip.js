@@ -16,7 +16,7 @@ Trip.js has been tested and work well on `IE 9+`, `Chrome 32+`, `Firefox 32+` an
 
 ### Use this library
 
-Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj.github.io/Trip.js/doc-setup.html), [configuration](http://eragonj.github.io/Trip.js/doc-configuration.html) and [API](http://eragonj.github.io/Trip.js/doc-api.html) :P
+Please check [website](http://eragonj.github.io/Trip.js), [setup](http://eragonj.github.io/Trip.js/documentations/setup/index.html), [configuration](http://eragonj.github.io/Trip.js/documentations/configuration/index.html) and [API](http://eragonj.github.io/Trip.js/documentations/api/index.html) :P
 
 ### Run tests
 
