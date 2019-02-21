@@ -127,7 +127,7 @@ function Trip() {
   this.$tripBlock = null;
   this.$overlay = null;
   this.$bar = null;
-  this.$root = $('html>body');
+  this.$root = $('html');
 
   // save the current trip index
   this.tripDirection = 'next';
