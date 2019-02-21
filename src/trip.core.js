@@ -1233,7 +1233,7 @@ Trip.prototype = {
           TripUtils.isSet(tripObject.stopClickPropagation,
             that.settings.stopClickPropagation);
 
-        if (tripStopClickPropagation) {
+        if (toStopClickPropagation) {
           e.stopPropagation();
         }
       });

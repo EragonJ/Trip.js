@@ -4,7 +4,7 @@
  *  This is a jQuery plugin that can help you customize your tutorial trip
  *  with full flexibilities.
  *
- *  Version: 3.3.4
+ *  Version: 3.3.5
  *
  *  Author: EragonJ <eragonj@eragonj.me>
  *  Blog: http://eragonj.me
@@ -1303,7 +1303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          TripUtils.isSet(tripObject.stopClickPropagation,
 	            that.settings.stopClickPropagation);
 
-	        if (tripStopClickPropagation) {
+	        if (toStopClickPropagation) {
 	          e.stopPropagation();
 	        }
 	      });
