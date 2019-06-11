@@ -992,6 +992,9 @@ Trip.prototype = {
       case 's':
         cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
         cssVertical += $sel.offset().top + selHeight + arrowHeight;
+        if (cssHorizontal < 0) {
+		    cssHorizontal = 0;
+        }
         break;
       case 'w':
         cssHorizontal += $sel.offset().left - (arrowWidth + blockWidth);
@@ -1002,10 +1005,30 @@ Trip.prototype = {
       default:
         cssHorizontal += $sel.offset().left + ((selWidth - blockWidth) / 2);
         cssVertical += $sel.offset().top - arrowHeight - blockHeight;
+        if (cssHorizontal < 0) {
+		    cssHorizontal = 0;
+        }
         break;
     }
 
     if (horizontalOrVertical === 'horizontal') {
+        // When the sel element is close to the page edge and the tripBlock has a modified (not centered) horizontal
+        // position we also modify the horizontal position of the arrow.
+        // Because the arrow is a pseudo element we cannot select it directly with jQuery
+        // so we create a style tag which we can then manipulate.
+        if (cssHorizontal <= 0) {
+            // add a style tag if it doesn't already exist in the DOM tree
+            if (typeof $('#arrowstyle').get(0) === 'undefined') {
+                $('head').append('<style id="arrowstyle"></style>');
+            }
+            // set the arrow to an appropriate horizontal location
+            $('#arrowstyle').text('.trip-block.n::before,.trip-block.s::before{left:' + ($sel.offset().left + (selWidth / 2) - arrowWidth) + 'px !important;}');
+        }
+        else {
+            // use default arrow horizontal location
+            $('#arrowstyle').remove();
+        }
+		
       switch (o.position) {
         case 'screen-center':
           $tripBlock.css({
